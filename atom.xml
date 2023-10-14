@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>💻 Lee&#39;s blog</title>
+  
+  <subtitle>Welcome!这里是Lee的个人博客</subtitle>
+  <link href="http://02lb.github.io/atom.xml" rel="self"/>
+  
+  <link href="http://02lb.github.io/"/>
+  <updated>2023-10-14T14:01:24.937Z</updated>
+  <id>http://02lb.github.io/</id>
+  
+  <author>
+    <name>Leeberty</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>李博！JUSTDOIT！</title>
+    <link href="http://02lb.github.io/2023/10/14/hello-world/"/>
+    <id>http://02lb.github.io/2023/10/14/hello-world/</id>
+    <published>2023-10-14T13:05:59.256Z</published>
+    <updated>2023-10-14T14:01:24.937Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;Quick-Start&quot;&gt;&lt;a href=&quot;#Quick-Start&quot; class=&quot;headerlink&quot; title=&quot;Quick Start&quot;&gt;&lt;/a&gt;Quick Start&lt;/h2&gt;&lt;h3 id=&quot;Create-a-new-post&quot;&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+</feed>
