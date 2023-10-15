@@ -6,7 +6,7 @@
   <link href="http://02lb.github.io/atom.xml" rel="self"/>
   
   <link href="http://02lb.github.io/"/>
-  <updated>2023-10-15T07:08:23.000Z</updated>
+  <updated>2023-10-15T12:32:35.821Z</updated>
   <id>http://02lb.github.io/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>神经网络加速器</title>
+    <link href="http://02lb.github.io/2023/10/15/aiprocessunit/"/>
+    <id>http://02lb.github.io/2023/10/15/aiprocessunit/</id>
+    <published>2023-10-15T12:23:26.000Z</published>
+    <updated>2023-10-15T12:32:35.821Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;Table-of-Contents&quot;&gt;&lt;a href=&quot;#Table-of-Contents&quot; class=&quot;headerlink&quot; title=&quot;Table of Contents&quot;&gt;&lt;/a&gt;Table of Contents&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="人工智能" scheme="http://02lb.github.io/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/"/>
+    
+    
+    <category term="人工智能" scheme="http://02lb.github.io/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/"/>
+    
+    <category term="体系结构" scheme="http://02lb.github.io/tags/%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/"/>
+    
+    <category term="神经网络加速器" scheme="http://02lb.github.io/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%8A%A0%E9%80%9F%E5%99%A8/"/>
+    
+  </entry>
   
   <entry>
     <title>hexo+matery搭建个人博客总结</title>
