@@ -2,11 +2,11 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>💻 Lee&#39;s blog</title>
   
-  <subtitle>Welcome!这里是Lee的个人博客</subtitle>
+  <subtitle>一花一世界</subtitle>
   <link href="http://02lb.github.io/atom.xml" rel="self"/>
   
   <link href="http://02lb.github.io/"/>
-  <updated>2023-10-14T14:01:24.937Z</updated>
+  <updated>2023-10-15T07:08:23.000Z</updated>
   <id>http://02lb.github.io/</id>
   
   <author>
@@ -17,23 +17,31 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>李博！JUSTDOIT！</title>
-    <link href="http://02lb.github.io/2023/10/14/hello-world/"/>
-    <id>http://02lb.github.io/2023/10/14/hello-world/</id>
-    <published>2023-10-14T13:05:59.256Z</published>
-    <updated>2023-10-14T14:01:24.937Z</updated>
+    <title>hexo+matery搭建个人博客总结</title>
+    <link href="http://02lb.github.io/2023/10/15/hexo-matery/"/>
+    <id>http://02lb.github.io/2023/10/15/hexo-matery/</id>
+    <published>2023-10-14T16:00:00.000Z</published>
+    <updated>2023-10-15T07:08:23.000Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;h2 id=&quot;Quick-Start&quot;&gt;&lt;a href=&quot;#Quick-Start&quot; class=&quot;headerlink&quot; title=&quot;Quick Start&quot;&gt;&lt;/a&gt;Quick Start&lt;/h2&gt;&lt;h3 id=&quot;Create-a-new-post&quot;&gt;&lt;a</summary>
+    <summary type="html">&lt;h1 id=&quot;Let’s-Go！&quot;&gt;&lt;a href=&quot;#Let’s-Go！&quot; class=&quot;headerlink&quot; title=&quot;Let’s Go！&quot;&gt;&lt;/a&gt;Let’s Go！&lt;/h1&gt;&lt;h2 id=&quot;HEXO&quot;&gt;&lt;a href=&quot;#HEXO&quot;</summary>
         
       
     
     
     
+    <category term="hexo" scheme="http://02lb.github.io/categories/hexo/"/>
+    
+    
+    <category term="hexo" scheme="http://02lb.github.io/tags/hexo/"/>
+    
+    <category term="matery" scheme="http://02lb.github.io/tags/matery/"/>
+    
+    <category term="blog" scheme="http://02lb.github.io/tags/blog/"/>
     
   </entry>
   
