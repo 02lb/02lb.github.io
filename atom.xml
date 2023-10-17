@@ -6,7 +6,7 @@
   <link href="http://02lb.github.io/atom.xml" rel="self"/>
   
   <link href="http://02lb.github.io/"/>
-  <updated>2023-10-15T12:32:35.821Z</updated>
+  <updated>2023-10-17T13:50:04.468Z</updated>
   <id>http://02lb.github.io/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Adversarial_Examples</title>
+    <link href="http://02lb.github.io/2023/10/17/adversarial-examples/"/>
+    <id>http://02lb.github.io/2023/10/17/adversarial-examples/</id>
+    <published>2023-10-17T13:43:46.000Z</published>
+    <updated>2023-10-17T13:50:04.468Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;&lt;img src=&quot;https://img2018.cnblogs.com/blog/1355395/201811/1355395-20181121142959730-1241932650.png&quot;&gt;&lt;/p&gt;
+&lt;h2</summary>
+        
+      
+    
+    
+    
+    <category term="对抗样本" scheme="http://02lb.github.io/categories/%E5%AF%B9%E6%8A%97%E6%A0%B7%E6%9C%AC/"/>
+    
+    
+    <category term="对抗样本" scheme="http://02lb.github.io/tags/%E5%AF%B9%E6%8A%97%E6%A0%B7%E6%9C%AC/"/>
+    
+    <category term="AI安全" scheme="http://02lb.github.io/tags/AI%E5%AE%89%E5%85%A8/"/>
+    
+  </entry>
   
   <entry>
     <title>神经网络加速器</title>

@@ -1,0 +1,2430 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="神经网络加速器, 💻 Lee&#39;s blog">
+    <meta name="description" content="这是一个主要用于记录的默默无闻的博客">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>神经网络加速器 | 💻 Lee&#39;s blog</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="💻 Lee's blog" type="application/atom+xml">
+
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+
+   <style>
+    body{
+       background-image: url(https://www.toopic.cn/public/uploads/small/1658043938262165804393852.jpg);
+       background-repeat:no-repeat;
+       background-size:cover;
+       background-attachment:fixed;
+    }
+</style>
+
+
+
+<body>
+    
+    <!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="神经网络加速器, 💻 Lee&#39;s blog">
+    <meta name="description" content="这是一个主要用于记录的默默无闻的博客">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>神经网络加速器 | 💻 Lee&#39;s blog</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+</head>
+
+
+ 
+    <style type="text/css" lang="css">
+    #loading-container{
+        position: fixed;
+        top: 0;
+        left: 0;
+        min-height: 100vh;
+        width: 100vw;
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: #54a59e;
+        text-align: center;
+        /* loader页面消失采用渐隐的方式*/
+        -webkit-transition: opacity 1s ease;
+        -moz-transition: opacity 1s ease;
+        -o-transition: opacity 1s ease;
+        transition: opacity 1s ease;
+    }
+    .loading-image{
+        width: 120px;
+        height: 50px;
+        transform: translate(-50%);
+    }
+
+    .loading-image div:nth-child(2) {
+        -webkit-animation: pacman-balls 1s linear 0s infinite;
+        animation: pacman-balls 1s linear 0s infinite
+    }
+
+    .loading-image div:nth-child(3) {
+        -webkit-animation: pacman-balls 1s linear .33s infinite;
+        animation: pacman-balls 1s linear .33s infinite
+    }
+
+    .loading-image div:nth-child(4) {
+        -webkit-animation: pacman-balls 1s linear .66s infinite;
+        animation: pacman-balls 1s linear .66s infinite
+    }
+
+    .loading-image div:nth-child(5) {
+        -webkit-animation: pacman-balls 1s linear .99s infinite;
+        animation: pacman-balls 1s linear .99s infinite
+    }
+
+   .loading-image div:first-of-type {
+        width: 0;
+        height: 0;
+        border: 25px solid #06151f;
+        border-right-color: transparent;
+        border-radius: 25px;
+        -webkit-animation: rotate_pacman_half_up .5s 0s infinite;
+        animation: rotate_pacman_half_up .5s 0s infinite;
+    }
+    .loading-image div:nth-child(2) {
+        width: 0;
+        height: 0;
+        border: 25px solid #06151f;
+        border-right-color: transparent;
+        border-radius: 25px;
+        -webkit-animation: rotate_pacman_half_down .5s 0s infinite;
+        animation: rotate_pacman_half_down .5s 0s infinite;
+        margin-top: -50px;
+    }
+    @-webkit-keyframes rotate_pacman_half_up {0% {transform: rotate(270deg)}50% {transform: rotate(1turn)}to {transform: rotate(270deg)}}
+
+    @keyframes rotate_pacman_half_up {0% {transform: rotate(270deg)}50% {transform: rotate(1turn)}to {transform: rotate(270deg)}}
+
+    @-webkit-keyframes rotate_pacman_half_down {0% {transform: rotate(90deg)}50% {transform: rotate(0deg)}to {transform: rotate(90deg)}}
+
+    @keyframes rotate_pacman_half_down {0% {transform: rotate(90deg)}50% {transform: rotate(0deg)}to {transform: rotate(90deg)}}
+
+    @-webkit-keyframes pacman-balls {75% {opacity: .7}to {transform: translate(-100px, -6.25px)}}
+
+    @keyframes pacman-balls {75% {opacity: .7}to {transform: translate(-100px, -6.25px)}}
+
+
+    .loading-image div:nth-child(3),
+    .loading-image div:nth-child(4),
+    .loading-image div:nth-child(5),
+    .loading-image div:nth-child(6){
+        background-color: #06151f;
+        width: 15px;
+        height: 15px;
+        border-radius: 100%;
+        margin: 2px;
+        width: 10px;
+        height: 10px;
+        position: absolute;
+        transform: translateY(-6.25px);
+        top: 25px;
+        left: 100px;
+    }
+    .loading-text{
+        margin-bottom: 20vh;
+        text-align: center;
+        color: #06151f;
+        font-size: 3rem;
+        box-sizing: border-box;
+        padding: 0 10px;
+        text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+    @media only screen and (max-width: 500px) {
+         .loading-text{
+            font-size: 1.5rem;
+         }
+    }
+    .fadeout {
+        opacity: 0;
+        filter: alpha(opacity=0);
+    }
+    /* logo出现动画 */
+    @-webkit-keyframes fadeInDown{0%{opacity:0;-webkit-transform:translate3d(0,-100%,0);transform:translate3d(0,-100%,0)}100%{opacity:1;-webkit-transform:none;transform:none}}
+    @keyframes fadeInDown{0%{opacity:0;-webkit-transform:translate3d(0,-100%,0);}}
+ </style>
+ <script>
+(function () {
+    const loaded = function(){
+       setTimeout(function(){
+            const loader = document.getElementById("loading-container");
+            loader.className="fadeout" ;//使用渐隐的方法淡出loading page
+            // document.getElementById("body-wrap").style.display="flex";
+            setTimeout(function(){
+                loader.style.display="none";
+            },2500); 
+        },700);//强制显示loading page 1s  
+    };
+    loaded();
+})()
+</script>
+
+
+ 
+<body>
+    
+        <div id="loading-container">
+             <p class="loading-text">嘘~  正在从服务器偷取页面 . . . </p> 
+             <div class="loading-image">
+                 <div></div>
+                 <div></div>
+                 <div></div>
+                 <div></div> 
+                 <div></div>
+             </div>
+        </div>
+    
+
+
+
+
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/favicon.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">💻 Lee&#39;s blog</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/favicon.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">💻 Lee&#39;s blog</div>
+        <div class="logo-desc">
+            
+            这是一个主要用于记录的默默无闻的博客
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://www.bittware.com/files/AI_brain_800px.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                        <h1 class="description center-align post-title">神经网络加速器</h1>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/"></script>
+
+
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">
+                                <span class="chip bg-color">人工智能</span>
+                            </a>
+                        
+                            <a href="/tags/%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/">
+                                <span class="chip bg-color">体系结构</span>
+                            </a>
+                        
+                            <a href="/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%8A%A0%E9%80%9F%E5%99%A8/">
+                                <span class="chip bg-color">神经网络加速器</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/" class="post-category">
+                                人工智能
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2023-10-15
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2023-10-15
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    10.2k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    63 分
+                </div>
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+        <!-- 代码块折行 -->
+        <style type="text/css">
+            code[class*="language-"], pre[class*="language-"] { white-space: pre-wrap !important; }
+        </style>
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="Table-of-Contents"><a href="#Table-of-Contents" class="headerlink" title="Table of Contents"></a>Table of Contents</h2><ul>
+<li><a href="#my-contributions">My Contributions</a></li>
+<li><a href="#conference-papers">Conference Papers</a><ul>
+<li>2014: <a href="#2014-asplos">ASPLOS</a>, <a href="#2014-micro">MICRO</a></li>
+<li>2015: <a href="#2015-isca">ISCA</a>, <a href="#2015-asplos">ASPLOS</a>, <a href="#2015-fpga">FPGA</a>, <a href="#2015-dac">DAC</a></li>
+<li>2016: <a href="#2016-isscc">ISSCC</a>, <a href="#2016-isca">ISCA</a>, <a href="#2016-micro">MICRO</a>, <a href="#2016-hpca">HPCA</a>, <a href="#2016-dac">DAC</a>, <a href="#2016-fpga">FPGA</a>, <a href="#2016-iccad">ICCAD</a>, <a href="#2016-date">DATE</a>, <a href="#2016-aspdac">ASPDAC</a>, <a href="#2016-vlsi">VLSI</a>, <a href="#2016-fpl">FPL</a></li>
+<li>2017: <a href="#2017-isscc">ISSCC</a>, <a href="#2017-isca">ISCA</a>, <a href="#2017-micro">MICRO</a>, <a href="#2017-hpca">HPCA</a>, <a href="#2017-asplos">ASPLOS</a>, <a href="#2017-dac">DAC</a>, <a href="#2017-fpga">FPGA</a>, <a href="#2017-iccad">ICCAD</a>, <a href="#2017-date">DATE</a>, <a href="#2017-vlsi">VLSI</a>, <a href="#2017-fccm">FCCM</a>, <a href="#2017-hotchips">HotChips</a></li>
+<li>2018: <a href="#2018-isscc">ISSCC</a>, <a href="#2018-isca">ISCA</a>, <a href="#2018-micro">MICRO</a>, <a href="#2018-hpca">HPCA</a>, <a href="#2018-asplos">ASPLOS</a>, <a href="#2018-dac">DAC</a>, <a href="#2018-fpga">FPGA</a>, <a href="#2018-iccad">ICCAD</a>, <a href="#2018-date">DATE</a>, <a href="#2018-aspdac">ASPDAC</a>, <a href="#2018-vlsi">VLSI</a>, <a href="#2018-hotchips">HotChips</a></li>
+<li>2019: <a href="#2019-isscc">ISSCC</a>, <a href="#2019-isca">ISCA</a>, <a href="#2019-micro">MICRO</a>, <a href="#2019-hpca">HPCA</a>, <a href="#2019-asplos">ASPLOS</a>, <a href="#2019-dac">DAC</a>, <a href="#2019-fpga">FPGA</a>, <a href="#2019-iccad">ICCAD</a>, <a href="#2019-aspdac">ASPDAC</a>, <a href="#2019-vlsi">VLSI</a>, <a href="#2019-hotchips">HotChips</a>, <a href="#2019-asscc">ASSCC</a></li>
+<li>2020: <a href="#2020-isscc">ISSCC</a>, <a href="#2020-isca">ISCA</a>, <a href="#2020-micro">MICRO</a>, <a href="#2020-hpca">HPCA</a>, <a href="#2020-asplos">ASPLOS</a>, <a href="#2020-dac">DAC</a>, <a href="#2020-fpga">FPGA</a>, <a href="#2020-iccad">ICCAD</a>, <a href="#2020-vlsi">VLSI</a>,  <a href="#2020-hotchips">HotChips</a></li>
+<li>2021: <a href="#2021-isscc">ISSCC</a>, <a href="#2021-asplos">ASPLOS</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="My-Contributions"><a href="#My-Contributions" class="headerlink" title="My Contributions"></a>My Contributions</h2><p>I’m working on energy-efficient architecture design for deep learning. Some featured works are presented here. Hope my new papers will come out soon in the near future.</p>
+<p>[Aug. 2020] I have designed a deep learning processor (Evolver) with on-device quantization-voltage-frequency (QVF) tuning. Compared with conventional QVF tuning that determines policies offline, Evolver make optimal customizations for local user scenarios.</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://ieeexplore.ieee.org/document/9209075"><strong>Evolver: A Deep Learning Processor with On-Device Quantization-Voltage-Frequency Tuning.</strong></a> (<strong>JSSC’21</strong>)<ul>
+<li>Evolver contains a reinforcement learning unit (RLU) that searches QVF polices based on its direct feedbacks. An outlier-skipping scheme is proposed to save unnecessary training for invalid policies under the profiled latency and energy constraints.</li>
+<li>We exploit the inherent sparsity of feature/error maps in DNN training’s feedforward and backpropagation passes, and design a bidirectional speculation unit (BSU) to capture runtime sparsity and discard zero-output computation, thus reducing training cost. The feedforward speculation also benefits the execution mode.</li>
+<li>Since the runtime sparsity causes time-varying workload parallelism that harms performance and efficiency, we design a reconfigurable computing engine (RCE) with an online configuration compiler (OCC) for Evolver, in order to dynamically reconfigure dataflow parallelism to match workload parallelism.</li>
+</ul>
+</li>
+</ul>
+<p>[Jun. 2018] A retention-aware neural acceleration (RANA) framework has been designed, which strengthens DNN accelerators with refresh-optimized eDRAM to save total system energy. RANA includes three techniques from the training, scheduling, architecture levels respectively.</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://ieeexplore.ieee.org/abstract/document/8416839/"><strong>RANA: Towards Efficient Neural Acceleration with Refresh-Optimized Embedded DRAM.</strong></a> (<strong>ISCA’18</strong>) <ul>
+<li><strong>Training Level</strong>: A retention-aware training method is proposed to improve eDRAM’s tolerable retention time with no accuracy loss. Bit-level retention errors are injected during training, so the network’ s tolerance to retention failures is improved. A higher tolerable failure rate leads to longer tolerable retention time, so more refresh can be removed.</li>
+<li><strong>Scheduling Level</strong>: A system energy consumption model is built in consideration of computing energy, on-chip buffer access energy, refresh energy and off-chip memory access energy. RANA schedules networks in a hybrid computation pattern based on this model. Each layer is assigned with the computation pattern that costs the lowest energy.</li>
+<li><strong>Architecture Level</strong>: RANA independently disables refresh to eDRAM banks based on their storing data’s lifetime, saving more refresh energy. A programmable eDRAM controller is proposed to enable the above fine-grained refresh controls.</li>
+</ul>
+</li>
+</ul>
+<p>[Apr. 2017] A deep convoultional neural network architecture (DNA) has been designed with 1~2 orders higher energy efficiency over the state-of-the-art works. I’m trying to further improve the architecture for ultra low-power compting. </p>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://ieeexplore.ieee.org/document/7898402/"><strong>Deep Convolutional Neural Network Architecture with Reconfigurable Computation Patterns.</strong></a> (<strong>TVLSI popular paper</strong>)<ul>
+<li>This is the first work to assign Input/Output/Weight Reuse to different layers of a CNN, which optimizes system-level energy consumption based on different CONV parameters.</li>
+<li>A 4-level CONV engine is designed to to support different tiling parameters for higher resource utilization and performance.</li>
+<li>A layer-based scheduling framework is proposed to optimize both system-level energy efficiency and performance.</li>
+</ul>
+</li>
+</ul>
+<h2 id="Conference-Papers"><a href="#Conference-Papers" class="headerlink" title="Conference Papers"></a>Conference Papers</h2><p>This is a collection of conference papers that interest me. The emphasis is focused on, but not limited to neural networks on silicon. Papers of significance are marked in <strong>bold</strong>. My comments are marked in <em>italic</em>.</p>
+<h3 id="2014-ASPLOS"><a href="#2014-ASPLOS" class="headerlink" title="2014 ASPLOS"></a>2014 ASPLOS</h3><ul>
+<li><strong>DianNao: A Small-Footprint High-Throughput Accelerator for Ubiquitous Machine-Learning.</strong> (CAS, Inria)</li>
+</ul>
+<h3 id="2014-MICRO"><a href="#2014-MICRO" class="headerlink" title="2014 MICRO"></a>2014 MICRO</h3><ul>
+<li><strong>DaDianNao: A Machine-Learning Supercomputer.</strong> (CAS, Inria, Inner Mongolia University)</li>
+</ul>
+<h3 id="2015-ISCA"><a href="#2015-ISCA" class="headerlink" title="2015 ISCA"></a>2015 ISCA</h3><ul>
+<li><strong>ShiDianNao: Shifting Vision Processing Closer to the Sensor.</strong> (CAS, EPFL, Inria)</li>
+</ul>
+<h3 id="2015-ASPLOS"><a href="#2015-ASPLOS" class="headerlink" title="2015 ASPLOS"></a>2015 ASPLOS</h3><ul>
+<li><strong>PuDianNao: A Polyvalent Machine Learning Accelerator.</strong> (CAS, USTC, Inria)</li>
+</ul>
+<h3 id="2015-FPGA"><a href="#2015-FPGA" class="headerlink" title="2015 FPGA"></a>2015 FPGA</h3><ul>
+<li><strong>Optimizing FPGA-based Accelerator Design for Deep Convolutional Neural Networks.</strong> (Peking University, UCLA)</li>
+</ul>
+<h3 id="2015-DAC"><a href="#2015-DAC" class="headerlink" title="2015 DAC"></a>2015 DAC</h3><ul>
+<li>Reno: A Highly-Efficient Reconfigurable Neuromorphic Computing Accelerator Design. (Universtiy of Pittsburgh, Tsinghua University, San Francisco State University, Air Force Research Laboratory, University of Massachusetts.)</li>
+<li>Scalable Effort Classifiers for Energy Efficient Machine Learning. (Purdue University, Microsoft Research)</li>
+<li>Design Methodology for Operating in Near-Threshold Computing (NTC) Region. (AMD)</li>
+<li>Opportunistic Turbo Execution in NTC: Exploiting the Paradigm Shift in Performance Bottlenecks. (Utah State University)</li>
+</ul>
+<h3 id="2016-DAC"><a href="#2016-DAC" class="headerlink" title="2016 DAC"></a>2016 DAC</h3><ul>
+<li><strong>DeepBurning: Automatic Generation of FPGA-based Learning Accelerators for the Neural Network Family.</strong> (Chinese Academy of Sciences)<ul>
+<li><em>Hardware generator: Basic buliding blocks for neural networks, and address generation unit (RTL).</em></li>
+<li><em>Compiler: Dynamic control flow (configurations for different models), and data layout in memory.</em></li>
+<li><em>Simply report their framework and describe some stages.</em></li>
+</ul>
+</li>
+<li><strong>C-Brain: A Deep Learning Accelerator that Tames the Diversity of CNNs through Adaptive Data-Level Parallelization.</strong> (Chinese Academy of Sciences)</li>
+<li><strong>Simplifying Deep Neural Networks for Neuromorphic Architectures.</strong> (Incheon National University)</li>
+<li><strong>Dynamic Energy-Accuracy Trade-off Using Stochastic Computing in Deep Neural Networks.</strong> (Samsung, Seoul National University, Ulsan National Institute of Science and Technology)</li>
+<li><strong>Optimal Design of JPEG Hardware under the Approximate Computing Paradigm.</strong> (University of Minnesota, TAMU)</li>
+<li>Perform-ML: Performance Optimized Machine Learning by Platform and Content Aware Customization. (Rice University, UCSD)</li>
+<li>Low-Power Approximate Convolution Computing Unit with Domain-Wall Motion Based “Spin-Memristor” for Image Processing Applications. (Purdue University)</li>
+<li>Cross-Layer Approximations for Neuromorphic Computing: From Devices to Circuits and Systems. (Purdue University)</li>
+<li>Switched by Input: Power Efficient Structure for RRAM-based Convolutional Neural Network. (Tsinghua University)</li>
+<li>A 2.2 GHz SRAM with High Temperature Variation Immunity for Deep Learning Application under 28nm. (UCLA, Bell Labs)</li>
+</ul>
+<h3 id="2016-ISSCC"><a href="#2016-ISSCC" class="headerlink" title="2016 ISSCC"></a>2016 ISSCC</h3><ul>
+<li><strong>A 1.42TOPS/W Deep Convolutional Neural Network Recognition Processor for Intelligent IoE Systems.</strong> (KAIST)</li>
+<li><strong>Eyeriss: An Energy-Efficient Reconfigurable Accelerator for Deep Convolutional Neural Networks.</strong> (MIT, NVIDIA)</li>
+<li>A 126.1mW Real-Time Natural UI/UX Processor with Embedded Deep Learning Core for Low-Power Smart Glasses Systems. (KAIST)</li>
+<li>A 502GOPS and 0.984mW Dual-Mode ADAS SoC with RNN-FIS Engine for Intention Prediction in Automotive Black-Box System. (KAIST)</li>
+<li>A 0.55V 1.1mW Artificial-Intelligence Processor with PVT Compensation for Micro Robots. (KAIST)</li>
+<li>A 4Gpixel/s 8/10b H.265/HEVC Video Decoder Chip for 8K Ultra HD Applications. (Waseda University)</li>
+</ul>
+<h3 id="2016-ISCA"><a href="#2016-ISCA" class="headerlink" title="2016 ISCA"></a>2016 ISCA</h3><ul>
+<li><strong>Cnvlutin: Ineffectual-Neuron-Free Deep Convolutional Neural Network Computing.</strong> (University of Toronto, University of British Columbia)</li>
+<li><strong>EIE: Efficient Inference Engine on Compressed Deep Neural Network.</strong> (Stanford University, Tsinghua University)</li>
+<li><strong>Minerva: Enabling Low-Power, High-Accuracy Deep Neural Network Accelerators.</strong> (Harvard University)</li>
+<li><strong>Eyeriss: A Spatial Architecture for Energy-Efficient Dataflow for Convolutional Neural Networks.</strong> (MIT, NVIDIA)<ul>
+<li><em>Present an energy analysis framework.</em></li>
+<li><em>Propose an energy-efficienct dataflow called Row Stationary, which considers three levels of reuse.</em></li>
+</ul>
+</li>
+<li><strong>Neurocube: A Programmable Digital Neuromorphic Architecture with High-Density 3D Memory.</strong> (Georgia Institute of Technology, SRI International)<ul>
+<li><em>Propose an architecture integrated in 3D DRAM, with a mesh-like NOC in the logic layer.</em></li>
+<li><em>Detailedly describe the data movements in the NOC.</em></li>
+</ul>
+</li>
+<li>ISAAC: A Convolutional Neural Network Accelerator with In-Situ Analog Arithmetic in Crossbars. (University of Utah, HP Labs)<ul>
+<li><em>An advance over ISAAC has been published in “Newton: Gravitating Towards the Physical Limits of Crossbar Acceleration” (IEEE Micro).</em></li>
+</ul>
+</li>
+<li>A Novel Processing-in-memory Architecture for Neural Network Computation in ReRAM-based Main Memory. (UCSB, HP Labs, NVIDIA, Tsinghua University)</li>
+<li>RedEye: Analog ConvNet Image Sensor Architecture for Continuous Mobile Vision. (Rice University)</li>
+<li>Cambricon: An Instruction Set Architecture for Neural Networks. (Chinese Academy of Sciences, UCSB)</li>
+</ul>
+<h3 id="2016-DATE"><a href="#2016-DATE" class="headerlink" title="2016 DATE"></a>2016 DATE</h3><ul>
+<li><strong>The Neuro Vector Engine: Flexibility to Improve Convolutional Network Efficiency for Wearable Vision.</strong> (Eindhoven University of Technology, Soochow University, TU Berlin)<ul>
+<li><em>Propose an SIMD accelerator for CNN.</em></li>
+</ul>
+</li>
+<li><strong>Efficient FPGA Acceleration of Convolutional Neural Networks Using Logical-3D Compute Array.</strong> (UNIST, Seoul National University)<ul>
+<li><em>The compute tile is organized on 3 dimensions: Tm, Tr, Tc.</em></li>
+</ul>
+</li>
+<li>NEURODSP: A Multi-Purpose Energy-Optimized Accelerator for Neural Networks. (CEA LIST)</li>
+<li>MNSIM: Simulation Platform for Memristor-Based Neuromorphic Computing System. (Tsinghua University, UCSB, Arizona State University)</li>
+<li>Accelerated Artificial Neural Networks on FPGA for Fault Detection in Automotive Systems. (Nanyang Technological University, University of Warwick)</li>
+<li>Significance Driven Hybrid 8T-6T SRAM for Energy-Efficient Synaptic Storage in Artificial Neural Networks. (Purdue University)</li>
+</ul>
+<h3 id="2016-FPGA"><a href="#2016-FPGA" class="headerlink" title="2016 FPGA"></a>2016 FPGA</h3><ul>
+<li><strong>Going Deeper with Embedded FPGA Platform for Convolutional Neural Network.</strong> [<a target="_blank" rel="noopener" href="http://www.isfpga.org/fpga2016/index_files/Slides/1_2.pdf">Slides</a>][<a target="_blank" rel="noopener" href="http://www.isfpga.org/fpga2016/index_files/Slides/1_2_demo.m4v">Demo</a>] (Tsinghua University, MSRA)<ul>
+<li><em>The first work I see, which runs the entire flow of CNN, including both CONV and FC layers.</em></li>
+<li><em>Point out that CONV layers are computational-centric, while FC layrers are memory-centric.</em></li>
+<li><em>The FPGA runs VGG16-SVD without reconfiguring its resources, but the convolver can only support k=3.</em></li>
+<li><em>Dynamic-precision data quantization is creative, but not implemented on hardware.</em></li>
+</ul>
+</li>
+<li><strong>Throughput-Optimized OpenCL-based FPGA Accelerator for Large-Scale Convolutional Neural Networks.</strong> [<a target="_blank" rel="noopener" href="http://www.isfpga.org/fpga2016/index_files/Slides/1_1.pdf">Slides</a>] (Arizona State Univ, ARM)<ul>
+<li><em>Spatially allocate FPGA’s resources to CONV/POOL/NORM/FC layers.</em></li>
+</ul>
+</li>
+</ul>
+<h3 id="2016-ASPDAC"><a href="#2016-ASPDAC" class="headerlink" title="2016 ASPDAC"></a>2016 ASPDAC</h3><ul>
+<li><strong>Design Space Exploration of FPGA-Based Deep Convolutional Neural Networks.</strong> (UC Davis)</li>
+<li><strong>LRADNN: High-Throughput and Energy-Efficient Deep Neural Network Accelerator using Low Rank Approximation.</strong> (Hong Kong University of Science and Technology, Shanghai Jiao Tong University)</li>
+<li><strong>Efficient Embedded Learning for IoT Devices.</strong> (Purdue University)</li>
+<li>ACR: Enabling Computation Reuse for Approximate Computing. (Chinese Academy of Sciences)</li>
+</ul>
+<h3 id="2016-VLSI"><a href="#2016-VLSI" class="headerlink" title="2016 VLSI"></a>2016 VLSI</h3><ul>
+<li><strong>A 0.3‐2.6 TOPS/W Precision‐Scalable Processor for Real‐Time Large‐Scale ConvNets.</strong> (KU Leuven)<ul>
+<li><em>Use dynamic precision for different CONV layers, and scales down the MAC array’s supply voltage at lower precision.</em></li>
+<li><em>Prevent memory fetches and MAC operations based on the ReLU sparsity.</em></li>
+</ul>
+</li>
+<li><strong>A 1.40mm2 141mW 898GOPS Sparse Neuromorphic Processor in 40nm CMOS.</strong> (University of Michigan)</li>
+<li>A 58.6mW Real-Time Programmable Object Detector with Multi-Scale Multi-Object Support Using Deformable Parts Model on 1920x1080 Video at 30fps. (MIT)</li>
+<li>A Machine-learning Classifier Implemented in a Standard 6T SRAM Array. (Princeton)</li>
+</ul>
+<h3 id="2016-ICCAD"><a href="#2016-ICCAD" class="headerlink" title="2016 ICCAD"></a>2016 ICCAD</h3><ul>
+<li><strong>Efficient Memory Compression in Deep Neural Networks Using Coarse-Grain Sparsification for Speech Applications.</strong> (Arizona State University)</li>
+<li><strong>Memsqueezer: Re-architecting the On-chip memory Sub-system of Deep Learning Accelerator for Embedded Devices.</strong> (Chinese Academy of Sciences)</li>
+<li><strong>Caffeine: Towards Uniformed Representation and Acceleration for Deep Convolutional Neural Networks.</strong> (Peking University, UCLA, Falcon)<ul>
+<li><em>Propose a uniformed convolutional matrix-multiplication representation for accelerating CONV and FC layers on FPGA.</em></li>
+<li><em>Propose a weight-major convolutional mapping method for FC layers, which has good data reuse, DRAM access burst length and effective bandwidth.</em></li>
+</ul>
+</li>
+<li><strong>BoostNoC: Power Efficient Network-on-Chip Architecture for Near Threshold Computing.</strong> (Utah State University)</li>
+<li>Design of Power-Efficient Approximate Multipliers for Approximate Artificial Neural Network. (Brno University of Technology, Brno University of Technology)</li>
+<li>Neural Networks Designing Neural Networks: Multi-Objective Hyper-Parameter Optimization. (McGill University)</li>
+</ul>
+<h3 id="2016-MICRO"><a href="#2016-MICRO" class="headerlink" title="2016 MICRO"></a>2016 MICRO</h3><ul>
+<li><strong>From High-Level Deep Neural Models to FPGAs.</strong> (Georgia Institute of Technology, Intel)<ul>
+<li><em>Develop a macro dataflow ISA for DNN accelerators.</em></li>
+<li><em>Develop hand-optimized template designs that are scalable and highly customizable.</em></li>
+<li><em>Provide a Template Resource Optimization search algorithm to co-optimize the accelerator architecture and scheduling.</em></li>
+</ul>
+</li>
+<li><strong>vDNN: Virtualized Deep Neural Networks for Scalable, Memory-Efficient Neural Network Design.</strong> (NVIDIA)</li>
+<li><strong>Stripes: Bit-Serial Deep Neural Network Computing.</strong> (University of Toronto, University of British Columbia)<ul>
+<li><em>Introduce serial computation and reduced precision computation to neural network accelerator designs, enabling accuracy vs. performance trade-offs.</em></li>
+<li><em>Design a bit-serial computing unit to enable linear scaling the performance with precision reduction.</em></li>
+</ul>
+</li>
+<li><strong>Cambricon-X: An Accelerator for Sparse Neural Networks.</strong> (Chinese Academy of Sciences)</li>
+<li><strong>NEUTRAMS: Neural Network Transformation and Co-design under Neuromorphic Hardware Constraints.</strong> (Tsinghua University, UCSB)</li>
+<li><strong>Fused-Layer CNN Accelerators.</strong> (Stony Brook University)<ul>
+<li><em>Fuse multiple CNN layers (CONV+POOL) to reduce DRAM access for input/output data.</em></li>
+</ul>
+</li>
+<li><strong>Bridging the I/O Performance Gap for Big Data Workloads: A New NVDIMM-based Approach.</strong> (The Hong Kong Polytechnic University, NSF/University of Florida)</li>
+<li><strong>A Patch Memory System For Image Processing and Computer Vision.</strong> (NVIDIA)</li>
+<li><strong>An Ultra Low-Power Hardware Accelerator for Automatic Speech Recognition.</strong> (Universitat Politecnica de Catalunya)</li>
+<li>Perceptron Learning for Reuse Prediction. (TAMU, Intel Labs)<ul>
+<li><em>Train neural networks to predict reuse of cache blocks.</em></li>
+</ul>
+</li>
+<li>A Cloud-Scale Acceleration Architecture. (Microsoft Research)</li>
+<li>Reducing Data Movement Energy via Online Data Clustering and Encoding. (University of Rochester)</li>
+<li>The Microarchitecture of a Real-time Robot Motion Planning Accelerator. (Duke University)</li>
+<li>Chameleon: Versatile and Practical Near-DRAM Acceleration Architecture for Large Memory Systems. (UIUC, Seoul National University)</li>
+</ul>
+<h3 id="2016-FPL"><a href="#2016-FPL" class="headerlink" title="2016 FPL"></a>2016 FPL</h3><ul>
+<li><strong>A High Performance FPGA-based Accelerator for Large-Scale Convolutional Neural Network.</strong> (Fudan University)</li>
+<li><strong>Overcoming Resource Underutilization in Spatial CNN Accelerators.</strong> (Stony Brook University)<ul>
+<li><em>Build multiple accelerators, each specialized for specific CNN layers, instead of a single accelerator with uniform tiling parameters.</em></li>
+</ul>
+</li>
+<li><strong>Accelerating Recurrent Neural Networks in Analytics Servers: Comparison of FPGA, CPU, GPU, and ASIC.</strong> (Intel)</li>
+</ul>
+<h3 id="2016-HPCA"><a href="#2016-HPCA" class="headerlink" title="2016 HPCA"></a>2016 HPCA</h3><ul>
+<li><strong>A Performance Analysis Framework for Optimizing OpenCL Applications on FPGAs.</strong> (Nanyang Technological University, HKUST, Cornell University)</li>
+<li><strong>TABLA: A Unified Template-based Architecture for Accelerating Statistical Machine Learning.</strong> (Georgia Institute of Technology)</li>
+<li>Memristive Boltzmann Machine: A Hardware Accelerator for Combinatorial Optimization and Deep Learning. (University of Rochester)</li>
+</ul>
+<h3 id="2017-FPGA"><a href="#2017-FPGA" class="headerlink" title="2017 FPGA"></a>2017 FPGA</h3><ul>
+<li><strong>An OpenCL Deep Learning Accelerator on Arria 10.</strong> (Intel)<ul>
+<li><em>Minimum bandwidth requirement: All the intermediate data in AlexNet’s CONV layers are cached in the on-chip buffer, so their architecture is compute-bound.</em></li>
+<li><em>Reduced operations: Winograd transformation.</em></li>
+<li><em>High usage of the available DSPs+Reduced computation -&gt; Higher performance on FPGA -&gt; Competitive efficiency vs. TitanX.</em></li>
+</ul>
+</li>
+<li><strong>ESE: Efficient Speech Recognition Engine for Compressed LSTM on FPGA.</strong> (Stanford University, DeepPhi, Tsinghua University, NVIDIA)</li>
+<li><strong>FINN: A Framework for Fast, Scalable Binarized Neural Network Inference.</strong> (Xilinx, Norwegian University of Science and Technology, University of Sydney)</li>
+<li><strong>Can FPGA Beat GPUs in Accelerating Next-Generation Deep Neural Networks?</strong> (Intel)</li>
+<li><strong>Accelerating Binarized Convolutional Neural Networks with Software-Programmable FPGAs.</strong> (Cornell University, UCLA, UCSD)</li>
+<li><strong>Improving the Performance of OpenCL-based FPGA Accelerator for Convolutional Neural Network.</strong> (UW-Madison)</li>
+<li><strong>Frequency Domain Acceleration of Convolutional Neural Networks on CPU-FPGA Shared Memory System.</strong> (USC)</li>
+<li><strong>Optimizing Loop Operation and Dataflow in FPGA Acceleration of Deep Convolutional Neural Networks.</strong> (Arizona State University)</li>
+</ul>
+<h3 id="2017-ISSCC"><a href="#2017-ISSCC" class="headerlink" title="2017 ISSCC"></a>2017 ISSCC</h3><ul>
+<li><strong>A 2.9TOPS/W Deep Convolutional Neural Network SoC in FD-SOI 28nm for Intelligent Embedded Systems.</strong> (ST)</li>
+<li><strong>DNPU: An 8.1TOPS/W Reconfigurable CNN-RNN Processor for General Purpose Deep Neural Networks.</strong> (KAIST)</li>
+<li><strong>ENVISION: A 0.26-to-10TOPS/W Subword-Parallel Computational Accuracy-Voltage-Frequency-Scalable Convolutional Neural Network Processor in 28nm FDSOI.</strong> (KU Leuven)</li>
+<li><strong>A 288µW Programmable Deep-Learning Processor with 270KB On-Chip Weight Storage Using Non-Uniform Memory Hierarchy for Mobile Intelligence.</strong> (University of Michigan, CubeWorks)</li>
+<li>A 28nm SoC with a 1.2GHz 568nJ/Prediction Sparse Deep-NeuralNetwork Engine with &gt;0.1 Timing Error Rate Tolerance for IoT Applications. (Harvard)</li>
+<li>A Scalable Speech Recognizer with Deep-Neural-Network Acoustic Models and Voice-Activated Power Gating (MIT)</li>
+<li>A 0.62mW Ultra-Low-Power Convolutional-Neural-Network Face Recognition Processor and a CIS Integrated with Always-On Haar-Like Face Detector. (KAIST)</li>
+</ul>
+<h3 id="2017-HPCA"><a href="#2017-HPCA" class="headerlink" title="2017 HPCA"></a>2017 HPCA</h3><ul>
+<li><strong>FlexFlow: A Flexible Dataflow Accelerator Architecture for Convolutional Neural Networks.</strong> (Chinese Academy of Sciences)</li>
+<li><strong>PipeLayer: A Pipelined ReRAM-Based Accelerator for Deep Learning.</strong> (University of Pittsburgh, University of Southern California)</li>
+<li>Towards Pervasive and User Satisfactory CNN across GPU Microarchitectures. (University of Florida)<ul>
+<li><em>Satisfaction of CNN (SoC) is the combination of SoCtime, SoCaccuracy and energy consumption.</em></li>
+<li><em>The P-CNN framework is composed of offline compilation and run-time management.</em><ul>
+<li><em>Offline compilation: Generally optimizes runtime, and generates scheduling configurations for the run-time stage.</em></li>
+<li><em>Run-time management: Generates tuning tables through accuracy tuning, and calibrate accuracy+runtime (select the best tuning table) during the long-term execution.</em></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Supporting Address Translation for Accelerator-Centric Architectures. (UCLA)</li>
+</ul>
+<h3 id="2017-ASPLOS"><a href="#2017-ASPLOS" class="headerlink" title="2017 ASPLOS"></a>2017 ASPLOS</h3><ul>
+<li><strong>Tetris: Scalable and Efficient Neural Network Acceleration with 3D Memory.</strong> (Stanford University)<ul>
+<li><em>Move accumulation operations close to the DRAM banks.</em></li>
+<li><em>Develop a hybrid partitioning scheme that parallelizes the NN computations over multiple accelerators.</em></li>
+</ul>
+</li>
+<li>SC-DCNN: Highly-Scalable Deep Convolutional Neural Network using Stochastic Computing. (Syracuse University, USC, The City College of New York)</li>
+</ul>
+<h3 id="2017-ISCA"><a href="#2017-ISCA" class="headerlink" title="2017 ISCA"></a>2017 ISCA</h3><ul>
+<li><strong>Maximizing CNN Accelerator Efficiency Through Resource Partitioning.</strong> (Stony Brook University)<ul>
+<li><em>An Extension of their FPL’16 paper.</em></li>
+</ul>
+</li>
+<li><strong>In-Datacenter Performance Analysis of a Tensor Processing Unit.</strong> (Google)</li>
+<li><strong>SCALEDEEP: A Scalable Compute Architecture for Learning and Evaluating Deep Networks.</strong> (Purdue University, Intel)<ul>
+<li><em>Propose a full-system (server node) architecture, focusing on the challenge of DNN training (intra and inter-layer heterogeneity).</em></li>
+</ul>
+</li>
+<li><strong>SCNN: An Accelerator for Compressed-sparse Convolutional Neural Networks.</strong> (NVIDIA, MIT, UC Berkeley, Stanford University)</li>
+<li><strong>Scalpel: Customizing DNN Pruning to the Underlying Hardware Parallelism.</strong> (University of Michigan, ARM)</li>
+<li>Understanding and Optimizing Asynchronous Low-Precision Stochastic Gradient Descent. (Stanford)</li>
+<li>LogCA: A High-Level Performance Model for Hardware Accelerators. (AMD, University of Wisconsin-Madison)</li>
+<li>APPROX-NoC: A Data Approximation Framework for Network-On-Chip Architectures. (TAMU)</li>
+</ul>
+<h3 id="2017-FCCM"><a href="#2017-FCCM" class="headerlink" title="2017 FCCM"></a>2017 FCCM</h3><ul>
+<li><strong>Escher: A CNN Accelerator with Flexible Buffering to Minimize Off-Chip Transfer.</strong> (Stony Brook University)</li>
+<li><strong>Customizing Neural Networks for Efficient FPGA Implementation.</strong></li>
+<li><strong>Evaluating Fast Algorithms for Convolutional Neural Networks on FPGAs.</strong></li>
+<li><strong>FP-DNN: An Automated Framework for Mapping Deep Neural Networks onto FPGAs with RTL-HLS Hybrid Templates.</strong> (Peking University, HKUST, MSRA, UCLA)<ul>
+<li><em>Compute-instensive part: RTL-based generalized matrix multiplication kernel.</em></li>
+<li><em>Layer-specific part: HLS-based control logic.</em></li>
+<li><em>Memory-instensive part: Several techniques for lower DRAM bandwidth requirements.</em></li>
+</ul>
+</li>
+<li>FPGA accelerated Dense Linear Machine Learning: A Precision-Convergence Trade-off.</li>
+<li>A Configurable FPGA Implementation of the Tanh Function using DCT Interpolation.</li>
+</ul>
+<h3 id="2017-DAC"><a href="#2017-DAC" class="headerlink" title="2017 DAC"></a>2017 DAC</h3><ul>
+<li><strong>Deep^3: Leveraging Three Levels of Parallelism for Efficient Deep Learning.</strong> (UCSD, Rice)</li>
+<li><strong>Real-Time meets Approximate Computing: An Elastic Deep Learning Accelerator Design with Adaptive Trade-off between QoS and QoR.</strong> (CAS)<ul>
+<li><em>I’m not sure whether the proposed tuning scenario and direction are reasonable enough to find out feasible solutions.</em></li>
+</ul>
+</li>
+<li><strong>Exploring Heterogeneous Algorithms for Accelerating Deep Convolutional Neural Networks on FPGAs.</strong> (PKU, CUHK, SenseTime)</li>
+<li><strong>Hardware-Software Codesign of Highly Accurate, Multiplier-free Deep Neural Networks.</strong> (Brown University)</li>
+<li><strong>A Kernel Decomposition Architecture for Binary-weight Convolutional Neural Networks.</strong> (KAIST)</li>
+<li><strong>Design of An Energy-Efficient Accelerator for Training of Convolutional Neural Networks using Frequency-Domain Computation.</strong> (Georgia Tech)</li>
+<li><strong>New Stochastic Computing Multiplier and Its Application to Deep Neural Networks.</strong> (UNIST)</li>
+<li><strong>TIME: A Training-in-memory Architecture for Memristor-based Deep Neural Networks.</strong> (THU, UCSB)</li>
+<li><strong>Fault-Tolerant Training with On-Line Fault Detection for RRAM-Based Neural Computing Systems.</strong> (THU, Duke)</li>
+<li><strong>Automating the systolic array generation and optimizations for high throughput convolution neural network.</strong> (PKU, UCLA, Falcon)</li>
+<li><strong>Towards Full-System Energy-Accuracy Tradeoffs: A Case Study of An Approximate Smart Camera System.</strong> (Purdue)<ul>
+<li><em>Synergistically tunes componet-level approximation knobs to achieve system-level energy-accuracy tradeoffs.</em></li>
+</ul>
+</li>
+<li><strong>Error Propagation Aware Timing Relaxation For Approximate Near Threshold Computing.</strong> (KIT)</li>
+<li>RESPARC: A Reconfigurable and Energy-Efficient Architecture with Memristive Crossbars for Deep Spiking Neural Networks. (Purdue)</li>
+<li>Rescuing Memristor-based Neuromorphic Design with High Defects. (University of Pittsburgh, HP Lab, Duke)</li>
+<li>Group Scissor: Scaling Neuromorphic Computing Design to Big Neural Networks. (University of Pittsburgh, Duke)</li>
+<li>Towards Aging-induced Approximations. (KIT, UT Austin)</li>
+<li>SABER: Selection of Approximate Bits for the Design of Error Tolerant Circuits. (University of Minnesota, TAMU)</li>
+<li>On Quality Trade-off Control for Approximate Computing using Iterative Training. (SJTU, CUHK)</li>
+</ul>
+<h3 id="2017-DATE"><a href="#2017-DATE" class="headerlink" title="2017 DATE"></a>2017 DATE</h3><ul>
+<li><strong>DVAFS: Trading Computational Accuracy for Energy Through Dynamic-Voltage-Accuracy-Frequency-Scaling.</strong> (KU Leuven)</li>
+<li><strong>Accelerator-friendly Neural-network Training: Learning Variations and Defects in RRAM Crossbar.</strong> (Shanghai Jiao Tong University, University of Pittsburgh, Lynmax Research)</li>
+<li><strong>A Novel Zero Weight/Activation-Aware Hardware Architecture of Convolutional Neural Network.</strong> (Seoul National University)<ul>
+<li><em>Solve the zero-induced load imbalance problem.</em></li>
+</ul>
+</li>
+<li><strong>Understanding the Impact of Precision Quantization on the Accuracy and Energy of Neural Networks.</strong> (Brown University)</li>
+<li><strong>Design Space Exploration of FPGA Accelerators for Convolutional Neural Networks.</strong> (Samsung, UNIST, Seoul National University)</li>
+<li><strong>MoDNN: Local Distributed Mobile Computing System for Deep Neural Network.</strong> (University of Pittsburgh, George Mason University, University of Maryland)</li>
+<li><strong>Chain-NN: An Energy-Efficient 1D Chain Architecture for Accelerating Deep Convolutional Neural Networks.</strong> (Waseda University)</li>
+<li><strong>LookNN: Neural Network with No Multiplication.</strong> (UCSD)<ul>
+<li><em>Cluster weights and use LUT to avoid multiplication.</em></li>
+</ul>
+</li>
+<li>Energy-Efficient Approximate Multiplier Design using Bit Significance-Driven Logic Compression. (Newcastle University)</li>
+<li>Revamping Timing Error Resilience to Tackle Choke Points at NTC Systems. (Utah State University)</li>
+</ul>
+<h3 id="2017-VLSI"><a href="#2017-VLSI" class="headerlink" title="2017 VLSI"></a>2017 VLSI</h3><ul>
+<li><strong>A 3.43TOPS/W 48.9pJ/Pixel 50.1nJ/Classification 512 Analog Neuron Sparse Coding Neural Network with On-Chip Learning and Classification in 40nm CMOS.</strong> (University of Michigan, Intel)</li>
+<li><strong>BRein Memory: A 13-Layer 4.2 K Neuron/0.8 M Synapse Binary/Ternary Reconfigurable In-Memory Deep Neural Network Accelerator in 65 nm CMOS.</strong> (Hokkaido University, Tokyo Institute of Technology, Keio University)</li>
+<li><strong>A 1.06-To-5.09 TOPS/W Reconfigurable Hybrid-Neural-Network Processor for Deep Learning Applications.</strong> (Tsinghua University)</li>
+<li><strong>A 127mW 1.63TOPS sparse spatio-temporal cognitive SoC for action classification and motion tracking in videos.</strong> (University of Michigan)</li>
+</ul>
+<h3 id="2017-ICCAD"><a href="#2017-ICCAD" class="headerlink" title="2017 ICCAD"></a>2017 ICCAD</h3><ul>
+<li><strong>AEP: An Error-bearing Neural Network Accelerator for Energy Efficiency and Model Protection.</strong> (University of Pittsburgh)</li>
+<li>VoCaM: Visualization oriented convolutional neural network acceleration on mobile system. (George Mason University, Duke)</li>
+<li>AdaLearner: An Adaptive Distributed Mobile Learning System for Neural Networks. (Duke)</li>
+<li>MeDNN: A Distributed Mobile System with Enhanced Partition and Deployment for Large-Scale DNNs. (Duke)</li>
+<li>TraNNsformer: Neural Network Transformation for Memristive Crossbar based Neuromorphic System Design. (Purdue).</li>
+<li>A Closed-loop Design to Enhance Weight Stability of Memristor Based Neural Network Chips. (Duke)</li>
+<li>Fault injection attack on deep neural network. (CUHK)</li>
+<li>ORCHARD: Visual Object Recognition Accelerator Based on Approximate In-Memory Processing. (UCSD)</li>
+</ul>
+<h3 id="2017-HotChips"><a href="#2017-HotChips" class="headerlink" title="2017 HotChips"></a>2017 HotChips</h3><ul>
+<li><strong>A Dataflow Processing Chip for Training Deep Neural Networks.</strong> (Wave Computing)</li>
+<li><strong>Brainwave: Accelerating Persistent Neural Networks at Datacenter Scale.</strong> (Microsoft)</li>
+<li><strong>DNN ENGINE: A 16nm Sub-uJ Deep Neural Network Inference Accelerator for the Embedded Masses.</strong> (Harvard, ARM)</li>
+<li><strong>DNPU: An Energy-Efficient Deep Neural Network Processor with On-Chip Stereo Matching.</strong> (KAIST)</li>
+<li><strong>Evaluation of the Tensor Processing Unit (TPU): A Deep Neural Network Accelerator for the Datacenter.</strong> (Google)</li>
+<li>NVIDIA’s Volta GPU: Programmability and Performance for GPU Computing. (NVIDIA)</li>
+<li>Knights Mill: Intel Xeon Phi Processor for Machine Learning. (Intel)</li>
+<li>XPU: A programmable FPGA Accelerator for diverse workloads. (Baidu)</li>
+</ul>
+<h3 id="2017-MICRO"><a href="#2017-MICRO" class="headerlink" title="2017 MICRO"></a>2017 MICRO</h3><ul>
+<li><strong>Bit-Pragmatic Deep Neural Network Computing.</strong> (NVIDIA, University of Toronto)</li>
+<li><strong>CirCNN: Accelerating and Compressing Deep Neural Networks Using Block-Circulant Weight Matrices.</strong> (Syracuse University, City University of New York, USC, California State University, Northeastern University)</li>
+<li><strong>DRISA: A DRAM-based Reconfigurable In-Situ Accelerator.</strong> (UCSB, Samsung)</li>
+<li><strong>Scale-Out Acceleration for Machine Learning.</strong> (Georgia Tech, UCSD)<ul>
+<li>Propose CoSMIC, a full computing stack constituting language, compiler, system software, template architecture, and circuit generators, that enable programmable acceleration of learning at scale.</li>
+</ul>
+</li>
+<li>DeftNN: Addressing Bottlenecks for DNN Execution on GPUs via Synapse Vector Elimination and Near-compute Data Fission. (Univ. of Michigan, Univ. of Nevada)</li>
+<li>Data Movement Aware Computation Partitioning. (PSU, TOBB University of Economics and Technology)<ul>
+<li><em>Partition computation on a manycore system for near data processing.</em></li>
+</ul>
+</li>
+</ul>
+<h3 id="2018-ASPDAC"><a href="#2018-ASPDAC" class="headerlink" title="2018 ASPDAC"></a>2018 ASPDAC</h3><ul>
+<li><strong>ReGAN: A Pipelined ReRAM-Based Accelerator for Generative Adversarial Networks.</strong> (University of Pittsburgh, Duke)</li>
+<li><strong>Accelerator-centric Deep Learning Systems for Enhanced Scalability, Energy-efficiency, and Programmability.</strong> (POSTECH)</li>
+<li><strong>Architectures and Algorithms for User Customization of CNNs.</strong> (Seoul National University, Samsung)</li>
+<li><strong>Optimizing FPGA-based Convolutional Neural Networks Accelerator for Image Super-Resolution.</strong> (Sogang University)</li>
+<li><strong>Running sparse and low-precision neural network: when algorithm meets hardware.</strong> (Duke)</li>
+</ul>
+<h3 id="2018-ISSCC"><a href="#2018-ISSCC" class="headerlink" title="2018 ISSCC"></a>2018 ISSCC</h3><ul>
+<li><strong>A 55nm Time-Domain Mixed-Signal Neuromorphic Accelerator with Stochastic Synapses and Embedded Reinforcement Learning for Autonomous Micro-Robots.</strong> (Georgia Tech)</li>
+<li><strong>A Shift Towards Edge Machine-Learning Processing.</strong> (Google)</li>
+<li><strong>QUEST: A 7.49TOPS Multi-Purpose Log-Quantized DNN Inference Engine Stacked on 96MB 3D SRAM Using Inductive-Coupling Technology in 40nm CMOS.</strong> (Hokkaido University, Ultra Memory, Keio University)</li>
+<li><strong>UNPU: A 50.6TOPS/W Unified Deep Neural Network Accelerator with 1b-to-16b Fully-Variable Weight Bit-Precision.</strong> (KAIST)</li>
+<li><strong>A 9.02mW CNN-Stereo-Based Real-Time 3D Hand-Gesture Recognition Processor for Smart Mobile Devices.</strong> (KAIST)</li>
+<li><strong>An Always-On 3.8μJ/86% CIFAR-10 Mixed-Signal Binary CNN Processor with All Memory on Chip in 28nm CMOS.</strong> (Stanford, KU Leuven)</li>
+<li><strong>Conv-RAM: An Energy-Efficient SRAM with Embedded Convolution Computation for Low-Power CNN-Based Machine Learning Applications.</strong> (MIT)</li>
+<li><strong>A 42pJ/Decision 3.12TOPS/W Robust In-Memory Machine Learning Classifier with On-Chip Training.</strong> (UIUC)</li>
+<li><strong>Brain-Inspired Computing Exploiting Carbon Nanotube FETs and Resistive RAM: Hyperdimensional Computing Case Study.</strong> (Stanford, UC Berkeley, MIT)</li>
+<li><strong>A 65nm 1Mb Nonvolatile Computing-in-Memory ReRAM Macro with Sub-16ns Multiply-and-Accumulate for Binary DNN AI Edge Processors.</strong> (NTHU)</li>
+<li><strong>A 65nm 4Kb Algorithm-Dependent Computing-in-Memory SRAM Unit Macro with 2.3ns and 55.8TOPS/W Fully Parallel Product-Sum Operation for Binary DNN Edge Processors.</strong> (NTHU, TSMC, UESTC, ASU)</li>
+<li><strong>A 1μW Voice Activity Detector Using Analog Feature Extraction and Digital Deep Neural Network.</strong> (Columbia University)</li>
+</ul>
+<h3 id="2018-HPCA"><a href="#2018-HPCA" class="headerlink" title="2018 HPCA"></a>2018 HPCA</h3><ul>
+<li><strong>Making Memristive Neural Network Accelerators Reliable.</strong> (University of Rochester)</li>
+<li><strong>Towards Efficient Microarchitectural Design for Accelerating Unsupervised GAN-based Deep Learning.</strong> (University of Florida)</li>
+<li><strong>Compressing DMA Engine: Leveraging Activation Sparsity for Training Deep Neural Networks.</strong> (POSTECH, NVIDIA, UT-Austin)</li>
+<li><strong>In-situ AI: Towards Autonomous and Incremental Deep Learning for IoT Systems.</strong> (University of Florida, Chongqing University, Capital Normal University)</li>
+<li>RC-NVM: Enabling Symmetric Row and Column Memory Accesses for In-Memory Databases. (PKU, NUDT, Duke, UCLA, PSU)</li>
+<li>GraphR: Accelerating Graph Processing Using ReRAM. (Duke, USC, Binghamton University SUNY)</li>
+<li>GraphP: Reducing Communication of PIM-based Graph Processing with Efficient Data Partition. (THU, USC, Stanford)</li>
+<li>PM3: Power Modeling and Power Management for Processing-in-Memory. (PKU)</li>
+</ul>
+<h3 id="2018-ASPLOS"><a href="#2018-ASPLOS" class="headerlink" title="2018 ASPLOS"></a>2018 ASPLOS</h3><ul>
+<li><strong>Bridging the Gap Between Neural Networks and Neuromorphic Hardware with A Neural Network Compiler.</strong> (Tsinghua, UCSB)</li>
+<li><strong>MAERI: Enabling Flexible Dataflow Mapping over DNN Accelerators via Reconfigurable Interconnects.</strong> (Georgia Tech)<ul>
+<li><em>Higher PE utilization: Use an augmented reduction tree (reconfigurable interconnects) to construct arbitrary sized virtual neurons.</em></li>
+</ul>
+</li>
+<li><strong>VIBNN: Hardware Acceleration of Bayesian Neural Networks.</strong> (Syracuse University, USC)</li>
+<li>Exploiting Dynamical Thermal Energy Harvesting for Reusing in Smartphone with Mobile Applications. (Guizhou University, University of Florida)</li>
+<li>Potluck: Cross-application Approximate Deduplication for Computation-Intensive Mobile Applications. (Yale)</li>
+</ul>
+<h3 id="2018-VLSI"><a href="#2018-VLSI" class="headerlink" title="2018 VLSI"></a>2018 VLSI</h3><ul>
+<li><strong>STICKER: A 0.41‐62.1 TOPS/W 8bit Neural Network Processor with Multi‐Sparsity Compatible Convolution Arrays and Online Tuning Acceleration for Fully Connected Layers.</strong> (THU)</li>
+<li><strong>2.9TOPS/W Reconfigurable Dense/Sparse Matrix‐Multiply Accelerator with Unified INT8/INT16/FP16 Datapath in 14nm Tri‐gate CMOS.</strong> (Intel)</li>
+<li><strong>A Scalable Multi‐TeraOPS Deep Learning Processor Core for AI Training and Inference.</strong> (IBM)</li>
+<li><strong>An&nbsp;Ultra‐high&nbsp;Energy‐efficient&nbsp;reconfigurable&nbsp;Processor&nbsp;for&nbsp;Deep&nbsp;Neural&nbsp;Networks&nbsp;with&nbsp;Binary/Ternary&nbsp;Weights&nbsp;in&nbsp;28nm&nbsp;CMOS.</strong> (THU)</li>
+<li><strong>B‐Face:&nbsp;0.2&nbsp;mW&nbsp;CNN‐Based&nbsp;Face&nbsp;Recognition&nbsp;Processor&nbsp;with&nbsp;Face&nbsp;Alignment&nbsp;for&nbsp;Mobile&nbsp;User&nbsp;Identification.</strong> (KAIST)</li>
+<li><strong>A&nbsp;141&nbsp;uW,&nbsp;2.46&nbsp;pJ/Neuron&nbsp;Binarized&nbsp;Convolutional&nbsp;Neural&nbsp;Network&nbsp;based&nbsp;Self-learning&nbsp;Speech&nbsp;Recognition&nbsp;Processor&nbsp;in&nbsp;28nm&nbsp;CMOS.</strong> (THU)</li>
+<li><strong>A&nbsp;Mixed‐Signal&nbsp;Binarized&nbsp;Convolutional‐Neural-Network&nbsp;Accelerator&nbsp;Integrating&nbsp;Dense&nbsp;Weight&nbsp;Storage&nbsp;and&nbsp;Multiplication&nbsp;for&nbsp;Reduced&nbsp;Data&nbsp;Movement.</strong> (Princeton)</li>
+<li><strong>PhaseMAC:&nbsp;A&nbsp;14&nbsp;TOPS/W&nbsp;8bit&nbsp;GRO&nbsp;based&nbsp;Phase&nbsp;Domain&nbsp;MAC&nbsp;Circuit&nbsp;for&nbsp;In‐Sensor‐Computed&nbsp;Deep&nbsp;Learning&nbsp;Accelerators.</strong> (Toshiba)</li>
+</ul>
+<h3 id="2018-FPGA"><a href="#2018-FPGA" class="headerlink" title="2018 FPGA"></a>2018 FPGA</h3><ul>
+<li><strong>C-LSTM: Enabling Efficient LSTM using Structured Compression Techniques on FPGAs.</strong> (Peking Univ, Syracuse Univ, CUNY)</li>
+<li><strong>DeltaRNN: A Power-efficient Recurrent Neural Network Accelerator.</strong> (ETHZ, BenevolentAI)</li>
+<li><strong>Towards a Uniform Template-based Architecture for Accelerating 2D and 3D CNNs on FPGA.</strong> (National Univ of Defense Tech)</li>
+<li><strong>A Customizable Matrix Multiplication Framework for the Intel HARPv2 Xeon+FPGA Platform - A Deep Learning Case Study.</strong> (The Univ of Sydney, Intel)</li>
+<li><strong>A Framework for Generating High Throughput CNN Implementations on FPGAs.</strong> (USC)</li>
+<li>Liquid Silicon: A Data-Centric Reconfigurable Architecture enabled by RRAM Technology. (UW Madison)</li>
+</ul>
+<h3 id="2018-ISCA"><a href="#2018-ISCA" class="headerlink" title="2018 ISCA"></a>2018 ISCA</h3><ul>
+<li><strong>RANA: Towards Efficient Neural Acceleration with Refresh-Optimized Embedded DRAM.</strong> (THU)</li>
+<li><strong>Brainwave: A Configurable Cloud-Scale DNN Processor for Real-Time AI.</strong> (Microsoft)</li>
+<li><strong>PROMISE: An End-to-End Design of a Programmable Mixed-Signal Accelerator for Machine Learning Algorithms.</strong> (UIUC)</li>
+<li><strong>Computation Reuse in DNNs by Exploiting Input Similarity.</strong> (UPC)</li>
+<li><strong>GANAX: A Unified SIMD-MIMD Acceleration for Generative Adversarial Network.</strong> (Georiga Tech, IPM, Qualcomm, UCSD, UIUC)</li>
+<li><strong>SnaPEA: Predictive Early Activation for Reducing Computation in Deep Convolutional Neural Networks.</strong> (UCSD, Georgia Tech, Qualcomm)</li>
+<li><strong>UCNN: Exploiting Computational Reuse in Deep Neural Networks via Weight Repetition.</strong> (UIUC, NVIDIA)</li>
+<li><strong>An Energy-Efficient Neural Network Accelerator based on Outlier-Aware Low Precision Computation.</strong> (Seoul National)</li>
+<li><strong>Prediction based Execution on Deep Neural Networks.</strong> (Florida)</li>
+<li><strong>Bit Fusion: Bit-Level Dynamically Composable Architecture for Accelerating Deep Neural Networks.</strong> (Georgia Tech, ARM, UCSD)</li>
+<li><strong>Gist: Efficient Data Encoding for Deep Neural Network Training.</strong> (Michigan, Microsoft, Toronto)</li>
+<li><strong>The Dark Side of DNN Pruning.</strong> (UPC)</li>
+<li><strong>Neural Cache: Bit-Serial In-Cache Acceleration of Deep Neural Networks.</strong> (Michigan)</li>
+<li>EVA^2: Exploiting Temporal Redundancy in Live Computer Vision. (Cornell)</li>
+<li>Euphrates: Algorithm-SoC Co-Design for Low-Power Mobile Continuous Vision. (Rochester, Georgia Tech, ARM)</li>
+<li>Feature-Driven and Spatially Folded Digital Neurons for Efficient Spiking Neural Network Simulations. (POSTECH/Berkeley, Seoul National)</li>
+<li>Space-Time Algebra: A Model for Neocortical Computation. (Wisconsin)</li>
+<li>Scaling Datacenter Accelerators With Compute-Reuse Architectures. (Princeton)<ul>
+<li><em>Add a NVM-based storage layer to the accelerator, for computation reuse.</em></li>
+</ul>
+</li>
+<li>Enabling Scientific Computing on Memristive Accelerators. (Rochester)</li>
+</ul>
+<h3 id="2018-DATE"><a href="#2018-DATE" class="headerlink" title="2018 DATE"></a>2018 DATE</h3><ul>
+<li><strong>MATIC: Learning Around Errors for Efficient Low-Voltage Neural Network Accelerators.</strong> (University of Washington)<ul>
+<li><em>Learn around errors resulting from SRAM voltage scaling, demonstrated on a fabricated 65nm test chip.</em></li>
+</ul>
+</li>
+<li><strong>Maximizing System Performance by Balancing Computation Loads in LSTM Accelerators.</strong> (POSTECH)<ul>
+<li><em>Sparse matrix format that load balances computation, demonstrated for LSTMs.</em></li>
+</ul>
+</li>
+<li><strong>CCR: A Concise Convolution Rule for Sparse Neural Network Accelerators.</strong> (CAS)<ul>
+<li><em>Decompose convolution into multiple dense and zero kernels for sparsity savings.</em></li>
+</ul>
+</li>
+<li><strong>Block Convolution: Towards Memory-Efficient Inference of Large-Scale CNNs on FPGA.</strong> (CAS)</li>
+<li><strong>moDNN: Memory Optimal DNN Training on GPUs.</strong> (University of Notre Dame, CAS)</li>
+<li>HyperPower: Power and Memory-Constrained Hyper-Parameter Optimization for Neural Networks. (CMU, Google)</li>
+</ul>
+<h3 id="2018-DAC"><a href="#2018-DAC" class="headerlink" title="2018 DAC"></a>2018 DAC</h3><ul>
+<li><strong>Compensated-DNN: Energy Efficient Low-Precision Deep Neural Networks by Compensating Quantization Errors.</strong> (<strong>Best Paper</strong>, Purdue, IBM)<ul>
+<li><em>Introduce a new fixed-point representation, Fixed Point with Error Compensation (FPEC): Computation bits, +compensation bits that represent quantization error.</em></li>
+<li><em>Propose a low-overhead sparse compensation scheme to estimate the error in MAC design.</em></li>
+</ul>
+</li>
+<li><strong>Calibrating Process Variation at System Level with In-Situ Low-Precision Transfer Learning for Analog Neural Network Processors.</strong> (THU)</li>
+<li><strong>DPS: Dynamic Precision Scaling for Stochastic Computing-Based Deep Neural Networks.</strong> (UNIST)</li>
+<li><strong>DyHard-DNN: Even More DNN Acceleration With Dynamic Hardware Reconfiguration.</strong> (Univ. of Virginia)</li>
+<li><strong>Exploring the Programmability for Deep Learning Processors: from Architecture to Tensorization.</strong> (Univ. of Washington)</li>
+<li><strong>LCP: Layer Clusters Paralleling Mapping Mechanism for Accelerating Inception and Residual Networks on FPGA.</strong> (THU)</li>
+<li><strong>A Kernel Decomposition Architecture for Binary-weight Convolutional Neural Networks.</strong> (THU)</li>
+<li><strong>Ares: A Framework for Quantifying the Resilience of Deep Neural Networks.</strong> (Harvard)</li>
+<li><strong>ThUnderVolt: Enabling Aggressive Voltage Underscaling and Timing Error Resilience for Energy Efficient<br>  Deep Learning Accelerators</strong> (New York Univ., IIT Kanpur)</li>
+<li><strong>Loom: Exploiting Weight and Activation Precisions to Accelerate Convolutional Neural Networks.</strong> (Univ. of Toronto)</li>
+<li><strong>Parallelizing SRAM Arrays with Customized Bit-Cell for Binary Neural Networks.</strong> (Arizona)</li>
+<li><strong>Thermal-Aware Optimizations of ReRAM-Based Neuromorphic Computing Systems.</strong> (Northwestern Univ.)</li>
+<li><strong>SNrram: An Efficient Sparse Neural Network Computation Architecture Based on Resistive RandomAccess Memory.</strong> (THU, UCSB)</li>
+<li><strong>Long Live TIME: Improving Lifetime for Training-In-Memory Engines by Structured Gradient Sparsification.</strong> (THU, CAS, MIT)</li>
+<li><strong>Bandwidth-Efficient Deep Learning.</strong> (MIT, Stanford)</li>
+<li><strong>Co-Design of Deep Neural Nets and Neural Net Accelerators for Embedded Vision Applications.</strong> (Berkeley)</li>
+<li><strong>Sign-Magnitude SC: Getting 10X Accuracy for Free in Stochastic Computing for Deep Neural Networks.</strong> (UNIST)</li>
+<li><strong>DrAcc: A DRAM Based Accelerator for Accurate CNN Inference.</strong> (National Univ. of Defense Technology, Indiana Univ., Univ. of Pittsburgh)</li>
+<li><strong>On-Chip Deep Neural Network Storage With Multi-Level eNVM.</strong> (Harvard)</li>
+<li>VRL-DRAM: Improving DRAM Performance via Variable Refresh Latency. (Drexel Univ., ETHZ)</li>
+</ul>
+<h3 id="2018-HotChips"><a href="#2018-HotChips" class="headerlink" title="2018 HotChips"></a>2018 HotChips</h3><ul>
+<li><strong>ARM’s First Generation ML Processor.</strong> (ARM)</li>
+<li><strong>The NVIDIA Deep Learning Accelerator.</strong> (NVIDIA)</li>
+<li><strong>Xilinx Tensor Processor: An Inference Engine, Network Compiler + Runtime for Xilinx FPGAs.</strong> (Xilinx)</li>
+<li>Tachyum Cloud Chip for Hyperscale workloads, deep ML, general, symbolic and bio AI. (Tachyum)</li>
+<li>SMIV: A 16nm SoC with Efficient and Flexible DNN Acceleration for Intelligent IoT Devices. (ARM)</li>
+<li>NVIDIA’s Xavier System-on-Chip. (NVIDIA)</li>
+<li>Xilinx Project Everest: HW/SW Programmable Engine. (Xilinx)</li>
+</ul>
+<h3 id="2018-ICCAD"><a href="#2018-ICCAD" class="headerlink" title="2018 ICCAD"></a>2018 ICCAD</h3><ul>
+<li><strong>Tetris: Re-architecting Convolutional Neural Network Computation for Machine Learning Accelerators.</strong> (CAS)</li>
+<li><strong>3DICT: A Reliable and QoS Capable Mobile Process-In-Memory Architecture for Lookup-based CNNs in 3D XPoint ReRAMs.</strong> (Indiana - - University Bloomington, Florida International Univ.)</li>
+<li><strong>TGPA: Tile-Grained Pipeline Architecture for Low Latency CNN Inference.</strong> (PKU, UCLA, Falcon)</li>
+<li><strong>NID: Processing Binary Convolutional Neural Network in Commodity DRAM.</strong> (KAIST)</li>
+<li><strong>Adaptive-Precision Framework for SGD using Deep Q-Learning.</strong> (PKU)</li>
+<li><strong>Efficient Hardware Acceleration of CNNs using Logarithmic Data Representation with Arbitrary log-base.</strong> (Robert Bosch GmbH)</li>
+<li><strong>C-GOOD: C-code Generation Framework for Optimized On-device Deep Learning.</strong> (SNU)</li>
+<li><strong>Mixed Size Crossbar based RRAM CNN Accelerator with Overlapped Mapping Method.</strong> (THU)</li>
+<li><strong>FCN-Engine: Accelerating Deconvolutional Layers in Classic CNN Processors.</strong> (HUT, CAS, NUS)</li>
+<li><strong>DNNBuilder: an Automated Tool for Building High-Performance DNN Hardware Accelerators for FPGAs.</strong> (UIUC)</li>
+<li><strong>DIMA: A Depthwise CNN In-Memory Accelerator.</strong> (Univ. of Central Florida)</li>
+<li><strong>EMAT: An Efficient Multi-Task Architecture for Transfer Learning using ReRAM.</strong> (Duke)</li>
+<li><strong>FATE: Fast and Accurate Timing Error Prediction Framework for Low Power DNN Accelerator Design.</strong> (NYU)</li>
+<li><strong>Designing Adaptive Neural Networks for Energy-Constrained Image Classification.</strong> (CMU)</li>
+<li>Watermarking Deep Neural Networks for Embedded Systems. (UCLA)</li>
+<li>Defensive Dropout for Hardening Deep Neural Networks under Adversarial Attacks. (Northeastern Univ., Boston Univ., Florida International Univ.)</li>
+<li>A Cross-Layer Methodology for Design and Optimization of Networks in 2.5D Systems. (Boston Univ., UCSD)</li>
+</ul>
+<h3 id="2018-MICRO"><a href="#2018-MICRO" class="headerlink" title="2018 MICRO"></a>2018 MICRO</h3><ul>
+<li><strong>Addressing Irregularity in Sparse Neural Networks: A Cooperative Software/Hardware Approach.</strong> (USTC, CAS)</li>
+<li><strong>Diffy: a Deja vu-Free Differential Deep Neural Network Accelerator.</strong> (University of Toronto)</li>
+<li><strong>Beyond the Memory Wall: A Case for Memory-centric HPC System for Deep Learning.</strong> (KAIST)</li>
+<li><strong>Towards Memory Friendly Long-Short Term Memory Networks (LSTMs) on Mobile GPUs.</strong> (University of Houston, Capital Normal University)</li>
+<li><strong>A Network-Centric Hardware/Algorithm Co-Design to Accelerate Distributed Training of Deep Neural Networks.</strong> (UIUC, THU, SJTU, Intel, UCSD)</li>
+<li><strong>PermDNN: Efficient Compressed Deep Neural Network Architecture with Permuted Diagonal Matrices.</strong> (City University of New York, University of Minnesota, USC)</li>
+<li><strong>GeneSys: Enabling Continuous Learning through Neural Network Evolution in Hardware.</strong> (Georgia Tech)</li>
+<li><strong>Processing-in-Memory for Energy-efficient Neural Network Training: A Heterogeneous Approach.</strong> (UCM, UCSD, UCSC)<ul>
+<li>Schedules computing resources provided by CPU and heterogeneous PIMs (fixed-function logic + programmable ARM cores), to optimized energy efficiency and hardware utilization.</li>
+</ul>
+</li>
+<li><strong>LerGAN: A Zero-free, Low Data Movement and PIM-based GAN Architecture.</strong> (THU, University of Florida)</li>
+<li><strong>Multi-dimensional Parallel Training of Winograd Layer through Distributed Near-Data Processing.</strong> (KAIST)<ul>
+<li>Winograd is applied to training to extend traditional data parallelsim with a new dimension named intra-tile parallelism. With intra-tile parallelism, nodes ara dividied into several groups, and weight update communication only occurs independtly in the group. The method shows better scalability for training clusters, as the total commnication doesn’t scale with the increasing of node count.</li>
+</ul>
+</li>
+<li><strong>SCOPE: A Stochastic Computing Engine for DRAM-based In-situ Accelerator.</strong> (UCSB, Samsung)</li>
+<li><strong>Morph: Flexible Acceleration for 3D CNN-based Video Understanding.</strong> (UIUC)</li>
+<li>Inter-thread Communication in Multithreaded, Reconfigurable Coarse-grain Arrays. (Technion)</li>
+<li>An Architectural Framework for Accelerating Dynamic Parallel Algorithms on Reconfigurable Hardware. (Cornell)</li>
+</ul>
+<h3 id="2019-ASPDAC"><a href="#2019-ASPDAC" class="headerlink" title="2019 ASPDAC"></a>2019 ASPDAC</h3><ul>
+<li><strong>An N-way group association architecture and sparse data group association load balancing algorithm for sparse CNN accelerators.</strong> (THU)</li>
+<li><strong>TNPU: An Efficient Accelerator Architecture for Training Convolutional Neural Networks.</strong> (ICT)</li>
+<li><strong>NeuralHMC: An Efficient HMC-Based Accelerator for Deep Neural Networks.</strong> (University of Pittsburgh, Duke)</li>
+<li><strong>P3M: A PIM-based Neural Network Model Protection Scheme for Deep Learning Accelerator.</strong> (ICT)</li>
+<li>GraphSAR: A Sparsity-Aware Processing-in-Memory Architecture for Large-Scale Graph Processing on ReRAMs. (Tsinghua, MIT, Berkely)</li>
+</ul>
+<h3 id="2019-ISSCC"><a href="#2019-ISSCC" class="headerlink" title="2019 ISSCC"></a>2019 ISSCC</h3><ul>
+<li><strong>An 11.5TOPS/W 1024-MAC Butterfly Structure Dual-Core Sparsity-Aware Neural Processing Unit in 8nm Flagship Mobile SoC.</strong> (Samsung)</li>
+<li><strong>A 20.5TOPS and 217.3GOPS/mm2 Multicore SoC with DNN Accelerator and Image Signal Processor Complying with ISO26262 for Automotive Applications.</strong> (Toshiba)</li>
+<li><strong>An 879GOPS 243mW 80fps VGA Fully Visual CNN-SLAM Processor for Wide-Range Autonomous Exploration.</strong> (Michigan)</li>
+<li><strong>A 2.1TFLOPS/W Mobile Deep RL Accelerator with Transposable PE Array and Experience Compression.</strong> (KAIST)</li>
+<li><strong>A 65nm 0.39-to-140.3TOPS/W 1-to-12b Unified Neural-Network Processor Using Block-Circulant-Enabled Transpose-Domain Acceleration with 8.1× Higher TOPS/mm2 and 6T HBST-TRAM-Based 2D Data-Reuse Architecture.</strong> (THU, National Tsing Hua University, Northeastern University)</li>
+<li><strong>A 65nm 236.5nJ/Classification Neuromorphic Processor with 7.5% Energy Overhead On-Chip Learning Using Direct Spike-Only Feedback.</strong> (SNU)</li>
+<li><strong>LNPU: A 25.3TFLOPS/W Sparse Deep-Neural-Network Learning Processor with Fine-Grained Mixed Precision of FP8-FP16.</strong> (KAIST)</li>
+<li>A 1Mb Multibit ReRAM Computing-In-Memory Macro with 14.6ns Parallel MAC Computing Time for CNN-Based AI Edge Processors. (National Tsing Hua University)</li>
+<li>Sandwich-RAM: An Energy-Efficient In-Memory BWN Architecture with Pulse-Width Modulation. (Southeast University, Boxing Electronics, THU)</li>
+<li>A Twin-8T SRAM Computation-In-Memory Macro for Multiple-Bit CNN Based Machine Learning. (National Tsing Hua University, University of Electronic Science and Technology of China, ASU, Georgia Tech)</li>
+<li>A Reconfigurable RRAM Physically Unclonable Function Utilizing PostProcess Randomness Source with &lt;6×10-6 Native Bit Error Rate. (THU, National Tsing Hua University, Georgia Tech)</li>
+<li>A 65nm 1.1-to-9.1TOPS/W Hybrid-Digital-Mixed-Signal Computing Platform for Accelerating Model-Based and Model-Free Swarm Robotics. (Georgia Tech)</li>
+<li>A Compute SRAM with Bit-Serial Integer/Floating-Point Operations for Programmable In-Memory Vector Acceleration. (Michigan)</li>
+<li>All-Digital Time-Domain CNN Engine Using Bidirectional Memory Delay Lines for Energy-Efficient Edge Computing. (UT Austin)</li>
+</ul>
+<h3 id="2019-HPCA"><a href="#2019-HPCA" class="headerlink" title="2019 HPCA"></a>2019 HPCA</h3><ul>
+<li><strong>HyPar: Towards Hybrid Parallelism for Deep Learning Accelerator Array.</strong> (Duke, USC)</li>
+<li><strong>E-RNN: Design Optimization for Efficient Recurrent Neural Networks in FPGAs.</strong> (Syracuse University, Northeastern University, Florida International University, USC, University at Buffalo)</li>
+<li><strong>Bit Prudent In-Cache Acceleration of Deep Convolutional Neural Networks.</strong> (Michigan, Intel)</li>
+<li><strong>Shortcut Mining: Exploiting Cross-layer Shortcut Reuse in DCNN Accelerators.</strong> (OSU)</li>
+<li><strong>NAND-Net: Minimizing Computational Complexity of In-Memory Processing for Binary Neural Networks.</strong> (KAIST)</li>
+<li><strong>Kelp: QoS for Accelerators in Machine Learning Platforms.</strong> (Microsoft, Google, UT Austin)</li>
+<li><strong>Machine Learning at Facebook: Understanding Inference at the Edge.</strong> (Facebook)</li>
+<li>The Accelerator Wall: Limits of Chip Specialization. (Princeton)</li>
+</ul>
+<h3 id="2019-ASPLOS"><a href="#2019-ASPLOS" class="headerlink" title="2019 ASPLOS"></a>2019 ASPLOS</h3><ul>
+<li><strong>FA3C: FPGA-Accelerated Deep Reinforcement Learning.</strong> (Hongik University, SNU)</li>
+<li><strong>PUMA: A Programmable Ultra-efficient Memristor-based Accelerator for Machine Learning Inference.</strong> (Purdue, UIUC, HP)</li>
+<li><strong>FPSA: A Full System Stack Solution for Reconfigurable ReRAM-based NN Accelerator Architecture.</strong> (THU, UCSB)</li>
+<li><strong>Bit-Tactical: A Software/Hardware Approach to Exploiting Value and Bit Sparsity in Neural Networks.</strong> (Toronto, NVIDIA)</li>
+<li><strong>TANGRAM: Optimized Coarse-Grained Dataflow for Scalable NN Accelerators.</strong> (Stanford)</li>
+<li><strong>Packing Sparse Convolutional Neural Networks for Efficient Systolic Array Implementations: Column Combining Under Joint Optimization.</strong> (Harvard)</li>
+<li><strong>Split-CNN: Splitting Window-based Operations in Convolutional Neural Networks for Memory System Optimization.</strong> (IBM, Kyungpook National University)</li>
+<li><strong>HOP: Heterogeneity-Aware Decentralized Training.</strong> (USC, THU)</li>
+<li><strong>Astra: Exploiting Predictability to Optimize Deep Learning.</strong> (Microsoft)</li>
+<li><strong>ADMM-NN: An Algorithm-Hardware Co-Design Framework of DNNs Using Alternating Direction Methods of Multipliers.</strong> (Northeastern, Syracuse, SUNY, Buffalo, USC)</li>
+<li><strong>DeepSigns: An End-to-End Watermarking Framework for Protecting the Ownership of Deep Neural Networks.</strong> (UCSD)</li>
+</ul>
+<h3 id="2019-ISCA"><a href="#2019-ISCA" class="headerlink" title="2019 ISCA"></a>2019 ISCA</h3><ul>
+<li><strong>Sparse ReRAM Engine: Joint Exploration of Activation and Weight Sparsity on Compressed Neural Network.</strong> (NTU, Academia Sinica, Macronix)</li>
+<li><strong>MnnFast: A Fast and Scalable System Architecture for Memory-Augmented Neural Networks.</strong> (POSTECH, SNU)</li>
+<li><strong>TIE: Energy-efficient Tensor Train-based Inference Engine for Deep Neural Network.</strong> (Rutgers University, Nanjing University, USC)</li>
+<li><strong>Accelerating Distributed Reinforcement Learning with In-Switch Computing.</strong> (UIUC)</li>
+<li><strong>Eager Pruning: Algorithm and Architecture Support for Fast Training of Deep Neural Networks.</strong> (University of Florida)</li>
+<li><strong>Laconic Deep Learning Inference Acceleration.</strong> (Toronto)</li>
+<li><strong>DeepAttest: An End-to-End Attestation Framework for Deep Neural Networks.</strong> (UCSD)</li>
+<li><strong>A Stochastic-Computing based Deep Learning Framework using Adiabatic Quantum-Flux-Parametron Superconducting Technology.</strong> (Northeastern, Yokohama National University, USC, University of Alberta)</li>
+<li><strong>Fractal Machine Learning Computers.</strong> (ICT)</li>
+<li><strong>FloatPIM: In-Memory Acceleration of Deep Neural Network Training with High Precision.</strong> (UCSD)</li>
+<li>3D-based Video Understanding Acceleration by Leveraging Temporal Locality and Activation Sparsity. (University of Florida, University of Florida)</li>
+<li>Energy-Efficient Video Processing for Virtual Reality. (UIUC, University of Rochester)</li>
+<li>Scalable Interconnects for Reconfigurable Spatial Architectures. (Stanford)</li>
+<li>CoNDA: Enabling Efficient Near-Data Accelerator Communication by Optimizing Data Movement. (CMU, ETHZ)</li>
+</ul>
+<h3 id="2019-DAC"><a href="#2019-DAC" class="headerlink" title="2019 DAC"></a>2019 DAC</h3><ul>
+<li><strong>Accuracy vs. Efficiency: Achieving Both through FPGA-Implementation Aware Neural Architecture Search.</strong> (East China Normal University, Pittsburgh, Chongqing University, UCI,  Notre Dame)</li>
+<li><strong>FPGA/DNN Co-Design: An Efficient Design Methodology for IoT Intelligence on the Edge.</strong> (UIUC, IBM, Inspirit IoT)</li>
+<li><strong>An Optimized Design Technique of Low-Bit Neural Network Training for Personalization on IoT Devices.</strong> (KAIST)</li>
+<li><strong>ReForm: Static and Dynamic Resource-Aware DNN Reconfiguration Framework for Mobile Devices.</strong> (George Mason, Clarkson)</li>
+<li><strong>DRIS-3: Deep Neural Network Reliability Improvement Scheme in 3D Die-Stacked Memory based on Fault Analysis.</strong> (Sungkyunkwan University)</li>
+<li><strong>ZARA: A Novel Zero-free Dataflow Accelerator for Generative Adversarial Networks in 3D ReRAM.</strong> (Duke)</li>
+<li><strong>BitBlade: Area and Energy-Efficient Precision-Scalable Neural Network Accelerator with Bitwise Summation.</strong> (POSTECH)</li>
+<li>X-MANN: A Crossbar based Architecture for Memory Augmented Neural Networks. (Purdue, Intel)</li>
+<li>Thermal-Aware Design and Management for Search-based In-Memory Acceleration. (UCSD)</li>
+<li>An Energy-Efficient Network-on-Chip Design using Reinforcement Learning. (George Washington)</li>
+<li>Designing Vertical Processors in Monolithic 3D. (UIUC)</li>
+</ul>
+<h3 id="2019-MICRO"><a href="#2019-MICRO" class="headerlink" title="2019 MICRO"></a>2019 MICRO</h3><ul>
+<li><strong>Wire-Aware Architecture and Dataflow for CNN Accelerators.</strong> (Utah)</li>
+<li><strong>ShapeShifter: Enabling Fine-Grain Data Width Adaptation in Deep Learning.</strong> (Toronto)</li>
+<li><strong>Simba: Scaling Deep-Learning Inference with Multi-Chip-Module-Based Architecture.</strong> (NVIDIA)</li>
+<li><strong>ZCOMP: Reducing DNN Cross-Layer Memory Footprint Using Vector Extensions.</strong> (Google, Intel)</li>
+<li><strong>Boosting the Performance of CNN Accelerators with Dynamic Fine-Grained Channel Gating.</strong> (Cornell)</li>
+<li><strong>SparTen: A Sparse Tensor Accelerator for Convolutional Neural Networks.</strong> (Purdue)</li>
+<li><strong>EDEN: Enabling Approximate DRAM for DNN Inference using Error-Resilient Neural Networks.</strong> (ETHZ, CMU)</li>
+<li><strong>eCNN: a Block-Based and Highly-Parallel CNN Accelerator for Edge Inference.</strong> (NTHU)</li>
+<li><strong>TensorDIMM: A Practical Near-Memory Processing Architecture for Embeddings and Tensor Operations in Deep Learning.</strong> (KAIST)</li>
+<li><strong>Understanding Reuse, Performance, and Hardware Cost of DNN Dataflows: A Data-Centric Approach.</strong> (Georgia Tech, NVIDIA)</li>
+<li><strong>MaxNVM: Maximizing DNN Storage Density and Inference Efficiency with Sparse Encoding and Error Mitigation.</strong> (Harvard, Facebook)</li>
+<li><strong>Neuron-Level Fuzzy Memoization in RNNs.</strong> (UPC)</li>
+<li><strong>Manna: An Accelerator for Memory-Augmented Neural Networks.</strong> (Purdue, Intel)</li>
+<li>eAP: A Scalable and Efficient In-Memory Accelerator for Automata Processing. (Virginia)</li>
+<li>ComputeDRAM: In-Memory Compute Using Off-the-Shelf DRAMs. (Princeton)</li>
+<li>ExTensor: An Accelerator for Sparse Tensor Algebra. (UIUC, NVIDIA)</li>
+<li>Efficient SpMV Operation for Large and Highly Sparse Matrices Using Scalable Multi-Way Merge Parallelization. (CMU)</li>
+<li>Sparse Tensor Core: Algorithm and Hardware Co-Design for Vector-wise Sparse Neural Networks on Modern GPUs. (UCSB, Alibaba)</li>
+<li>DynaSprint: Microarchitectural Sprints with Dynamic Utility and Thermal Management. (Waterloo, ARM, Duke)</li>
+<li>MEDAL: Scalable DIMM based Near Data Processing Accelerator for DNA Seeding Algorithm. (UCSB, ICT)</li>
+<li>Tigris: Architecture and Algorithms for 3D Perception in Point Clouds. (Rochester)</li>
+<li>ASV: Accelerated Stereo Vision System. (Rochester)</li>
+<li>Alleviating Irregularity in Graph Analytics Acceleration: a Hardware/Software Co-Design Approach. (UCSB, ICT)</li>
+</ul>
+<h3 id="2019-ICCAD"><a href="#2019-ICCAD" class="headerlink" title="2019 ICCAD"></a>2019 ICCAD</h3><ul>
+<li><strong>Zac: Towards Automatic Optimization and Deployment of Quantized Deep Neural Networks on Embedded Devices.</strong> (PKU)</li>
+<li><strong>NAIS: Neural Architecture and Implementation Search and its Applications in Autonomous Driving.</strong> (UIUC)</li>
+<li><strong>MAGNet: A Modular Accelerator Generator for Neural Networks.</strong> (NVIDIA)</li>
+<li><strong>ReDRAM: A Reconfigurable Processing-in-DRAM Platform for Accelerating Bulk Bit-Wise Operations.</strong> (ASU)</li>
+<li><strong>Accelergy: An Architecture-Level Energy Estimation Methodology for Accelerator Designs.</strong> (MIT)</li>
+</ul>
+<h3 id="2019-ASSCC"><a href="#2019-ASSCC" class="headerlink" title="2019 ASSCC"></a>2019 ASSCC</h3><ul>
+<li><strong>A 47.4µJ/epoch Trainable Deep Convolutional Neural Network Accelerator for In-Situ Personalization on Smart Devices.</strong> (KAIST)</li>
+<li><strong>A 2.25 TOPS/W Fully-Integrated Deep CNN Learning Processor with On-Chip Training.</strong> (NTU)</li>
+<li><strong>A Sparse-Adaptive CNN Processor with Area/Performance Balanced N-Way Set-Associate Pe Arrays Assisted by a Collision-Aware Scheduler.</strong> (THU, Northeastern)</li>
+<li>A 24 Kb Single-Well Mixed 3T Gain-Cell eDRAM with Body-Bias in 28 nm FD-SOI for Refresh-Free DSP Applications. (EPFL)</li>
+</ul>
+<h3 id="2019-VLSI"><a href="#2019-VLSI" class="headerlink" title="2019 VLSI"></a>2019 VLSI</h3><ul>
+<li><strong>Area-Efficient and Variation-Tolerant In-Memory BNN Computing Using 6T SRAM Array.</strong> (POSTECH)</li>
+<li><strong>A 5.1pJ/Neuron 127.3us/Inference RNN-Based Speech Recognition Processor Using 16 Computingin-Memory SRAM Macros in 65nm CMOS.</strong> (THU, NTU, TsingMicro)</li>
+<li><strong>A 0.11 pJ/Op, 0.32-128 TOPS, Scalable, Multi-ChipModule-Based Deep Neural Network Accelerator with Ground-Reference Signaling in 16nm.</strong> (NVIDIA)</li>
+<li><strong>SNAP: A 1.67 – 21.55TOPS/W Sparse Neural Acceleration Processor for Unstructured Sparse Deep Neural Network Inference in 16nm CMOS.</strong> (UMich, NVIDA)</li>
+<li><strong>A Full HD 60 fps CNN Super Resolution Processor with Selective Caching based Layer Fusion for Mobile Devices.</strong> (KAIST)</li>
+<li><strong>A 1.32 TOPS/W Energy Efficient Deep Neural Network Learning Processor with Direct Feedback Alignment based Heterogeneous Core Architecture.</strong> (KAIST)</li>
+<li>Considerations of Integrating Computing-In-Memory and Processing-In-Sensorinto Convolutional Neural Network Accelerators for Low-Power Edge Devices. (NTU, NCHU)</li>
+<li>Computational Memory-Based Inference and Training of Deep Neural Networks. (IBM, EPFL, ETHZ, et al)</li>
+<li>A Ternary Based Bit Scalable, 8.80 TOPS/W CNN A95Accelerator with Many-Core Processing-in-Memory Architecture with 896K Synapses/mm2. (Renesas)</li>
+<li>In-Memory Reinforcement Learning with ModeratelyStochastic Conductance Switching of Ferroelectric Tunnel Junctions. (Toshiba)</li>
+</ul>
+<h3 id="2019-HotChips"><a href="#2019-HotChips" class="headerlink" title="2019 HotChips"></a>2019 HotChips</h3><ul>
+<li><strong>MLPerf: A Benchmark Suite for Machine Learning from an Academic-Industry Cooperative.</strong> (MLPerf)</li>
+<li><strong>Zion: Facebook Next-Generation Large-memory Unified Training Platform.</strong> (Facebook)</li>
+<li><strong>A Scalable Unified Architecture for Neural Network Computing from Nano-Level to High Performance Computing.</strong> (Huawei)</li>
+<li><strong>Deep Learning Training at Scale – Spring Crest Deep Learning Accelerator.</strong> (Intel)</li>
+<li><strong>Spring Hill – Intel’s Data Center Inference Chip.</strong> (Intel)</li>
+<li><strong>Wafer Scale Deep Learning.</strong> (Cerebras)</li>
+<li><strong>Habana Labs Approach to Scaling AI Training.</strong> (Habana)</li>
+<li><strong>Ouroboros: A WaveNet Inference Engine for TTS Applications on Embedded Devices.</strong> (Alibaba)</li>
+<li><strong>A 0.11 pJ/Op, 0.32-128 TOPS, Scalable Multi-Chip-Module-based Deep Neural Network Accelerator Designed with a High-Productivity VLSI Methodology.</strong> (NVIDIA)</li>
+<li><strong>Xilinx Versal/AI Engine.</strong> (Xilinx)</li>
+<li>A Programmable Embedded Microprocessor for Bit-scalable In-memory Computing. (Princeton)</li>
+</ul>
+<h3 id="2019-FPGA"><a href="#2019-FPGA" class="headerlink" title="2019 FPGA"></a>2019 FPGA</h3><ul>
+<li><strong>Synetgy: Algorithm-hardware Co-design for ConvNet Accelerators on Embedded FPGAs.</strong> (THU, Berkeley, Politecnico di Torino, Xilinx)</li>
+<li><strong>REQ-YOLO: A Resource-Aware, Efficient Quantization Framework for Object Detection on FPGAs.</strong> (PKU, Northeastern）</li>
+<li><strong>Reconfigurable Convolutional Kernels for Neural Networks on FPGAs.</strong> (University of Kassel)</li>
+<li><strong>Efficient and Effective Sparse LSTM on FPGA with Bank-Balanced Sparsity.</strong> (Harbin Institute of Technology, Microsoft, THU, Beihang)</li>
+<li><strong>Cloud-DNN: An Open Framework for Mapping DNN Models to Cloud FPGAs.</strong> (Advanced Digital Sciences Center, UIUC)</li>
+<li>F5-HD: Fast Flexible FPGA-based Framework for Refreshing Hyperdimensional Computing. (UCSD)</li>
+<li>Xilinx Adaptive Compute Acceleration Platform: Versal Architecture. (Xilinx)</li>
+</ul>
+<h3 id="2020-ISSCC"><a href="#2020-ISSCC" class="headerlink" title="2020 ISSCC"></a>2020 ISSCC</h3><ul>
+<li><strong>A 3.4-to-13.3TOPS/W 3.6TOPS Dual-Core Deep-Learning Accelerator for Versatile AI Applications in 7nm 5G Smartphone SoC.</strong> (MediaTek)</li>
+<li><strong>A 12nm Programmable Convolution-Efficient Neural-Processing-Unit Chip Achieving 825TOPS.</strong> (Alibaba)</li>
+<li><strong>STATICA: A 512-Spin 0.25M-Weight Full-Digital Annealing Processor with a Near-Memory All-SpinUpdates-at-Once Architecture for Combinatorial Optimization with Complete Spin-Spin Interactions.</strong> (Tokyo Institute of Technology, Hokkaido Univ., Univ. of Tokyo)</li>
+<li><strong>GANPU: A 135TFLOPS/W Multi-DNN Training Processor for GANs with Speculative Dual-Sparsity Exploitation.</strong> (KAIST)</li>
+<li><strong>A 510nW 0.41V Low-Memory Low-Computation Keyword-Spotting Chip Using Serial FFT-Based MFCC and Binarized Depthwise Separable Convolutional Neural Network in 28nm CMOS.</strong> (Southeast, EPFL, Columbia)</li>
+<li><strong>A 65nm 24.7μJ/Frame 12.3mW Activation-Similarity Aware Convolutional Neural Network Video Processor Using Hybrid Precision, Inter-Frame Data Reuse and Mixed-Bit-Width Difference-Frame Data Codec.</strong> (THU)</li>
+<li><strong>A 65nm Computing-in-Memory-Based CNN Processor with 2.9-to-35.8TOPS/W System Energy Efficiency Using Dynamic-Sparsity Performance-Scaling Architecture and Energy-Efficient Inter/Intra-Macro Data Reuse.</strong> (THU, NTHU)</li>
+<li>A 28nm 64Kb Inference-Training Two-Way Transpose Multibit 6T SRAM Compute-in-Memory Macro for AI Edge Chips. (NTU)</li>
+<li>A 351TOPS/W and 372.4GOPS Compute-in-Memory SRAM Macro in 7nm FinFET CMOS for Machine-Learning Applications. (TSMC)</li>
+<li>A 22nm 2Mb ReRAM Compute-in-Memory Macro with 121-28TOPS/W for Multibit MAC Computing for Tiny AI Edge Devices. (NTHU)</li>
+<li>A 28nm 64Kb 6T SRAM Computing-in-Memory Macro with 8b MAC Operation for AI Edge Chips. (NTHU)</li>
+<li>A 1.5μJ/Task Path-Planning Processor for 2D/3D Autonomous Navigation of Micro Robots. (NTHU)</li>
+<li>A 65nm 8.79TOPS/W 23.82mW Mixed-Signal Oscillator-Based NeuroSLAM Accelerator for Applications in Edge Robotics. (Georgia Tech)</li>
+<li>CIM-Spin: A 0.5-to-1.2V Scalable Annealing Processor Using Digital Compute-In-Memory Spin Operators and Register-Based Spins for Combinatorial Optimization Problems. (NTU)</li>
+<li>A Compute-Adaptive Elastic Clock-Chain Technique with Dynamic Timing Enhancement for 2D PE-Array-Based Accelerators. (Northwestern)</li>
+<li>A 74 TMACS/W CMOS-RRAM Neurosynaptic Core with Dynamically Reconfigurable Dataflow and In-situ Transposable Weights for Probabilistic Graphical Models. (Stanford, UCSD, THU, Notre Dame)</li>
+<li>A Fully Integrated Analog ReRAM Based 78.4TOPS/W Compute-In-Memory Chip with Fully Parallel MAC Computing. (THU, NTHU)</li>
+</ul>
+<h3 id="2020-HPCA"><a href="#2020-HPCA" class="headerlink" title="2020 HPCA"></a>2020 HPCA</h3><ul>
+<li><strong>Deep Learning Acceleration with Neuron-to-Memory Transformation.</strong>	(UCSD)</li>
+<li><strong>HyGCN: A GCN Accelerator with Hybrid Architecture.</strong>	(ICT, UCSB)</li>
+<li><strong>SIGMA: A Sparse and Irregular GEMM Accelerator with Flexible Interconnects for DNN Training.</strong>	(Georgia Tech)</li>
+<li><strong>PREMA: A Predictive Multi-task Scheduling Algorithm For Preemptible NPUs.</strong>	(KAIST)</li>
+<li><strong>ALRESCHA: A Lightweight Reconfigurable Sparse-Computation Accelerator.</strong>	(Georgia Tech)</li>
+<li><strong>SpArch: Efficient Architecture for Sparse Matrix Multiplication.</strong>	(MIT, NVIDIA)</li>
+<li><strong>A3: Accelerating Attention Mechanisms in Neural Networks with Approximation.</strong>	(SNU)</li>
+<li><strong>AccPar: Tensor Partitioning for Heterogeneous Deep Learning Accelerator Arrays.</strong>	(Duke, USC)</li>
+<li><strong>PIXEL: Photonic Neural Network Accelerator.</strong>	(Ohio, George Washington)</li>
+<li><strong>The Architectural Implications of Facebook’s DNN-based Personalized Recommendation.</strong>	(Facebook)</li>
+<li><strong>Enabling Highly Efficient Capsule Networks Processing Through A PIM-Based Architecture Design.</strong>	(Houston)</li>
+<li><strong>Missing the Forest for the Trees: End-to-End AI Application Performance in Edge Data.</strong>	(UT Austin, Intel)</li>
+<li><strong>Communication Lower Bound in Convolution Accelerators.</strong>	(ICT, THU)</li>
+<li><strong>Fulcrum: a Simplified Control and Access Mechanism toward Flexible and Practical in-situ Accelerators.</strong>	(Virginia, UCSB, Micron)</li>
+<li><strong>EFLOPS: Algorithm and System Co-design for a High Performance Distributed Training Platform.</strong>	(Alibaba)</li>
+<li><strong>Experiences with ML-Driven Design: A NoC Case Study.</strong>	(AMD)</li>
+<li><strong>Tensaurus: A Versatile Accelerator for Mixed Sparse-Dense Tensor Computations.</strong>	(Cornell, Intel)</li>
+<li><strong>A Hybrid Systolic-Dataflow Architecture for Inductive Matrix Algorithms.</strong>	(UCLA)</li>
+<li>A Deep Reinforcement Learning Framework for Architectural Exploration: A Routerless NoC Case Study.	(USC, OSU)</li>
+<li>QuickNN: Memory and Performance Optimization of k-d Tree Based Nearest Neighbor Search for 3D Point Clouds.	(Umich, General Motors)</li>
+<li>Orbital Edge Computing: Machine Inference in Space.	(CMU)</li>
+<li>A Scalable and Efficient in-Memory Interconnect Architecture for Automata Processing.	(Virginia)</li>
+<li>Techniques for Reducing the Connected-Standby Energy Consumption of Mobile Devices.	(ETHZ, Cyprus, CMU)</li>
+</ul>
+<h3 id="2020-ASPLOS"><a href="#2020-ASPLOS" class="headerlink" title="2020 ASPLOS"></a>2020 ASPLOS</h3><ul>
+<li><strong>Shredder: Learning Noise Distributions to Protect Inference Privacy.</strong>	(UCSD)</li>
+<li><strong>DNNGuard: An Elastic Heterogeneous DNN Accelerator Architecture against Adversarial Attacks.</strong>	(CAS, USC)</li>
+<li><strong>Interstellar: Using Halide’s Scheduling Language to Analyze DNN Accelerators.</strong>	(Stanford, THU)</li>
+<li><strong>DeepSniffer: A DNN Model Extraction Framework Based on Learning Architectural Hints.</strong>	(UCSB)</li>
+<li><strong>Prague: High-Performance Heterogeneity-Aware Asynchronous Decentralized Training.</strong>	(USC)</li>
+<li><strong>PatDNN: Achieving Real-Time DNN Execution on Mobile Devices with Pattern-based Weight Pruning.</strong>	(College of William and Mary, Northeastern , USC)</li>
+<li><strong>Capuchin: Tensor-based GPU Memory Management for Deep Learning.</strong>	(HUST, MSRA, USC)</li>
+<li><strong>NeuMMU: Architectural Support for Efficient Address Translations in Neural Processing Units.</strong>	(KAIST)</li>
+<li><strong>FlexTensor: An Automatic Schedule Exploration and Optimization Framework for Tensor Computation on Heterogeneous System.</strong>	(PKU)</li>
+</ul>
+<h3 id="2020-DAC"><a href="#2020-DAC" class="headerlink" title="2020 DAC"></a>2020 DAC</h3><ul>
+<li><strong>A Pragmatic Approach to On-device Incremental Learning System with Selective Weight Updates.</strong></li>
+<li><strong>A Two-way SRAM Array based Accelerator for Deep Neural Network On-chip Training.</strong></li>
+<li><strong>Algorithm-Hardware Co-Design for In-Memory Neural Network Computing with Minimal Peripheral Circuit Overhead.</strong></li>
+<li><strong>Algorithm-Hardware Co-Design of Adaptive Floating-Point Encodings for Resilient Deep Learning Inference.</strong></li>
+<li><strong>Hardware Acceleration of Graph Neural Networks.</strong></li>
+<li><strong>Exploiting Dataflow Sparsity for Efficient Convolutional Neural Networks Training.</strong></li>
+<li><strong>Low-Power Acceleration of Deep Neural Network Training Using Computational Storage Devices.</strong></li>
+<li><strong>Prediction Confidence based Low Complexity Gradient Computation for Accelerating DNN Training.</strong></li>
+<li><strong>SparseTrain: Exploiting Dataflow Sparsity for Efficient Convolutional Neural Networks Training.</strong></li>
+<li><strong>SCA: A Secure CNN Accelerator for both Training and Inference.</strong></li>
+<li><strong>STC: Significance-aware Transform-based Codec Framework for External Memory Access Reduction.</strong></li>
+</ul>
+<h3 id="2020-FPGA"><a href="#2020-FPGA" class="headerlink" title="2020 FPGA"></a>2020 FPGA</h3><ul>
+<li><strong>AutoDNNchip: An Automated DNN Chip Generator through Compilation, Optimization, and Exploration.</strong> （Rice, UIUC)</li>
+<li><strong>Accelerating GCN Training on CPU-FPGA Heterogeneous Platforms.</strong> (USC)</li>
+<li>Massively Simulating Adiabatic Bifurcations with FPGA to Solve Combinatorial Optimization. (Central Florida)</li>
+</ul>
+<h3 id="2020-ISCA"><a href="#2020-ISCA" class="headerlink" title="2020 ISCA"></a>2020 ISCA</h3><ul>
+<li><strong>Data Compression Accelerator on IBM POWER9 and z15 Processors.</strong> (IBM)</li>
+<li><strong>High-Performance Deep-Learning Coprocessor Integrated into x86 SoC with Server-Class CPUs.</strong>	(Centaur )</li>
+<li><strong>Think Fast: A Tensor Streaming Processor (TSP) for Accelerating Deep Learning Workloads.</strong> (Groq)</li>
+<li><strong>MLPerf Inference: A Benchmarking Methodology for Machine Learning Inference Systems.</strong>	</li>
+<li><strong>A Multi-Neural Network Acceleration Architecture.</strong> (SNU)</li>
+<li><strong>SmartExchange: Trading Higher-Cost Memory Storage/Access for Lower-Cost Computation.</strong> (Rice, TAMU, UCSB)</li>
+<li><strong>Centaur: A Chiplet-Based, Hybrid Sparse-Dense Accelerator for Personalized Recommendations.</strong> (KAIST)</li>
+<li><strong>DeepRecSys: A System for Optimizing End-to-End At-Scale Neural Recommendation Inference.</strong>	(Facebook, Harvard)</li>
+<li><strong>An In-Network Architecture for Accelerating Shared-Memory Multiprocessor Collectives.</strong>	(NVIDIA)</li>
+<li><strong>DRQ: Dynamic Region-Based Quantization for Deep Neural Network Acceleration.</strong>	(SJTU)</li>
+<li>The IBM z15 High Frequency Mainframe Branch Predictor. (ETHZ)</li>
+<li>Déjà View: Spatio-Temporal Compute Reuse for Energy-Efficient 360° VR Video Streaming. (Penn State)</li>
+<li>uGEMM: Unary Computing Architecture for GEMM Applications. (Wisconsin)</li>
+<li>Gorgon: Accelerating Machine Learning from Relational Data. (Stanford)</li>
+<li>RecNMP: Accelerating Personalized Recommendation with Near-Memory Processing. (Facebook)</li>
+<li>JPEG-ACT: Accelerating Deep Learning via Transform-Based Lossy Compression. (UBC)</li>
+<li>Commutative Data Reordering: A New Technique to Reduce Data Movement Energy on Sparse Inference Workloads. (Sandia, Rochester)</li>
+<li>Echo: Compiler-Based GPU Memory Footprint Reduction for LSTM RNN Training. (Toronto, Intel)</li>
+</ul>
+<h3 id="2020-HotChips"><a href="#2020-HotChips" class="headerlink" title="2020 HotChips"></a>2020 HotChips</h3><ul>
+<li><strong>Google’s Training Chips Revealed: TPUv2 and TPUv3.</strong> （Google)</li>
+<li><strong>Software Co-design for the First Wafer-Scale Processor (and Beyond).</strong> (Cerebras)</li>
+<li><strong>Manticore: A 4096-core RISC-V Chiplet Architecture for Ultra-efficient Floating-point Computing.</strong> (ETHZ)</li>
+<li><strong>Baidu Kunlun – An AI Processor for Diversified Workloads.</strong> (Baidu)</li>
+<li><strong>Hanguang 800 NPU – The Ultimate AI Inference Solution for Data Centers.</strong> (Alibaba)</li>
+<li><strong>Silicon Photonics for Artificial Intelligence Acceleration.</strong> (Lightmatter)</li>
+<li>Xuantie-910: Innovating Cloud and Edge Computing by RISC-V. (Alibaba)</li>
+<li>A Technical Overview of the ARM Cortex-M55 and Ethos-U55: ARM’s Most Capable Processors for Endpoint AI. (ARM)</li>
+<li>PGMA: A Scalable Bayesian Inference Accelerator for Unsupervised Learning. (Harvard)</li>
+</ul>
+<h3 id="2020-VLSI"><a href="#2020-VLSI" class="headerlink" title="2020 VLSI"></a>2020 VLSI</h3><ul>
+<li><strong>PNPU: A 146.52TOPS/W Deep-Neural-Network Learning Processor with Stochastic Coarse-Fine Pruning and Adaptive Input/Output/Weight Skipping.</strong> (KAIST)</li>
+<li><strong>A 3.0 TFLOPS 0.62V Scalable Processor Core for High Compute Utilization AI Training and Inference.</strong> (IBM)</li>
+<li><strong>A 617 TOPS/W All Digital Binary Neural Network Accelerator in 10nm FinFET CMOS.</strong> (Intel)</li>
+<li><strong>An Ultra-Low Latency 7.8-13.6 pJ/b Reconfigurable Neural Network-Assisted Polar Decoder with Multi-Code Length Support.</strong> (NTU)</li>
+<li><strong>A 4.45ms Low-Latency 3D Point-Cloud-Based Neural Network Processor for Hand Pose Estimation in Immersive Wearable Devices.</strong> (KAIST)</li>
+<li><strong>A 3mm2 Programmable Bayesian Inference Accelerator for Unsupervised Machine Perception Using Parallel Gibbs Sampling in 16nm.</strong> (Harvard)</li>
+<li>1.03pW/b Ultra-Low Leakage Voltage-Stacked SRAM for Intelligent Edge Processors. (Umich)</li>
+<li>Z-PIM: An Energy-Efficient Sparsity-Aware Processing-In-Memory Architecture with Fully-Variable Weight Precision. (KAIST)</li>
+</ul>
+<h3 id="2020-MICRO"><a href="#2020-MICRO" class="headerlink" title="2020 MICRO"></a>2020 MICRO</h3><ul>
+<li><strong>SuperNPU: An Extremely Fast Neural Processing Unit Using Superconducting Logic Devices.</strong> (Kyushu University）</li>
+<li><strong>Printed Machine Learning Classifiers.</strong> (UIUC, KIT）</li>
+<li><strong>Look-Up Table based Energy Efficient Processing in Cache Support for Neural Network Acceleration.</strong> (PSU, Intel)</li>
+<li><strong>FReaC Cache: Folded-Logic Reconfigurable Computing in the Last Level Cache.</strong> (UIUC, IBM)</li>
+<li><strong>Newton: A DRAM-Maker’s Accelerator-in-Memory (AiM) Architecture for Machine Learning.</strong> (Purdue, SK Hynix)</li>
+<li><strong>VR-DANN: Real-Time Video Recognition via Decoder-Assisted Neural Network Acceleration.</strong> (SJTU)</li>
+<li><strong>Procrustes: A Dataflow and Accelerator for Sparse Deep Neural Network Training.</strong> (University of British Columbia, Microsoft)</li>
+<li><strong>Duplo: Lifting Redundant Memory Accesses of Deep Neural Networks for GPU Tensor Cores.</strong> (Yonsei University, EcoCloud, EPFL)</li>
+<li><strong>DUET: Boosting Deep Neural Network Efficiency on Dual-Module Architecture.</strong> (UCSB, Alibaba)</li>
+<li><strong>ConfuciuX: Autonomous Hardware Resource Assignment for DNN Accelerators using Reinforcement Learning.</strong> (GaTech)</li>
+<li><strong>Planaria: Dynamic Architecture Fission for Spatial Multi-Tenant Acceleration of Deep Neural Networks.</strong> (UCSD, Bigstream, Kansas, NVIDIA, Google)</li>
+<li><strong>TFE: Energy-Efficient Transferred Filter-Based Engine to Compress and Accelerate Convolutional Neural Networks.</strong> (THU, Alibaba)</li>
+<li><strong>MatRaptor: A Sparse-Sparse Matrix Multiplication Accelerator Based on Row-Wise Product.</strong> (Cornell)</li>
+<li><strong>TensorDash: Exploiting Sparsity to Accelerate Deep Neural Network Training.</strong> (Toronto)</li>
+<li><strong>SAVE: Sparsity-Aware Vector Engine for Accelerating DNN Training and Inference on CPUs.</strong> (UIUC)</li>
+<li><strong>GOBO: Quantizing Attention-Based NLP Models for Low Latency and Energy Efficient Inference.</strong> (Toronto)</li>
+<li><strong>TrainBox: An Extreme-Scale Neural Network Training Server Architecture by Systematically Balancing Operations.</strong> (SNU)</li>
+<li><strong>AWB-GCN: A Graph Convolutional Network Accelerator with Runtime Workload Rebalancing.</strong> (Boston et al.)</li>
+<li><strong>Mesorasi: Architecture Support for Point Cloud Analytics via Delayed-Aggregation.</strong> (Rochestor, ARM)</li>
+<li><strong>NCPU: An Embedded Neural CPU Architecture on Resource-Constrained Low Power Devices for Real-Time End-to-End Performance.</strong> (Northwestern University)</li>
+<li>FlexWatts: A Power- and Workload-Aware Hybrid Power Delivery Network for Energy-Efficient Microprocessors.	(ETHZ, Intel, Technion, NTU)</li>
+<li>AutoScale: Energy Efficiency Optimization for Stochastic Edge Inference Using Reinforcement Learning.	(Facebook)</li>
+<li>CATCAM: Constant-time Alteration Ternary CAM with Scalable In-Memory Architecture.	(THU, Southeast University)</li>
+<li>DUAL: Acceleration of Clustering Algorithms using Digital-Based Processing In-Memory.	(UCSD)</li>
+<li>Bit-Exact ECC Recovery (BEER): Determining DRAM On-Die ECC Functions by Exploiting DRAM Data Retention Characteristics.	(ETHZ)</li>
+</ul>
+<h3 id="2020-ICCAD"><a href="#2020-ICCAD" class="headerlink" title="2020 ICCAD"></a>2020 ICCAD</h3><ul>
+<li>ReTransformer: ReRAM-based Processing-in-Memory Architecture for Transformer Acceleration.	(Duke)</li>
+<li>Energy-efficient XNOR-free In-Memory BNN Accelerator with Input Distribution Regularization.	(POSTECH)</li>
+<li>HyperTune: Dynamic Hyperparameter Tuning for Efficient Distribution of DNN Training Over Heterogeneous Systems.	(UCI, NGD)</li>
+<li>SynergicLearning: Neural Network-Based Feature Extraction for Highly-Accurate Hyperdimensional Learning.	(USC)</li>
+<li>Optimizing Stochastic Computing for Low Latency Inference of Convolutional Neural Networks.	(Nanjing University)</li>
+<li>HAPI: Hardware-Aware Progressive Inference.	(Samsung)</li>
+<li>MobiLattice: A Depth-wise DCNN Accelerator with Hybrid Digital/Analog Nonvolatile Processing-In-Memory Block.	(PKU, Duke)</li>
+<li>A Many-Core Accelerator Design for On-Chip Deep Reinforcement Learning.	(ICT)</li>
+<li>DRAMA: An Approximate DRAM Architecture for High-performance and Energy-efficient Deep Training System.	(Kyung Hee Univ., NUS)</li>
+<li>FPGA-based Low-Batch Training Accelerator for Modern CNNs Featuring High Bandwidth Memory.	(ASU, Intel)</li>
+</ul>
+<h3 id="2021-ISSCC"><a href="#2021-ISSCC" class="headerlink" title="2021 ISSCC"></a>2021 ISSCC</h3><ul>
+<li><strong>The A100 Datacenter GPU and Ampere Architecture.</strong> (NVIDIA）</li>
+<li><strong>Kunlun: A 14nm High-Performance AI Processor for Diversified Workloads.</strong> (Baidu）</li>
+<li><strong>A 12nm Autonomous-Driving Processor with 60.4TOPS, 13.8TOPS/W CNN Executed by Task-Separated ASIL D Control.</strong> (Renesas）</li>
+<li><strong>BioAIP: A Reconfigurable Biomedical AI Processor with Adaptive Learning for Versatile Intelligent Health Monitoring.</strong> (UESTC）</li>
+<li><strong>A 0.2-to-3.6TOPS/W Programmable Convolutional Imager SoC with In-Sensor Current-Domain Ternary-Weighted MAC Operations for Feature Extraction and Region-of-Interest Detection.</strong> (Leuven）</li>
+<li><strong>A 7nm 4-Core AI Chip with 25.6TFLOPS Hybrid FP8 Training, 102.4TOPS INT4 Inference and Workload-Aware Throttling.</strong> (IBM）</li>
+<li><strong>A 28nm 12.1TOPS/W Dual-Mode CNN Processor Using Effective-Weight-Based Convolution and Error-Compensation-Based Prediction.</strong> (THU）</li>
+<li><strong>A 40nm 4.81TFLOPS/W 8b Floating-Point Training Processor for Non-Sparse Neural Networks Using Shared Exponent Bias and 24-Way Fused Multiply-Add Tree.</strong> (SNU）</li>
+<li><strong>PIU: A 248GOPS/W Stream-Based Processor for Irregular Probabilistic Inference Networks Using Precision-Scalable Posit Arithmetic in 28nm.</strong> (Leuven）</li>
+<li><strong>A 6K-MAC Feature-Map-Sparsity-Aware Neural Processing Unit in 5nm Flagship Mobile SoC.</strong> (Samsung）</li>
+<li><strong>A 1/2.3inch 12.3Mpixel with On-Chip 4.97TOPS/W CNN Processor Back-Illuminated Stacked CMOS Image Sensor.</strong> (Sony）</li>
+<li><strong>A 184μW Real-Time Hand-Gesture Recognition System with Hybrid Tiny Classifiers for Smart Wearable Devices.</strong> (Nanyang）</li>
+<li><strong>A 25mm2 SoC for IoT Devices with 18ms Noise-Robust Speech-to-Text Latency via Bayesian Speech Denoising and Attention-Based Sequence-to-Sequence DNN Speech Recognition in 16nm FinFET.</strong> (Harvard, Tufts, ARM, Cornell）</li>
+<li><strong>A Background-Noise and Process-Variation-Tolerant 109nW Acoustic Feature Extractor Based on Spike-Domain Divisive-Energy Normalization for an Always-On Keyword Spotting Device.</strong> (Columnbia）</li>
+<li>A 148nW General-Purpose Event-Driven Intelligent Wake-Up Chip for AIoT Devices Using Asynchronous Spike-Based Feature Extractor and Convolutional Neural Network. (PKU）</li>
+<li>A Programmable Neural-Network Inference Accelerator Based on Scalable In-Memory Computing. (Princeton）</li>
+<li>A 2.75-to-75.9TOPS/W Computing-in-Memory NN Processor Supporting Set-Associate Block-Wise Zero Skipping and Ping-Pong CIM with Simultaneous Computation and Weight Updating. (THU）</li>
+<li>A 65nm 3T Dynamic Analog RAM-Based Computing-in-Memory Macro and CNN Accelerator with Retention Enhancement, Adaptive Analog Sparsity and 44TOPS/W System Energy Efficiency. (Northwestern）</li>
+<li>A 5.99-to-691.1TOPS/W Tensor-Train In-Memory-Computing Processor Using Bit-Level-SparsityBased Optimization and Variable-Precision Quantization. (THU, UESTC, NTHU）</li>
+<li>A 22nm 4Mb 8b-Precision ReRAM Computing-in-Memory Macro with 11.91 to 195.7TOPS/W for Tiny AI Edge Devices. (NTHU, TSMC）</li>
+<li>eDRAM-CIM: Compute-In-Memory Design with Reconfigurable Embedded-Dynamic-Memory Array Realizing Adaptive Data Converters and Charge-Domain Computing. (UT Austin, Intel）</li>
+<li>A 28nm 384kb 6T-SRAM Computation-in-Memory Macro with 8b of Precision for AI Edge Chips. (NTHU, Industrial Technology Research Institute, TSMC）</li>
+<li>An 89TOPS/W and 16.3TOPS/mm2 All-Digital SRAM-Based Full-Precision Compute-In Memory Macro in 22nm for Machine-Learning Edge Applications. (TSMC）</li>
+<li>A 20nm 6GB Function-In-Memory DRAM, Based on HBM2 with a 1.2TFLOPS Programmable Computing Unit Using Bank-Level Parallelism, for Machine Learning Applications. (Samsung）</li>
+<li>A 21×21 Dynamic-Precision Bit-Serial Computing Graph Accelerator for Solving Partial Differential Equations Using Finite Difference Method. (Nanyang）</li>
+</ul>
+<h3 id="2021-ASPLOS"><a href="#2021-ASPLOS" class="headerlink" title="2021 ASPLOS"></a>2021 ASPLOS</h3><ul>
+<li><strong>Exploiting Gustavson’s Algorithm to Accelerate Sparse Matrix Multiplication.</strong>	(MIT, NVIDIA)</li>
+<li><strong>SIMDRAM: A Framework for Bit-Serial SIMD Processing using DRAM.</strong>	(ETHZ, CMU)</li>
+<li><strong>RecSSD: Near Data Processing for Solid State Drive Based Recommendation Inference.</strong>	(Harvard, Facebook, ASU)</li>
+<li>DiAG: A Dataflow-inspired Architecture for General-purpose Processors.	(UIUC)</li>
+<li>Field-Configurable Multi-resolution Inference: Rethinking Quantization.	(Harvard, Franklin &amp; Marshall College)</li>
+<li>Defensive Approximation: Securing CNNs using Approximate Computing.	(University of Sfax et al.)</li>
+</ul>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Leeberty</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://02lb.github.io/2023/10/15/aiprocessunit/">http://02lb.github.io/2023/10/15/aiprocessunit/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Leeberty</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">
+                                    <span class="chip bg-color">人工智能</span>
+                                </a>
+                            
+                                <a href="/tags/%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/">
+                                    <span class="chip bg-color">体系结构</span>
+                                </a>
+                            
+                                <a href="/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%8A%A0%E9%80%9F%E5%99%A8/">
+                                    <span class="chip bg-color">神经网络加速器</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">---创作不易～ (拴Q)</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/Alipay.png" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/Wechatpay.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2023/10/15/aiprocessunit/">
+                    <div class="card-image">
+                        
+                        <img src="https://www.bittware.com/files/AI_brain_800px.jpg" class="responsive-img" alt="神经网络加速器">
+                        
+                        <span class="card-title">神经网络加速器</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            计算机体系结构相关-深度学习加速的硬件-论文参考
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-10-15
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/" class="post-category">
+                                    人工智能
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">
+                        <span class="chip bg-color">人工智能</span>
+                    </a>
+                    
+                    <a href="/tags/%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/">
+                        <span class="chip bg-color">体系结构</span>
+                    </a>
+                    
+                    <a href="/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%8A%A0%E9%80%9F%E5%99%A8/">
+                        <span class="chip bg-color">神经网络加速器</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2023/10/15/hexo-matery/">
+                    <div class="card-image">
+                        
+                        <img src="https://titangene.github.io/images/cover/hexo.jpg" class="responsive-img" alt="hexo+matery搭建个人博客总结">
+                        
+                        <span class="card-title">hexo+matery搭建个人博客总结</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            人生那么辛苦，总要记录一下吧😭
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-10-15
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/hexo/" class="post-category">
+                                    hexo
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/hexo/">
+                        <span class="chip bg-color">hexo</span>
+                    </a>
+                    
+                    <a href="/tags/matery/">
+                        <span class="chip bg-color">matery</span>
+                    </a>
+                    
+                    <a href="/tags/blog/">
+                        <span class="chip bg-color">blog</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('100')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: 💻 Lee&#39;s blog<br />'
+            + '文章作者: Leeberty<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '\n ---创作不易～ (拴Q)';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="503838841"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2023</span>
+            
+            <span id="year">2023</span>
+            <a href="/about" target="_blank">Leeberty</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">13.9k</span>&nbsp;字
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/02lb" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:2726853740@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2726853740" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 2726853740" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+    <a href="https://www.zhihu.com/people/zi-yang-37-33" class="tooltipped" target="_blank" data-tooltip="关注我的知乎: https://www.zhihu.com/people/zi-yang-37-33" data-position="top" data-delay="50">
+        <i class="fab fa-zhihu1">知</i>
+    </a>
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+<div class="translate-style">
+    繁/简：<a id="translateLink" href="javascript:translatePage();">繁体
+    </a>
+    </div>
+    <script type="text/javascript" src="/js/tw_cn.js"></script>
+    <script type="text/javascript">
+    var defaultEncoding = 2; //网站编写字体是否繁体，1-繁体，2-简体
+    var translateDelay = 0; //延迟时间,若不在前, 要设定延迟翻译时间, 如100表示100ms,默认为0
+    var cookieDomain = "https://1han.wiki/"; //Cookie地址, 一定要设定, 通常为你的网址
+    var msgToTraditionalChinese = "繁体"; //此处可以更改为你想要显示的文字
+    var msgToSimplifiedChinese = "简体"; //同上，但两处均不建议更改
+    var translateButtonId = "translateLink"; //默认互换id
+    translateInitilization();
+    </script>
+    
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+	
+    
+
+    
+    
+    <script type="text/javascript" size="150" alpha='0.6'
+        zIndex="-1" src="/libs/background/ribbon-refresh.min.js" async="async"></script>
+    
+
+    
+    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+
+</html>
+
+
+<script type="text/javascript">
+//只在桌面版网页启用特效
+var windowWidth = $(window).width();
+if (windowWidth > 768) {
+    document.write('<script type="text/javascript" src="/js/sakura.js"><\/script>');
+}
+</script>
+
