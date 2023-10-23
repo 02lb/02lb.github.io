@@ -6,7 +6,7 @@
   <link href="http://02lb.github.io/atom.xml" rel="self"/>
   
   <link href="http://02lb.github.io/"/>
-  <updated>2023-10-17T13:50:04.468Z</updated>
+  <updated>2023-10-23T12:23:43.760Z</updated>
   <id>http://02lb.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>markdown-formula</title>
+    <link href="http://02lb.github.io/2023/10/23/markdown-formula/"/>
+    <id>http://02lb.github.io/2023/10/23/markdown-formula/</id>
+    <published>2023-10-23T12:21:42.000Z</published>
+    <updated>2023-10-23T12:23:43.760Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;行内与独行&quot;&gt;&lt;a href=&quot;#行内与独行&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="markdown" scheme="http://02lb.github.io/categories/markdown/"/>
+    
+    
+    <category term="markdown公式" scheme="http://02lb.github.io/tags/markdown%E5%85%AC%E5%BC%8F/"/>
+    
+  </entry>
   
   <entry>
     <title>Adversarial_Examples</title>
