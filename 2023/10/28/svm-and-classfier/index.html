@@ -1,0 +1,2323 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="svm_and_classfier, 💻 Lee&#39;s blog">
+    <meta name="description" content="这是一个主要用于记录的默默无闻的博客">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>svm_and_classfier | 💻 Lee&#39;s blog</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="💻 Lee's blog" type="application/atom+xml">
+
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+
+   <style>
+    body{
+       background-image: url(https://www.toopic.cn/public/uploads/small/1658043938262165804393852.jpg);
+       background-repeat:no-repeat;
+       background-size:cover;
+       background-attachment:fixed;
+    }
+</style>
+
+
+
+<body>
+    
+    <!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="svm_and_classfier, 💻 Lee&#39;s blog">
+    <meta name="description" content="这是一个主要用于记录的默默无闻的博客">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>svm_and_classfier | 💻 Lee&#39;s blog</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+</head>
+
+
+ 
+    <style type="text/css" lang="css">
+    #loading-container{
+        position: fixed;
+        top: 0;
+        left: 0;
+        min-height: 100vh;
+        width: 100vw;
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: #54a59e;
+        text-align: center;
+        /* loader页面消失采用渐隐的方式*/
+        -webkit-transition: opacity 1s ease;
+        -moz-transition: opacity 1s ease;
+        -o-transition: opacity 1s ease;
+        transition: opacity 1s ease;
+    }
+    .loading-image{
+        width: 120px;
+        height: 50px;
+        transform: translate(-50%);
+    }
+
+    .loading-image div:nth-child(2) {
+        -webkit-animation: pacman-balls 1s linear 0s infinite;
+        animation: pacman-balls 1s linear 0s infinite
+    }
+
+    .loading-image div:nth-child(3) {
+        -webkit-animation: pacman-balls 1s linear .33s infinite;
+        animation: pacman-balls 1s linear .33s infinite
+    }
+
+    .loading-image div:nth-child(4) {
+        -webkit-animation: pacman-balls 1s linear .66s infinite;
+        animation: pacman-balls 1s linear .66s infinite
+    }
+
+    .loading-image div:nth-child(5) {
+        -webkit-animation: pacman-balls 1s linear .99s infinite;
+        animation: pacman-balls 1s linear .99s infinite
+    }
+
+   .loading-image div:first-of-type {
+        width: 0;
+        height: 0;
+        border: 25px solid #06151f;
+        border-right-color: transparent;
+        border-radius: 25px;
+        -webkit-animation: rotate_pacman_half_up .5s 0s infinite;
+        animation: rotate_pacman_half_up .5s 0s infinite;
+    }
+    .loading-image div:nth-child(2) {
+        width: 0;
+        height: 0;
+        border: 25px solid #06151f;
+        border-right-color: transparent;
+        border-radius: 25px;
+        -webkit-animation: rotate_pacman_half_down .5s 0s infinite;
+        animation: rotate_pacman_half_down .5s 0s infinite;
+        margin-top: -50px;
+    }
+    @-webkit-keyframes rotate_pacman_half_up {0% {transform: rotate(270deg)}50% {transform: rotate(1turn)}to {transform: rotate(270deg)}}
+
+    @keyframes rotate_pacman_half_up {0% {transform: rotate(270deg)}50% {transform: rotate(1turn)}to {transform: rotate(270deg)}}
+
+    @-webkit-keyframes rotate_pacman_half_down {0% {transform: rotate(90deg)}50% {transform: rotate(0deg)}to {transform: rotate(90deg)}}
+
+    @keyframes rotate_pacman_half_down {0% {transform: rotate(90deg)}50% {transform: rotate(0deg)}to {transform: rotate(90deg)}}
+
+    @-webkit-keyframes pacman-balls {75% {opacity: .7}to {transform: translate(-100px, -6.25px)}}
+
+    @keyframes pacman-balls {75% {opacity: .7}to {transform: translate(-100px, -6.25px)}}
+
+
+    .loading-image div:nth-child(3),
+    .loading-image div:nth-child(4),
+    .loading-image div:nth-child(5),
+    .loading-image div:nth-child(6){
+        background-color: #06151f;
+        width: 15px;
+        height: 15px;
+        border-radius: 100%;
+        margin: 2px;
+        width: 10px;
+        height: 10px;
+        position: absolute;
+        transform: translateY(-6.25px);
+        top: 25px;
+        left: 100px;
+    }
+    .loading-text{
+        margin-bottom: 20vh;
+        text-align: center;
+        color: #06151f;
+        font-size: 3rem;
+        box-sizing: border-box;
+        padding: 0 10px;
+        text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+    @media only screen and (max-width: 500px) {
+         .loading-text{
+            font-size: 1.5rem;
+         }
+    }
+    .fadeout {
+        opacity: 0;
+        filter: alpha(opacity=0);
+    }
+    /* logo出现动画 */
+    @-webkit-keyframes fadeInDown{0%{opacity:0;-webkit-transform:translate3d(0,-100%,0);transform:translate3d(0,-100%,0)}100%{opacity:1;-webkit-transform:none;transform:none}}
+    @keyframes fadeInDown{0%{opacity:0;-webkit-transform:translate3d(0,-100%,0);}}
+ </style>
+ <script>
+(function () {
+    const loaded = function(){
+       setTimeout(function(){
+            const loader = document.getElementById("loading-container");
+            loader.className="fadeout" ;//使用渐隐的方法淡出loading page
+            // document.getElementById("body-wrap").style.display="flex";
+            setTimeout(function(){
+                loader.style.display="none";
+            },2500); 
+        },700);//强制显示loading page 1s  
+    };
+    loaded();
+})()
+</script>
+
+
+ 
+<body>
+    
+        <div id="loading-container">
+             <p class="loading-text">嘘~  正在从服务器偷取页面 . . . </p> 
+             <div class="loading-image">
+                 <div></div>
+                 <div></div>
+                 <div></div>
+                 <div></div> 
+                 <div></div>
+             </div>
+        </div>
+    
+
+
+
+
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/favicon.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">💻 Lee&#39;s blog</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/favicon.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">💻 Lee&#39;s blog</div>
+        <div class="logo-desc">
+            
+            这是一个主要用于记录的默默无闻的博客
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://pic2.zhimg.com/80/v2-8097d0895c1a25bf77d21331ad21dc75_1440w.webp')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                        <h1 class="description center-align post-title">svm_and_classfier</h1>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/"></script>
+
+
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/svm/">
+                                <span class="chip bg-color">svm</span>
+                            </a>
+                        
+                            <a href="/tags/%E7%BA%BF%E5%BD%A2%E5%88%86%E7%B1%BB%E5%99%A8/">
+                                <span class="chip bg-color">线形分类器</span>
+                            </a>
+                        
+                            <a href="/tags/hinge%E6%8D%9F%E5%A4%B1/">
+                                <span class="chip bg-color">hinge损失</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                机器学习
+                            </a>
+                        
+                            <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/" class="post-category">
+                                支持向量机
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2023-10-28
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2023-10-28
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    5.1k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    20 分
+                </div>
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+        <!-- 代码块折行 -->
+        <style type="text/css">
+            code[class*="language-"], pre[class*="language-"] { white-space: pre-wrap !important; }
+        </style>
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E4%B8%AD%E5%B1%B1%E5%A4%A7%E5%AD%A6-%E6%A0%87%E9%A2%98.png" alt="中山大学-标题" style="zoom: 25%;">
+
+<h1 id="本科生实验报告"><a href="#本科生实验报告" class="headerlink" title="本科生实验报告"></a>本科生实验报告</h1><hr>
+<h2 id="实验课程：23Fall机器学习与数据挖掘"><a href="#实验课程：23Fall机器学习与数据挖掘" class="headerlink" title="实验课程：23Fall机器学习与数据挖掘"></a>实验课程：23Fall机器学习与数据挖掘</h2><h2 id="任课教师：苏勤亮"><a href="#任课教师：苏勤亮" class="headerlink" title="任课教师：苏勤亮"></a>任课教师：苏勤亮</h2><h2 id="实验题目：SVM分类器"><a href="#实验题目：SVM分类器" class="headerlink" title="实验题目：SVM分类器"></a>实验题目：SVM分类器</h2><h2 id="专业名称：计算机科学与技术"><a href="#专业名称：计算机科学与技术" class="headerlink" title="专业名称：计算机科学与技术"></a>专业名称：计算机科学与技术</h2><h2 id="学生姓名：李博"><a href="#学生姓名：李博" class="headerlink" title="学生姓名：李博"></a>学生姓名：李博</h2><h2 id="学生学号：21307278"><a href="#学生学号：21307278" class="headerlink" title="学生学号：21307278"></a>学生学号：21307278</h2><h2 id="实验时间：2023-10-10"><a href="#实验时间：2023-10-10" class="headerlink" title="实验时间：2023.10.10"></a>实验时间：2023.10.10</h2><hr>
+<h2 id="Section1-实验内容概述"><a href="#Section1-实验内容概述" class="headerlink" title="==Section1  实验内容概述=="></a>==Section1  实验内容概述==</h2><ul>
+<li><h4 id="根据提供的数据，训练⼀个采⽤在不同的核函数的⽀持向量机-SVM-的-2-分类器，并验证其在测试数据集上的性能。"><a href="#根据提供的数据，训练⼀个采⽤在不同的核函数的⽀持向量机-SVM-的-2-分类器，并验证其在测试数据集上的性能。" class="headerlink" title="根据提供的数据，训练⼀个采⽤在不同的核函数的⽀持向量机 SVM 的 2 分类器，并验证其在测试数据集上的性能。"></a>根据提供的数据，训练⼀个采⽤在不同的核函数的⽀持向量机 SVM 的 2 分类器，并验证其在测试数据集上的性能。</h4></li>
+<li><h4 id="基本要求："><a href="#基本要求：" class="headerlink" title="基本要求："></a>基本要求：</h4><ol>
+<li>考虑两种不同的核函数：<br>i) 线性核函数		 ii) ⾼斯核函数</li>
+<li>可以直接调⽤现成 SVM 软件包来实现</li>
+<li>⼿动实现采⽤ hinge loss 和 cross-entropy loss 的线性分类模型，并⽐较它们的优劣</li>
+</ol>
+</li>
+<li><h4 id="实验报告包括："><a href="#实验报告包括：" class="headerlink" title="实验报告包括："></a>实验报告包括：</h4><ol>
+<li><p>SVM 模型的⼀般理论 </p>
+</li>
+<li><p>采⽤不同核函数的模型和性能⽐较及分析</p>
+</li>
+<li><p>采⽤ hinge loss 的线性分类模型和 SVM 模型之间的关系</p>
+</li>
+<li><p>采⽤ hinge loss 线性分类模型和 cross-entropy loss 线性分类模型⽐较</p>
+</li>
+<li><p>训练过程（包括初始化⽅法、超参数参数选择、⽤到的训练技巧等）</p>
+</li>
+<li><p>实验结果、分析及讨论</p>
+</li>
+</ol>
+</li>
+</ul>
+<hr>
+<h2 id="Section2-SVM模型的一般理论"><a href="#Section2-SVM模型的一般理论" class="headerlink" title="==Section2  SVM模型的一般理论=="></a>==Section2  SVM模型的一般理论==</h2><h3 id="支持向量机"><a href="#支持向量机" class="headerlink" title="==支持向量机=="></a>==支持向量机==</h3><ul>
+<li>是一类广为使用的分类方法，在多种分类问题中都表现出了很高的准确性。</li>
+<li>简单地来说，SVM 通过寻找一个最佳的分类边界，将样本特征 <strong>x</strong> 的域划分为不同的区域。落在同一个区域内的样本全都属于同一个类，且不同的区域对应不同的类别。</li>
+</ul>
+<h3 id="线形可分最大间隔分类器"><a href="#线形可分最大间隔分类器" class="headerlink" title="==线形可分最大间隔分类器=="></a>==线形可分最大间隔分类器==</h3><ul>
+<li><p>假设我们遇到的问题是线性可分二分类的，即样本有两种类别、可以被线性边界完全区分。那么，分类边界将是一个超平面，它将样本空间划分为两部分，落在不同部分的样本属于不同类别。</p>
+</li>
+<li><p>我们使用两个参数来描述这个超平面：<strong>w</strong> 和 <em>b</em>。在 <em>d</em> 维空间中，一个超平面可以使用如下线性方程来描述：</p>
+  <img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2023-10-16%2019.32.56.png" alt="截屏2023-10-16 19.32.56" style="zoom: 50%;">
+</li>
+<li><p>如果超平面 (<strong>w</strong>, b) 能将训练样本正确分类，我们可以通过定义一个损失函数来描述这种优化目标：</p>
+</li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2023-10-16%2019.33.23.png" alt="截屏2023-10-16 19.33.23" style="zoom:50%;">
+
+<ul>
+<li><p>从泛化能力的角度上看，我们认为一个最优超平面应当与两个类别样本簇的间隔（margin）尽可能远，这样才能使得这个超平面对于未知数据也有准确的预测，避免由于未知数据的轻微波动导致被错误分类。</p>
+</li>
+<li><p>在对样本到超平面的距离做缩放变换后，我们总可以得到优化目标：</p>
+  <img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2023-10-16%2019.53.35.png" style="zoom:50%;">
+</li>
+<li><p>等价于：</p>
+  <img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2023-10-16%2019.57.04.png" alt="截屏2023-10-16 19.57.04" style="zoom:50%;">
+</li>
+<li><p>上式为 SVM 的原始形式，它是一个典型的凸优化问题。我们可以通过 SVM 的对偶形式来求得获得最优解。我们使用拉格朗日乘子法，为每个不等式约束定义一个拉格朗日乘子 $αi$，可以得到拉格朗日函数</p>
+</li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2023-10-16%2019.58.56.png" style="zoom: 50%;">
+
+<ul>
+<li>通过求解 SVM 的对偶形式，可以得到最优的<strong>w</strong> 和 *b，就可以预测一个样本 <strong>x</strong> 所属的类别：</li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2023-10-16%2020.05.30.png" style="zoom:50%;">
+
+<h3 id="软最大间隔（线形不可分）支持向量机"><a href="#软最大间隔（线形不可分）支持向量机" class="headerlink" title="==软最大间隔（线形不可分）支持向量机=="></a>==软最大间隔（线形不可分）支持向量机==</h3><ul>
+<li><p>现实世界的数据中，很少有线性可分的情况，即找不到一个超平面可将两个类完美分开。软最大间隔支持向量机允许数据中存在一些错误分类的样本，并通过引入惩罚项来平衡错误分类和间隔大小。</p>
+</li>
+<li><p>引入松弛变量$ ξl$，从而把约束修改成：</p>
+  <img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2023-10-16%2020.10.18.png" alt="截屏2023-10-16 20.10.18" style="zoom:50%;">
+</li>
+<li><p>运用和线性可分的SVM相同的优化方法，求得对偶问题的约束形式为：</p>
+  <img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2023-10-16%2020.10.33.png" style="zoom:50%;"></li>
+</ul>
+<h3 id="核方法"><a href="#核方法" class="headerlink" title="==核方法=="></a>==核方法==</h3><ul>
+<li><p>核方法是一类在机器学习中常用的技术，用于处理非线性问题和高维数据。它通过将输入数据映射到一个高维特征空间，并在该特征空间中进行线性操作来解决非线性问题。</p>
+</li>
+<li><p>核方法的目标是通过引入核函数，将原始数据从低维空间映射到更高维度的特征空间，从而使数据在新的特征空间中更容易分割。</p>
+  <img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2023-10-16%2020.13.33.png" alt="截屏2023-10-16 20.13.33" style="zoom:50%;">
+
+  <img src="/Users/lbyyds/Desktop/markdown/typora文件统一使用的图片/截屏2023-10-16 20.19.47.png" style="zoom:50%;">
+</li>
+<li><p>核函数是核方法的关键组成部分，它能够计算两个样本在高维特征空间中的内积，而无需显式地进行特征空间的映射。避免了直接计算高维特征空间的复杂性，并在计算上具有高效性。通过核函数 k(x, y)，我们就可以简化对偶形式，不必计算 ϕ 的内积：</p>
+  <img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2023-10-16%2020.13.53.png" style="zoom:50%;">
+</li>
+<li><p>常见的核函数包括线性核函数、多项式核函数、高斯核函数等。每种核函数都有不同的属性和适用范围，可以根据具体问题选择合适的核函数。</p>
+</li>
+</ul>
+<h3 id="Hinge-损失"><a href="#Hinge-损失" class="headerlink" title="==Hinge 损失=="></a>==Hinge 损失==</h3><p>$$<br>\begin{aligned}<br>            L(\boldsymbol{w}, b) &amp;=C \sum_{n=1}^{N} E_{S V}\left(y^{(n)} h^{(n)}\right)+\frac{1}{2}|\boldsymbol{w}|^{2} \<br>            &amp;=\sum_{n=1}^{N} E_{S V}\left(y^{(n)} h^{(n)}\right)+\lambda|\boldsymbol{w}|^{2}<br>            \end{aligned}<br>$$</p>
+<ul>
+<li>​    其中，$E_{SV}(z)=\max(0,1-z)$。</li>
+</ul>
+<h3 id="Cross-entropy-损失"><a href="#Cross-entropy-损失" class="headerlink" title="==Cross_entropy 损失=="></a>==Cross_entropy 损失==</h3><p>$$<br>\begin{aligned}<br>    L(w, b) &amp;=-\sum_{n=1}^{N}\left[\tilde{y}^{(n)} \log \sigma\left(h^{(n)}\right)+\left(1-\tilde{y}^{(n)}\right)\left(1-\sigma\left(h^{(n)}\right)\right)\right]+\lambda|w|^{2} \<br>    &amp;=\sum_{n=1}^{N} \log \left(1+\exp \left(-y^{(n)} h^{(n)}\right)\right)+\lambda|w|^{2} \<br>    &amp;=\sum_{n=1}^{N} E_{L R}\left(y^{(n)} h^{(n)}\right)+\lambda|w|^{2}<br>    \end{aligned}<br>$$</p>
+<ul>
+<li>其中，$E_{LR}(z)=\log(1+\exp(-z))$，$\tilde y\in{0,1}$，$y\in{-1.1}$</li>
+</ul>
+<h3 id="采⽤-hinge-loss-的线性分类模型和-SVM-模型之间的关系"><a href="#采⽤-hinge-loss-的线性分类模型和-SVM-模型之间的关系" class="headerlink" title="==采⽤ hinge loss 的线性分类模型和 SVM 模型之间的关系=="></a>==采⽤ hinge loss 的线性分类模型和 SVM 模型之间的关系==</h3><ul>
+<li>采用hinge损失的软线性最大间隔分类器的损失函数如下：</li>
+</ul>
+<p>$$<br>\begin{aligned}<br>            L(\boldsymbol{w}, b) &amp;=\sum_{n=1}^{N} max\left(0, 1-y^{(n)} h^{(n)}\right)+\lambda|\boldsymbol{w}|^{2}<br>            \end{aligned}<br>$$</p>
+<ul>
+<li>其对应的对偶问题为：</li>
+</ul>
+<p>$$<br>\begin{array}{l}<br>    \max <em>{\boldsymbol{a}} g(\boldsymbol{a})\<br>    \text { s.t.: } a</em>{n} \geq 0, a_{n} \leq C\<br>    \quad\quad\sum_{n=1}^{N} a_{n} y^{(n)}=0<br>    \end{array}<br>$$</p>
+<ul>
+<li><p>其中：<br>  $$<br>  g(\boldsymbol{a})=\sum_{n=1}^{N} a_{n}-\frac{1}{2} \sum_{n=1}^{N} \sum_{m=1}^{N} a_{n} a_{m} y^{(n)} y^{(m)} \boldsymbol{x}^{(n) T} \boldsymbol{x}^{(m)}<br>  $$</p>
+</li>
+<li><p>使用了核方法的SVM就是在使用hinge损失的线形分类模型上进一步使用$\phi$函数把原始数据 $x$ 映射到更高维数的特征空间，来使其非线性化，即：</p>
+</li>
+</ul>
+<p>$$<br>g_{kernel}(\boldsymbol{a})={\sum_{n=1}^{N} a_{n}-\frac{1}{2} \sum_{n=1}^{N} \sum_{m=1}^{N} a_{n} a_{m} y^{(n)} y^{(m)} \phi\left(x^{(n)}\right)^{T} \phi\left(x^{(m)}\right)} = {\sum_{n=1}^{N} a_{n}-\frac{1}{2} \sum_{n=1}^{N} \sum_{m=1}^{N} a_{n} a_{m} y^{(n)} y^{(m)} k\left (\boldsymbol x^{(n)}, \boldsymbol{x} ^{(m)} \right )}<br>$$</p>
+<hr>
+<h2 id="Section3-代码实现及分析"><a href="#Section3-代码实现及分析" class="headerlink" title="==Section3  代码实现及分析=="></a>==Section3  代码实现及分析==</h2><h3 id="数据预处理"><a href="#数据预处理" class="headerlink" title="==数据预处理=="></a>==数据预处理==</h3><ul>
+<li>对输入的数据集进行预处理，包括数据的标准化、打乱样本顺序等。</li>
+<li>由于原数据相同标号的样本是连续的，所以数据清洗一定程度可以增强模型的泛化性。</li>
+</ul>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">get_data</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment" spellcheck="true"># 读入数据</span>
+    train <span class="token operator">=</span> pd<span class="token punctuation">.</span>read_csv<span class="token punctuation">(</span><span class="token string">'dataset/mnist_01_train.csv'</span><span class="token punctuation">)</span>
+    test <span class="token operator">=</span> pd<span class="token punctuation">.</span>read_csv<span class="token punctuation">(</span><span class="token string">'dataset/mnist_01_test.csv'</span><span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true"># 变换csv格式为np格式</span>
+    x_train <span class="token operator">=</span> train<span class="token punctuation">.</span>iloc<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">:</span><span class="token punctuation">]</span><span class="token punctuation">.</span>values
+    y_train <span class="token operator">=</span> train<span class="token punctuation">.</span>iloc<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>values
+    x_test <span class="token operator">=</span> test<span class="token punctuation">.</span>iloc<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">:</span><span class="token punctuation">]</span><span class="token punctuation">.</span>values
+    y_test <span class="token operator">=</span> test<span class="token punctuation">.</span>iloc<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>values
+    <span class="token comment" spellcheck="true"># 打乱数据</span>
+    num_samples <span class="token operator">=</span> x_train<span class="token punctuation">.</span>shape<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+    random_index <span class="token operator">=</span> np<span class="token punctuation">.</span>random<span class="token punctuation">.</span>permutation<span class="token punctuation">(</span>num_samples<span class="token punctuation">)</span>
+    x_train <span class="token operator">=</span> x_train<span class="token punctuation">[</span>random_index<span class="token punctuation">]</span>
+    y_train <span class="token operator">=</span> y_train<span class="token punctuation">[</span>random_index<span class="token punctuation">]</span>
+    <span class="token comment" spellcheck="true"># normalization</span>
+    num_features <span class="token operator">=</span> x_train<span class="token punctuation">.</span>shape<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>
+    mean_train <span class="token operator">=</span> np<span class="token punctuation">.</span>mean<span class="token punctuation">(</span>x_train<span class="token punctuation">)</span>
+    mean_test <span class="token operator">=</span> np<span class="token punctuation">.</span>mean<span class="token punctuation">(</span>x_test<span class="token punctuation">)</span>
+    std_train <span class="token operator">=</span> np<span class="token punctuation">.</span>std<span class="token punctuation">(</span>x_train<span class="token punctuation">)</span>
+    std_test <span class="token operator">=</span> np<span class="token punctuation">.</span>std<span class="token punctuation">(</span>x_test<span class="token punctuation">)</span>
+    x_train <span class="token operator">=</span> <span class="token punctuation">(</span>x_train<span class="token operator">-</span>mean_train<span class="token punctuation">)</span><span class="token operator">/</span>std_train
+    x_test <span class="token operator">=</span> <span class="token punctuation">(</span>x_test<span class="token operator">-</span>mean_test<span class="token punctuation">)</span><span class="token operator">/</span>std_test
+    <span class="token keyword">return</span>  x_train<span class="token punctuation">,</span>y_train<span class="token punctuation">,</span>x_test<span class="token punctuation">,</span>y_test
+</code></pre>
+<h3 id="不同核函数的模型实现"><a href="#不同核函数的模型实现" class="headerlink" title="==不同核函数的模型实现=="></a>==不同核函数的模型实现==</h3><ul>
+<li>定义获取模型的函数，核函数类型作为参数导入。</li>
+<li>调用<code>sklearn.svm</code>创建支持向量机的方式十分简单。</li>
+<li>注意对<code>SVC</code>传入参数类型作用：<ol>
+<li><code>C=</code>：惩罚项参数，控制了分类错误的惩罚程度。较小的C值会导致容忍更多的错误分类，较大的C值会更严格地对待错误分类，默认值为1.0。</li>
+<li><code>kernel=</code>：用于指定支持向量机的核函数类型。常见的核函数包括线性核（linear）、多项式核（poly）、高斯径向基函数核（rbf）等。默认值为’rbf’。</li>
+<li><code>degree</code>：多项式核函数的阶数。只有当kernel参数为’poly’时才需要设置。</li>
+<li><code>gamma</code>：核函数系数。对于多项式核和高斯径向基函数核来说，gamma控制了决策边界的曲率。较小的gamma值会导致较平缓的决策边界，而较大的gamma值会导致决策边界更加复杂。默认值为’auto’，表示使用1/n_features。</li>
+<li><code>probability</code>：是否启用概率估计功能。如果设置为True，训练时会为每个类别生成概率估计，默认值为False。</li>
+</ol>
+</li>
+</ul>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> sklearn<span class="token punctuation">.</span>svm <span class="token keyword">import</span> SVC
+<span class="token keyword">from</span> sklearn<span class="token punctuation">.</span>metrics <span class="token keyword">import</span> accuracy_score
+<span class="token keyword">def</span> <span class="token function">get_model</span><span class="token punctuation">(</span>kernel_type<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment" spellcheck="true"># 限定核函数的类型</span>
+    <span class="token keyword">if</span> kernel_type <span class="token operator">not</span> <span class="token keyword">in</span> <span class="token punctuation">(</span><span class="token string">'rbf'</span><span class="token punctuation">,</span> <span class="token string">'linear'</span><span class="token punctuation">,</span> <span class="token string">'poly'</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span>
+    <span class="token comment" spellcheck="true"># 创建SVM不同核函数的分类器模型</span>
+    svm_model <span class="token operator">=</span> SVC<span class="token punctuation">(</span>C<span class="token operator">=</span><span class="token number">1.0</span><span class="token punctuation">,</span> kernel<span class="token operator">=</span>kernel_type<span class="token punctuation">,</span> gamma<span class="token operator">=</span><span class="token string">'auto'</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> svm_model
+</code></pre>
+<h3 id="线性分类模型"><a href="#线性分类模型" class="headerlink" title="==线性分类模型=="></a>==线性分类模型==</h3><ul>
+<li>在原来的数据预处理的基础上，在线形分类模型中，需要将负类标签转换为-1</li>
+</ul>
+<pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true"># 标签转换0->-1</span>
+y_train<span class="token punctuation">[</span>y_train<span class="token operator">==</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span>
+y_test<span class="token punctuation">[</span>y_test<span class="token operator">==</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span>
+</code></pre>
+<ul>
+<li>定义<code>classifier</code>类，指定输入超参数类型以及一些必要的记录损失的数据结构。</li>
+</ul>
+<pre class=" language-python"><code class="language-python">    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> lr<span class="token punctuation">,</span> loss_type<span class="token punctuation">,</span> batch_size<span class="token punctuation">,</span> epoch_num<span class="token punctuation">,</span> C<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">"""
+        :param lr: 学习率
+        :param loss_type: 损失函数类型
+        :param batch_size: 批量大小
+        :param epoch_num: 训练回合
+        :param C: 惩罚项系数
+        """</span>
+        <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+</code></pre>
+<ul>
+<li>使用的<code>mini-batch</code>梯度下降：<ol>
+<li>由于是手动实现，所以无法调用自动求导，损失函数对于参数的导数需要手动计算。</li>
+<li>根据实验要求，设置根据不同的<code>loss_type</code>进行不同的梯度下降。</li>
+</ol>
+</li>
+</ul>
+<pre class=" language-python"><code class="language-python">    <span class="token keyword">def</span> <span class="token function">gradient_descent</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> x_batch<span class="token punctuation">,</span> y_batch<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">"""
+        根据不同损失函数进行梯度下降
+        """</span>
+        <span class="token keyword">if</span> self<span class="token punctuation">.</span>loss_type <span class="token operator">==</span> <span class="token string">'hinge'</span><span class="token punctuation">:</span>
+            gradient_W <span class="token operator">=</span> np<span class="token punctuation">.</span>dot<span class="token punctuation">(</span>x_batch<span class="token punctuation">.</span>T<span class="token punctuation">,</span>
+                <span class="token punctuation">(</span>y_batch <span class="token operator">*</span> <span class="token punctuation">(</span>np<span class="token punctuation">.</span>dot<span class="token punctuation">(</span>x_batch<span class="token punctuation">,</span> self<span class="token punctuation">.</span>W<span class="token punctuation">)</span><span class="token operator">+</span>self<span class="token punctuation">.</span>b<span class="token punctuation">)</span><span class="token operator">&lt;</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">.</span>astype<span class="token punctuation">(</span>int<span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token operator">-</span>y_batch<span class="token punctuation">)</span> <span class="token operator">/</span> self<span class="token punctuation">.</span>batch_size
+            gradient_b <span class="token operator">=</span> np<span class="token punctuation">.</span>mean<span class="token punctuation">(</span><span class="token punctuation">(</span>y_batch <span class="token operator">*</span>
+                                  <span class="token punctuation">(</span>np<span class="token punctuation">.</span>dot<span class="token punctuation">(</span>x_batch<span class="token punctuation">,</span> self<span class="token punctuation">.</span>W<span class="token punctuation">)</span> <span class="token operator">+</span> self<span class="token punctuation">.</span>b<span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">.</span>astype<span class="token punctuation">(</span>int<span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token operator">-</span>y_batch<span class="token punctuation">)</span>
+            self<span class="token punctuation">.</span>W <span class="token operator">-=</span> self<span class="token punctuation">.</span>lr <span class="token operator">*</span> gradient_W
+            self<span class="token punctuation">.</span>b <span class="token operator">-=</span> self<span class="token punctuation">.</span>lr <span class="token operator">*</span> gradient_b
+
+        <span class="token keyword">if</span> self<span class="token punctuation">.</span>loss_type <span class="token operator">==</span> <span class="token string">'cross_entropy'</span><span class="token punctuation">:</span>
+            gradient_W <span class="token operator">=</span> <span class="token operator">-</span>np<span class="token punctuation">.</span>dot<span class="token punctuation">(</span>x_batch<span class="token punctuation">.</span>T<span class="token punctuation">,</span> 
+                             y_batch <span class="token operator">/</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">+</span>np<span class="token punctuation">.</span>exp<span class="token punctuation">(</span>y_batch <span class="token operator">*</span> <span class="token punctuation">(</span>x_batch@self<span class="token punctuation">.</span>W<span class="token operator">+</span>self<span class="token punctuation">.</span>b<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">/</span> self<span class="token punctuation">.</span>batch_size
+            gradient_b <span class="token operator">=</span> <span class="token operator">-</span>np<span class="token punctuation">.</span>mean<span class="token punctuation">(</span>y_batch <span class="token operator">/</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">+</span> np<span class="token punctuation">.</span>exp<span class="token punctuation">(</span>y_batch<span class="token operator">*</span><span class="token punctuation">(</span>x_batch@self<span class="token punctuation">.</span>W<span class="token operator">+</span>self<span class="token punctuation">.</span>b<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            self<span class="token punctuation">.</span>W <span class="token operator">-=</span> self<span class="token punctuation">.</span>lr <span class="token operator">*</span> gradient_W
+            self<span class="token punctuation">.</span>b <span class="token operator">-=</span> self<span class="token punctuation">.</span>lr <span class="token operator">*</span> gradient_b
+</code></pre>
+<ul>
+<li>根据不同的损失类型，按照公式计算并记录损失值<ol>
+<li>输入指定了<code>type</code>参数，指示是训练集损失或者验证集损失。</li>
+<li>对于损失求的是平均损失，使用了<code>np.mean()</code>，所以损失的绝对值会较小，损失值不会受到样本数量的影响。</li>
+</ol>
+</li>
+</ul>
+<pre class=" language-python"><code class="language-python">    <span class="token keyword">def</span> <span class="token function">loss</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> x_batch<span class="token punctuation">,</span> y_batch<span class="token punctuation">,</span> type<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">"""
+        计算并记录损失值
+        :param type: 指定损失类型：训练集损失/验证集损失并记录
+        """</span>
+        loss_num <span class="token operator">=</span> None
+        <span class="token keyword">if</span> self<span class="token punctuation">.</span>loss_type <span class="token operator">==</span> <span class="token string">'hinge'</span><span class="token punctuation">:</span>
+            loss_num <span class="token operator">=</span> np<span class="token punctuation">.</span>mean<span class="token punctuation">(</span>np<span class="token punctuation">.</span>maximum<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token operator">-</span>y_batch<span class="token operator">*</span><span class="token punctuation">(</span>x_batch@self<span class="token punctuation">.</span>W<span class="token operator">+</span>self<span class="token punctuation">.</span>b<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token keyword">if</span> self<span class="token punctuation">.</span>loss_type <span class="token operator">==</span> <span class="token string">'cross_entropy'</span><span class="token punctuation">:</span>
+            loss_num <span class="token operator">=</span> np<span class="token punctuation">.</span>mean<span class="token punctuation">(</span>np<span class="token punctuation">.</span>log<span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">+</span> np<span class="token punctuation">.</span>exp<span class="token punctuation">(</span><span class="token operator">-</span>y_batch<span class="token operator">*</span><span class="token punctuation">(</span>x_batch@self<span class="token punctuation">.</span>W<span class="token operator">+</span>self<span class="token punctuation">.</span>b<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token keyword">if</span> type <span class="token operator">==</span> <span class="token string">'train'</span><span class="token punctuation">:</span>
+            self<span class="token punctuation">.</span>train_loss<span class="token punctuation">.</span>append<span class="token punctuation">(</span>loss_num<span class="token punctuation">)</span>
+        <span class="token keyword">elif</span> type <span class="token operator">==</span> <span class="token string">'valid'</span><span class="token punctuation">:</span>
+            self<span class="token punctuation">.</span>valid_loss<span class="token punctuation">.</span>append<span class="token punctuation">(</span>loss_num<span class="token punctuation">)</span>
+</code></pre>
+<ul>
+<li><p>对给定样本计算准确率</p>
+<ol>
+<li><p>公式如下：</p>
+ <img src="/Users/lbyyds/Desktop/markdown/typora文件统一使用的图片/截屏2023-10-16 20.05.30.png" style="zoom:50%;">
+</li>
+<li><p>对于测试集：不能调参来修正测试集精度，这样是对测试集的一种拟合，所以测试精度只在模型调完参后计算一次。</p>
+</li>
+<li><p>对于验证集：设置验证集来调整超参数。</p>
+</li>
+</ol>
+</li>
+</ul>
+<pre class=" language-python"><code class="language-python">    <span class="token keyword">def</span> <span class="token function">predict</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> X<span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">"""
+        :return: 准确率
+        """</span>
+        y_predict <span class="token operator">=</span> np<span class="token punctuation">.</span>sign<span class="token punctuation">(</span>X@self<span class="token punctuation">.</span>W <span class="token operator">+</span> self<span class="token punctuation">.</span>b<span class="token punctuation">)</span>
+        accuracy <span class="token operator">=</span> np<span class="token punctuation">.</span>mean<span class="token punctuation">(</span><span class="token punctuation">(</span>y_predict <span class="token operator">==</span> y<span class="token punctuation">)</span><span class="token punctuation">.</span>astype<span class="token punctuation">(</span>int<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> accuracy
+</code></pre>
+<hr>
+<h2 id="Section4-模型训练过程"><a href="#Section4-模型训练过程" class="headerlink" title="==Section4  模型训练过程=="></a>==Section4  模型训练过程==</h2><h3 id="训练核函数模型"><a href="#训练核函数模型" class="headerlink" title="==训练核函数模型=="></a>==训练核函数模型==</h3><ul>
+<li><p>进行了如下数据预处理来提高模型泛化性：</p>
+<ol>
+<li>进行数据标准化。</li>
+<li>对连续标号的数据进行打乱操作。</li>
+</ol>
+</li>
+<li><p>模型创建时对于模型的超参数选择如下：</p>
+<ol>
+<li>选择不同的核函数，对比不同核函数向量机。</li>
+<li>调试不同的超参数<code>C</code>和<code>gamma</code>来比较性能。（对比结果在Section5中给出）</li>
+</ol>
+</li>
+</ul>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">get_model</span><span class="token punctuation">(</span>C<span class="token punctuation">,</span> kernel_type<span class="token punctuation">,</span> gamma<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment" spellcheck="true"># 限定核函数的类型</span>
+    <span class="token keyword">if</span> kernel_type <span class="token operator">not</span> <span class="token keyword">in</span> <span class="token punctuation">(</span><span class="token string">'rbf'</span><span class="token punctuation">,</span> <span class="token string">'linear'</span><span class="token punctuation">,</span> <span class="token string">'poly'</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span>
+    <span class="token comment" spellcheck="true"># 创建不同核函数的SVM</span>
+    svm_model <span class="token operator">=</span> SVC<span class="token punctuation">(</span>C<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> kernel<span class="token operator">=</span>kernel_type<span class="token punctuation">,</span> gamma<span class="token operator">=</span><span class="token string">'auto'</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> svm_model
+</code></pre>
+<ul>
+<li>对于调包实现的<code>svm_model</code>的训练过程是自动实现的：<ol>
+<li>由于一次<code>model.fit</code>操作就可以完成训练，所以难以统计损失曲线。</li>
+<li>统计了二分类问题常用的运行时间、准确率、精确率、召回率作为性能指标。（调参结果在Section5中给出）</li>
+</ol>
+</li>
+</ul>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">train</span><span class="token punctuation">(</span>svm_model<span class="token punctuation">,</span>x_train<span class="token punctuation">,</span>y_train<span class="token punctuation">,</span>x_test<span class="token punctuation">,</span>y_test<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    time_start <span class="token operator">=</span> time<span class="token punctuation">.</span>time<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    svm_model<span class="token punctuation">.</span>fit<span class="token punctuation">(</span>x_train<span class="token punctuation">,</span> y_train<span class="token punctuation">)</span>
+    time_end <span class="token operator">=</span> time<span class="token punctuation">.</span>time<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true"># prediction</span>
+    predictions <span class="token operator">=</span> svm_model<span class="token punctuation">.</span>predict<span class="token punctuation">(</span>x_test<span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true"># 统计性能</span>
+    time_consume <span class="token operator">=</span> time_end<span class="token operator">-</span>time_start
+    accuracy <span class="token operator">=</span> accuracy_score<span class="token punctuation">(</span>y_test<span class="token punctuation">,</span> predictions<span class="token punctuation">)</span>
+    precision <span class="token operator">=</span> precision_score<span class="token punctuation">(</span>y_test<span class="token punctuation">,</span> predictions<span class="token punctuation">)</span>
+    recall <span class="token operator">=</span> recall_score<span class="token punctuation">(</span>y_test<span class="token punctuation">,</span> predictions<span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true"># 统计支持向量的个数</span>
+    <span class="token comment" spellcheck="true"># supported_vector = svm_model.support_vectors_</span>
+    <span class="token keyword">return</span> time_consume<span class="token punctuation">,</span> accuracy<span class="token punctuation">,</span> precision<span class="token punctuation">,</span> recall
+</code></pre>
+<h3 id="线形分类器训练过程：使用k-fold交叉验证"><a href="#线形分类器训练过程：使用k-fold交叉验证" class="headerlink" title="==线形分类器训练过程：使用k-fold交叉验证=="></a>==线形分类器训练过程：使用k-fold交叉验证==</h3><ul>
+<li>由于训练样本数量不多，可以设置<code>K=5</code>进行交叉验证。</li>
+<li>每次训练时使用随机的<code>minibatch</code>方法进行梯度下降。</li>
+<li>每次epoch对训练集计算并记录损失，每次epoch对k折的验证集损失值取均值并记录。</li>
+</ul>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">train</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+    <span class="token keyword">for</span> epoch <span class="token keyword">in</span> range<span class="token punctuation">(</span>self<span class="token punctuation">.</span>epoch_num<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token comment" spellcheck="true"># k-fold交叉验证</span>
+        <span class="token keyword">for</span> k <span class="token keyword">in</span> range<span class="token punctuation">(</span>self<span class="token punctuation">.</span>K<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            x_valid_k <span class="token operator">=</span> x_train<span class="token punctuation">[</span>k<span class="token operator">*</span>block_size<span class="token punctuation">:</span><span class="token punctuation">(</span>k<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">*</span>block_size<span class="token punctuation">,</span> <span class="token punctuation">:</span><span class="token punctuation">]</span>
+            y_valid_k <span class="token operator">=</span> y_train<span class="token punctuation">[</span>k<span class="token operator">*</span>block_size<span class="token punctuation">:</span><span class="token punctuation">(</span>k<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">*</span>block_size<span class="token punctuation">]</span>
+            x_train_k <span class="token operator">=</span> np<span class="token punctuation">.</span>concatenate<span class="token punctuation">(</span> <span class="token punctuation">(</span>x_train<span class="token punctuation">[</span><span class="token punctuation">:</span>k<span class="token operator">*</span>block_size<span class="token punctuation">,</span> <span class="token punctuation">:</span><span class="token punctuation">]</span><span class="token punctuation">,</span> x_train<span class="token punctuation">[</span><span class="token punctuation">(</span>k<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">*</span>block_size<span class="token punctuation">:</span><span class="token punctuation">,</span> <span class="token punctuation">:</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            y_train_k <span class="token operator">=</span> np<span class="token punctuation">.</span>concatenate<span class="token punctuation">(</span> <span class="token punctuation">(</span>y_train<span class="token punctuation">[</span><span class="token punctuation">:</span>k<span class="token operator">*</span>block_size<span class="token punctuation">]</span><span class="token punctuation">,</span> y_train<span class="token punctuation">[</span><span class="token punctuation">(</span>k<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">*</span>block_size<span class="token punctuation">:</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token keyword">for</span> _ <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">30</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+                <span class="token comment" spellcheck="true"># suffle - minibatch</span>
+                train_size <span class="token operator">=</span> x_train_k<span class="token punctuation">.</span>shape<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+                idx <span class="token operator">=</span> random<span class="token punctuation">.</span>sample<span class="token punctuation">(</span>range<span class="token punctuation">(</span>train_size<span class="token punctuation">)</span><span class="token punctuation">,</span> self<span class="token punctuation">.</span>batch_size<span class="token punctuation">)</span>
+                x_batch <span class="token operator">=</span> x_train_k<span class="token punctuation">[</span>idx<span class="token punctuation">]</span>
+                y_bacth <span class="token operator">=</span> y_train_k<span class="token punctuation">[</span>idx<span class="token punctuation">]</span>
+                <span class="token comment" spellcheck="true"># 梯度下降</span>
+                self<span class="token punctuation">.</span>gradient_descent<span class="token punctuation">(</span>x_batch<span class="token punctuation">,</span> y_bacth<span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+</code></pre>
+<h3 id="线形分类器超参数选择"><a href="#线形分类器超参数选择" class="headerlink" title="==线形分类器超参数选择=="></a>==线形分类器超参数选择==</h3><ul>
+<li>本次实验中，线形分类器超参数的选择可以根据在验证集上的精度和验证集损失的收敛情况来选择。</li>
+<li>选择模型超参数的一种常用方法是网格搜索，各种超参数的约束取值范围如下：<ol>
+<li>损失类型：使用两种损失<code>hinge</code> 或者<code> cross_entropy</code></li>
+<li>学习率：选取常见的  0.1、1、10</li>
+<li>批量大小：由于给定数据集不大，<code>batch_size</code>选取常见的32、64、128</li>
+<li>迭代次数：设置epoch数固定为50，此时模型已经收敛</li>
+</ol>
+</li>
+<li>实验结果记录如下：<ol>
+<li><strong>综合验证集上的精度和验证集损失的收敛情况选择一组性能表现最优的超参数为：学习率=1；批量大小=128，迭代次数=50。</strong></li>
+<li>对于两种损失函数的线形分类器，这组超参数表现同样优秀。</li>
+<li>当学习率过低时，最终训练收敛慢，验证集精度较低。</li>
+<li>当批量大小较低时，损失曲线和精度曲线波动较大。</li>
+</ol>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>损失类型</th>
+<th>学习率</th>
+<th>批量大小</th>
+<th>验证集最终精度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>hinge</td>
+<td>0.1</td>
+<td>32</td>
+<td>0.998499802605606</td>
+</tr>
+<tr>
+<td>hinge</td>
+<td>1</td>
+<td>32</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>hinge</td>
+<td>10</td>
+<td>32</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>hinge</td>
+<td>0.1</td>
+<td>64</td>
+<td>0.9990525069088039</td>
+</tr>
+<tr>
+<td>hinge</td>
+<td>1</td>
+<td>64</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>hinge</td>
+<td>10</td>
+<td>64</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>hinge</td>
+<td>0.1</td>
+<td>128</td>
+<td>0.9989735491512042</td>
+</tr>
+<tr>
+<td>hinge</td>
+<td>1</td>
+<td>128</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>hinge</td>
+<td>10</td>
+<td>128</td>
+<td>1.0</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th><img src="/Users/lbyyds/Desktop/markdown/typora文件统一使用的图片/截屏2023-10-25 02.31.59.png" style="zoom:50%;"></th>
+<th><img src="/Users/lbyyds/Desktop/markdown/typora文件统一使用的图片/截屏2023-10-25 02.31.54.png" alt="截屏2023-10-25 02.31.54" style="zoom: 50%;"></th>
+<th><img src="/Users/lbyyds/Desktop/markdown/typora文件统一使用的图片/截屏2023-10-25 02.31.49.png" alt="截屏2023-10-25 02.31.49" style="zoom:50%;"></th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><img src="/Users/lbyyds/Desktop/markdown/typora文件统一使用的图片/截屏2023-10-25 02.31.45.png" alt="截屏2023-10-25 02.31.45" style="zoom:50%;"></td>
+<td><img src="/Users/lbyyds/Desktop/markdown/typora文件统一使用的图片/截屏2023-10-25 02.31.32.png" alt="截屏2023-10-25 02.31.32" style="zoom:50%;"></td>
+<td><img src="/Users/lbyyds/Desktop/markdown/typora文件统一使用的图片/截屏2023-10-25 02.31.26.png" alt="截屏2023-10-25 02.31.26" style="zoom:50%;"></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><img src="/Users/lbyyds/Desktop/markdown/typora文件统一使用的图片/截屏2023-10-25 02.31.20.png" alt="截屏2023-10-25 02.31.20" style="zoom:50%;"></td>
+<td><img src="/Users/lbyyds/Desktop/markdown/typora文件统一使用的图片/截屏2023-10-25 02.31.13.png" alt="截屏2023-10-25 02.31.13" style="zoom:50%;"></td>
+<td><img src="/Users/lbyyds/Desktop/markdown/typora文件统一使用的图片/截屏2023-10-25 02.31.06.png" alt="截屏2023-10-25 02.31.06" style="zoom:50%;"></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>损失类型</th>
+<th>学习率</th>
+<th>批量大小</th>
+<th>验证集最终精度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>cross_entropy</td>
+<td>0.1</td>
+<td>32</td>
+<td>0.9991314646664036</td>
+</tr>
+<tr>
+<td>cross_entropy</td>
+<td>1</td>
+<td>32</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>cross_entropy</td>
+<td>10</td>
+<td>32</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>cross_entropy</td>
+<td>0.1</td>
+<td>64</td>
+<td>0.9985787603632057</td>
+</tr>
+<tr>
+<td>cross_entropy</td>
+<td>1</td>
+<td>64</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>cross_entropy</td>
+<td>10</td>
+<td>64</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>cross_entropy</td>
+<td>0.1</td>
+<td>128</td>
+<td>0.9991314646664033</td>
+</tr>
+<tr>
+<td>cross_entropy</td>
+<td>1</td>
+<td>128</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>cross_entropy</td>
+<td>10</td>
+<td>128</td>
+<td>1.0</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th><img src="/Users/lbyyds/Desktop/markdown/typora文件统一使用的图片/截屏2023-10-25 02.38.21.png" style="zoom:50%;"></th>
+<th><img src="/Users/lbyyds/Desktop/markdown/typora文件统一使用的图片/截屏2023-10-25 02.38.15.png" alt="截屏2023-10-25 02.38.15" style="zoom:50%;"></th>
+<th><img src="/Users/lbyyds/Desktop/markdown/typora文件统一使用的图片/截屏2023-10-25 02.38.11.png" alt="截屏2023-10-25 02.38.11" style="zoom:50%;"></th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><img src="/Users/lbyyds/Desktop/markdown/typora文件统一使用的图片/截屏2023-10-25 02.38.07.png" alt="截屏2023-10-25 02.38.07" style="zoom:50%;"></td>
+<td><img src="/Users/lbyyds/Desktop/markdown/typora文件统一使用的图片/截屏2023-10-25 02.38.02.png" alt="截屏2023-10-25 02.38.02" style="zoom:50%;"></td>
+<td><img src="/Users/lbyyds/Desktop/markdown/typora文件统一使用的图片/截屏2023-10-25 02.37.57.png" alt="截屏2023-10-25 02.37.57" style="zoom:50%;"></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><img src="/Users/lbyyds/Desktop/markdown/typora文件统一使用的图片/截屏2023-10-25 02.37.52.png" alt="截屏2023-10-25 02.37.52" style="zoom:50%;"></td>
+<td><img src="/Users/lbyyds/Desktop/markdown/typora文件统一使用的图片/截屏2023-10-25 02.37.48.png" alt="截屏2023-10-25 02.37.48" style="zoom:50%;"></td>
+<td><img src="/Users/lbyyds/Desktop/markdown/typora文件统一使用的图片/截屏2023-10-25 02.37.43.png" alt="截屏2023-10-25 02.37.43" style="zoom:50%;"></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="Section5-实验结果及分析"><a href="#Section5-实验结果及分析" class="headerlink" title="==Section5  实验结果及分析=="></a>==Section5  实验结果及分析==</h2><h3 id="不同核函数模型性能分析"><a href="#不同核函数模型性能分析" class="headerlink" title="==不同核函数模型性能分析=="></a>==不同核函数模型性能分析==</h3><ul>
+<li><p>对于使用线性核函数以及高斯核函数的svm模型对比分析：</p>
+<ol>
+<li>对于调包实现的<code>svm_model</code>的训练过程是自动实现的，使用<code>model.fit</code>操作完成训练，所以难以统计损失曲线。</li>
+<li>所以统计了二分类问题常用的运行时间、准确率、精确率、召回率作为性能指标。</li>
+<li>主要对参数惩罚项<code>C</code>进行调试。</li>
+<li>实验结果如下：</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>![](/Users/lbyyds/Desktop/markdown/typora文件统一使用的图片/截屏2023-10-23 20.48.56.png)</th>
+<th>![截屏2023-10-23 20.48.24](/Users/lbyyds/Desktop/markdown/typora文件统一使用的图片/截屏2023-10-23 20.48.24.png)</th>
+<th><img src="/Users/lbyyds/Desktop/markdown/typora文件统一使用的图片/截屏2023-10-23 20.47.40.png" alt="截屏2023-10-23 20.47.40" style="zoom:50%;"></th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>![截屏2023-10-23 20.46.25](/Users/lbyyds/Desktop/markdown/typora文件统一使用的图片/截屏2023-10-23 20.46.25.png)</td>
+<td>![截屏2023-10-23 20.45.48](/Users/lbyyds/Desktop/markdown/typora文件统一使用的图片/截屏2023-10-23 20.45.48.png)</td>
+<td>![截屏2023-10-23 20.45.05](/Users/lbyyds/Desktop/markdown/typora文件统一使用的图片/截屏2023-10-23 20.45.05.png)</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>核函数类型</th>
+<th>惩罚项参数</th>
+<th>运行时间</th>
+<th>准确率</th>
+<th>精确率</th>
+<th>召回率</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>线性核函数</strong></td>
+<td>1.0</td>
+<td>0.353328</td>
+<td>0.999054</td>
+<td>0.999118</td>
+<td>0.999118</td>
+</tr>
+<tr>
+<td></td>
+<td>0.01</td>
+<td>0.362733</td>
+<td>0.999054</td>
+<td>0.999118</td>
+<td>0.999118</td>
+</tr>
+<tr>
+<td></td>
+<td>100</td>
+<td>0.370609</td>
+<td>0.999054</td>
+<td>0.999118</td>
+<td>0.999118</td>
+</tr>
+<tr>
+<td><strong>高斯核函数</strong></td>
+<td>1.0</td>
+<td>0.645979</td>
+<td>0.999527</td>
+<td>0.999119</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td></td>
+<td>0.01</td>
+<td>0.684295</td>
+<td>0.999527</td>
+<td>0.999119</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td></td>
+<td>100</td>
+<td>0.650714</td>
+<td>0.999527</td>
+<td>0.999119</td>
+<td>1.0</td>
+</tr>
+</tbody></table>
+<ul>
+<li><p>惩罚项参数<code>C</code>：</p>
+<ol>
+<li>主要设置了三个阶段的参数：<code>1,0.01,100</code></li>
+<li>对照实验结果可以看出，由于<code>mnist</code>数据集本身具有明显的可分性，<code>svm</code>模型可能对<code>C</code>的取值不敏感。即使<code>C</code>的值变小或变大，模型的分类结果几乎没有区别而且分类效果较好。</li>
+</ol>
+</li>
+<li><p>从运行时间对比：</p>
+<ol>
+<li>高斯核函数训练用时稳定在<code>0.65s</code>左右，线形核函数训练用时稳定在<code>0.36s</code>左右。</li>
+<li>由于高斯核函数相对线性核函数复杂，训练用时明显大于线形核函数。</li>
+</ol>
+</li>
+<li><p>从模型性能对比：</p>
+<ol>
+<li>从实验结果可以观察出，对于数据集两种核函数的准确率都很高。相对而言，高斯核函数在准确率和召回率上高了0.05%左右。</li>
+<li>由于线形核函数是一个线性最大间隔分类器，对于线形不可分的数据性能较差。而高斯核函数能够将数据映射到更高维的特征空间，所以模型性能使用高斯核函数的SVM更优。</li>
+<li>由于本次使用的<code>mnist</code>手写数字分类训练集本身比较简单，可分性较强，所以没有体现出两种模型很大的区别。</li>
+<li>在召回率可以看出，存在某些正例样本使得线形核函数无法分类成功，而高斯核函数能够准确分类，达到了100%的召回率。</li>
+</ol>
+</li>
+</ul>
+<h3 id="线形分类器精度"><a href="#线形分类器精度" class="headerlink" title="==线形分类器精度=="></a>==线形分类器精度==</h3><ul>
+<li><p>根据<code>section4 模型训练过程</code>中超参数选择这一小节所述：综合验证集上的精度和验证集损失的收敛情况选择一组性能表现最优的超参数为：<strong>学习率=1；批量大小=128，迭代次数=50。</strong></p>
+</li>
+<li><p>根据此组超参数在验证集上作预测如下：</p>
+<ul>
+<li>hinge loss线形分类器：</li>
+</ul>
+  <img src="/Users/lbyyds/Desktop/markdown/typora文件统一使用的图片/截屏2023-10-25 02.57.24.png" style="zoom:50%;">
+
+<ul>
+<li><p>cross-entropy loss线形分类器：</p>
+  <img src="/Users/lbyyds/Desktop/markdown/typora文件统一使用的图片/截屏2023-10-25 02.57.01.png" alt="截屏2023-10-25 02.57.01" style="zoom:50%;"></li>
+</ul>
+</li>
+</ul>
+<h3 id="采⽤-hinge-loss-线性分类模型和-cross-entropy-loss-线性分类模型⽐较"><a href="#采⽤-hinge-loss-线性分类模型和-cross-entropy-loss-线性分类模型⽐较" class="headerlink" title="==采⽤ hinge loss 线性分类模型和 cross-entropy loss 线性分类模型⽐较=="></a>==采⽤ hinge loss 线性分类模型和 cross-entropy loss 线性分类模型⽐较==</h3><table>
+<thead>
+<tr>
+<th>线形分类器损失函数类型</th>
+<th>训练用时</th>
+<th>测试集准确率</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>hinge loss</td>
+<td>4.481224</td>
+<td>0.999054</td>
+</tr>
+<tr>
+<td>cross-entropy loss</td>
+<td>4.676503</td>
+<td>0.999527</td>
+</tr>
+</tbody></table>
+<ul>
+<li>两种线形分类模型的主要区别在损失函数的不同。hinge损失主要从最大间隔角度考虑，鼓励模型产生更大的间隔，以更好地分离不同类别的样本；而交叉熵损失主要从概率角度考虑，通过最大化正确类别的概率来优化模型。</li>
+<li>在本次实验中，由于数据集的可分性较强，数据类型比较简单，所以两种分类器都没有遇到困难，分类精度在99.9%以上。模型的训练用时也很接近。</li>
+</ul>
+<hr>
+<h2 id="Section6-实验总结和心得体会"><a href="#Section6-实验总结和心得体会" class="headerlink" title="==Section6  实验总结和心得体会=="></a>==Section6  实验总结和心得体会==</h2><h3 id="实验总结："><a href="#实验总结：" class="headerlink" title="==实验总结：=="></a>==实验总结：==</h3><table>
+<thead>
+<tr>
+<th>模型类型</th>
+<th>模型训练用时</th>
+<th>最终测试集准确率</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>线性核函数SVM</strong></td>
+<td>0.353328</td>
+<td>0.999054</td>
+</tr>
+<tr>
+<td><strong>高斯核函数SVM</strong></td>
+<td>0.645979</td>
+<td>0.999527</td>
+</tr>
+<tr>
+<td><strong>hinge loss 线性分类器</strong></td>
+<td>4.481224</td>
+<td>0.999054</td>
+</tr>
+<tr>
+<td><strong>cross-entropy loss 线性分类器</strong></td>
+<td>4.676503</td>
+<td>0.999527</td>
+</tr>
+</tbody></table>
+<ul>
+<li><p>这次实验总共实验了以上四种模型用于手写数字0/1图片集的简单分类问题。</p>
+</li>
+<li><p>由于实验的数据集可分性很强，这四种模型最终收敛到了很高的准确度，即都有非常好的效果。</p>
+</li>
+<li><p>从运行时间上看，由于两种线形分类器主要在计算梯度时有所区别外其它训练过程一致，所以用时接近。而两种核函数的SVM训练用时体现了出了差别，体现了高斯核函数较于线性核函数的复杂性。</p>
+</li>
+<li><p>对于最终模型准确度雷同的问题，我认为是可能是原始数据集的标注有错误或者是无法区分类别，这些样本导致了模型只在这几个特例出错，最终准确率相同。</p>
+</li>
+</ul>
+<h3 id="心得体会："><a href="#心得体会：" class="headerlink" title="==心得体会：=="></a>==心得体会：==</h3><ul>
+<li><p>本次实验的实现相对简单，SVM模型的原理以及实现老师已经在课堂上详细阐述过，所以实现起来比较容易。</p>
+</li>
+<li><p>遇到的主要问题在于，对于损失函数的手动求导不熟悉，尤其是涉及到一些函数的偏导已经矩阵向量求导时无从下手。由于之前训练模型的时候依赖于<code>backword()</code>自动求导方法，所以还得多加训练。</p>
+</li>
+</ul>
+<hr>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Leebertey</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://02lb.github.io/2023/10/28/svm-and-classfier/">http://02lb.github.io/2023/10/28/svm-and-classfier/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Leebertey</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/svm/">
+                                    <span class="chip bg-color">svm</span>
+                                </a>
+                            
+                                <a href="/tags/%E7%BA%BF%E5%BD%A2%E5%88%86%E7%B1%BB%E5%99%A8/">
+                                    <span class="chip bg-color">线形分类器</span>
+                                </a>
+                            
+                                <a href="/tags/hinge%E6%8D%9F%E5%A4%B1/">
+                                    <span class="chip bg-color">hinge损失</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">---创作不易～ (拴Q)</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/Alipay.png" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/Wechatpay.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2023/10/28/svm-and-classfier/">
+                    <div class="card-image">
+                        
+                        <img src="https://pic2.zhimg.com/80/v2-8097d0895c1a25bf77d21331ad21dc75_1440w.webp" class="responsive-img" alt="svm_and_classfier">
+                        
+                        <span class="card-title">svm_and_classfier</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-10-28
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                    机器学习
+                                </a>
+                            
+                            <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/" class="post-category">
+                                    支持向量机
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/svm/">
+                        <span class="chip bg-color">svm</span>
+                    </a>
+                    
+                    <a href="/tags/%E7%BA%BF%E5%BD%A2%E5%88%86%E7%B1%BB%E5%99%A8/">
+                        <span class="chip bg-color">线形分类器</span>
+                    </a>
+                    
+                    <a href="/tags/hinge%E6%8D%9F%E5%A4%B1/">
+                        <span class="chip bg-color">hinge损失</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2023/10/23/markdown-formula/">
+                    <div class="card-image">
+                        
+                        <img src="https://pic.netbian.com/uploads/allimg/231015/234046-1697384446c383.jpg" class="responsive-img" alt="markdown-formula">
+                        
+                        <span class="card-title">markdown-formula</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            总结markdown公式的语法
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-10-23
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/markdown/" class="post-category">
+                                    markdown
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/markdown%E5%85%AC%E5%BC%8F/">
+                        <span class="chip bg-color">markdown公式</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('100')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: 💻 Lee&#39;s blog<br />'
+            + '文章作者: Leeberty<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '\n ---创作不易～ (拴Q)';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="503838841"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2023</span>
+            
+            <span id="year">2023</span>
+            <a href="/about" target="_blank">Leeberty</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">21.9k</span>&nbsp;字
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/02lb" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:2726853740@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2726853740" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 2726853740" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+    <a href="https://www.zhihu.com/people/zi-yang-37-33" class="tooltipped" target="_blank" data-tooltip="关注我的知乎: https://www.zhihu.com/people/zi-yang-37-33" data-position="top" data-delay="50">
+        <i class="fab fa-zhihu1">知</i>
+    </a>
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+<div class="translate-style">
+    繁/简：<a id="translateLink" href="javascript:translatePage();">繁体
+    </a>
+    </div>
+    <script type="text/javascript" src="/js/tw_cn.js"></script>
+    <script type="text/javascript">
+    var defaultEncoding = 2; //网站编写字体是否繁体，1-繁体，2-简体
+    var translateDelay = 0; //延迟时间,若不在前, 要设定延迟翻译时间, 如100表示100ms,默认为0
+    var cookieDomain = "https://1han.wiki/"; //Cookie地址, 一定要设定, 通常为你的网址
+    var msgToTraditionalChinese = "繁体"; //此处可以更改为你想要显示的文字
+    var msgToSimplifiedChinese = "简体"; //同上，但两处均不建议更改
+    var translateButtonId = "translateLink"; //默认互换id
+    translateInitilization();
+    </script>
+    
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+	
+    
+
+    
+    
+    <script type="text/javascript" size="150" alpha='0.6'
+        zIndex="-1" src="/libs/background/ribbon-refresh.min.js" async="async"></script>
+    
+
+    
+    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+
+</html>
+
+
+<script type="text/javascript">
+//只在桌面版网页启用特效
+var windowWidth = $(window).width();
+if (windowWidth > 768) {
+    document.write('<script type="text/javascript" src="/js/sakura.js"><\/script>');
+}
+</script>
+

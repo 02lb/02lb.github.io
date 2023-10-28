@@ -6,7 +6,7 @@
   <link href="http://02lb.github.io/atom.xml" rel="self"/>
   
   <link href="http://02lb.github.io/"/>
-  <updated>2023-10-23T12:23:43.760Z</updated>
+  <updated>2023-10-28T06:24:11.750Z</updated>
   <id>http://02lb.github.io/</id>
   
   <author>
@@ -15,6 +15,37 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>svm_and_classfier</title>
+    <link href="http://02lb.github.io/2023/10/28/svm-and-classfier/"/>
+    <id>http://02lb.github.io/2023/10/28/svm-and-classfier/</id>
+    <published>2023-10-28T06:18:23.000Z</published>
+    <updated>2023-10-28T06:24:11.750Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;img src=&quot;https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E4%B8%AD%E5%B1%B1%E5%A4%A7%E5%AD%A6-%E6%A0%87%E9%A2%98.png&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="机器学习" scheme="http://02lb.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+    <category term="支持向量机" scheme="http://02lb.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/"/>
+    
+    
+    <category term="svm" scheme="http://02lb.github.io/tags/svm/"/>
+    
+    <category term="线形分类器" scheme="http://02lb.github.io/tags/%E7%BA%BF%E5%BD%A2%E5%88%86%E7%B1%BB%E5%99%A8/"/>
+    
+    <category term="hinge损失" scheme="http://02lb.github.io/tags/hinge%E6%8D%9F%E5%A4%B1/"/>
+    
+  </entry>
   
   <entry>
     <title>markdown-formula</title>
