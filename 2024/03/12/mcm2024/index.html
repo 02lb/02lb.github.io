@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="美赛总结 大一大二没打过建模比赛，一直以为打这比赛没用，最后发现推免能够加分，悔恨不已。 2024&#x2F;2这场美赛也是我在大三下推免前能参与的最后一场建模比赛了（国赛更加重要，但是都错过了）  赛题：   24MCMC题（大数据） 在2023年温布尔登锦标赛男单决赛中，20岁的西班牙新星卡洛斯·阿尔卡拉斯击败了36岁的诺瓦克·德约科维奇。这是德约科维奇自2013年以来在温布尔登的首次失利，也">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mcm2024">
+<meta property="og:url" content="https://02lb.github.io/2024/03/12/mcm2024/index.html">
+<meta property="og:site_name" content="Bo Li’s Blog">
+<meta property="og:description" content="美赛总结 大一大二没打过建模比赛，一直以为打这比赛没用，最后发现推免能够加分，悔恨不已。 2024&#x2F;2这场美赛也是我在大三下推免前能参与的最后一场建模比赛了（国赛更加重要，但是都错过了）  赛题：   24MCMC题（大数据） 在2023年温布尔登锦标赛男单决赛中，20岁的西班牙新星卡洛斯·阿尔卡拉斯击败了36岁的诺瓦克·德约科维奇。这是德约科维奇自2013年以来在温布尔登的首次失利，也">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/mcm24.png">
+<meta property="article:published_time" content="2024-03-12T12:06:16.000Z">
+<meta property="article:modified_time" content="2024-03-12T13:11:42.005Z">
+<meta property="article:author" content="Lee">
+<meta property="article:tag" content="MCM">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/mcm24.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.png">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>mcm2024</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/02lb">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2024/03/12/QuantumComputing/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://02lb.github.io/2024/03/12/mcm2024/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://02lb.github.io/2024/03/12/mcm2024/&text=mcm2024"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://02lb.github.io/2024/03/12/mcm2024/&title=mcm2024"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://02lb.github.io/2024/03/12/mcm2024/&is_video=false&description=mcm2024"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=mcm2024&body=Check out this article: https://02lb.github.io/2024/03/12/mcm2024/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://02lb.github.io/2024/03/12/mcm2024/&title=mcm2024"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://02lb.github.io/2024/03/12/mcm2024/&title=mcm2024"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://02lb.github.io/2024/03/12/mcm2024/&title=mcm2024"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://02lb.github.io/2024/03/12/mcm2024/&title=mcm2024"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://02lb.github.io/2024/03/12/mcm2024/&name=mcm2024&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://02lb.github.io/2024/03/12/mcm2024/&t=mcm2024"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BE%8E%E8%B5%9B%E6%80%BB%E7%BB%93"><span class="toc-number">1.</span> <span class="toc-text">美赛总结</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B5%9B%E9%A2%98%EF%BC%9A"><span class="toc-number">1.1.</span> <span class="toc-text">赛题：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%91%98%E8%A6%81"><span class="toc-number">1.2.</span> <span class="toc-text">摘要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%BA%E6%96%87"><span class="toc-number">1.3.</span> <span class="toc-text">论文</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B5%9B%E5%90%8E%E6%80%BB%E7%BB%93"><span class="toc-number">1.4.</span> <span class="toc-text">赛后总结</span></a></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        mcm2024
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Lee</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2024-03-12T12:06:16.000Z" class="dt-published" itemprop="datePublished">2024-03-12</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/MCM/" rel="tag">MCM</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h1 id="美赛总结"><a href="#美赛总结" class="headerlink" title="美赛总结"></a>美赛总结</h1><ul>
+<li>大一大二没打过建模比赛，一直以为打这比赛没用，最后发现推免能够加分，悔恨不已。</li>
+<li>2024&#x2F;2这场美赛也是我在大三下推免前能参与的最后一场建模比赛了（国赛更加重要，但是都错过了）</li>
+</ul>
+<h2 id="赛题："><a href="#赛题：" class="headerlink" title="赛题："></a>赛题：</h2><img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/mcm24.png" style="zoom:33%;" />
+
+<ul>
+<li>24MCMC题（大数据）</li>
+<li>在2023年温布尔登锦标赛男单决赛中，20岁的西班牙新星卡洛斯·阿尔卡拉斯击败了36岁的诺瓦克·德约科维奇。这是德约科维奇自2013年以来在温布尔登的首次失利，也标志着这位历史悠久的大满贯赛事伟大球员的非凡时期的结束。</li>
+<li>这场比赛本身是一场引人注目的战斗。起初，德约科维奇似乎注定要轻松获胜，因为他在第一盘中以6-1的比分占据优势（赢得7局中的6局）。然而，第二盘局势紧张，最终由阿尔卡拉斯在抢七局中以7-6获胜。第三盘与第一盘相反，阿尔卡拉斯以6-1轻松获胜。年轻的西班牙人在第四盘开始时似乎完全掌控局面，但不知何故比赛再次改变，德约科维奇完全掌控比赛，以6-3赢得该盘。第五盘也是最后一盘，德约科维奇从第四盘带着优势开始，但再次发生了局势的变化，阿尔卡拉斯掌控了比赛并以6-4获胜。（背景）</li>
+<li>该比赛的数据包含在提供的数据集“2023-wimbledon-1701”的“match_id”中。您可以使用“set_no”列等于1来查看德约科维奇占据优势的第一盘的所有得分。在网球比赛中，常常将那些发生在表现优势的球员身上的令人难以置信的波动，有时甚至是在很多分或甚至是在游戏中的波动，归因于“<strong>Momentum</strong>”。</li>
+<li>“<strong>Momentum</strong>”的一个词典定义是“通过运动或一系列事件获得的力量或力量”。在体育中，一支团队或球员可能会觉得他们在比赛&#x2F;局中有动能，即“力量&#x2F;力量”，但要测量这种现象是困难的。此外，如果存在动能，比赛中的各种事件如何创造或改变动能并不容易看出来。</li>
+<li>提供了温布尔登2023年男子比赛的所有数据，包括第二轮之后的比赛。您可以选择包括其他球员信息或其他数据，但必须完全记录来源。使用数据来：<ol>
+<li>制定一个模型，捕捉比赛进行时的比分情况，并将其应用于一个或多个比赛。您的模型应该能够确定在比赛的某个时刻哪个球员的表现更好，以及他们的表现有多好。根据您的模型提供一个可视化来描述比赛的流程。注意：在网球中，发球的球员赢得比分&#x2F;局的概率要高得多。您可能希望以某种方式将这一点纳入您的模型。</li>
+<li>一位网球教练对“动能”在比赛中是否起到任何作用表示怀疑。相反，他提出球员表现的波动和一方球员成功的连续运行是随机的。使用您的模型&#x2F;度量来评估这种说法。</li>
+<li>教练们想知道是否有可以帮助确定比赛流程即将从一名球员转向另一名球员的指标。使用至少一场比赛提供的数据，制定一个可以预测比赛中这些波动的模型。哪些因素似乎最相关（如果有的话）？鉴于过去比赛的“动能”波动差异，您如何建议一名球员在新的比赛中面对不同的对手？</li>
+<li>测试您在一个或多个其他比赛中开发的模型。您对比赛的波动有多好的预测？如果模型在某些时候表现不佳，您能否确定可能需要包含在未来模型中的任何因素？您的模型对其他比赛（如女子比赛）、锦标赛、球场表面和其他体育项目（如乒乓球）有多通用？</li>
+<li>撰写一份不超过25页的报告，包括您的研究结果，并附上一份一页到两页的备忘录，概述您对“动能”角色的观点，以及如何指导球员应对影响比赛流程的事件。</li>
+</ol>
+</li>
+</ul>
+<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><ul>
+<li>Momuntim is defined in dictionaries as “strength or force gained by motion or by a series of events,” but this force is challenging to measure in practical phenomena. Tennis, as a typical one-on-one individual sport, is not influenced by other team members during the competitive process. Instead, opponents directly impact each other, providing an excellent environment for modeling momentum.</li>
+<li>In Task 1, starting from the intuitive idea that a player’s previous state influences subsequent states in a match, our team first established a machine learning model based on LSTM for time-series performance prediction. The training data are derived from the processed match samples through feature engineering. Considering the significant impact of serving on the win rate, we used the statistically calculated serving win rate as a penalty term to adjust the labels, achieving a point prediction model for match data. This model predicts the player’s performance score at a specific moment, and the predicted performance score difference is used as the output. The model successfully captures the flow of play as points occur, demonstrating high predictive confidence with low RMSE (0.0638) and R² (0.1159) values. Furthermore, we perform real-time performance score EWMA processing to obtain a quantified trend of momentum. Swings of momentum are visualized for presentation. Additionally, we visualize some statistical indicators of players (e.g., serving error rate) based on real data to achieve match visualization.</li>
+<li>In Task 2, we first decoupled the task requirements, primarily judging the role of momentum through two indicators: swings in play and runs of success. Swings in play can be quantified and defined based on the output data of the LSTM point prediction model. After binarization, the randomness is assessed through a run test. Finally, we calculate the model’s Z-score (-6.9791) and P-value (2.9714e-12), significantly rejecting the null hypothesis, thus proving that these two indicators are not random and indicating the role of momentum.</li>
+<li>In Task 3, our objective is to predict fluctuations in the match to assess changes in momentum. We analyze the features most correlated with these changes and provide effective recommendations for players based on the analysis. Initially, we categorize momentum changes using thresholding and tri-classification. We define samples where momentum category transitions occur as target samples, turning the task into a classification problem. Given the data imbalance, an improved random forest model is employed for fitting. The top few features in terms of importance are Error (19.37%), Good_shot (18.39%), Distance_run (11.44%), Game_sit (9.46%), and others. Finally, we provide recommendations to players based on the prediction results and feature importance judgments.</li>
+<li>Our established model has practical implications for both players and coaches in tennis matches. By predicting the real-time performance of players, we can identify the weaknesses of players during the match. Through the quantification of momentum, predictions of future momentum trends at specific moments in the game can be made. Coaches can use these predictions to provide targeted guidance to players. By predicting turning points, players can be alerted to negative changes in momentum in advance and make preparations accordingly.</li>
+</ul>
+<h2 id="论文"><a href="#论文" class="headerlink" title="论文"></a>论文</h2><ul>
+<li>题目、paper等都放在<a target="_blank" rel="noopener" href="https://github.com/02lb/24mcmC">https://github.com/02lb/24mcmC</a></li>
+<li>探究网球比赛中运动员Momentum对比赛的影响（很大程度上是一种心态的影响） </li>
+<li>其中：<ol>
+<li>2024_MCM_Problem_C_FINAL.pdf：比赛真题 </li>
+<li>Wimbledon_featured_matches.csv和data_dictionary.csv：官方给定的网球比赛数据 </li>
+<li>mcm.pdf：最后的论文成品（由于前面太拖，很多地方都没有完善，尤其是摘要——捡了芝麻丢了西瓜（哭）） </li>
+<li>memo.pdf：备忘录（类似海报）</li>
+</ol>
+</li>
+</ul>
+<h2 id="赛后总结"><a href="#赛后总结" class="headerlink" title="赛后总结"></a>赛后总结</h2><ul>
+<li>仅仅记录一下自己的想法。</li>
+<li>从2号六点我拿到题目开始到6号的10点（9.59）上交论文，这几天是非常累的。几乎总是到1点左右睡6点左右起，最后一天直接通宵，连续工作了26个小时，巨大的脑力消耗。</li>
+<li>总结一下不足之处：拖拉，过于拖拉。摘要一开始不愿写，最后只能草草了事。标题甚至也没有来得及；其次是任务分配不均。不想说了，很无语。</li>
+<li>精力消耗比较大，但是也在过程中有所收获。结果是什么不要在意。不是很重要的比赛，在过程中已经足够努力。</li>
+<li>尽力了，问心无愧。</li>
+</ul>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/02lb">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BE%8E%E8%B5%9B%E6%80%BB%E7%BB%93"><span class="toc-number">1.</span> <span class="toc-text">美赛总结</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B5%9B%E9%A2%98%EF%BC%9A"><span class="toc-number">1.1.</span> <span class="toc-text">赛题：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%91%98%E8%A6%81"><span class="toc-number">1.2.</span> <span class="toc-text">摘要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%BA%E6%96%87"><span class="toc-number">1.3.</span> <span class="toc-text">论文</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B5%9B%E5%90%8E%E6%80%BB%E7%BB%93"><span class="toc-number">1.4.</span> <span class="toc-text">赛后总结</span></a></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://02lb.github.io/2024/03/12/mcm2024/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://02lb.github.io/2024/03/12/mcm2024/&text=mcm2024"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://02lb.github.io/2024/03/12/mcm2024/&title=mcm2024"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://02lb.github.io/2024/03/12/mcm2024/&is_video=false&description=mcm2024"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=mcm2024&body=Check out this article: https://02lb.github.io/2024/03/12/mcm2024/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://02lb.github.io/2024/03/12/mcm2024/&title=mcm2024"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://02lb.github.io/2024/03/12/mcm2024/&title=mcm2024"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://02lb.github.io/2024/03/12/mcm2024/&title=mcm2024"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://02lb.github.io/2024/03/12/mcm2024/&title=mcm2024"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://02lb.github.io/2024/03/12/mcm2024/&name=mcm2024&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://02lb.github.io/2024/03/12/mcm2024/&t=mcm2024"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2024
+    Lee
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/02lb">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
