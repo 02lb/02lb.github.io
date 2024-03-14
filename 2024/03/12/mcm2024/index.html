@@ -6,16 +6,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="美赛总结 大一大二没打过建模比赛，一直以为打这比赛没用，最后发现推免能够加分，悔恨不已。 2024&#x2F;2这场美赛也是我在大三下推免前能参与的最后一场建模比赛了（国赛更加重要，但是都错过了）  赛题：   24MCMC题（大数据） 在2023年温布尔登锦标赛男单决赛中，20岁的西班牙新星卡洛斯·阿尔卡拉斯击败了36岁的诺瓦克·德约科维奇。这是德约科维奇自2013年以来在温布尔登的首次失利，也">
+    <meta name="description" content="美赛总结 由于自身的懒惰和信息差，大一大二没打过建模比赛，一直以为打这比赛没用，最后发现推免能够加分（国赛国一、美赛F以上），悔恨不已。 2024&#x2F;2这场美赛也是我在大三下推免前能参与的最后一场建模比赛了（国赛更加重要，但是都错过了） 总的来说，这次美赛还是很有意义的。赛前对模型的设计和论文的书写技巧、图片流程设计做了充分的预习，这应该对研究生的写作比较有帮助的（我看顶会的论文图片都是很">
 <meta property="og:type" content="article">
 <meta property="og:title" content="mcm2024">
 <meta property="og:url" content="https://02lb.github.io/2024/03/12/mcm2024/index.html">
 <meta property="og:site_name" content="Bo Li’s Blog">
-<meta property="og:description" content="美赛总结 大一大二没打过建模比赛，一直以为打这比赛没用，最后发现推免能够加分，悔恨不已。 2024&#x2F;2这场美赛也是我在大三下推免前能参与的最后一场建模比赛了（国赛更加重要，但是都错过了）  赛题：   24MCMC题（大数据） 在2023年温布尔登锦标赛男单决赛中，20岁的西班牙新星卡洛斯·阿尔卡拉斯击败了36岁的诺瓦克·德约科维奇。这是德约科维奇自2013年以来在温布尔登的首次失利，也">
+<meta property="og:description" content="美赛总结 由于自身的懒惰和信息差，大一大二没打过建模比赛，一直以为打这比赛没用，最后发现推免能够加分（国赛国一、美赛F以上），悔恨不已。 2024&#x2F;2这场美赛也是我在大三下推免前能参与的最后一场建模比赛了（国赛更加重要，但是都错过了） 总的来说，这次美赛还是很有意义的。赛前对模型的设计和论文的书写技巧、图片流程设计做了充分的预习，这应该对研究生的写作比较有帮助的（我看顶会的论文图片都是很">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/mcm24.png">
 <meta property="article:published_time" content="2024-03-12T12:06:16.000Z">
-<meta property="article:modified_time" content="2024-03-12T13:11:42.005Z">
+<meta property="article:modified_time" content="2024-03-14T13:45:13.161Z">
 <meta property="article:author" content="Lee">
 <meta property="article:tag" content="MCM">
 <meta name="twitter:card" content="summary">
@@ -125,7 +125,7 @@
     
     
       <div id="toc">
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BE%8E%E8%B5%9B%E6%80%BB%E7%BB%93"><span class="toc-number">1.</span> <span class="toc-text">美赛总结</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B5%9B%E9%A2%98%EF%BC%9A"><span class="toc-number">1.1.</span> <span class="toc-text">赛题：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%91%98%E8%A6%81"><span class="toc-number">1.2.</span> <span class="toc-text">摘要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%BA%E6%96%87"><span class="toc-number">1.3.</span> <span class="toc-text">论文</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B5%9B%E5%90%8E%E6%80%BB%E7%BB%93"><span class="toc-number">1.4.</span> <span class="toc-text">赛后总结</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BE%8E%E8%B5%9B%E6%80%BB%E7%BB%93"><span class="toc-number">1.</span> <span class="toc-text">美赛总结</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B5%9B%E9%A2%98%EF%BC%9A"><span class="toc-number">1.1.</span> <span class="toc-text">赛题：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%91%98%E8%A6%81%E5%92%8C%E6%80%9D%E8%B7%AF"><span class="toc-number">1.2.</span> <span class="toc-text">摘要和思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3%E8%B5%84%E6%96%99"><span class="toc-number">1.3.</span> <span class="toc-text">相关资料</span></a></li></ol></li></ol>
       </div>
     
   </span>
@@ -171,17 +171,17 @@
 
   <div class="content e-content" itemprop="articleBody">
     <h1 id="美赛总结"><a href="#美赛总结" class="headerlink" title="美赛总结"></a>美赛总结</h1><ul>
-<li>大一大二没打过建模比赛，一直以为打这比赛没用，最后发现推免能够加分，悔恨不已。</li>
+<li>由于自身的懒惰和信息差，大一大二没打过建模比赛，一直以为打这比赛没用，最后发现推免能够加分（国赛国一、美赛F以上），悔恨不已。</li>
 <li>2024&#x2F;2这场美赛也是我在大三下推免前能参与的最后一场建模比赛了（国赛更加重要，但是都错过了）</li>
+<li>总的来说，这次美赛还是很有意义的。赛前对模型的设计和论文的书写技巧、图片流程设计做了充分的预习，这应该对研究生的写作比较有帮助的（我看顶会的论文图片都是很fancy的）。</li>
+<li>比赛过程中，我们团队是线上连麦的，总体比较辛苦。从2号六点我拿到题目开始到6号的10点（9：59）上交论文，这几天是非常累的。几乎总是到1点左右睡6点左右起，最后一天直接通宵，连续工作了26个小时，巨大的脑力消耗。</li>
+<li><strong>总结一下不足之处：拖拉，过于拖拉。摘要一开始不愿写，最后只能草草了事。标题甚至也没有来得及；其次是任务分配不均，有位队友比较划水。</strong></li>
+<li>精力消耗算是比较大，但是也在过程中有所收获。结果还是不应该过度在意。不算是很重要的比赛，在过程中已经足够努力。尽力了，问心无愧。</li>
 </ul>
 <h2 id="赛题："><a href="#赛题：" class="headerlink" title="赛题："></a>赛题：</h2><img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/mcm24.png" style="zoom:33%;" />
 
 <ul>
-<li>24MCMC题（大数据）</li>
-<li>在2023年温布尔登锦标赛男单决赛中，20岁的西班牙新星卡洛斯·阿尔卡拉斯击败了36岁的诺瓦克·德约科维奇。这是德约科维奇自2013年以来在温布尔登的首次失利，也标志着这位历史悠久的大满贯赛事伟大球员的非凡时期的结束。</li>
-<li>这场比赛本身是一场引人注目的战斗。起初，德约科维奇似乎注定要轻松获胜，因为他在第一盘中以6-1的比分占据优势（赢得7局中的6局）。然而，第二盘局势紧张，最终由阿尔卡拉斯在抢七局中以7-6获胜。第三盘与第一盘相反，阿尔卡拉斯以6-1轻松获胜。年轻的西班牙人在第四盘开始时似乎完全掌控局面，但不知何故比赛再次改变，德约科维奇完全掌控比赛，以6-3赢得该盘。第五盘也是最后一盘，德约科维奇从第四盘带着优势开始，但再次发生了局势的变化，阿尔卡拉斯掌控了比赛并以6-4获胜。（背景）</li>
-<li>该比赛的数据包含在提供的数据集“2023-wimbledon-1701”的“match_id”中。您可以使用“set_no”列等于1来查看德约科维奇占据优势的第一盘的所有得分。在网球比赛中，常常将那些发生在表现优势的球员身上的令人难以置信的波动，有时甚至是在很多分或甚至是在游戏中的波动，归因于“<strong>Momentum</strong>”。</li>
-<li>“<strong>Momentum</strong>”的一个词典定义是“通过运动或一系列事件获得的力量或力量”。在体育中，一支团队或球员可能会觉得他们在比赛&#x2F;局中有动能，即“力量&#x2F;力量”，但要测量这种现象是困难的。此外，如果存在动能，比赛中的各种事件如何创造或改变动能并不容易看出来。</li>
+<li>在网球比赛中，常常将那些发生在表现优势的球员身上的令人难以置信的波动，有时甚至是在很多分或甚至是在游戏中的波动，归因于“<strong>Momentum</strong>”。“<strong>Momentum</strong>”的一个词典定义是“通过运动或一系列事件获得的力量或力量”。在体育中，一支团队或球员可能会觉得他们在比赛&#x2F;局中有动能，即“力量&#x2F;力量”，但要测量这种现象是困难的。此外，如果存在动能，比赛中的各种事件如何创造或改变动能并不容易看出来。</li>
 <li>提供了温布尔登2023年男子比赛的所有数据，包括第二轮之后的比赛。您可以选择包括其他球员信息或其他数据，但必须完全记录来源。使用数据来：<ol>
 <li>制定一个模型，捕捉比赛进行时的比分情况，并将其应用于一个或多个比赛。您的模型应该能够确定在比赛的某个时刻哪个球员的表现更好，以及他们的表现有多好。根据您的模型提供一个可视化来描述比赛的流程。注意：在网球中，发球的球员赢得比分&#x2F;局的概率要高得多。您可能希望以某种方式将这一点纳入您的模型。</li>
 <li>一位网球教练对“动能”在比赛中是否起到任何作用表示怀疑。相反，他提出球员表现的波动和一方球员成功的连续运行是随机的。使用您的模型&#x2F;度量来评估这种说法。</li>
@@ -191,15 +191,25 @@
 </ol>
 </li>
 </ul>
-<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><ul>
-<li>Momuntim is defined in dictionaries as “strength or force gained by motion or by a series of events,” but this force is challenging to measure in practical phenomena. Tennis, as a typical one-on-one individual sport, is not influenced by other team members during the competitive process. Instead, opponents directly impact each other, providing an excellent environment for modeling momentum.</li>
-<li>In Task 1, starting from the intuitive idea that a player’s previous state influences subsequent states in a match, our team first established a machine learning model based on LSTM for time-series performance prediction. The training data are derived from the processed match samples through feature engineering. Considering the significant impact of serving on the win rate, we used the statistically calculated serving win rate as a penalty term to adjust the labels, achieving a point prediction model for match data. This model predicts the player’s performance score at a specific moment, and the predicted performance score difference is used as the output. The model successfully captures the flow of play as points occur, demonstrating high predictive confidence with low RMSE (0.0638) and R² (0.1159) values. Furthermore, we perform real-time performance score EWMA processing to obtain a quantified trend of momentum. Swings of momentum are visualized for presentation. Additionally, we visualize some statistical indicators of players (e.g., serving error rate) based on real data to achieve match visualization.</li>
-<li>In Task 2, we first decoupled the task requirements, primarily judging the role of momentum through two indicators: swings in play and runs of success. Swings in play can be quantified and defined based on the output data of the LSTM point prediction model. After binarization, the randomness is assessed through a run test. Finally, we calculate the model’s Z-score (-6.9791) and P-value (2.9714e-12), significantly rejecting the null hypothesis, thus proving that these two indicators are not random and indicating the role of momentum.</li>
-<li>In Task 3, our objective is to predict fluctuations in the match to assess changes in momentum. We analyze the features most correlated with these changes and provide effective recommendations for players based on the analysis. Initially, we categorize momentum changes using thresholding and tri-classification. We define samples where momentum category transitions occur as target samples, turning the task into a classification problem. Given the data imbalance, an improved random forest model is employed for fitting. The top few features in terms of importance are Error (19.37%), Good_shot (18.39%), Distance_run (11.44%), Game_sit (9.46%), and others. Finally, we provide recommendations to players based on the prediction results and feature importance judgments.</li>
-<li>Our established model has practical implications for both players and coaches in tennis matches. By predicting the real-time performance of players, we can identify the weaknesses of players during the match. Through the quantification of momentum, predictions of future momentum trends at specific moments in the game can be made. Coaches can use these predictions to provide targeted guidance to players. By predicting turning points, players can be alerted to negative changes in momentum in advance and make preparations accordingly.</li>
+<h2 id="摘要和思路"><a href="#摘要和思路" class="headerlink" title="摘要和思路"></a>摘要和思路</h2><ul>
+<li><p>Momuntim is defined in dictionaries as “strength or force gained by motion or by a series of events,” but this force is challenging to measure in practical phenomena. Tennis, as a typical one-on-one individual sport, is not influenced by other team members during the competitive process. Instead, opponents directly impact each other, providing an excellent environment for modeling momentum.</p>
+<p>  【	Momuntim 在词典中被定义为“通过运动或一系列事件获得的力量或动力”，但这种力量在实际现象中很难进行测量。网球作为典型的一对一个人运动，在竞争过程中不受其他团队成员的影响。相反，对手直接影响彼此，为建模动量提供了良好的环境。】</p>
+</li>
+<li><p>In Task 1, starting from the intuitive idea that a player’s previous state influences subsequent states in a match, our team first established a machine learning model based on LSTM for time-series performance prediction. The training data are derived from the processed match samples through feature engineering. Considering the significant impact of serving on the win rate, we used the statistically calculated serving win rate as a penalty term to adjust the labels, achieving a point prediction model for match data. This model predicts the player’s performance score at a specific moment, and the predicted performance score difference is used as the output. The model successfully captures the flow of play as points occur, demonstrating high predictive confidence with low RMSE (0.0638) and R² (0.1159) values. Furthermore, we perform real-time performance score EWMA processing to obtain a quantified trend of momentum. Swings of momentum are visualized for presentation. Additionally, we visualize some statistical indicators of players (e.g., serving error rate) based on real data to achieve match visualization.</p>
+<p>  【	在任务1中，从一个直观的想法出发，即球员的先前状态影响比赛中的后续状态，我们的团队首先建立了一个基于LSTM的时间序列性能预测的机器学习模型。训练数据是通过特征工程从处理过的比赛样本中得到的。考虑到发球对胜率的重大影响，我们使用统计计算得出的发球获胜率作为惩罚项来调整标签，实现了一种针对比赛数据的点预测模型。该模型预测了球员在特定时刻的表现分数，并将预测的表现分数差用作输出。该模型成功捕捉了比赛进行时的比赛进程，表现出高预测置信度，同时具有较低的RMSE（0.0638）和R²（0.1159）值。此外，我们进行实时表现分数EWMA处理，以获得动量的量化趋势。动量的波动被可视化以供展示。此外，我们基于真实数据可视化了一些球员的统计指标（例如发球失误率），以实现比赛可视化。	】</p>
+</li>
+<li><p>In Task 2, we first decoupled the task requirements, primarily judging the role of momentum through two indicators: swings in play and runs of success. Swings in play can be quantified and defined based on the output data of the LSTM point prediction model. After binarization, the randomness is assessed through a run test. Finally, we calculate the model’s Z-score (-6.9791) and P-value (2.9714e-12), significantly rejecting the null hypothesis, thus proving that these two indicators are not random and indicating the role of momentum.</p>
+<p>  【	在任务2中，我们首先解耦了任务需求，主要通过两个指标来判断动量的作用：比赛进程的波动和成功连续比赛。比赛进程的波动可以根据LSTM点预测模型的输出数据进行量化和定义。经过二值化后，通过一次运行检验评估其随机性。最后，我们计算了模型的Z分数（-6.9791）和P值（2.9714e-12），明显拒绝了零假设，从而证明了这两个指标不是随机的，并表明了动量的作用。 】</p>
+</li>
+<li><p>In Task 3, our objective is to predict fluctuations in the match to assess changes in momentum. We analyze the features most correlated with these changes and provide effective recommendations for players based on the analysis. Initially, we categorize momentum changes using thresholding and tri-classification. We define samples where momentum category transitions occur as target samples, turning the task into a classification problem. Given the data imbalance, an improved random forest model is employed for fitting. The top few features in terms of importance are Error (19.37%), Good_shot (18.39%), Distance_run (11.44%), Game_sit (9.46%), and others. Finally, we provide recommendations to players based on the prediction results and feature importance judgments.</p>
+<p>  【	在任务3中，我们的目标是预测比赛中的波动，以评估动量的变化。我们分析了与这些变化最相关的特征，并根据分析为球员提供有效的建议。最初，我们使用阈值和三类分类将动量变化进行分类。我们将动量类别转换发生的样本定义为目标样本，将任务转化为一个分类问题。考虑到数据的不平衡性，我们采用改进的随机森林模型进行拟合。在重要性方面排名前几位的特征是错误（19.37%）、好球（18.39%）、跑动距离（11.44%）、比赛情况（9.46%）等。最后，我们根据预测结果和特征重要性判断为球员提供建议。  】</p>
+</li>
+<li><p>Our established model has practical implications for both players and coaches in tennis matches. By predicting the real-time performance of players, we can identify the weaknesses of players during the match. Through the quantification of momentum, predictions of future momentum trends at specific moments in the game can be made. Coaches can use these predictions to provide targeted guidance to players. By predicting turning points, players can be alerted to negative changes in momentum in advance and make preparations accordingly.</p>
+<p>  【	我们建立的模型对网球比赛中的球员和教练都具有实际意义。通过预测球员的实时表现，我们可以在比赛中发现球员的弱点。通过动量的量化，可以预测比赛中特定时刻未来动量趋势。教练可以利用这些预测为球员提供有针对性的指导。通过预测转折点，可以提前警告球员动量的负面变化，并做好相应的准备。	】</p>
+</li>
 </ul>
-<h2 id="论文"><a href="#论文" class="headerlink" title="论文"></a>论文</h2><ul>
-<li>题目、paper等都放在<a target="_blank" rel="noopener" href="https://github.com/02lb/24mcmC">https://github.com/02lb/24mcmC</a></li>
+<h2 id="相关资料"><a href="#相关资料" class="headerlink" title="相关资料"></a>相关资料</h2><ul>
+<li>题目、Paper、Memo等都放在<a target="_blank" rel="noopener" href="https://github.com/02lb/24mcmC">https://github.com/02lb/24mcmC</a></li>
 <li>探究网球比赛中运动员Momentum对比赛的影响（很大程度上是一种心态的影响） </li>
 <li>其中：<ol>
 <li>2024_MCM_Problem_C_FINAL.pdf：比赛真题 </li>
@@ -208,13 +218,6 @@
 <li>memo.pdf：备忘录（类似海报）</li>
 </ol>
 </li>
-</ul>
-<h2 id="赛后总结"><a href="#赛后总结" class="headerlink" title="赛后总结"></a>赛后总结</h2><ul>
-<li>仅仅记录一下自己的想法。</li>
-<li>从2号六点我拿到题目开始到6号的10点（9.59）上交论文，这几天是非常累的。几乎总是到1点左右睡6点左右起，最后一天直接通宵，连续工作了26个小时，巨大的脑力消耗。</li>
-<li>总结一下不足之处：拖拉，过于拖拉。摘要一开始不愿写，最后只能草草了事。标题甚至也没有来得及；其次是任务分配不均。不想说了，很无语。</li>
-<li>精力消耗比较大，但是也在过程中有所收获。结果是什么不要在意。不是很重要的比赛，在过程中已经足够努力。</li>
-<li>尽力了，问心无愧。</li>
 </ul>
 
   </div>
@@ -243,7 +246,7 @@
     
     
       <div id="toc-footer" style="display: none">
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BE%8E%E8%B5%9B%E6%80%BB%E7%BB%93"><span class="toc-number">1.</span> <span class="toc-text">美赛总结</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B5%9B%E9%A2%98%EF%BC%9A"><span class="toc-number">1.1.</span> <span class="toc-text">赛题：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%91%98%E8%A6%81"><span class="toc-number">1.2.</span> <span class="toc-text">摘要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%BA%E6%96%87"><span class="toc-number">1.3.</span> <span class="toc-text">论文</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B5%9B%E5%90%8E%E6%80%BB%E7%BB%93"><span class="toc-number">1.4.</span> <span class="toc-text">赛后总结</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BE%8E%E8%B5%9B%E6%80%BB%E7%BB%93"><span class="toc-number">1.</span> <span class="toc-text">美赛总结</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B5%9B%E9%A2%98%EF%BC%9A"><span class="toc-number">1.1.</span> <span class="toc-text">赛题：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%91%98%E8%A6%81%E5%92%8C%E6%80%9D%E8%B7%AF"><span class="toc-number">1.2.</span> <span class="toc-text">摘要和思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3%E8%B5%84%E6%96%99"><span class="toc-number">1.3.</span> <span class="toc-text">相关资料</span></a></li></ol></li></ol>
       </div>
     
 
