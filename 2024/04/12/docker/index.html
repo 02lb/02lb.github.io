@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Docker Why docker ？ 虚拟机的发展，减轻了企业对硬件资源的依赖，它将一台物理设备虚拟为多个逻辑设备，每个逻辑设备可运行不同的操作系统，并且应用程序都可以在相互独立的空间内运行而互不影响，从而显著提高设备的工作效率。然而，传统VM需要安装操作系统才能执行应用程序，占用系统资源过多。多数情况下，用户只需要运行简单的应用程序，采用VM技术操作繁琐且造成资源浪费。倘若需要迁移应用服务程序">
+<meta property="og:type" content="article">
+<meta property="og:title" content="docker">
+<meta property="og:url" content="https://02lb.github.io/2024/04/12/docker/index.html">
+<meta property="og:site_name" content="Bo Li’s Blog">
+<meta property="og:description" content="Docker Why docker ？ 虚拟机的发展，减轻了企业对硬件资源的依赖，它将一台物理设备虚拟为多个逻辑设备，每个逻辑设备可运行不同的操作系统，并且应用程序都可以在相互独立的空间内运行而互不影响，从而显著提高设备的工作效率。然而，传统VM需要安装操作系统才能执行应用程序，占用系统资源过多。多数情况下，用户只需要运行简单的应用程序，采用VM技术操作繁琐且造成资源浪费。倘若需要迁移应用服务程序">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E4%B8%8B%E8%BD%BD.png">
+<meta property="article:published_time" content="2024-04-12T07:36:11.000Z">
+<meta property="article:modified_time" content="2024-04-12T09:59:26.248Z">
+<meta property="article:author" content="Lee">
+<meta property="article:tag" content="docker">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E4%B8%8B%E8%BD%BD.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.png">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>docker</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/02lb">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2024/03/14/SearchForIntern/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://02lb.github.io/2024/04/12/docker/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://02lb.github.io/2024/04/12/docker/&text=docker"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://02lb.github.io/2024/04/12/docker/&title=docker"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://02lb.github.io/2024/04/12/docker/&is_video=false&description=docker"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=docker&body=Check out this article: https://02lb.github.io/2024/04/12/docker/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://02lb.github.io/2024/04/12/docker/&title=docker"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://02lb.github.io/2024/04/12/docker/&title=docker"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://02lb.github.io/2024/04/12/docker/&title=docker"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://02lb.github.io/2024/04/12/docker/&title=docker"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://02lb.github.io/2024/04/12/docker/&name=docker&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://02lb.github.io/2024/04/12/docker/&t=docker"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Docker"><span class="toc-number">1.</span> <span class="toc-text">Docker</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Why-docker-%EF%BC%9F"><span class="toc-number">1.1.</span> <span class="toc-text">Why docker ？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Docker%E5%AE%B9%E5%99%A8%E5%85%B7%E6%9C%89%E4%BB%A5%E4%B8%8B%E4%B8%89%E5%A4%A7%E7%89%B9%E7%82%B9%EF%BC%9A"><span class="toc-number">1.1.1.</span> <span class="toc-text">Docker容器具有以下三大特点：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Docker-V-S-VM"><span class="toc-number">1.1.2.</span> <span class="toc-text">Docker V.S. VM</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Memo%EF%BC%9A%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4"><span class="toc-number">1.2.</span> <span class="toc-text">Memo：常用指令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Service-about"><span class="toc-number">1.2.0.1.</span> <span class="toc-text">Service-about</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Image-about"><span class="toc-number">1.2.0.2.</span> <span class="toc-text">Image-about</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Container-about"><span class="toc-number">1.2.0.3.</span> <span class="toc-text">Container-about</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%95%9C%E5%83%8F%E7%9A%84%E6%9E%84%E5%BB%BA"><span class="toc-number">1.2.1.</span> <span class="toc-text">镜像的构建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E7%9A%84%E9%83%A8%E7%BD%B2"><span class="toc-number">1.2.2.</span> <span class="toc-text">项目的部署</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%8F%E8%AE%B0"><span class="toc-number">1.3.</span> <span class="toc-text">小记</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BD%BF%E7%94%A8-Docker-%E5%AE%B9%E5%99%A8%E8%BF%9B%E8%A1%8C%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%BC%80%E5%8F%91%EF%BC%9F"><span class="toc-number">1.3.0.1.</span> <span class="toc-text">为什么使用 Docker 容器进行机器学习开发？</span></a></li></ol></li></ol></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        docker
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Lee</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2024-04-12T07:36:11.000Z" class="dt-published" itemprop="datePublished">2024-04-12</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/docker/" rel="tag">docker</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h1 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h1><p><img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E4%B8%8B%E8%BD%BD.png"></p>
+<h2 id="Why-docker-？"><a href="#Why-docker-？" class="headerlink" title="Why docker ？"></a>Why docker ？</h2><ul>
+<li><p>虚拟机的发展，减轻了企业对硬件资源的依赖，它将一台物理设备虚拟为多个逻辑设备，每个逻辑设备可运行不同的操作系统，并且应用程序都可以在相互独立的空间内运行而互不影响，从而显著提高设备的工作效率。然而，传统VM需要安装操作系统才能执行应用程序，占用系统资源过多。多数情况下，用户只需要运行简单的应用程序，采用VM技术操作繁琐且造成资源浪费。倘若需要迁移应用服务程序，则需迁移整个VM，因此<strong>企业迫切需要轻量级的虚拟化技术。</strong></p>
+</li>
+<li><p><strong>容器，就是一种轻量级的虚拟化技术，目的和虚拟机一样，都是为了创造“隔离环境”。但是它不像VM采用操作系统级的资源隔离，容器采用的是进程级的系统隔离。</strong>Docker作为创建容器的主流工具，近年来迅速发展，它的优势在于可以让开发者将企业需要的各种应用及应用依赖文件封装在Docker镜像文件中，然后在任何物理设备（Linux设备或Window设备等）上安装运行实现虚拟化，让应用程序彻底脱离底层设备，可以在物理机之间灵活迁移部署，使运维工程师摆脱了繁琐的环境部署，极大的提高了工作效率，同时减少了部署过程中的潜在风险。</p>
+</li>
+</ul>
+<h3 id="Docker容器具有以下三大特点："><a href="#Docker容器具有以下三大特点：" class="headerlink" title="Docker容器具有以下三大特点："></a>Docker容器具有以下三大特点：</h3><ul>
+<li><strong>轻量化：</strong>一台主机上运行的多个Docker容器可以共享主机操作系统内核；启动迅速，只需占用很少的计算和内存资源。</li>
+<li><strong>标准开放：</strong>Docker容器基于开放式标准，能够在所有主流Linux版本、Microsoft Windows以及包括VM、裸机服务器和云在内的任何基础设施上运行。</li>
+<li><strong>安全可靠：</strong>Docker赋予应用的隔离性不仅限于彼此隔离，还独立于底层的基础设施。Docker默认提供最强的隔离，因此应用出现问题，也只是单个容器的问题，而不会波及到整台主机。</li>
+</ul>
+<h3 id="Docker-V-S-VM"><a href="#Docker-V-S-VM" class="headerlink" title="Docker V.S. VM"></a>Docker V.S. VM</h3><ul>
+<li><strong>启动更快：</strong>传统的虚拟机技术启动应用服务往往需要数分钟，而 <code>Docker</code> 容器应用，由于直接运行于宿主内核，无需启动完整的操作系统，因此可以做到秒级、甚至毫秒级的启动时间。大大的节约了开发、测试、部署的时间。</li>
+<li><strong>资源利用更高效：</strong>由于容器不需要进行硬件虚拟以及运行完整操作系统等额外开销，<code>Docker</code> 对系统资源的利用率更高。无论是应用执行速度、内存损耗或者文件存储速度，都要比传统虚拟机技术更高效。因此，相比虚拟机技术，一个相同配置的主机，往往可以运行更多数量的应用。</li>
+<li><strong>可迁移性</strong>：由于 <code>Docker</code> 确保了执行环境的一致性，使得应用的迁移更加容易。<code>Docker</code> 可以在很多平台上运行，无论是物理机、虚拟机、公有云、私有云，甚至是笔记本，其运行结果是一致的。因此用户可以很轻易的将在一个平台上运行的应用，迁移到另一个平台上，而不用担心运行环境的变化导致应用无法正常运行的情况。</li>
+</ul>
+<h2 id="Memo：常用指令"><a href="#Memo：常用指令" class="headerlink" title="Memo：常用指令"></a>Memo：常用指令</h2><h4 id="Service-about"><a href="#Service-about" class="headerlink" title="Service-about"></a>Service-about</h4><ul>
+<li>查看状态</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ systemctl status docker </span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>启动&#x2F;关闭守护Damon进程</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ systemctl start/stop docker </span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>&#x2F;&#x2F;（SysV Linux）</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ service docker status/start/stop/restart</span><br></pre></td></tr></table></figure>
+
+<h4 id="Image-about"><a href="#Image-about" class="headerlink" title="Image-about"></a>Image-about</h4><ul>
+<li>拉取镜像<ul>
+<li>Image-hub：<a target="_blank" rel="noopener" href="https://hub.docker.com/">https://hub.docker.com/</a></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker pull image-name</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查看所有镜像</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker images</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>删除镜像</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker rmi image-name</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>搜索相关镜像</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker search image-name</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>&#x2F;&#x2F; 利用Dockerfile建立镜像档（responsitory:tag为tiangolo&#x2F;nginx_flask）</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker build -t <span class="string">&quot;tiangolo/nginx_flask&quot;</span> .</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="Container-about"><a href="#Container-about" class="headerlink" title="Container-about"></a>Container-about</h4><ul>
+<li>由镜像生产容器</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker run image-name</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>生成mysql容器<ul>
+<li><code>-d</code>后台运行 ；<code>--name</code>指定容器名 ；<code>-p</code>指定宿主机和容器的端口映射（容器不能直接访问）；<code>-e</code>设置环境变量</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker run -d --name=mysql-2 -p 3307:3306 -e MYSQL_ROOT_PASSWORD=123 mysql</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>容器的数据挂载（两种方式：数据卷volume 和 文件目录）</li>
+</ul>
+<p>&#x2F;&#x2F; todo</p>
+<ul>
+<li>查看容器</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker ps -a</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查看容器详情信息</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker inspect container-id</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>启动&#x2F;停止&#x2F;输出已经存在的容器</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker start/stop/rm container-id</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查看日志</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker logs container-id</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>进入某个容器后，执行bash<ul>
+<li><code>-i</code>: 这个选项表示要保持标准输入 (stdin) 打开，即允许你输入命令。</li>
+<li><code>-t</code>: 这个选项表示分配一个伪终端 (pseudo-TTY)，使得你可以与 Bash Shell 进行交互。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker <span class="built_in">exec</span> -i -t [Container-<span class="built_in">id</span>] bash</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="镜像的构建"><a href="#镜像的构建" class="headerlink" title="镜像的构建"></a>镜像的构建</h3><ul>
+<li><p>Images的分层打包（分层的好处）</p>
+</li>
+<li><p>Dockerfile的构建</p>
+</li>
+</ul>
+<h3 id="项目的部署"><a href="#项目的部署" class="headerlink" title="项目的部署"></a>项目的部署</h3><ul>
+<li>Docker Compose 的使用</li>
+</ul>
+<h2 id="小记"><a href="#小记" class="headerlink" title="小记"></a>小记</h2><ul>
+<li><h4 id="为什么使用-Docker-容器进行机器学习开发？"><a href="#为什么使用-Docker-容器进行机器学习开发？" class="headerlink" title="为什么使用 Docker 容器进行机器学习开发？"></a><a target="_blank" rel="noopener" href="https://aws.amazon.com/cn/blogs/china/why-use-docker-containers-for-machine-learning-development/">为什么使用 Docker 容器进行机器学习开发？</a></h4></li>
+</ul>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/02lb">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Docker"><span class="toc-number">1.</span> <span class="toc-text">Docker</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Why-docker-%EF%BC%9F"><span class="toc-number">1.1.</span> <span class="toc-text">Why docker ？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Docker%E5%AE%B9%E5%99%A8%E5%85%B7%E6%9C%89%E4%BB%A5%E4%B8%8B%E4%B8%89%E5%A4%A7%E7%89%B9%E7%82%B9%EF%BC%9A"><span class="toc-number">1.1.1.</span> <span class="toc-text">Docker容器具有以下三大特点：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Docker-V-S-VM"><span class="toc-number">1.1.2.</span> <span class="toc-text">Docker V.S. VM</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Memo%EF%BC%9A%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4"><span class="toc-number">1.2.</span> <span class="toc-text">Memo：常用指令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Service-about"><span class="toc-number">1.2.0.1.</span> <span class="toc-text">Service-about</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Image-about"><span class="toc-number">1.2.0.2.</span> <span class="toc-text">Image-about</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Container-about"><span class="toc-number">1.2.0.3.</span> <span class="toc-text">Container-about</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%95%9C%E5%83%8F%E7%9A%84%E6%9E%84%E5%BB%BA"><span class="toc-number">1.2.1.</span> <span class="toc-text">镜像的构建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E7%9A%84%E9%83%A8%E7%BD%B2"><span class="toc-number">1.2.2.</span> <span class="toc-text">项目的部署</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%8F%E8%AE%B0"><span class="toc-number">1.3.</span> <span class="toc-text">小记</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BD%BF%E7%94%A8-Docker-%E5%AE%B9%E5%99%A8%E8%BF%9B%E8%A1%8C%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%BC%80%E5%8F%91%EF%BC%9F"><span class="toc-number">1.3.0.1.</span> <span class="toc-text">为什么使用 Docker 容器进行机器学习开发？</span></a></li></ol></li></ol></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://02lb.github.io/2024/04/12/docker/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://02lb.github.io/2024/04/12/docker/&text=docker"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://02lb.github.io/2024/04/12/docker/&title=docker"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://02lb.github.io/2024/04/12/docker/&is_video=false&description=docker"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=docker&body=Check out this article: https://02lb.github.io/2024/04/12/docker/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://02lb.github.io/2024/04/12/docker/&title=docker"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://02lb.github.io/2024/04/12/docker/&title=docker"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://02lb.github.io/2024/04/12/docker/&title=docker"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://02lb.github.io/2024/04/12/docker/&title=docker"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://02lb.github.io/2024/04/12/docker/&name=docker&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://02lb.github.io/2024/04/12/docker/&t=docker"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2024
+    Lee
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/02lb">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
