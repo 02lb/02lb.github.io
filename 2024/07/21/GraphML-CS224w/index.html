@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="图表示学习&#x2F;图机器学习CS224W: Machine Learning with Graphs GuideLines Methods for node embeddings: DeepWalk, Node2Vec  Graph Neural Networks: GCN, GraphSAGE, GAT…  Graph Transformers  Knowledge graphs and r">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GraphML-CS224w【图机器学习】">
+<meta property="og:url" content="https://02lb.github.io/2024/07/21/GraphML-CS224w/index.html">
+<meta property="og:site_name" content="Bo Li’s Blog">
+<meta property="og:description" content="图表示学习&#x2F;图机器学习CS224W: Machine Learning with Graphs GuideLines Methods for node embeddings: DeepWalk, Node2Vec  Graph Neural Networks: GCN, GraphSAGE, GAT…  Graph Transformers  Knowledge graphs and r">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-21%2017.02.31.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-21%2017.07.23.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-22%2015.41.27.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-22%2016.11.46.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-22%2016.18.05.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-22%2016.20.58.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-22%2016.31.53.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-22%2016.38.30.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-22%2016.42.25.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-22%2016.43.26.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-22%2016.44.18.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-22%2017.05.24.png">
+<meta property="article:published_time" content="2024-07-21T09:26:48.000Z">
+<meta property="article:modified_time" content="2024-07-22T09:19:59.548Z">
+<meta property="article:author" content="Lee">
+<meta property="article:tag" content="图机器学习">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-21%2017.02.31.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.png">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>GraphML-CS224w【图机器学习】</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/02lb">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2024/04/12/docker/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://02lb.github.io/2024/07/21/GraphML-CS224w/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://02lb.github.io/2024/07/21/GraphML-CS224w/&text=GraphML-CS224w【图机器学习】"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://02lb.github.io/2024/07/21/GraphML-CS224w/&title=GraphML-CS224w【图机器学习】"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://02lb.github.io/2024/07/21/GraphML-CS224w/&is_video=false&description=GraphML-CS224w【图机器学习】"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=GraphML-CS224w【图机器学习】&body=Check out this article: https://02lb.github.io/2024/07/21/GraphML-CS224w/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://02lb.github.io/2024/07/21/GraphML-CS224w/&title=GraphML-CS224w【图机器学习】"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://02lb.github.io/2024/07/21/GraphML-CS224w/&title=GraphML-CS224w【图机器学习】"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://02lb.github.io/2024/07/21/GraphML-CS224w/&title=GraphML-CS224w【图机器学习】"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://02lb.github.io/2024/07/21/GraphML-CS224w/&title=GraphML-CS224w【图机器学习】"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://02lb.github.io/2024/07/21/GraphML-CS224w/&name=GraphML-CS224w【图机器学习】&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://02lb.github.io/2024/07/21/GraphML-CS224w/&t=GraphML-CS224w【图机器学习】"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%BE%E8%A1%A8%E7%A4%BA%E5%AD%A6%E4%B9%A0-%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0"><span class="toc-number">1.</span> <span class="toc-text">图表示学习&#x2F;图机器学习</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#GuideLines"><span class="toc-number">1.0.0.1.</span> <span class="toc-text">GuideLines</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Day1"><span class="toc-number">1.1.</span> <span class="toc-text">Day1:</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Node-Embedding"><span class="toc-number">1.1.1.</span> <span class="toc-text">Node Embedding</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Encoder-Decoder-Framework"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">Encoder - Decoder Framework</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9A%8F%E6%9C%BA%E6%B8%B8%E8%B5%B0%EF%BC%9ARandom-Walk%EF%BC%9A"><span class="toc-number">1.1.1.2.</span> <span class="toc-text">随机游走：Random Walk：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%80%9D%E6%83%B3%EF%BC%88Idea%EF%BC%89"><span class="toc-number">1.1.1.2.1.</span> <span class="toc-text">思想（Idea）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%A1%A8%E8%BE%BE%E8%83%BD%E5%8A%9B%EF%BC%88Expressivity%EF%BC%89"><span class="toc-number">1.1.1.2.2.</span> <span class="toc-text">表达能力（Expressivity）</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B4%9F%E9%87%87%E6%A0%B7-Negative-Sampling%EF%BC%9A"><span class="toc-number">1.1.1.3.</span> <span class="toc-text">负采样 Negative Sampling：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%B4%9F%E9%87%87%E6%A0%B7%E7%9A%84%E5%8E%9F%E7%90%86"><span class="toc-number">1.1.1.3.1.</span> <span class="toc-text">负采样的原理</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%B4%9F%E6%A0%B7%E6%9C%AC%E6%95%B0%E9%87%8F-K-%E7%9A%84%E9%80%89%E6%8B%A9"><span class="toc-number">1.1.1.3.2.</span> <span class="toc-text">负样本数量 (K) 的选择</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%B4%9F%E6%A0%B7%E6%9C%AC%E7%9A%84%E9%80%89%E6%8B%A9"><span class="toc-number">1.1.1.3.3.</span> <span class="toc-text">负样本的选择</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%A7%A3%E9%87%8A%E8%B4%9F%E9%87%87%E6%A0%B7%E5%85%AC%E5%BC%8F%E5%8F%8A%E5%85%B6%E5%8E%9F%E7%90%86"><span class="toc-number">1.1.1.3.4.</span> <span class="toc-text">解释负采样公式及其原理</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Node-Embedding-%EF%BC%9A-DeepWalk-Node2Vec"><span class="toc-number">1.1.2.</span> <span class="toc-text">Node Embedding ： DeepWalk &#x2F; Node2Vec</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Graph-Embedding-%EF%BC%9A%E5%9B%BE%E5%B5%8C%E5%85%A5"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">Graph Embedding ：图嵌入</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Day1-Lab"><span class="toc-number">1.2.</span> <span class="toc-text">Day1-Lab:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Day2"><span class="toc-number">1.3.</span> <span class="toc-text">Day2:</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CORE%EF%BC%9AGraph-Neural-Network"><span class="toc-number">1.3.1.</span> <span class="toc-text">CORE：Graph Neural Network</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Graph-vs-Image"><span class="toc-number">1.3.1.1.</span> <span class="toc-text">Graph vs Image</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#GNN-Basics"><span class="toc-number">1.3.1.2.</span> <span class="toc-text">GNN Basics</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Classic-GNN"><span class="toc-number">1.3.1.3.</span> <span class="toc-text">Classic GNN</span></a></li></ol></li></ol></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        GraphML-CS224w【图机器学习】
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Lee</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2024-07-21T09:26:48.000Z" class="dt-published" itemprop="datePublished">2024-07-21</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">图机器学习</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h1 id="图表示学习-图机器学习"><a href="#图表示学习-图机器学习" class="headerlink" title="图表示学习&#x2F;图机器学习"></a>图表示学习&#x2F;图机器学习</h1><p><a target="_blank" rel="noopener" href="https://web.stanford.edu/class/cs224w/">CS224W: Machine Learning with Graphs</a></p>
+<h4 id="GuideLines"><a href="#GuideLines" class="headerlink" title="GuideLines"></a>GuideLines</h4><ul>
+<li>Methods for node embeddings: DeepWalk, Node2Vec </li>
+<li>Graph Neural Networks: GCN, GraphSAGE, GAT… </li>
+<li>Graph Transformers </li>
+<li>Knowledge graphs and reasoning: TransE, BetaE </li>
+<li>Generative models for graphs: GraphRNN </li>
+<li>Graphs in 3D: Molecules § Scaling up to large graphs </li>
+<li>Applications to Biomedicine, Science, Technology</li>
+</ul>
+<h2 id="Day1"><a href="#Day1" class="headerlink" title="Day1:"></a>Day1:</h2><h3 id="Node-Embedding"><a href="#Node-Embedding" class="headerlink" title="Node Embedding"></a>Node Embedding</h3><blockquote>
+<p>Core idea: <strong>Embed nodes so that distances in embedding space reflect node similarities in the original network.</strong></p>
+</blockquote>
+<p>对节点进行自动的特征提取-自动嵌入&#x2F;编码：被下游任务利用</p>
+<h4 id="Encoder-Decoder-Framework"><a href="#Encoder-Decoder-Framework" class="headerlink" title="Encoder - Decoder Framework"></a><strong>Encoder - Decoder Framework</strong></h4><ul>
+<li>encoder 就是node embedding</li>
+<li>decoder 就是对节点vector 做相似度提取：例如内积相似度</li>
+</ul>
+<h4 id="随机游走：Random-Walk："><a href="#随机游走：Random-Walk：" class="headerlink" title="随机游走：Random Walk："></a><strong>随机游走：Random Walk：</strong></h4><ul>
+<li><h5 id="思想（Idea）"><a href="#思想（Idea）" class="headerlink" title="思想（Idea）"></a>思想（Idea）</h5><p>  核心思想是：如果从节点 u 开始的随机游走高概率访问节点 v，那么 u 和 v 是相似的。具体解释如下：</p>
+<ol>
+<li><strong>访问概率高</strong>：从节点 u 开始的随机游走如果高概率访问节点 v，这意味着 u 和 v 之间的路径很多，或者有很多共同的邻居。这说明 u 和 v 在图中的结构位置很相似，具有相似的网络结构特征。</li>
+<li><strong>多跳信息</strong>：随机游走不仅考虑直接的邻居关系，还会通过多跳路径访问更远的节点。这种方式可以捕捉到网络中更复杂的结构信息和节点之间的关系。例如，两个节点即使不直接相连，但如果它们通过多个中间节点有较高的访问概率，那么它们之间仍然具有潜在的相似性。</li>
+</ol>
+</li>
+<li><h5 id="表达能力（Expressivity）"><a href="#表达能力（Expressivity）" class="headerlink" title="表达能力（Expressivity）"></a>表达能力（Expressivity）</h5><p>  随机游走路径通过灵活的随机定义方式捕捉节点之间的相似度，能够同时包含局部和高阶的邻域信息：</p>
+<ol>
+<li><strong>局部信息</strong>：随机游走会优先访问与起始节点直接相连的节点，这样能够捕捉节点的局部结构信息。如果两个节点在局部结构上相似（例如，它们有很多共同邻居），那么随机游走路径会较高概率访问到这些共同邻居。</li>
+<li><strong>高阶信息</strong>：随着随机游走的步数增加，它会逐渐扩展到更多的邻居节点，甚至是更远的节点。这样可以<strong>捕捉到多跳（multi-hop）的关系信息，即高阶邻域信息。</strong>如果两个节点在网络中的更大范围内具有相似的连接模式，随机游走路径也能反映这一点。</li>
+</ol>
+</li>
+<li><p>随机游走最大化目标节点embedding的对数似然（使得目标节点周围节点的似然概率最大化，原理是周围节点在嵌入向量空间时距离也相对近），这个计算过程可以使用负采样进行优化。</p>
+</li>
+</ul>
+<h4 id="负采样-Negative-Sampling："><a href="#负采样-Negative-Sampling：" class="headerlink" title="负采样 Negative Sampling："></a>负采样 Negative Sampling：</h4><ul>
+<li><h5 id="负采样的原理"><a href="#负采样的原理" class="headerlink" title="负采样的原理"></a>负采样的原理</h5><p>  <strong>负采样的核心思想是用一部分负样本来近似整个负样本空间，从而减少计算开销。</strong>具体步骤如下：</p>
+<ol>
+<li><strong>选择正样本</strong>：即实际存在的节点对（例如，图中的实际边）。</li>
+<li><strong>选择负样本</strong>：随机选择一些节点对（图中不存在的边），这些对作为负样本。</li>
+</ol>
+</li>
+<li><h5 id="负样本数量-K-的选择"><a href="#负样本数量-K-的选择" class="headerlink" title="负样本数量 (K) 的选择"></a>负样本数量 (K) 的选择</h5><ul>
+<li><strong>更高的 (K) 值</strong>：提供更鲁棒的估计，因为更多的负样本能够更好地近似整个负样本空间。但是这也会增加计算开销。</li>
+<li><strong>更低的 (K) 值</strong>：减少计算开销，但可能会增加对负事件的偏差。</li>
+</ul>
+<p>  在实际应用中， (K) 通常选择在5到20之间，以平衡计算效率和估计精度。</p>
+</li>
+<li><h5 id="负样本的选择"><a href="#负样本的选择" class="headerlink" title="负样本的选择"></a>负样本的选择</h5><p>  负样本可以是任何节点，不一定要与随机游走无关。为了提高效率，常常会从所有节点中随机选择负样本，而不是仅从未在随机游走中出现的节点中选择。</p>
+</li>
+<li><h5 id="解释负采样公式及其原理"><a href="#解释负采样公式及其原理" class="headerlink" title="解释负采样公式及其原理"></a>解释负采样公式及其原理</h5><p>  负采样是一种用于<strong>提高训练效率和计算效率的方法</strong>，尤其是在处理大规模数据集时。下面我们详细解释给定的公式和相关概念。</p>
+<p>  给定的公式：<br>  $$<br>  \log \left( \frac{\exp(\mathbf{z}_v^\top \mathbf{z}<em>u)}{\sum</em>{n \in N} \exp(\mathbf{z}_n^\top \mathbf{z}_u)} \right) \approx \log \sigma(\mathbf{z}_v^\top \mathbf{z}<em>u) + \sum</em>{k&#x3D;1}^K \log \sigma(-\mathbf{z}_n^\top \mathbf{z}_u)<br>  $$<br>  其中：</p>
+<ul>
+<li>$\mathbf{z}_v$ 和 $\mathbf{z}_u$是节点$v$ 和 $u$ 的嵌入向量。</li>
+<li>$\sigma(x)$是sigmoid函数，定义为 $\sigma(x) &#x3D; \frac{1}{1 + \exp(-x)}$。</li>
+<li>$N$ 是所有节点的集合。</li>
+<li>$K$ 是负样本的数量。</li>
+<li>$\mathbf{z}_n$ 是负样本节点的嵌入向量。</li>
+</ul>
+<p>  公式表示：</p>
+<ul>
+<li><p>左边的<br>  $$<br>  \log \left( \frac{\exp(\mathbf{z}_v^\top \mathbf{z}<em>u)}{\sum</em>{n \in N} \exp(\mathbf{z}_n^\top \mathbf{z}_u)} \right)<br>  $$<br>  是softmax的对数。</p>
+</li>
+<li><p>右边的<br>  $$<br>  \log \sigma(\mathbf{z}_v^\top \mathbf{z}<em>u) + \sum</em>{k&#x3D;1}^K \log \sigma(-\mathbf{z}_n^\top \mathbf{z}_u)<br>  $$<br>  是<strong>负采样的对数近似。</strong></p>
+</li>
+</ul>
+<p>  <strong>&#x3D;&#x3D;通过负采样，我们可以将计算从整个节点集合的softmax归约到少量负样本的log-sigmoid函数计算，从而大大减少计算复杂度。&#x3D;&#x3D;</strong></p>
+</li>
+</ul>
+<h3 id="Node-Embedding-：-DeepWalk-Node2Vec"><a href="#Node-Embedding-：-DeepWalk-Node2Vec" class="headerlink" title="Node Embedding ： DeepWalk &#x2F; Node2Vec"></a>Node Embedding ： DeepWalk &#x2F; Node2Vec</h3><blockquote>
+<p><strong>重点内容</strong></p>
+</blockquote>
+<ul>
+<li><p>DeepWalk：RandomWalk + 词嵌入模型（如Word2Vec）</p>
+</li>
+<li><p>Node2Vec：DeepWalk + 利用了参数p、q进行BFS&#x2F;DFS的随机游走，提供了biased的路径选择。</p>
+<blockquote>
+<p>引入了更灵活的随机游走策略，通过调整参数 p 和 q 来控制游走的行为，从而在深度优先搜索（DFS）和广度优先搜索（BFS）之间进行平衡。</p>
+</blockquote>
+</li>
+<li><p>利用随机游走得到的node-seq视为word2vec的词序列进行embedding</p>
+</li>
+<li><p><strong>Limitations：</strong></p>
+<ul>
+<li><p><strong>模型不能推广到训练和测试集中未见过的新节点或新结构：</strong>若new node到来，需要重新计算整个graph的node embedding，而不是增量可扩展的。</p>
+</li>
+<li><p><strong>无法捕捉结构相似性</strong>：它们只是用过节点的相邻性来判断空间相似性（距离），而不考虑任何结构信息</p>
+<blockquote>
+<p>主要捕捉的是<strong>节点的同质性（homophily）特征</strong>，而不是<strong>结构相似性（structural similarity）</strong>。这意味着它们倾向于将相邻或近邻节点（即在图中距离较近的节点）映射到相似的嵌入空间中，而不是将具有相似结构但在图中距离较远的节点映射到相似的嵌入空间中。</p>
+<p>节点同质性假设是指在图中距离较近的节点往往具有相似的特征或属性。例如，在社交网络中，朋友之间的兴趣爱好往往相似。</p>
+<p>结构相似性是指两个节点在图中的角色或位置相似，即使它们在图中距离较远。例如，在公司组织图中，两个不同部门的经理可能具有类似的结构角色，即使他们不直接连接。</p>
+</blockquote>
+</li>
+<li><p>Solution to these limitations: <strong>Deep Representation Learning and Graph Neural Networks</strong></p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="Graph-Embedding-：图嵌入"><a href="#Graph-Embedding-：图嵌入" class="headerlink" title="Graph Embedding ：图嵌入"></a>Graph Embedding ：图嵌入</h4><ul>
+<li><p>Naive：将所有node的嵌入向量进行结合操作（累加&#x2F;avg&#x2F;……)</p>
+</li>
+<li><p>Approach2: 添加一个 上帝虚节点 </p>
+  <img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-21%2017.02.31.png" style="zoom: 25%;" />
+</li>
+<li><p>Aprroach3 ：分层&#x2F;pool：<strong>DiffPool（Differentiable Pooling）</strong></p>
+<blockquote>
+<p>是一种图神经网络（GNN）池化方法，用于在图上进行层次化聚类，并根据这些聚类对节点嵌入进行求和或平均。</p>
+</blockquote>
+</li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-21%2017.07.23.png" style="zoom: 33%;" />
+
+
+
+<h2 id="Day1-Lab"><a href="#Day1-Lab" class="headerlink" title="Day1-Lab:"></a>Day1-Lab:</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://colab.research.google.com/drive/1vvIoEqxGl1naopTZbh4bmCOLEiCxvcQq">Link</a></p>
+</blockquote>
+<p>熟悉 NetworkX 以及 PyG 的用法；简单的 NodeEmbedding方法</p>
+<h2 id="Day2"><a href="#Day2" class="headerlink" title="Day2:"></a>Day2:</h2><h3 id="CORE：Graph-Neural-Network"><a href="#CORE：Graph-Neural-Network" class="headerlink" title="CORE：Graph Neural Network"></a>CORE：Graph Neural Network</h3><blockquote>
+<p>之前的Node Embedding方法（简单的 encoder - decoder）没有考虑节点结构的信息，只是使用节点距离进行空间嵌入；这里使用GNN深度学习的方法学习节点的嵌入；</p>
+</blockquote>
+<h4 id="Graph-vs-Image"><a href="#Graph-vs-Image" class="headerlink" title="Graph vs Image"></a>Graph vs Image</h4><ul>
+<li><p>There is no fixed notion of locality or sliding window on the graph (图上<strong>没有固定的局部性或滑动窗口概念</strong>)</p>
+</li>
+<li><p>辨析：<strong>排列不变性（permutation invariant）</strong>，不存在一种对节点的权威的排序，任何排序应该有相同的结果；<strong>排列等变性（permutation equivariant）</strong>；</p>
+<blockquote>
+<p>排列不变性意味着，无论图的节点顺序如何，模型的输出结果应该保持不变。假设我们有一个图 $G$，其邻接矩阵为 $A$，节点特征矩阵为 $X$，则排列不变性可以表示为：</p>
+<p>$ f(A, X) &#x3D; f(PAP^T, PX) $</p>
+<p>其中，$P$ 是一个任意的排列矩阵，它可以重新排列图的节点。排列不变性的一个例子是将图映射到一个固定长度的向量。无论如何重新排列输入图的节点，输出向量始终保持不变。</p>
+</blockquote>
+</li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-22%2015.41.27.png" alt="截屏2024-07-22 15.41.27" style="zoom: 25%;" />
+
+
+
+<h4 id="GNN-Basics"><a href="#GNN-Basics" class="headerlink" title="GNN Basics"></a>GNN Basics</h4><ul>
+<li><p>Param sharing：参数共享</p>
+  <img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-22%2016.11.46.png" alt="截屏2024-07-22 16.11.46" style="zoom: 25%;" />
+
+
+</li>
+<li><p>GNN beyond CNN&#x2F;Transformers</p>
+<ul>
+<li><strong>CNNs can be seen as a special GNN with fixed neighbor</strong></li>
+</ul>
+  <img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-22%2016.18.05.png" alt="截屏2024-07-22 16.18.05" style="zoom:25%;" />
+
+<ul>
+<li><strong>Transformer layer can be seen as a special GNN that runs on a fullyconnected “word” graph!</strong></li>
+</ul>
+  <img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-22%2016.20.58.png" alt="截屏2024-07-22 16.20.58" style="zoom:25%;" /></li>
+</ul>
+<h4 id="Classic-GNN"><a href="#Classic-GNN" class="headerlink" title="Classic GNN"></a>Classic GNN</h4><ul>
+<li><p>一个通用的GNN架构：</p>
+  <img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-22%2016.31.53.png" alt="截屏2024-07-22 16.31.53" style="zoom:25%;" />
+</li>
+<li><p><strong>GNN Layer &#x3D;（1） Message + （2）Aggregation</strong></p>
+<blockquote>
+<p>不同的策略 -&gt; 不同的实例：GCN, GraphSAGE, GAT…..</p>
+</blockquote>
+  <img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-22%2016.38.30.png" alt="截屏2024-07-22 16.38.30" style="zoom:33%;" />
+</li>
+<li><p><strong>Graph Convolutional Networks (GCN)：</strong></p>
+  <img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-22%2016.42.25.png" alt="截屏2024-07-22 16.42.25" style="zoom:25%;" />
+</li>
+<li><p><strong>GraphSAGE：</strong></p>
+</li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-22%2016.43.26.png" alt="截屏2024-07-22 16.43.26" style="zoom:25%;" />
+
+<ul>
+<li><p><strong>Graph Attention Networks（GAT）：</strong></p>
+<blockquote>
+<p>Idea: <strong>Not all node’s neighbors are equally important</strong>；the NN should devote more computing power on that small but important part of the data. 【NN应该在数据中那个小而重要的部分上投入更多的计算能力。】</p>
+</blockquote>
+  <img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-22%2016.44.18.png" alt="截屏2024-07-22 16.44.18" style="zoom:25%;" />
+
+<ul>
+<li>Key benefit: Allows for (implicitly) specifying different importance values ($\alpha_{vu}$) to different neighbors</li>
+</ul>
+</li>
+<li><p><strong>over-smoothing problem【过度平滑</strong>】：当stack的GNN层过多时，节点的感知域【Receptive field】可能过大甚至覆盖整个Graph，导致所有节点都感知整个图，使得所有节点趋于相同的embedding；</p>
+<blockquote>
+<p>Key：the embedding of a node is <strong>determined by its receptive field</strong></p>
+</blockquote>
+<ul>
+<li>过多堆叠GNN Layer往往没用（不像CNN Layer那么有效），所以需要在GNN Layer较少（Shallow）的时候试图增强其感知能力</li>
+<li>通过增强其message&#x2F;Aggregation模块的NN的学习能力&#x2F;通过前后concat线性层&#x2F;通过添加 <strong>skip connection</strong>（集成学习视角）</li>
+</ul>
+  <img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-22%2017.05.24.png" alt="截屏2024-07-22 17.05.24" style="zoom:25%;" />
+</li>
+<li><p>图增强&#x2F;处理：应对稀疏图&#x2F;稠密图&#x2F;图过大等问题进行特征增强&#x2F;图处理</p>
+<ul>
+<li>Graph Manipulation: Feature augmentation &#x2F; Structure manipulation</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/02lb">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%BE%E8%A1%A8%E7%A4%BA%E5%AD%A6%E4%B9%A0-%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0"><span class="toc-number">1.</span> <span class="toc-text">图表示学习&#x2F;图机器学习</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#GuideLines"><span class="toc-number">1.0.0.1.</span> <span class="toc-text">GuideLines</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Day1"><span class="toc-number">1.1.</span> <span class="toc-text">Day1:</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Node-Embedding"><span class="toc-number">1.1.1.</span> <span class="toc-text">Node Embedding</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Encoder-Decoder-Framework"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">Encoder - Decoder Framework</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9A%8F%E6%9C%BA%E6%B8%B8%E8%B5%B0%EF%BC%9ARandom-Walk%EF%BC%9A"><span class="toc-number">1.1.1.2.</span> <span class="toc-text">随机游走：Random Walk：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%80%9D%E6%83%B3%EF%BC%88Idea%EF%BC%89"><span class="toc-number">1.1.1.2.1.</span> <span class="toc-text">思想（Idea）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%A1%A8%E8%BE%BE%E8%83%BD%E5%8A%9B%EF%BC%88Expressivity%EF%BC%89"><span class="toc-number">1.1.1.2.2.</span> <span class="toc-text">表达能力（Expressivity）</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B4%9F%E9%87%87%E6%A0%B7-Negative-Sampling%EF%BC%9A"><span class="toc-number">1.1.1.3.</span> <span class="toc-text">负采样 Negative Sampling：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%B4%9F%E9%87%87%E6%A0%B7%E7%9A%84%E5%8E%9F%E7%90%86"><span class="toc-number">1.1.1.3.1.</span> <span class="toc-text">负采样的原理</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%B4%9F%E6%A0%B7%E6%9C%AC%E6%95%B0%E9%87%8F-K-%E7%9A%84%E9%80%89%E6%8B%A9"><span class="toc-number">1.1.1.3.2.</span> <span class="toc-text">负样本数量 (K) 的选择</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%B4%9F%E6%A0%B7%E6%9C%AC%E7%9A%84%E9%80%89%E6%8B%A9"><span class="toc-number">1.1.1.3.3.</span> <span class="toc-text">负样本的选择</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%A7%A3%E9%87%8A%E8%B4%9F%E9%87%87%E6%A0%B7%E5%85%AC%E5%BC%8F%E5%8F%8A%E5%85%B6%E5%8E%9F%E7%90%86"><span class="toc-number">1.1.1.3.4.</span> <span class="toc-text">解释负采样公式及其原理</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Node-Embedding-%EF%BC%9A-DeepWalk-Node2Vec"><span class="toc-number">1.1.2.</span> <span class="toc-text">Node Embedding ： DeepWalk &#x2F; Node2Vec</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Graph-Embedding-%EF%BC%9A%E5%9B%BE%E5%B5%8C%E5%85%A5"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">Graph Embedding ：图嵌入</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Day1-Lab"><span class="toc-number">1.2.</span> <span class="toc-text">Day1-Lab:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Day2"><span class="toc-number">1.3.</span> <span class="toc-text">Day2:</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CORE%EF%BC%9AGraph-Neural-Network"><span class="toc-number">1.3.1.</span> <span class="toc-text">CORE：Graph Neural Network</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Graph-vs-Image"><span class="toc-number">1.3.1.1.</span> <span class="toc-text">Graph vs Image</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#GNN-Basics"><span class="toc-number">1.3.1.2.</span> <span class="toc-text">GNN Basics</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Classic-GNN"><span class="toc-number">1.3.1.3.</span> <span class="toc-text">Classic GNN</span></a></li></ol></li></ol></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://02lb.github.io/2024/07/21/GraphML-CS224w/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://02lb.github.io/2024/07/21/GraphML-CS224w/&text=GraphML-CS224w【图机器学习】"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://02lb.github.io/2024/07/21/GraphML-CS224w/&title=GraphML-CS224w【图机器学习】"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://02lb.github.io/2024/07/21/GraphML-CS224w/&is_video=false&description=GraphML-CS224w【图机器学习】"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=GraphML-CS224w【图机器学习】&body=Check out this article: https://02lb.github.io/2024/07/21/GraphML-CS224w/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://02lb.github.io/2024/07/21/GraphML-CS224w/&title=GraphML-CS224w【图机器学习】"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://02lb.github.io/2024/07/21/GraphML-CS224w/&title=GraphML-CS224w【图机器学习】"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://02lb.github.io/2024/07/21/GraphML-CS224w/&title=GraphML-CS224w【图机器学习】"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://02lb.github.io/2024/07/21/GraphML-CS224w/&title=GraphML-CS224w【图机器学习】"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://02lb.github.io/2024/07/21/GraphML-CS224w/&name=GraphML-CS224w【图机器学习】&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://02lb.github.io/2024/07/21/GraphML-CS224w/&t=GraphML-CS224w【图机器学习】"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2024
+    Lee
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/02lb">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
