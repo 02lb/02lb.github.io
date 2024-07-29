@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="【工业界】推荐系统课程 Bilibili：Wang Shusen 链接：https:&#x2F;&#x2F;www.bilibili.com&#x2F;video&#x2F;BV1HZ421U77y  GuideLines： （可以结合笔记进行复习，不理解的内容直接跳到对应视频坐标）  00:00 概要01：推荐系统的基本概念 ﻿09:19 概要02：推荐系统的链路 ﻿16:53 概要03：推荐系统的A&#x2F;B测试召回：33:15">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RecSys[推荐系统]">
+<meta property="og:url" content="https://02lb.github.io/2024/07/22/RecSys/index.html">
+<meta property="og:site_name" content="Bo Li’s Blog">
+<meta property="og:description" content="【工业界】推荐系统课程 Bilibili：Wang Shusen 链接：https:&#x2F;&#x2F;www.bilibili.com&#x2F;video&#x2F;BV1HZ421U77y  GuideLines： （可以结合笔记进行复习，不理解的内容直接跳到对应视频坐标）  00:00 概要01：推荐系统的基本概念 ﻿09:19 概要02：推荐系统的链路 ﻿16:53 概要03：推荐系统的A&#x2F;B测试召回：33:15">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-22%2020.14.01.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-22%2020.15.58.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-22%2021.08.22.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-22%2020.58.09.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-22%2021.24.04.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-22%2021.25.18.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-22%2021.33.16.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-22%2021.44.40.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-22%2021.48.36.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/image-20240723172724988.png">
+<meta property="article:published_time" content="2024-07-22T10:56:05.000Z">
+<meta property="article:modified_time" content="2024-07-26T03:44:06.206Z">
+<meta property="article:author" content="Lee">
+<meta property="article:tag" content="推荐系统">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-22%2020.14.01.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.png">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>RecSys[推荐系统]</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/02lb">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2024/07/21/GraphML-CS224w/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://02lb.github.io/2024/07/22/RecSys/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://02lb.github.io/2024/07/22/RecSys/&text=RecSys[推荐系统]"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://02lb.github.io/2024/07/22/RecSys/&title=RecSys[推荐系统]"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://02lb.github.io/2024/07/22/RecSys/&is_video=false&description=RecSys[推荐系统]"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=RecSys[推荐系统]&body=Check out this article: https://02lb.github.io/2024/07/22/RecSys/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://02lb.github.io/2024/07/22/RecSys/&title=RecSys[推荐系统]"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://02lb.github.io/2024/07/22/RecSys/&title=RecSys[推荐系统]"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://02lb.github.io/2024/07/22/RecSys/&title=RecSys[推荐系统]"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://02lb.github.io/2024/07/22/RecSys/&title=RecSys[推荐系统]"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://02lb.github.io/2024/07/22/RecSys/&name=RecSys[推荐系统]&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://02lb.github.io/2024/07/22/RecSys/&t=RecSys[推荐系统]"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E3%80%90%E5%B7%A5%E4%B8%9A%E7%95%8C%E3%80%91%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E8%AF%BE%E7%A8%8B"><span class="toc-number">1.</span> <span class="toc-text">【工业界】推荐系统课程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#GuideLines%EF%BC%9A"><span class="toc-number">1.0.1.</span> <span class="toc-text">GuideLines：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%94%E8%AE%B0"><span class="toc-number">1.0.2.</span> <span class="toc-text">笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E7%AE%97%E6%B3%95%E7%9A%84%E8%BF%87%E7%A8%8B%EF%BC%9A"><span class="toc-number">1.0.2.1.</span> <span class="toc-text">推荐系统算法的过程：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%AC%E5%9B%9E"><span class="toc-number">1.1.</span> <span class="toc-text">召回</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%8D%E5%90%8C%E7%9A%84%E5%8F%AC%E5%9B%9E%E9%80%9A%E9%81%93%EF%BC%9F"><span class="toc-number">1.1.0.1.</span> <span class="toc-text">不同的召回通道？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%8C%E5%A1%94%E6%A8%A1%E5%9E%8B%EF%BC%88%E5%B7%A5%E4%B8%9A%E7%95%8C%E5%B8%B8%E7%94%A8%EF%BC%89%EF%BC%9A"><span class="toc-number">1.1.0.2.</span> <span class="toc-text">双塔模型（工业界常用）：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%8C%E5%A1%94%E6%A8%A1%E5%9E%8B-%E8%87%AA%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0"><span class="toc-number">1.1.0.3.</span> <span class="toc-text">双塔模型+自监督学习</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Deep-Retrieval%E3%80%90%E6%B7%B1%E5%BA%A6%E6%A3%80%E7%B4%A2%E3%80%91"><span class="toc-number">1.1.0.4.</span> <span class="toc-text">Deep Retrieval【深度检索】</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B6%E5%AE%83%E5%8F%AC%E5%9B%9E%E9%80%9A%E9%81%93"><span class="toc-number">1.1.0.5.</span> <span class="toc-text">其它召回通道</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9B%9D%E5%85%89%E8%BF%87%E6%BB%A4-Bloom-Filter"><span class="toc-number">1.1.0.6.</span> <span class="toc-text">曝光过滤 &amp; Bloom Filter</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%92%E5%BA%8F"><span class="toc-number">1.2.</span> <span class="toc-text">排序</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%9A%E7%9B%AE%E6%A0%87%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.2.0.1.</span> <span class="toc-text">多目标模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A2%84%E4%BC%B0%E5%80%BC%E6%A0%A1%E5%87%86"><span class="toc-number">1.2.0.2.</span> <span class="toc-text">预估值校准</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Multi-gate-Mixture-of-Experts%E3%80%90MMoE%E3%80%91"><span class="toc-number">1.2.0.3.</span> <span class="toc-text">Multi-gate Mixture-of-Experts【MMoE】</span></a></li></ol></li></ol></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        RecSys[推荐系统]
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Lee</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2024-07-22T10:56:05.000Z" class="dt-published" itemprop="datePublished">2024-07-22</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/" rel="tag">推荐系统</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h1 id="【工业界】推荐系统课程"><a href="#【工业界】推荐系统课程" class="headerlink" title="【工业界】推荐系统课程"></a>【工业界】推荐系统课程</h1><blockquote>
+<p>Bilibili：Wang Shusen</p>
+<p>链接：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1HZ421U77y">https://www.bilibili.com/video/BV1HZ421U77y</a></p>
+</blockquote>
+<h3 id="GuideLines："><a href="#GuideLines：" class="headerlink" title="GuideLines："></a>GuideLines：</h3><blockquote>
+<p>（可以结合笔记进行复习，不理解的内容直接跳到对应视频坐标）</p>
+</blockquote>
+<p>00:00 概要01：推荐系统的基本概念 ﻿<br>09:19 概要02：推荐系统的链路 ﻿<br>16:53 概要03：推荐系统的A&#x2F;B测试<br><strong>召回：</strong><br>33:15 召回01：基于物品的协同过滤 ﻿<br>48:24 召回02：Swing 模型 ﻿<br>55:39 召回03：基于用户的协同过滤 ﻿<br>01:10:11 召回04：离散特征处理 ﻿<br>01:18:17 召回05：矩阵补充、最近邻查 ﻿<br>01:34:45 召回06：双塔模型——模型结构和训练<br>01:48:46 召回07：双塔模型——正负样本<br>02:02:00 召回08：双塔模型——线上召回和更新<br>02:14:50 召回09：双塔模型+自监督学习<br>02:35:07 召回10：Deep Retrieval<br>03:03:44 召回11：其他召回通道<br>03:11:43 召回12：曝光过滤 &amp; Bloom Filter<br><strong>排序：</strong><br>03:23:40 排序01：多目标排序模型 ﻿<br>03:33:30 排序02：Multi-gate Mixture-of-Experts【MMoE】 ﻿<br>03:40:06 排序03：预估分数的融合 ﻿<br>03:43:50 排序04：视频播放建模 ﻿<br>03:51:25 排序05：排序模型的特征 ﻿<br>04:03:58 排序06：粗排<br>04:12:34 特征交叉01：Factorized Machine【FM】﻿<br>04:18:29 特征交叉02：深度交叉网络【DCN】 ﻿<br>04:25:46 特征交叉03：LHUC网络结构<br>04:29:54 特征交叉04：SENet &amp; Bilinear Cross<br>04:38:42 行为序列01：用户行为序列建模<br>04:41:40 行为序列02：DIN模型<br>04:46:22 行为序列03：SIM模型（长</p>
+<h3 id="笔记"><a href="#笔记" class="headerlink" title="笔记"></a>笔记</h3><h4 id="推荐系统算法的过程："><a href="#推荐系统算法的过程：" class="headerlink" title="推荐系统算法的过程："></a>推荐系统算法的过程：</h4><ol>
+<li><strong>召回</strong>（多条通道从数亿条笔记中取出几千条） </li>
+<li><strong>粗排</strong> </li>
+<li><strong>精排</strong> </li>
+<li><strong>重排</strong>（多样性重样&#x2F;广告插入）</li>
+</ol>
+<ul>
+<li>具体实践中，要<strong>对多种推荐算法机制进行测试，如何在有限的用户流量中进行测试？</strong>分层实验（同层互斥、多层正交），holdout对照组</li>
+</ul>
+<h2 id="召回"><a href="#召回" class="headerlink" title="召回"></a>召回</h2><h4 id="不同的召回通道？"><a href="#不同的召回通道？" class="headerlink" title="不同的召回通道？"></a>不同的召回通道？</h4><ol>
+<li><p><strong>基于商品的协同过滤ItemCF</strong></p>
+<ul>
+<li><p>使用两个索引进行召回</p>
+<blockquote>
+<p>如何使用<strong>索引</strong>进行召回？</p>
+<ol>
+<li>对每个用户ID记录其最近浏览的n个商品</li>
+<li>对每个商品记录其最相似的k个商品</li>
+<li>这种方式：索引的记录的更新是<strong>依赖离线计算</strong>的，而对用户推荐的线上计算量很小（nk）</li>
+</ol>
+</blockquote>
+</li>
+<li><p>ItemCF使用不同用户对同一种商品的喜好作为商品相似度的衡量，会导致一种问题：哪些毫不相关的商品但是被同时被分享到一个小圈子（例如微信群）中，会同时被这些用户所关注（点赞&#x2F;收藏），导致明明毫不相关的商品却拥有高相似度。</p>
+</li>
+<li><p>如何解决？<strong>swing模型</strong>，两个用户倘若喜欢的商品的重合度高，那么很可能在一个小圈子中，其对于商品相似度的贡献权重设置为低。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>基于用户的系统过滤UserCF</strong></p>
+<ul>
+<li>主要的思想是：对于不同用户，计算两个用户间的相似度（使用喜欢商品的相似度来衡量）</li>
+<li>需要降低热门商品的权重</li>
+<li>建立索引的方法：<ol>
+<li>用户-用户索引：找出对给定用户的最相似k个用户</li>
+<li>每个用户的last-n商品</li>
+<li>一共nk个商品</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p>最近邻召回时复杂度过高？使用近似最近邻算法，使用桶哈希局部区域的item（相当于聚类）；</p>
+</li>
+</ol>
+<ul>
+<li>余弦相似度就是：向量归一化后的向量内积相似度</li>
+</ul>
+<h4 id="双塔模型（工业界常用）："><a href="#双塔模型（工业界常用）：" class="headerlink" title="双塔模型（工业界常用）："></a><strong>双塔模型</strong>（工业界常用）：</h4><ol>
+<li><p>用户塔 + 物品塔</p>
+</li>
+<li><p>分别对用户和物品进行embedding，输出两个向量，使用向量计算相似度；余弦相似度作为用户对物品的兴趣预估值。</p>
+</li>
+<li><p>在计算了向量后，可以使用近似最近邻找到目标的物品</p>
+</li>
+<li><p>正样本 &#x2F; 负样本 &#x2F; 采样</p>
+<ul>
+<li><p>正样本：被点击过的样本</p>
+</li>
+<li><p>简单负样本：没有被召回的样本（几乎是全体物品）</p>
+</li>
+<li><p>困难负样本：被召回但是没有进入精排的样本&#x2F;被曝光但是没有被点击的样本 </p>
+</li>
+<li><p>困难负样本标志着用户可能感兴趣（被召回），但是没有实际点击的样本；它不能用于召回模型的训练，而只能用于排序模型的训练；</p>
+</li>
+</ul>
+</li>
+<li><p>如何进行训练？</p>
+<ul>
+<li>选择样本：pointwise；pairwise；listwise</li>
+</ul>
+</li>
+<li><p>如何进行线上推荐：</p>
+<ul>
+<li>离线存储物品向量：实现通过神经网络计算物品向量，并存入向量数据库和建立索引</li>
+<li>在线计算用户向量（因为用户特征可能是动态变化的）：近似最近邻查找</li>
+</ul>
+</li>
+<li><p>模型的更新？全量更新；增量更新</p>
+</li>
+</ol>
+<h4 id="双塔模型-自监督学习"><a href="#双塔模型-自监督学习" class="headerlink" title="双塔模型+自监督学习"></a>双塔模型+自监督学习</h4><ul>
+<li><p>推荐系统的<strong>头部效应</strong>严重：少部份物品占据绝大部分点击，从而学到较好的表征；但是大部分低曝光物体的表征学不好</p>
+</li>
+<li><p><strong>自监督对比学习【Contrastive Learning】方法：</strong>（Google提出&#x2F;小红书应用效果很好）</p>
+<blockquote>
+<p>对比学习的核心思想是将相似的样本（正样本对）拉近，将不相似的样本（负样本对）推远。<strong>通过这种方式，模型能够学习到样本的有用特征，使得相似样本在特征空间中靠近，不相似样本远离。</strong></p>
+</blockquote>
+<ul>
+<li>学习方法如下图所示：</li>
+</ul>
+</li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-22%2020.14.01.png" alt="截屏2024-07-22 20.14.01" style="zoom: 25%;" />
+
+<ul>
+<li><strong>双塔模型+自监督学习的训练过程：</strong><ul>
+<li>由于加上第二项自监督的对比损失，<strong>有利于冷启动&#x2F;低曝光的物品参与模型训练</strong>（否则如果只有第一项双塔模型的损失，低曝光物品几乎没有机会被训练）。</li>
+</ul>
+</li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-22%2020.15.58.png" alt="截屏2024-07-22 20.15.58" style="zoom:25%;" />
+
+
+
+
+
+<h4 id="Deep-Retrieval【深度检索】"><a href="#Deep-Retrieval【深度检索】" class="headerlink" title="Deep Retrieval【深度检索】"></a>Deep Retrieval【深度检索】</h4><blockquote>
+<p>来自 ByteDance<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2007.07203">【Link】</a>Deep Retrieval: Learning A Retrievable Structure for Large-Scale Recommendations</p>
+<p>相关blog阅读<a target="_blank" rel="noopener" href="https://www.cnblogs.com/massquantity/p/16583715.html">📖</a> （TDM 三部曲以及DR）</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1801.02294.pdf">Learning Tree-based Deep Model for Recommender Systems</a> (TDM, 2018)</li>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1902.07565.pdf">Joint Optimization of Tree-based Index and Deep Model for Recommender Systems</a> (JTM, 2019)</li>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2006.15408.pdf">Learning Optimal Tree Models under Beam Search</a> (OTM, 2020)</li>
+</ul>
+</blockquote>
+<ul>
+<li>索引结构是一个 $K*D$ 的矩阵，总共有 $D$ 层，每层 $K$ 个节点，如下图(a)所示，$d$代表路径的深度，$K$代表海量物品的个数；</li>
+<li><strong>路径：</strong>一条路径指的是一条物品序列【suchas：3-4-1】</li>
+<li>DR通过<strong>输入用户特征向量</strong>，得到 $P(path|user)$ 【如下图(b)流程所示】，表示对于特定用户的，选择某条物品路径的可能性。</li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-22%2021.08.22.png" alt="截屏2024-07-22 21.08.22" style="zoom: 33%;" />
+
+<ul>
+<li>通过 <strong>beam search 束搜索</strong>贪心选取beamsize条路径，作为召回的所有物品。<strong>具体完整的召回过程</strong>如下图所示。</li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-22%2020.58.09.png" alt="截屏2024-07-22 20.58.09" style="zoom: 25%;" />
+
+<ul>
+<li><p><strong>模型的训练：</strong></p>
+<ul>
+<li><p>同时学习 【用户-路径】以及【物品-路径】之间的关系。</p>
+</li>
+<li><p>训练【用户-路径】索引，即给定用户可以匹配多条路径；</p>
+<blockquote>
+<p>如何进行训练？可以通过用户点击过的物品，找出该物品对应的路径；就匹配了一个用户和多条路径，对模型进行训练使得$p(path|user)$尽量大</p>
+</blockquote>
+  <img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-22%2021.24.04.png" alt="截屏2024-07-22 21.24.04" style="zoom: 50%;" />
+</li>
+<li><p>训练【物品-路径】索引，即给定物品可以匹配多条路径；</p>
+<blockquote>
+<p>如何进行训练？</p>
+</blockquote>
+  <img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-22%2021.25.18.png" alt="截屏2024-07-22 21.25.18" style="zoom: 50%;" /></li>
+</ul>
+</li>
+</ul>
+<h4 id="其它召回通道"><a href="#其它召回通道" class="headerlink" title="其它召回通道"></a>其它召回通道</h4><blockquote>
+<p>都可以通过维护索引进行实现</p>
+</blockquote>
+<ul>
+<li><p><strong>地理位置召回：</strong>维护【地理位置&#x2F;城市-&gt;优质笔记列表】的索引进行召回。这样的召回没有个性化可言，但是如果和用户不匹配在排序中会被丢弃。</p>
+</li>
+<li><p><strong>关注作者&#x2F;交互作者&#x2F;相似作者召回：</strong></p>
+</li>
+<li><p><strong>缓存召回：</strong>精排后没被曝光的物品不能直接浪费 &#x2F; 缓存需要<strong>退场替换机制</strong>（存留天数&#x2F;是否被曝光&#x2F;缓存次数…)。</p>
+</li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-22%2021.33.16.png" alt="截屏2024-07-22 21.33.16" style="zoom:25%;" />
+
+ 
+
+<h4 id="曝光过滤-Bloom-Filter"><a href="#曝光过滤-Bloom-Filter" class="headerlink" title="曝光过滤 &amp; Bloom Filter"></a>曝光过滤 &amp; Bloom Filter</h4><blockquote>
+<p>由于两次刷新的间隔可能很短，所以有很高的实时性要求</p>
+</blockquote>
+<ul>
+<li><p><strong>曝光过滤：</strong>对用户已经曝光过的物品不能再进行推送</p>
+</li>
+<li><p>实现：通过<strong>记录</strong>最近曝光过的物品-曝光列表</p>
+</li>
+<li><p>限制：召回数千个物品，如果对物品进行一一匹配是否在曝光列表中【也有数千个物品】，复杂度过高</p>
+</li>
+<li><p>解决：<strong>Bloom Filter</strong>：【一种数据结构】</p>
+<blockquote>
+<p>思想：维护一个二进制向量m bit；$k$个哈希函数，对每个已经曝光的物品进行$k$次哈希；只要召回物品多次的哈希存在至少一个0就可以肯定一定没有曝光；存在一定误判的可能性【即未曝光误判为已曝光】</p>
+</blockquote>
+</li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-22%2021.44.40.png" alt="截屏2024-07-22 21.44.40" style="zoom:15%;" />
+
+<ul>
+<li><p>Bloom Filter<strong>参数选取</strong>：</p>
+  <img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-22%2021.48.36.png" alt="截屏2024-07-22 21.48.36" style="zoom:25%;" /></li>
+</ul>
+<h2 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h2><ul>
+<li>包括精排&#x2F;粗排，这里不进行区分，因为是计算规模的区别；</li>
+</ul>
+<h4 id="多目标模型"><a href="#多目标模型" class="headerlink" title="多目标模型"></a>多目标模型</h4><ul>
+<li>由一系列<strong>特征</strong>【包括用户特征等】通过神经网络预测<strong>点击率</strong>【包括收藏率、点赞率】</li>
+</ul>
+<h4 id="预估值校准"><a href="#预估值校准" class="headerlink" title="预估值校准"></a>预估值校准</h4><ul>
+<li>由于正负样本数不均衡【这里的正例是用户点击的物品，正例&gt;&gt;负例】，所有需要对负样本做下采样。</li>
+<li>令正样本数为$n_+$，负样本数为$n_-$，$\alpha$为采样率</li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/image-20240723172724988.png" alt="image-20240723172724988" style="zoom:15%;" />
+
+<h4 id="Multi-gate-Mixture-of-Experts【MMoE】"><a href="#Multi-gate-Mixture-of-Experts【MMoE】" class="headerlink" title="Multi-gate Mixture-of-Experts【MMoE】"></a>Multi-gate Mixture-of-Experts【MMoE】</h4>
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/02lb">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E3%80%90%E5%B7%A5%E4%B8%9A%E7%95%8C%E3%80%91%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E8%AF%BE%E7%A8%8B"><span class="toc-number">1.</span> <span class="toc-text">【工业界】推荐系统课程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#GuideLines%EF%BC%9A"><span class="toc-number">1.0.1.</span> <span class="toc-text">GuideLines：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%94%E8%AE%B0"><span class="toc-number">1.0.2.</span> <span class="toc-text">笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E7%AE%97%E6%B3%95%E7%9A%84%E8%BF%87%E7%A8%8B%EF%BC%9A"><span class="toc-number">1.0.2.1.</span> <span class="toc-text">推荐系统算法的过程：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%AC%E5%9B%9E"><span class="toc-number">1.1.</span> <span class="toc-text">召回</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%8D%E5%90%8C%E7%9A%84%E5%8F%AC%E5%9B%9E%E9%80%9A%E9%81%93%EF%BC%9F"><span class="toc-number">1.1.0.1.</span> <span class="toc-text">不同的召回通道？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%8C%E5%A1%94%E6%A8%A1%E5%9E%8B%EF%BC%88%E5%B7%A5%E4%B8%9A%E7%95%8C%E5%B8%B8%E7%94%A8%EF%BC%89%EF%BC%9A"><span class="toc-number">1.1.0.2.</span> <span class="toc-text">双塔模型（工业界常用）：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%8C%E5%A1%94%E6%A8%A1%E5%9E%8B-%E8%87%AA%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0"><span class="toc-number">1.1.0.3.</span> <span class="toc-text">双塔模型+自监督学习</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Deep-Retrieval%E3%80%90%E6%B7%B1%E5%BA%A6%E6%A3%80%E7%B4%A2%E3%80%91"><span class="toc-number">1.1.0.4.</span> <span class="toc-text">Deep Retrieval【深度检索】</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B6%E5%AE%83%E5%8F%AC%E5%9B%9E%E9%80%9A%E9%81%93"><span class="toc-number">1.1.0.5.</span> <span class="toc-text">其它召回通道</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9B%9D%E5%85%89%E8%BF%87%E6%BB%A4-Bloom-Filter"><span class="toc-number">1.1.0.6.</span> <span class="toc-text">曝光过滤 &amp; Bloom Filter</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%92%E5%BA%8F"><span class="toc-number">1.2.</span> <span class="toc-text">排序</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%9A%E7%9B%AE%E6%A0%87%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.2.0.1.</span> <span class="toc-text">多目标模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A2%84%E4%BC%B0%E5%80%BC%E6%A0%A1%E5%87%86"><span class="toc-number">1.2.0.2.</span> <span class="toc-text">预估值校准</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Multi-gate-Mixture-of-Experts%E3%80%90MMoE%E3%80%91"><span class="toc-number">1.2.0.3.</span> <span class="toc-text">Multi-gate Mixture-of-Experts【MMoE】</span></a></li></ol></li></ol></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://02lb.github.io/2024/07/22/RecSys/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://02lb.github.io/2024/07/22/RecSys/&text=RecSys[推荐系统]"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://02lb.github.io/2024/07/22/RecSys/&title=RecSys[推荐系统]"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://02lb.github.io/2024/07/22/RecSys/&is_video=false&description=RecSys[推荐系统]"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=RecSys[推荐系统]&body=Check out this article: https://02lb.github.io/2024/07/22/RecSys/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://02lb.github.io/2024/07/22/RecSys/&title=RecSys[推荐系统]"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://02lb.github.io/2024/07/22/RecSys/&title=RecSys[推荐系统]"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://02lb.github.io/2024/07/22/RecSys/&title=RecSys[推荐系统]"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://02lb.github.io/2024/07/22/RecSys/&title=RecSys[推荐系统]"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://02lb.github.io/2024/07/22/RecSys/&name=RecSys[推荐系统]&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://02lb.github.io/2024/07/22/RecSys/&t=RecSys[推荐系统]"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2024
+    Lee
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/02lb">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
