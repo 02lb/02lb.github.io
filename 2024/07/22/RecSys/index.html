@@ -6,12 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="【工业界】推荐系统课程 Bilibili：Wang Shusen 链接：推荐系统公开课——8小时完整版，讲解工业界真实的推荐系统  GuideLines： （可以结合笔记进行复习，不理解的内容直接跳到对应视频坐标）  概要：00:00 概要01：推荐系统的基本概念 ﻿09:19 概要02：推荐系统的链路 ﻿16:53 概要03：推荐系统的A&#x2F;B测试 召回：33:15 召回01：基于物品的">
+    <meta name="description" content="【工业界】推荐系统课程 Bilibili：Wang Shusen 链接：推荐系统公开课——8小时完整版，讲解工业界真实的推荐系统 （可以结合笔记进行复习，不理解的内容直接跳到对应视频坐标） 视频分部分🔗 推荐阅读（关于推荐系统的找到的比较好的读物）  从零单排推荐系统   笔记推荐系统算法的过程： 召回 粗排  精排  重排   具体实践中，要对多种推荐算法机制进行测试，如何在有限的用户流量中进">
 <meta property="og:type" content="article">
 <meta property="og:title" content="RecSys[推荐系统]">
 <meta property="og:url" content="https://02lb.github.io/2024/07/22/RecSys/index.html">
 <meta property="og:site_name" content="Bo Li’s Blog">
-<meta property="og:description" content="【工业界】推荐系统课程 Bilibili：Wang Shusen 链接：推荐系统公开课——8小时完整版，讲解工业界真实的推荐系统  GuideLines： （可以结合笔记进行复习，不理解的内容直接跳到对应视频坐标）  概要：00:00 概要01：推荐系统的基本概念 ﻿09:19 概要02：推荐系统的链路 ﻿16:53 概要03：推荐系统的A&#x2F;B测试 召回：33:15 召回01：基于物品的">
+<meta property="og:description" content="【工业界】推荐系统课程 Bilibili：Wang Shusen 链接：推荐系统公开课——8小时完整版，讲解工业界真实的推荐系统 （可以结合笔记进行复习，不理解的内容直接跳到对应视频坐标） 视频分部分🔗 推荐阅读（关于推荐系统的找到的比较好的读物）  从零单排推荐系统   笔记推荐系统算法的过程： 召回 粗排  精排  重排   具体实践中，要对多种推荐算法机制进行测试，如何在有限的用户流量中进">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-22%2020.14.01.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-22%2020.15.58.png">
@@ -22,14 +22,63 @@
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-22%2021.33.16.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-22%2021.44.40.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-22%2021.48.36.png">
-<meta property="og:image" content="https://02lb.github.io/Users/lbyyds/Library/Application%20Support/typora-user-images/%E6%88%AA%E5%B1%8F2024-07-29%2019.30.24.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-29%2019.30.24.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-29%2018.58.53.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/image-20240723172724988.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-29%2019.07.14.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-29%2019.06.56.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-29%2019.38.21.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-30%2001.16.43.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-30%2001.20.11.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-30%2002.00.55.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-30%2002.27.29.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-30%2002.32.15.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-30%2002.34.31.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-30%2002.44.35.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-30%2002.52.16.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-30%2003.05.55.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-30%2003.27.54.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-30%2003.28.31.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-30%2003.34.11.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-03%2009.55.58.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-03%2009.57.42.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-03%2010.03.33.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-03%2010.10.03.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-03%2010.15.25.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-03%2010.18.42.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-07%2010.39.43.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-07%2010.42.33.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-03%2010.33.40.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-07%2010.46.46.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-07%2010.47.29.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-07%2010.53.23.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-08%2009.27.21.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-08%2009.26.02.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-08%2009.28.56.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-08%2009.36.36.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-08%2009.41.19.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-08%2009.46.01.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-08%2009.47.30.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-08%2010.35.38.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-08%2010.43.49.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-08%2010.52.41.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-08%2011.07.34.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-08%2012.04.10.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-08%2012.10.50.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-08%2012.21.14.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-08%2012.40.27.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-08%2015.20.49.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-08%2015.26.25.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-08%2015.29.25.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-08%2015.44.41.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-08%2015.55.06.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-08%2015.57.28.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-08%2015.59.44.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-08%2016.06.50.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-08%2016.13.33.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-08%2016.14.39.png">
 <meta property="article:published_time" content="2024-07-22T10:56:05.000Z">
-<meta property="article:modified_time" content="2024-07-29T11:45:43.391Z">
+<meta property="article:modified_time" content="2024-08-08T10:09:42.302Z">
 <meta property="article:author" content="Lee">
 <meta property="article:tag" content="推荐系统">
 <meta name="twitter:card" content="summary">
@@ -139,7 +188,7 @@
     
     
       <div id="toc">
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E3%80%90%E5%B7%A5%E4%B8%9A%E7%95%8C%E3%80%91%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E8%AF%BE%E7%A8%8B"><span class="toc-number">1.</span> <span class="toc-text">【工业界】推荐系统课程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#GuideLines%EF%BC%9A"><span class="toc-number">1.0.1.</span> <span class="toc-text">GuideLines：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%94%E8%AE%B0"><span class="toc-number">1.0.2.</span> <span class="toc-text">笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E7%AE%97%E6%B3%95%E7%9A%84%E8%BF%87%E7%A8%8B%EF%BC%9A"><span class="toc-number">1.0.2.1.</span> <span class="toc-text">推荐系统算法的过程：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%AC%E5%9B%9E"><span class="toc-number">1.1.</span> <span class="toc-text">召回</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%8D%E5%90%8C%E7%9A%84%E5%8F%AC%E5%9B%9E%E9%80%9A%E9%81%93%EF%BC%9F"><span class="toc-number">1.1.0.1.</span> <span class="toc-text">不同的召回通道？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%8C%E5%A1%94%E6%A8%A1%E5%9E%8B%EF%BC%88%E5%B7%A5%E4%B8%9A%E7%95%8C%E5%B8%B8%E7%94%A8%EF%BC%89%EF%BC%9A"><span class="toc-number">1.1.0.2.</span> <span class="toc-text">双塔模型（工业界常用）：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%8C%E5%A1%94%E6%A8%A1%E5%9E%8B-%E8%87%AA%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0"><span class="toc-number">1.1.0.3.</span> <span class="toc-text">双塔模型+自监督学习</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Deep-Retrieval%E3%80%90%E6%B7%B1%E5%BA%A6%E6%A3%80%E7%B4%A2%E3%80%91"><span class="toc-number">1.1.0.4.</span> <span class="toc-text">Deep Retrieval【深度检索】</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B6%E5%AE%83%E5%8F%AC%E5%9B%9E%E9%80%9A%E9%81%93"><span class="toc-number">1.1.0.5.</span> <span class="toc-text">其它召回通道</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9B%9D%E5%85%89%E8%BF%87%E6%BB%A4-Bloom-Filter"><span class="toc-number">1.1.0.6.</span> <span class="toc-text">曝光过滤 &amp; Bloom Filter</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%92%E5%BA%8F"><span class="toc-number">1.2.</span> <span class="toc-text">排序</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%B9%E5%BE%81%E4%BF%A1%E6%81%AF"><span class="toc-number">1.2.0.1.</span> <span class="toc-text">特征信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%9A%E7%9B%AE%E6%A0%87%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.2.0.2.</span> <span class="toc-text">多目标模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A2%84%E4%BC%B0%E5%80%BC%E6%A0%A1%E5%87%86"><span class="toc-number">1.2.0.3.</span> <span class="toc-text">预估值校准</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Multi-gate-Mixture-of-Experts%E3%80%90MMoE%E3%80%91"><span class="toc-number">1.2.0.4.</span> <span class="toc-text">Multi-gate Mixture-of-Experts【MMoE】</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B2%97%E6%8E%92"><span class="toc-number">1.2.0.5.</span> <span class="toc-text">粗排</span></a></li></ol></li></ol></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E3%80%90%E5%B7%A5%E4%B8%9A%E7%95%8C%E3%80%91%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E8%AF%BE%E7%A8%8B"><span class="toc-number">1.</span> <span class="toc-text">【工业界】推荐系统课程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%94%E8%AE%B0"><span class="toc-number">1.0.1.</span> <span class="toc-text">笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E7%AE%97%E6%B3%95%E7%9A%84%E8%BF%87%E7%A8%8B%EF%BC%9A"><span class="toc-number">1.0.1.1.</span> <span class="toc-text">推荐系统算法的过程：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%AC%E5%9B%9E"><span class="toc-number">1.1.</span> <span class="toc-text">召回</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%8D%E5%90%8C%E7%9A%84%E5%8F%AC%E5%9B%9E%E9%80%9A%E9%81%93%EF%BC%9F"><span class="toc-number">1.1.0.1.</span> <span class="toc-text">不同的召回通道？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%8C%E5%A1%94%E6%A8%A1%E5%9E%8B%EF%BC%88%E5%B7%A5%E4%B8%9A%E7%95%8C%E5%B8%B8%E7%94%A8%EF%BC%89%EF%BC%9A"><span class="toc-number">1.1.0.2.</span> <span class="toc-text">双塔模型（工业界常用）：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%8C%E5%A1%94%E6%A8%A1%E5%9E%8B-%E8%87%AA%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0"><span class="toc-number">1.1.0.3.</span> <span class="toc-text">双塔模型+自监督学习</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Deep-Retrieval%E3%80%90%E6%B7%B1%E5%BA%A6%E6%A3%80%E7%B4%A2%E3%80%91"><span class="toc-number">1.1.0.4.</span> <span class="toc-text">Deep Retrieval【深度检索】</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B6%E5%AE%83%E5%8F%AC%E5%9B%9E%E9%80%9A%E9%81%93"><span class="toc-number">1.1.0.5.</span> <span class="toc-text">其它召回通道</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9B%9D%E5%85%89%E8%BF%87%E6%BB%A4-Bloom-Filter"><span class="toc-number">1.1.0.6.</span> <span class="toc-text">曝光过滤 &amp; Bloom Filter</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%92%E5%BA%8F"><span class="toc-number">1.2.</span> <span class="toc-text">排序</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%B9%E5%BE%81%E4%BF%A1%E6%81%AF"><span class="toc-number">1.2.0.1.</span> <span class="toc-text">特征信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%9A%E7%9B%AE%E6%A0%87%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.2.0.2.</span> <span class="toc-text">多目标模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A2%84%E4%BC%B0%E5%80%BC%E6%A0%A1%E5%87%86"><span class="toc-number">1.2.0.3.</span> <span class="toc-text">预估值校准</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Multi-gate-Mixture-of-Experts%E3%80%90MMoE%E3%80%91"><span class="toc-number">1.2.0.4.</span> <span class="toc-text">Multi-gate Mixture-of-Experts【MMoE】</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B2%97%E6%8E%92"><span class="toc-number">1.2.0.5.</span> <span class="toc-text">粗排</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%89%B9%E5%BE%81%E4%BA%A4%E5%8F%89"><span class="toc-number">1.3.</span> <span class="toc-text">特征交叉</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8C%E9%98%B6%E4%BA%A4%E5%8F%89%E7%89%B9%E5%BE%81"><span class="toc-number">1.3.0.1.</span> <span class="toc-text">二阶交叉特征</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Factorized-Machine%EF%BC%88FM%EF%BC%89"><span class="toc-number">1.3.0.2.</span> <span class="toc-text">Factorized Machine（FM）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B7%B1%E5%BA%A6%E4%BA%A4%E5%8F%89%E7%BD%91%E7%BB%9C%EF%BC%88DCN%EF%BC%8CDeep-Cross-Network%EF%BC%89"><span class="toc-number">1.3.0.3.</span> <span class="toc-text">深度交叉网络（DCN，Deep &amp; Cross Network）</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E7%BB%93%E6%9E%84%EF%BC%9A%E4%BA%A4%E5%8F%89%E5%B1%82-%E4%BA%A4%E5%8F%89%E7%BD%91%E7%BB%9C"><span class="toc-number">1.3.0.3.1.</span> <span class="toc-text">核心结构：交叉层&#x2F;交叉网络</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#LHUC%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84"><span class="toc-number">1.3.0.4.</span> <span class="toc-text">LHUC网络结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#SENet"><span class="toc-number">1.3.0.5.</span> <span class="toc-text">SENet</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Bilinear-Cross"><span class="toc-number">1.3.0.6.</span> <span class="toc-text">Bilinear Cross</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#FiBiNET"><span class="toc-number">1.3.0.7.</span> <span class="toc-text">FiBiNET</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E8%A1%8C%E4%B8%BA%E5%BA%8F%E5%88%97%E5%BB%BA%E6%A8%A1"><span class="toc-number">1.4.</span> <span class="toc-text">用户行为序列建模</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#LastN%E7%89%B9%E5%BE%81"><span class="toc-number">1.4.0.1.</span> <span class="toc-text">LastN特征</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#DIN%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.4.0.2.</span> <span class="toc-text">DIN模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#SIM%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.4.0.3.</span> <span class="toc-text">SIM模型</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%87%8D%E6%8E%92%EF%BC%9A%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%A4%9A%E6%A0%B7%E6%80%A7"><span class="toc-number">1.5.</span> <span class="toc-text">重排：推荐系统的多样性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9B%B8%E4%BC%BC%E6%80%A7%E5%BA%A6%E9%87%8F"><span class="toc-number">1.5.0.1.</span> <span class="toc-text">相似性度量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E%E5%9B%BE%E6%96%87%E5%86%85%E5%AE%B9%E7%9A%84%E7%89%A9%E5%93%81%E5%90%91%E9%87%8F%E8%A1%A8%E5%BE%81"><span class="toc-number">1.5.0.2.</span> <span class="toc-text">基于图文内容的物品向量表征</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Maximal-Marginal-Relevance-MMR"><span class="toc-number">1.5.0.3.</span> <span class="toc-text">Maximal Marginal Relevance[MMR]</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#DPP%E5%A4%9A%E6%A0%B7%E6%80%A7%E7%AE%97%E6%B3%95"><span class="toc-number">1.5.0.4.</span> <span class="toc-text">DPP多样性算法</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80"><span class="toc-number">1.5.0.4.1.</span> <span class="toc-text">数学基础</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#DPP%E5%9C%A8%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%BA%94%E7%94%A8"><span class="toc-number">1.5.0.5.</span> <span class="toc-text">DPP在推荐系统的应用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#DPP%E5%BF%AB%E9%80%9F%E7%AE%97%E6%B3%95"><span class="toc-number">1.5.0.6.</span> <span class="toc-text">DPP快速算法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%89%A9%E5%93%81%E5%86%B7%E5%90%AF%E5%8A%A8"><span class="toc-number">1.6.</span> <span class="toc-text">物品冷启动</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%B7%E5%90%AF%E5%8A%A8%E7%9A%84%E8%AF%84%E4%BB%B7%E6%8C%87%E6%A0%87"><span class="toc-number">1.6.0.1.</span> <span class="toc-text">冷启动的评价指标</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%B7%E5%90%AF%E5%8A%A8%EF%BC%9A%E4%BC%98%E5%8C%96%E5%8F%AC%E5%9B%9E%E9%80%9A%E9%81%93"><span class="toc-number">1.6.0.2.</span> <span class="toc-text">冷启动：优化召回通道</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Sol1-%E6%94%B9%E8%BF%9B%E5%8F%8C%E5%A1%94%E6%A8%A1%E5%9E%8B%E4%BB%A5%E9%80%82%E7%94%A8%E5%86%B7%E5%90%AF%E5%8A%A8"><span class="toc-number">1.6.0.2.1.</span> <span class="toc-text">Sol1: 改进双塔模型以适用冷启动</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Sol2-%E4%BD%BF%E7%94%A8%E7%B1%BB%E7%9B%AE%E8%BF%9B%E8%A1%8C%E5%8F%AC%E5%9B%9E"><span class="toc-number">1.6.0.2.2.</span> <span class="toc-text">Sol2: 使用类目进行召回</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Sol3-%E8%81%9A%E7%B1%BB%E5%8F%AC%E5%9B%9E"><span class="toc-number">1.6.0.2.3.</span> <span class="toc-text">Sol3: 聚类召回</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Sol4-Look-Alike%E5%8F%AC%E5%9B%9E"><span class="toc-number">1.6.0.2.4.</span> <span class="toc-text">Sol4: Look-Alike召回</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Look-Alike-%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-number">1.6.0.2.5.</span> <span class="toc-text">Look-Alike 的工作原理</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%B7%E5%90%AF%E5%8A%A8%EF%BC%9A%E6%B5%81%E9%87%8F%E8%B0%83%E6%8E%A7"><span class="toc-number">1.6.0.3.</span> <span class="toc-text">冷启动：流量调控</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B6%A8%E6%8C%87%E6%A0%87%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-number">1.7.</span> <span class="toc-text">涨指标的方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%AC%E5%9B%9E%E9%98%B6%E6%AE%B5%EF%BC%9A%E6%94%B9%E8%BF%9B"><span class="toc-number">1.7.0.1.</span> <span class="toc-text">召回阶段：改进</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AF%B9%E5%8F%8C%E5%A1%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%94%B9%E8%BF%9B"><span class="toc-number">1.7.0.1.1.</span> <span class="toc-text">对双塔模型的改进</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AF%B9Item-to-Item%E7%9A%84%E6%94%B9%E8%BF%9B"><span class="toc-number">1.7.0.1.2.</span> <span class="toc-text">对Item-to-Item的改进</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8E%92%E5%BA%8F%E9%98%B6%E6%AE%B5%EF%BC%9A%E6%94%B9%E8%BF%9B"><span class="toc-number">1.7.0.2.</span> <span class="toc-text">排序阶段：改进</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%B2%97%E7%B2%BE%E6%8E%92%E4%B8%80%E8%87%B4%E6%80%A7%E5%BB%BA%E6%A8%A1"><span class="toc-number">1.7.0.2.1.</span> <span class="toc-text">粗精排一致性建模</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%80%81%E6%B1%A4%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.7.0.2.2.</span> <span class="toc-text">老汤模型</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%9A%E6%A0%B7%E6%80%A7%E6%8F%90%E5%8D%87"><span class="toc-number">1.7.0.3.</span> <span class="toc-text">多样性提升</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8F%8C%E5%A1%94%E6%A8%A1%E5%9E%8B-%E6%B7%BB%E5%8A%A0%E5%99%AA%E5%A3%B0"><span class="toc-number">1.7.0.3.1.</span> <span class="toc-text">双塔模型-添加噪声</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%8E%A2%E7%B4%A2%E6%B5%81%E9%87%8F"><span class="toc-number">1.7.0.3.2.</span> <span class="toc-text">探索流量</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%A4%9A%E6%A0%B7%E6%80%A7%E6%80%BB%E7%BB%93"><span class="toc-number">1.7.0.3.3.</span> <span class="toc-text">多样性总结</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%B9%E6%AE%8A%E7%94%A8%E6%88%B7%E5%92%8C%E4%BA%BA%E7%BE%A4"><span class="toc-number">1.7.0.4.</span> <span class="toc-text">特殊用户和人群</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%A4%E4%BA%92%E8%A1%8C%E4%B8%BA"><span class="toc-number">1.7.0.5.</span> <span class="toc-text">交互行为</span></a></li></ol></li></ol></li></ol></li></ol>
       </div>
     
   </span>
@@ -187,20 +236,18 @@
     <h1 id="【工业界】推荐系统课程"><a href="#【工业界】推荐系统课程" class="headerlink" title="【工业界】推荐系统课程"></a>【工业界】推荐系统课程</h1><blockquote>
 <p>Bilibili：Wang Shusen</p>
 <p>链接：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1HZ421U77y">推荐系统公开课——8小时完整版，讲解工业界真实的推荐系统</a></p>
-</blockquote>
-<h3 id="GuideLines："><a href="#GuideLines：" class="headerlink" title="GuideLines："></a>GuideLines：</h3><blockquote>
 <p>（可以结合笔记进行复习，不理解的内容直接跳到对应视频坐标）</p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1re411F7cp">视频分部分🔗</a></p>
+<p>推荐阅读（关于推荐系统的找到的比较好的读物）</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/407871839">从零单排推荐系统</a></li>
+</ul>
 </blockquote>
-<p><strong>概要：</strong><br>00:00 概要01：推荐系统的基本概念 ﻿<br>09:19 概要02：推荐系统的链路 ﻿<br>16:53 概要03：推荐系统的A&#x2F;B测试</p>
-<p><strong>召回：</strong><br>33:15 召回01：基于物品的协同过滤 ﻿<br>48:24 召回02：Swing 模型 ﻿<br>55:39 召回03：基于用户的协同过滤 ﻿<br>01:10:11 召回04：离散特征处理 ﻿<br>01:18:17 召回05：矩阵补充、最近邻查 ﻿<br>01:34:45 召回06：双塔模型——模型结构和训练<br>01:48:46 召回07：双塔模型——正负样本<br>02:02:00 召回08：双塔模型——线上召回和更新<br>02:14:50 召回09：双塔模型+自监督学习<br>02:35:07 召回10：Deep Retrieval<br>03:03:44 召回11：其他召回通道<br>03:11:43 召回12：曝光过滤 &amp; Bloom Filter</p>
-<p><strong>排序：</strong><br>03:23:40 排序01：多目标排序模型 ﻿<br>03:33:30 排序02：Multi-gate Mixture-of-Experts【MMoE】 ﻿<br>03:40:06 排序03：预估分数的融合 ﻿<br>03:43:50 排序04：视频播放建模 ﻿<br>03:51:25 排序05：排序模型的特征 ﻿<br>04:03:58 排序06：粗排</p>
-<p><strong>特征交叉：</strong><br>04:12:34 特征交叉01：Factorized Machine【FM】﻿<br>04:18:29 特征交叉02：深度交叉网络【DCN】 ﻿<br>04:25:46 特征交叉03：LHUC网络结构<br>04:29:54 特征交叉04：SENet &amp; Bilinear Cross </p>
-<p>04:38:42 行为序列01：用户行为序列建模<br>04:41:40 行为序列02：DIN模型<br>04:46:22 行为序列03：SIM模型（长</p>
 <h3 id="笔记"><a href="#笔记" class="headerlink" title="笔记"></a>笔记</h3><h4 id="推荐系统算法的过程："><a href="#推荐系统算法的过程：" class="headerlink" title="推荐系统算法的过程："></a>推荐系统算法的过程：</h4><ol>
-<li><strong>召回</strong>（多条通道从数亿条笔记中取出几千条） </li>
+<li><strong>召回</strong></li>
 <li><strong>粗排</strong> </li>
 <li><strong>精排</strong> </li>
-<li><strong>重排</strong>（多样性重样&#x2F;广告插入）</li>
+<li><strong>重排</strong></li>
 </ol>
 <ul>
 <li>具体实践中，要<strong>对多种推荐算法机制进行测试，如何在有限的用户流量中进行测试？</strong>分层实验（同层互斥、多层正交），holdout对照组</li>
@@ -287,7 +334,7 @@
 </ul>
 </li>
 </ul>
-<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-22%2020.14.01.png" alt="截屏2024-07-22 20.14.01" style="zoom: 25%;" />
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-22%2020.14.01.png" alt="截屏2024-07-22 20.14.01" style="zoom: 20%;" />
 
 <ul>
 <li><strong>双塔模型+自监督学习的训练过程：</strong><ul>
@@ -295,7 +342,7 @@
 </ul>
 </li>
 </ul>
-<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-22%2020.15.58.png" alt="截屏2024-07-22 20.15.58" style="zoom:25%;" />
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-22%2020.15.58.png" alt="截屏2024-07-22 20.15.58" style="zoom:20%;" />
 
 
 
@@ -320,7 +367,7 @@
 <ul>
 <li>通过 <strong>beam search 束搜索</strong>贪心选取beamsize条路径，作为召回的所有物品。<strong>具体完整的召回过程</strong>如下图所示。</li>
 </ul>
-<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-22%2020.58.09.png" alt="截屏2024-07-22 20.58.09" style="zoom: 25%;" />
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-22%2020.58.09.png" alt="截屏2024-07-22 20.58.09" style="zoom: 20%;" />
 
 <ul>
 <li><p><strong>模型的训练：</strong></p>
@@ -331,13 +378,13 @@
 <blockquote>
 <p>如何进行训练？可以通过用户点击过的物品，找出该物品对应的路径；就匹配了一个用户和多条路径，对模型进行训练使得$p(path|user)$尽量大</p>
 </blockquote>
-  <img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-22%2021.24.04.png" alt="截屏2024-07-22 21.24.04" style="zoom: 50%;" />
+  <img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-22%2021.24.04.png" alt="截屏2024-07-22 21.24.04" style="zoom: 33%;" />
 </li>
 <li><p>训练【物品-路径】索引，即给定物品可以匹配多条路径；</p>
 <blockquote>
 <p>如何进行训练？</p>
 </blockquote>
-  <img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-22%2021.25.18.png" alt="截屏2024-07-22 21.25.18" style="zoom: 50%;" /></li>
+  <img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-22%2021.25.18.png" alt="截屏2024-07-22 21.25.18" style="zoom: 33%;" /></li>
 </ul>
 </li>
 </ul>
@@ -352,7 +399,7 @@
 <li><p><strong>缓存召回：</strong>精排后没被曝光的物品不能直接浪费 &#x2F; 缓存需要<strong>退场替换机制</strong>（存留天数&#x2F;是否被曝光&#x2F;缓存次数…)。</p>
 </li>
 </ul>
-<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-22%2021.33.16.png" alt="截屏2024-07-22 21.33.16" style="zoom:25%;" />
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-22%2021.33.16.png" alt="截屏2024-07-22 21.33.16" style="zoom: 33%;" />
 
  
 
@@ -376,7 +423,7 @@
 
 <ul>
 <li><p>Bloom Filter<strong>参数选取</strong>：</p>
-  <img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-22%2021.48.36.png" alt="截屏2024-07-22 21.48.36" style="zoom:25%;" /></li>
+  <img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-22%2021.48.36.png" alt="截屏2024-07-22 21.48.36" style="zoom: 20%;" /></li>
 </ul>
 <h2 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h2><ul>
 <li>包括精排&#x2F;粗排，这里不进行区分，因为是<strong>计算规模的区别</strong>；</li>
@@ -384,7 +431,7 @@
 <h4 id="特征信息"><a href="#特征信息" class="headerlink" title="特征信息"></a>特征信息</h4><ul>
 <li>提高样本的特征覆盖率，有以下几个角度的特征信息，用于排序所需：</li>
 </ul>
-<img src="/Users/lbyyds/Library/Application Support/typora-user-images/截屏2024-07-29 19.30.24.png" alt="截屏2024-07-29 19.30.24" style="zoom:25%;" />
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-29%2019.30.24.png" alt="截屏2024-07-29 19.30.24" style="zoom:20%;" />
 
 <h4 id="多目标模型"><a href="#多目标模型" class="headerlink" title="多目标模型"></a>多目标模型</h4><ul>
 <li>排序模型由一系列<strong>特征</strong>【包括用户特征等】通过神经网络预测<strong>点击率</strong>【包括收藏率、点赞率】，融合这些点击率的加权和作为排序分数</li>
@@ -431,6 +478,465 @@
 <li><strong>优势在于：</strong>对于<strong>用户特征可以很大，因为只做一次推理</strong>；对于<strong>物品特征由于相对静态可以进行缓存</strong>；对于动态的统计特征需要进行多次推理，因此使用较小的交叉塔。</li>
 <li>三塔模型是后期融合，先推理和融合，因此开销较小。</li>
 </ul>
+<h2 id="特征交叉"><a href="#特征交叉" class="headerlink" title="特征交叉"></a>特征交叉</h2><ul>
+<li><strong>概念</strong>：特征交叉（Feature Crossing）是机器学习中特征工程的一种技术，<strong>通过组合多个原始特征来创建新的特征</strong>。这些新特征可以捕捉到原始特征之间的相互作用，从而提高模型的表达能力和预测性能。</li>
+<li>在推荐系统中，特征交叉是非常重要的一部分，它通过将用户和物品的不同特征进行组合，帮助模型更好地捕捉用户偏好和物品特性之间的复杂关系，从而提高推荐的准确性。</li>
+<li>在召回和排序的过程都会用到特征交叉 ；</li>
+</ul>
+<h4 id="二阶交叉特征"><a href="#二阶交叉特征" class="headerlink" title="二阶交叉特征"></a>二阶交叉特征</h4><ul>
+<li>如下图：d个特征进行交叉</li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-30%2001.16.43.png" alt="截屏2024-07-30 01.16.43" style="zoom:25%;" />
+
+<ul>
+<li><strong>存在问题？</strong>当d较大时，<strong>参数过多</strong>，导致过拟合问题；<strong>解决？</strong>使用Factorized Machine</li>
+</ul>
+<h4 id="Factorized-Machine（FM）"><a href="#Factorized-Machine（FM）" class="headerlink" title="Factorized Machine（FM）"></a>Factorized Machine（FM）</h4><ul>
+<li>把矩阵U进行矩阵分解，<strong>从而使得每一个$u_{ij}$为两个向量的内积</strong></li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-30%2001.20.11.png" alt="截屏2024-07-30 01.20.11" style="zoom:25%;" />
+
+<ul>
+<li>矩阵近似分解<strong>有效减少了参数数量</strong></li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-30%2002.00.55.png" alt="截屏2024-07-30 02.00.55" style="zoom:25%;" />
+
+<ul>
+<li>FM是线性模型的替代品，即<strong>在线性模型后面加入二阶交叉特征（FM对二阶交叉特征进行矩阵分解-减少权重参数数量），增强其表达能力；</strong></li>
+</ul>
+<h4 id="深度交叉网络（DCN，Deep-Cross-Network）"><a href="#深度交叉网络（DCN，Deep-Cross-Network）" class="headerlink" title="深度交叉网络（DCN，Deep &amp; Cross Network）"></a>深度交叉网络（DCN，Deep &amp; Cross Network）</h4><blockquote>
+<p>论文🔗：<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1708.05123">Deep &amp;Cross Network for Ad Click Predictions</a> KDD2017-Google（过时）<br>改进：<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2008.13535">DCNV2:Improved Deep &amp;Cross Network and Practical Lessons for Web-scale Learning to Rank Systems</a></p>
+</blockquote>
+<ul>
+<li>前面内容在召回&#x2F;排序的多种模型（例如双塔&#x2F;MMoE等）中许多都使用了神经网络；简单来看，这些可以使用全连接的神经网络MLP；<strong>深度交叉网络是一种神经网络，用于替代全连接神经网络。</strong></li>
+<li>概念：一种<strong>用于CTR预测</strong>的深度学习模型，它<strong>结合了深度神经网络（Deep部分）和交叉网络（Cross部分）</strong>，从而能够捕捉特征的高阶和低阶交互信息。DCN通过引入交叉层来增强特征的交互学习，提升了模型的表现。</li>
+</ul>
+<h5 id="核心结构：交叉层-交叉网络"><a href="#核心结构：交叉层-交叉网络" class="headerlink" title="核心结构：交叉层&#x2F;交叉网络"></a>核心结构：交叉层&#x2F;交叉网络</h5><ul>
+<li><p><strong>交叉层是DCN的核心组件，设计用于高效地捕捉特征之间的交互关系。</strong>$x_0$和$x_i$作为一个交叉层的输入，对$x_i$进行全连接变换后，和$x_0$进行内积，最后加上$x_i$作为输出（这应用skip-connection的思想-抑制梯度消失），最后输出一个$x_{i+1}$。</p>
+  <img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-30%2002.27.29.png" alt="截屏2024-07-30 02.27.29" style="zoom:25%;" />
+</li>
+<li><p>一个<strong>交叉网络串联多个交叉层</strong></p>
+</li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-30%2002.32.15.png" alt="截屏2024-07-30 02.32.15" style="zoom:25%;" />
+
+<ul>
+<li><strong>DCN的工作原理</strong><ol>
+<li><strong>输入层</strong>：接受用户特征、广告特征和上下文特征，并将这些特征<strong>转换为嵌入向量。</strong></li>
+<li><strong>交叉网络</strong>：输入层的嵌入向量<strong>传递给交叉网络，通过多个交叉层逐步捕捉特征的低阶交互。</strong></li>
+<li><strong>深度网络</strong>：输入层的嵌入向量<strong>也传递给深度网络，通过多个全连接层捕捉特征的高阶交互。</strong></li>
+<li><strong>融合层</strong>：将交叉网络和深度网络的输出进行<strong>融合</strong>，通常通过简单的拼接或加权和的方式。</li>
+<li><strong>输出层</strong>：融合层的输出通过一个全连接层，并<strong>使用sigmoid激活函数计算最终的点击率预测值。</strong></li>
+</ol>
+</li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-30%2002.34.31.png" alt="截屏2024-07-30 02.34.31" style="zoom: 50%;" />
+
+<h4 id="LHUC网络结构"><a href="#LHUC网络结构" class="headerlink" title="LHUC网络结构"></a>LHUC网络结构</h4><ul>
+<li>Learning Hidden Unit Contributions </li>
+<li>在<strong>语音识别领域</strong>被提出，通过对说话者的特征进行建模，通过神经网络（最后一层为<strong>sigmoid层乘以2</strong>，即规约元素到[0-2]区间），<strong>从而对语音信号进行逐元素积（每个0-2的元素起到对语言信号放大&#x2F;缩小的效果）</strong></li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-30%2002.44.35.png" alt="截屏2024-07-30 02.44.35" style="zoom:25%;" />
+
+<ul>
+<li>快手将思想运用到推荐系统中-<strong>PPNet</strong></li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-30%2002.52.16.png" alt="截屏2024-07-30 02.52.16" style="zoom: 25%;" />
+
+
+
+<h4 id="SENet"><a href="#SENet" class="headerlink" title="SENet"></a>SENet</h4><ul>
+<li><p>SENet （Squeeze-and-Excitation Networks）是一种<strong>用于图像分类和其他计算机视觉任务的网络架构</strong>，旨在<strong>通过自适应地重新校准特征通道</strong>来提高模型的表示能力。<strong>核心思想是引入一个“Squeeze-and-Excitation”模块，通过学习每个特征通道的重要性权重来增强特征表示。</strong></p>
+</li>
+<li><p><strong>工作原理</strong></p>
+<ol>
+<li><p><strong>Squeeze操作</strong>：首先，对输入的特征图<strong>进行全局平均池化，生成一个全局的特征描述。这一步将每个通道的空间信息压缩为一个单一的数值，得到一个通道级别的特征向量。</strong><br> $$<br> z_c &#x3D; \frac{1}{H \times W} \sum_{i&#x3D;1}^{H} \sum_{j&#x3D;1}^{W} X_{c, i, j}<br> $$</p>
+</li>
+<li><p><strong>Excitation操作</strong>：然后，通过一个由<strong>两个全连接层组成的瓶颈结构（使用ReLU和Sigmoid激活函数）对这个全局特征向量进行非线性变换，生成一个用于重新校准每个特征通道的权重向量。</strong><br> $$<br> s &#x3D; \sigma(W_2 \delta(W_1 z))<br> $$</p>
+</li>
+<li><p><strong>重新校准</strong>：最后，<strong>将得到的权重向量按通道逐元素地与原始特征图进行乘法运算</strong>，得到重新校准后的特征图。<br> $$<br> \tilde{X}_c &#x3D; s_c \cdot X_c<br> $$</p>
+</li>
+</ol>
+</li>
+<li><p>运用于 RecSys的特征交叉中，通过S-E操作生成一个每个特征通道的<strong>权重向量</strong>，进行逐元素-向量乘积；不同的特征向量具有不同维数也同样适用；<strong>校准后的特征向量中较为重要的特征被放大和重视。</strong></p>
+</li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-30%2003.05.55.png" alt="截屏2024-07-30 03.05.55" style="zoom:15%;" />
+
+<h4 id="Bilinear-Cross"><a href="#Bilinear-Cross" class="headerlink" title="Bilinear Cross"></a>Bilinear Cross</h4><ul>
+<li><p>常见的特征交叉操作包括：<strong>内积</strong>-生成一个实数；<strong>哈达玛乘积(逐元素乘积)</strong>-生成一个向量；</p>
+</li>
+<li><p>下面介绍：<strong>双线性交叉（Bilinear Cross）</strong>通过双线性操作，计算两个特征向量的交互关系。假设有两个特征向量 $\mathbf{x}$ 和 $\mathbf{y}$，每个特征向量包含多个维度。<br>  $$<br>  \mathbf{z} &#x3D; \mathbf{x}^T W \mathbf{y}<br>  $$<br>  其中，$W$是一个可学习的权重矩阵，$\mathbf{z}$ 是交互后的特征表示。</p>
+</li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-30%2003.27.54.png" alt="截屏2024-07-30 03.27.54" style="zoom:25%;" />
+
+<ul>
+<li>另一种 Bilinear Cross：在使用矩阵-向量乘后使用哈达玛乘积</li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-30%2003.28.31.png" alt="截屏2024-07-30 03.28.31" style="zoom:25%;" />
+
+<ul>
+<li>注意：由于每一次Bilinear Cross都需要训练一个权重矩阵，因此<strong>开销很大，需要选取部分特征向量</strong>而不是所有特征向量两两交叉。</li>
+</ul>
+<h4 id="FiBiNET"><a href="#FiBiNET" class="headerlink" title="FiBiNET"></a>FiBiNET</h4><ul>
+<li><p>使用了SENet+Bilinear Cross训练CTR模型</p>
+  <img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-07-30%2003.34.11.png" alt="截屏2024-07-30 03.34.11" style="zoom:25%;" /></li>
+</ul>
+<h2 id="用户行为序列建模"><a href="#用户行为序列建模" class="headerlink" title="用户行为序列建模"></a><strong>用户行为序列建模</strong></h2><blockquote>
+<p>基于用户的历史行为特征进行建模</p>
+</blockquote>
+<h4 id="LastN特征"><a href="#LastN特征" class="headerlink" title="LastN特征"></a>LastN特征</h4><img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-03%2009.55.58.png" alt="截屏2024-08-03 09.55.58" style="zoom: 33%;" />
+
+<ul>
+<li>简单的方式可以对物品ID（可以包含物品的其他信息例如类目等）的嵌入特征进行<strong>平均</strong></li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-03%2009.57.42.png" alt="截屏2024-08-03 09.57.42" style="zoom: 25%;" />
+
+
+
+<h4 id="DIN模型"><a href="#DIN模型" class="headerlink" title="DIN模型"></a>DIN模型</h4><ul>
+<li>对物品的嵌入特征<strong>不使用简单的平均策略</strong>，而使用<strong>注意力机制：</strong>适应候选query向量和每个LastN向量（既是key也是value）计算相似度权重（可以使用内积等方法），然后计算加权和。</li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-03%2010.03.33.png" alt="截屏2024-08-03 10.03.33" style="zoom:33%;" />
+
+<ul>
+<li>由于<strong>需要使用到候选物品向量</strong>，所以某些模型不适用（例如双塔模型的用户塔是无法获取物品的信息的）</li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-03%2010.10.03.png" alt="截屏2024-08-03 10.10.03" style="zoom:33%;" />
+
+<ul>
+<li><strong>局限性：</strong><ol>
+<li>注意力机制的计算量正比于 N（即用户行为序列长度）</li>
+<li>但是当 N 过小时，模型只关注了用户的短期行为序列和短期兴趣。</li>
+</ol>
+</li>
+<li>如何改进DIN？<strong>目标是在保障足够长的用户行为序列长度 N 的前提下，确保模型的计算效率。</strong>（注意力的计算开销过大）</li>
+</ul>
+<h4 id="SIM模型"><a href="#SIM模型" class="headerlink" title="SIM模型"></a>SIM模型</h4><ul>
+<li>思想：对于DIN模型使用的注意力机制，<strong>其中LastN中和候选物品相关度很小（即计算的相似度权重~0）的物品删去也不会有影响。</strong></li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-03%2010.15.25.png" alt="截屏2024-08-03 10.15.25" style="zoom: 33%;" />
+
+<ul>
+<li><p><strong>把 LastN 降低到 TopK 复杂度，输入注意力层。</strong></p>
+</li>
+<li><p><strong>一个技巧：</strong>由于TopK个用户行为特征是具有时间先后信息的，可以将此信息作为特征输入。</p>
+<ul>
+<li>使用这个技巧的原因：（1）时间越久远的交互信息，其价值越低。（2）相对于DIN模型，SIM模型一般关注的时间跨度更长。</li>
+<li>使用时间信息作为输入，可以取得很好的收益。</li>
+</ul>
+  <img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-03%2010.18.42.png" alt="截屏2024-08-03 10.18.42" style="zoom:33%;" /></li>
+</ul>
+<h2 id="重排：推荐系统的多样性"><a href="#重排：推荐系统的多样性" class="headerlink" title="重排：推荐系统的多样性"></a>重排：推荐系统的多样性</h2><ul>
+<li>在粗排和精排后需要考虑多样性，提升推荐指标。</li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-07%2010.39.43.png" alt="截屏2024-08-07 10.39.43" style="zoom:33%;" />
+
+<ul>
+<li>重排阶段需要考虑<strong>（1）精排阶段的打分分数（2）物品的多样性</strong></li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-07%2010.42.33.png" alt="截屏2024-08-07 10.42.33" style="zoom:33%;" />
+
+<h4 id="相似性度量"><a href="#相似性度量" class="headerlink" title="相似性度量"></a>相似性度量</h4><blockquote>
+<p>如何计算两个物品之间的相似度？</p>
+</blockquote>
+<ul>
+<li><strong>基于物品标签的方法</strong>：两个物品设置的标签信息。例如美妆、类目、品牌等。</li>
+<li><strong>基于物品向量的方法：</strong>使用学习到的物品的向量，计算余弦相似度等。 <ol>
+<li>局限性：<strong>使用双塔中的物品塔计算的向量可用性不高，因为其对于长尾物品（曝光少）的学习能力很差。</strong></li>
+<li>下面提出了一些学习物品向量表征的方法。</li>
+</ol>
+</li>
+</ul>
+<h4 id="基于图文内容的物品向量表征"><a href="#基于图文内容的物品向量表征" class="headerlink" title="基于图文内容的物品向量表征"></a>基于图文内容的物品向量表征</h4><ul>
+<li>图文内容：例如小红书的笔记包括图片以及文本内容。使用CNN将图片内容转换为向量，使用bert将文本内容转换为向量。</li>
+<li><strong>大规模预训练：CLIP</strong><ul>
+<li>其中同一篇笔记的图-文是一对<strong>正样本</strong>（即训练输出图和文的向量越接近越好），不同笔记的图-文是<strong>负样本</strong>，以此进行大规模的预训练，得到一个笔记的encoder。</li>
+</ul>
+</li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-03%2010.33.40.png" alt="截屏2024-08-03 10.33.40" style="zoom: 33%;" />
+
+
+
+<h4 id="Maximal-Marginal-Relevance-MMR"><a href="#Maximal-Marginal-Relevance-MMR" class="headerlink" title="Maximal Marginal Relevance[MMR]"></a>Maximal Marginal Relevance[MMR]</h4><ul>
+<li><strong>边缘相关度的计算：</strong>实际上是对精排打分以及物品多样性分数的加权，用于迭代选择未选中的物品</li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-07%2010.46.46.png" alt="截屏2024-08-07 10.46.46" style="zoom:33%;" />
+
+<ul>
+<li><strong>MMR算法的选择流程：</strong>迭代选择MR最高的物品</li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-07%2010.47.29.png" alt="截屏2024-08-07 10.47.29" style="zoom:33%;" />
+
+<ul>
+<li><strong>问题？</strong><ul>
+<li>多样性失效：当已经选中的集合物品较多时，使用如上的算法会出现一个问题：即<strong>物品总会和某个已选中物品较为相似，即多样性分数趋近于1</strong>，使得多样性分数失效。</li>
+<li><strong>解决：</strong>使用滑动窗口的方法，在已经选中的物品进行滑动窗口，只考虑最近一段时间选中的物品</li>
+</ul>
+</li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-07%2010.53.23.png" alt="截屏2024-08-07 10.53.23" style="zoom:33%;" />
+
+<h4 id="DPP多样性算法"><a href="#DPP多样性算法" class="headerlink" title="DPP多样性算法"></a>DPP多样性算法</h4><blockquote>
+<p>论文🔗<a target="_blank" rel="noopener" href="https://proceedings.neurips.cc/paper_files/paper/2018/file/dbbf603ff0e99629dda5d75b6f75f966-Paper.pdf">Fast Greedy MAP Inference for Determinantal Point Process to Improve Recommendation Diversity</a></p>
+<p>行列式点过程算法（Determinantal Point Process）</p>
+<p>推荐阅读：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/441823563">https://zhuanlan.zhihu.com/p/441823563</a></li>
+</ul>
+</blockquote>
+<ul>
+<li>公认的最好的多样性算法</li>
+</ul>
+<h5 id="数学基础"><a href="#数学基础" class="headerlink" title="数学基础"></a>数学基础</h5><p>（1）将<strong>矩阵中的每列看做向量</strong>，<strong>行列式的几何意义是所有向量张成高维多面体的体积</strong></p>
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-08%2009.27.21.png" alt="截屏2024-08-08 09.27.21" style="zoom:25%;" />
+
+<p>（2）超平行体：向量长成的平行体</p>
+<h4 id="DPP在推荐系统的应用"><a href="#DPP在推荐系统的应用" class="headerlink" title="DPP在推荐系统的应用"></a>DPP在推荐系统的应用</h4><ul>
+<li>如果把不同的商品看作归一化embedding向量，要保障多样性，就要<strong>使得其张成的超平行体的体积最大化</strong>，而这个体积可以用<strong>行列式的计算等价</strong>，即<strong>使用行列式衡量多样性</strong>。</li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-08%2009.26.02.png" alt="截屏2024-08-08 09.26.02" style="zoom: 25%;" />
+
+<ul>
+<li>加权精排打分以及多样性分数：</li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-08%2009.28.56.png" alt="截屏2024-08-08 09.28.56" style="zoom:25%;" />
+
+<h4 id="DPP快速算法"><a href="#DPP快速算法" class="headerlink" title="DPP快速算法"></a>DPP快速算法</h4><ul>
+<li>多样性问题是从所有的$n$个待选择商品选出$k$个。</li>
+<li>矩阵$A$ 是所有n个待选择商品的矩阵，$A_{ij}$是商品i和j的向量内积。</li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-08%2009.36.36.png" alt="截屏2024-08-08 09.36.36" style="zoom: 33%;" />
+
+<ul>
+<li>DPP求解是NP-hard的，一般<strong>使用贪心算法进行近似求解</strong>，即每一次贪心取出一个最优商品（具有较高的分数，也不能和已经选择的商品相似）。</li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-08%2009.41.19.png" alt="截屏2024-08-08 09.41.19" style="zoom: 33%;" />
+
+<ul>
+<li><p>上述求解的<strong>暴力算法的复杂度过高，在实际推荐的过程中多样性选择的时间只有数十毫秒</strong></p>
+  <img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-08%2009.46.01.png" alt="截屏2024-08-08 09.46.01" style="zoom: 33%;" />
+</li>
+<li><p><strong>Hulu的主要贡献是提供了快速的数值算法。</strong></p>
+  <img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-08%2009.47.30.png" alt="截屏2024-08-08 09.47.30" style="zoom:33%;" />
+</li>
+<li><p>通过每次迭代前后<strong>快速求出cholesky分解</strong>来快速求解行列式。</p>
+</li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-08%2010.35.38.png" alt="截屏2024-08-08 10.35.38" style="zoom: 25%;" />
+
+
+
+
+
+<h2 id="物品冷启动"><a href="#物品冷启动" class="headerlink" title="物品冷启动"></a>物品冷启动</h2><blockquote>
+<p>UGC：用户生成内容 ；PGC：平台生成内容</p>
+</blockquote>
+<h4 id="冷启动的评价指标"><a href="#冷启动的评价指标" class="headerlink" title="冷启动的评价指标"></a>冷启动的评价指标</h4><ul>
+<li><p>冷启动的意义：可以为新用户的UGC内容提供曝光，来增强用户体验。</p>
+</li>
+<li><p>对一个推荐系统冷启动效果是否好的具体的<strong>评价指标：</strong></p>
+  <img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-08%2010.43.49.png" alt="截屏2024-08-08 10.43.49" style="zoom:33%;" />
+</li>
+<li><p><strong>作者侧指标：</strong>指的是 <strong>笔记发布数量&#x2F;小红书日活数量</strong>，这是评价冷启动的重要指标，有助于促进发布，提高内容池。例如如果推荐算法可以对新笔记提供足够的曝光支持，可以激励发布笔记的作者，增强作者侧指标。</p>
+</li>
+<li><p><strong>用户侧指标：</strong>考虑用户和新笔记的交互率。</p>
+</li>
+<li><p><strong>内容侧指标：</strong>考虑新发布的冷启动的笔记中，高热笔记的占比。这些高热笔记越多表征了系统能够挖掘高质量笔记的能力越强。</p>
+</li>
+<li><p>主要有两类技术：</p>
+</li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-08%2010.52.41.png" alt="截屏2024-08-08 10.52.41" style="zoom:33%;" />
+
+<h4 id="冷启动：优化召回通道"><a href="#冷启动：优化召回通道" class="headerlink" title="冷启动：优化召回通道"></a>冷启动：优化召回通道</h4><ul>
+<li>冷启动物品具有自身特征（例如图片文字标签信息），但是<strong>缺少重要的用户交互特征</strong>（例如点赞点击），这使得其<strong>没有学好ID embedding</strong>（ID emb是最重要的召回技术，将笔记的标签嵌入为低维的向量；如果没有ID emb，是<strong>无法使用双塔模型进行召回的</strong>，双塔是最重要的召回通道）；另外，缺少交互信息<strong>也无法使用ItemCF技术</strong>。</li>
+</ul>
+<h5 id="Sol1-改进双塔模型以适用冷启动"><a href="#Sol1-改进双塔模型以适用冷启动" class="headerlink" title="Sol1: 改进双塔模型以适用冷启动"></a>Sol1: 改进双塔模型以适用冷启动</h5><ul>
+<li><p>主要的症结在于：冷启动物品的ID embedding没有学到，无法进行物品塔的推荐。</p>
+</li>
+<li><p>解决：</p>
+<p>  （1）新笔记<strong>统一使用一个默认的embedding向量</strong>，相对于使用新笔记自动的ID embedding 可以得到收益。</p>
+<p>  （2）<strong>利用相似的笔记进行embedding</strong>，这里的<strong>相似可以用：标签类目&#x2F;图文信息（例如使用CLIP嵌入）</strong>进行定义。</p>
+</li>
+</ul>
+<h5 id="Sol2-使用类目进行召回"><a href="#Sol2-使用类目进行召回" class="headerlink" title="Sol2: 使用类目进行召回"></a>Sol2: 使用类目进行召回</h5><ul>
+<li>对每一个用户维护一个感兴趣的类目列表， 例如：情感、程序员、电竞、游戏等等。</li>
+<li>在系统中维护索引进行召回：</li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-08%2011.07.34.png" alt="截屏2024-08-08 11.07.34" style="zoom:25%;" />
+
+<ul>
+<li><p>其中<strong>笔记列表按时间顺序倒排，有利于新笔记的冷启动。</strong></p>
+</li>
+<li><p>缺点：</p>
+<ol>
+<li>窗口期较短：当笔记发布几个小时后，就会被队列往后挤压，导致再也没有机会召回。</li>
+<li>个性化比较弱。</li>
+</ol>
+</li>
+</ul>
+<h5 id="Sol3-聚类召回"><a href="#Sol3-聚类召回" class="headerlink" title="Sol3: 聚类召回"></a>Sol3: 聚类召回</h5><ul>
+<li>将所有的笔记的embedding向量进行聚类，这样新笔记也可以在聚类空间中根据距离被推荐。</li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-08%2012.04.10.png" alt="截屏2024-08-08 12.04.10" style="zoom: 25%;" />
+
+<h5 id="Sol4-Look-Alike召回"><a href="#Sol4-Look-Alike召回" class="headerlink" title="Sol4: Look-Alike召回"></a>Sol4: Look-Alike召回</h5><blockquote>
+<p>在数字营销和广告技术领域，”Look-Alike”（相似受众）是一种用于扩展受众群体的技术。这种方法通过分析现有用户群体的特征，找到与这些用户相似的新用户，从而扩大潜在客户群体。Look-Alike 技术广泛应用于精准营销、广告投放和用户获取等场景。</p>
+<h5 id="Look-Alike-的工作原理"><a href="#Look-Alike-的工作原理" class="headerlink" title="Look-Alike 的工作原理"></a>Look-Alike 的工作原理</h5><ol>
+<li><p><strong>定义种子用户群体（Seed Audience）：</strong></p>
+<ul>
+<li>首先，选择一组现有的用户作为种子用户群体。这些用户通常是已经表现出高价值、高互动或高转化率的用户。例如，种子用户可以是已经购买产品的用户、订阅了服务的用户或高频互动的用户。</li>
+</ul>
+</li>
+<li><p><strong>提取特征：</strong></p>
+<ul>
+<li>对种子用户群体进行特征分析，提取他们的各种属性和行为数据。这些特征可能包括人口统计信息（如年龄、性别、地理位置）、兴趣爱好、在线行为（如浏览历史、点击记录）以及其他相关信息。</li>
+</ul>
+</li>
+<li><p><strong>建立相似性模型：</strong></p>
+<ul>
+<li>使用机器学习算法或统计方法，建立一个相似性模型来识别潜在的 Look-Alike 用户。这些算法可以包括分类算法、聚类算法或推荐系统模型，通过分析种子用户的特征，找到在大数据集中与种子用户相似的新用户。</li>
+</ul>
+</li>
+<li><p><strong>扩展受众：</strong></p>
+<ul>
+<li>使用相似性模型在更大的用户数据库中搜索，找到与种子用户群体特征相似的用户。这些相似用户即为 Look-Alike 用户，他们有较高的可能性表现出与种子用户相似的行为和兴趣。</li>
+</ul>
+</li>
+<li><p><strong>应用 Look-Alike 受众：</strong></p>
+<ul>
+<li>将 Look-Alike 用户群体应用于广告投放、营销活动和用户获取策略中，以提高广告的精准度和转化率。</li>
+</ul>
+</li>
+</ol>
+</blockquote>
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-08%2012.10.50.png" alt="截屏2024-08-08 12.10.50" style="zoom: 20%;" />
+
+<ul>
+<li>把<strong>种子用户的向量均值作为物品的向量表征</strong>，将该笔记推送给具有潜在的和种子用户类似的用户，可以有效提高笔记的指标。</li>
+<li>这里维护的向量需要根据时间（种子用户的更新）而实时更新。</li>
+</ul>
+<h4 id="冷启动：流量调控"><a href="#冷启动：流量调控" class="headerlink" title="冷启动：流量调控"></a>冷启动：流量调控</h4><img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-08%2012.21.14.png" alt="截屏2024-08-08 12.21.14" style="zoom: 33%;" />
+
+<ul>
+<li><p>针对上述四种方法：</p>
+<ol>
+<li><p><strong>强插：</strong>比较原始的方法。</p>
+</li>
+<li><p><strong>提权：</strong>新笔记的排序分数乘以一个大于一的系数。但是可能存在提权系数难以确定并且敏感的问题。</p>
+</li>
+<li><p><strong>保量：</strong>新笔记在固定时间例如一天之内，必须确保获得一定数量的曝光（<strong>差异化保量：</strong>越优质的内容保量越高，其中优质可以例如使用多模态模型、作者历史数据等等进行预测）。提权系数可以根据时间和实时曝光数量实时计算。</p>
+ <img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-08%2012.40.27.png" alt="截屏2024-08-08 12.40.27" style="zoom: 25%;" />
+
+<ul>
+<li>存在问题：如果对新笔记进行保量和提权，可能导致新笔记推荐给不感兴趣的用户，从而导致笔记的点击指标较低，从而被推荐系统打压。所以不能盲目的过度提权。</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<h2 id="涨指标的方法"><a href="#涨指标的方法" class="headerlink" title="涨指标的方法"></a>涨指标的方法</h2><ul>
+<li>推荐系统的核心评价指标？<strong>日活用户数 以及 留存</strong></li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-08%2015.20.49.png" alt="截屏2024-08-08 15.20.49" style="zoom:25%;" />
+
+
+
+<h4 id="召回阶段：改进"><a href="#召回阶段：改进" class="headerlink" title="召回阶段：改进"></a>召回阶段：改进</h4><ul>
+<li>为了涨指标，需要<strong>改进召回模型，或者添加新的召回模型</strong>，其中<strong>最重要的召回模型是双塔以及item-2-item</strong></li>
+</ul>
+<h5 id="对双塔模型的改进"><a href="#对双塔模型的改进" class="headerlink" title="对双塔模型的改进"></a>对双塔模型的改进</h5><ul>
+<li><p><strong>优化模型的训练样本</strong>：例如正样本（成功点击的样本）、简单负样本（随机样本）、困难负样本（排序较为靠后的样本）</p>
+</li>
+<li><p><strong>改进神经网络结构</strong></p>
+  <img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-08%2015.26.25.png" alt="截屏2024-08-08 15.26.25" style="zoom:25%;" />
+
+<ol>
+<li>在用户塔中可以使用<strong>用户行为序列</strong>作为用户的特征之一（例如last-n交互的均值作为一种特征）。</li>
+<li>使用更高级的NN，例如DCN。</li>
+<li>使用多向量模型：<strong>在用户塔输出多个向量分别用于不同指标的预测</strong>；其中物品塔只输出一个向量，因为其要存入数据库进行搜索，多向量代价会过大。<ul>
+<li><img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-08%2015.29.25.png" alt="截屏2024-08-08 15.29.25" style="zoom: 33%;" /></li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<h5 id="对Item-to-Item的改进"><a href="#对Item-to-Item的改进" class="headerlink" title="对Item-to-Item的改进"></a>对Item-to-Item的改进</h5><ul>
+<li>多种I2I模型结合工作，分配一定的配额</li>
+<li>包括协同过滤等方法</li>
+</ul>
+<h4 id="排序阶段：改进"><a href="#排序阶段：改进" class="headerlink" title="排序阶段：改进"></a>排序阶段：改进</h4><ul>
+<li>对粗排和精排进行改进；</li>
+</ul>
+<h5 id="粗精排一致性建模"><a href="#粗精排一致性建模" class="headerlink" title="粗精排一致性建模"></a>粗精排一致性建模</h5><ul>
+<li>使用精排和实际结果作为标签指导粗排模型</li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-08%2015.44.41.png" alt="截屏2024-08-08 15.44.41" style="zoom:25%;" />
+
+<ul>
+<li>可能存在的问题：精排一旦出现问题，会污染粗排。</li>
+</ul>
+<h5 id="老汤模型"><a href="#老汤模型" class="headerlink" title="老汤模型"></a>老汤模型</h5><ul>
+<li>老汤模型是推荐系统部署中的一个难题：即<strong>很难判断新模型是否真的比老模型效果好，因为老模型在日益的训练中达到较高的性能；在确定新模型后，需要较长的时间来追上老模型达到的性能</strong></li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-08%2015.55.06.png" alt="截屏2024-08-08 15.55.06" style="zoom:25%;" />
+
+<ul>
+<li><p>解决？</p>
+<ol>
+<li><p>为了对比新老模型的性能，随机初始化和相同数据下，进行公平对比</p>
+ <img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-08%2015.57.28.png" alt="截屏2024-08-08 15.57.28" style="zoom: 25%;" />
+</li>
+<li><p>为了追平老模型的性能（1）复用一些公用层例如embedding层（2）知识蒸馏</p>
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-08%2015.59.44.png" alt="截屏2024-08-08 15.59.44" style="zoom:25%;" /></li>
+</ol>
+</li>
+</ul>
+<h4 id="多样性提升"><a href="#多样性提升" class="headerlink" title="多样性提升"></a>多样性提升</h4><ul>
+<li><strong>加权rank分数以及多样性分数（使用MMR、DPP算法）</strong></li>
+<li>使用<strong>滑动窗口</strong>，防止在选择物品过多时，多样性失效。</li>
+</ul>
+<h5 id="双塔模型-添加噪声"><a href="#双塔模型-添加噪声" class="headerlink" title="双塔模型-添加噪声"></a>双塔模型-添加噪声</h5><ul>
+<li>对用户特征添加噪声，使其偏离原有的推荐兴趣域，从而保障多样性。</li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-08%2016.06.50.png" alt="截屏2024-08-08 16.06.50" style="zoom: 33%;" />
+
+<h5 id="探索流量"><a href="#探索流量" class="headerlink" title="探索流量"></a>探索流量</h5><ul>
+<li>维护一个<strong>非个性化的、高质量的内容池，将这部分内容强行推送给用户，作为其兴趣的拓展。</strong>（如果这部分内容不进行强行提权，是无法通过个性化的筛选的）</li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-08%2016.13.33.png" alt="截屏2024-08-08 16.13.33" style="zoom: 33%;" />
+
+<h5 id="多样性总结"><a href="#多样性总结" class="headerlink" title="多样性总结"></a>多样性总结</h5><img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-08%2016.14.39.png" alt="截屏2024-08-08 16.14.39" style="zoom:33%;" />
+
+
+
+
+
+<h4 id="特殊用户和人群"><a href="#特殊用户和人群" class="headerlink" title="特殊用户和人群"></a>特殊用户和人群</h4><blockquote>
+<p>例如<strong>新用户、低活跃用户</strong>（1）这些人用户交互较少，个性化很难做好（2）这些人要着重促使留存，否则易流失</p>
+</blockquote>
+<ol>
+<li><strong>构造特殊内容池，用于特殊用户人群的召回。</strong> 例如弱个性化的优质内容池。</li>
+<li><strong>使用特殊排序策略，保护特殊用户。</strong> 例如不对这些特殊用户做广告推荐、不推送新物品的测试，这些可能会损害特殊用户体验。另外，可以使用特殊的融分公式，这种推送点击率指标预估高的物品， 吸引特殊用户点击（而忽略其点赞率等指标）</li>
+<li><strong>使用特殊的排序模型，消除模型预估的偏差。</strong></li>
+</ol>
+<h4 id="交互行为"><a href="#交互行为" class="headerlink" title="交互行为"></a>交互行为</h4><blockquote>
+<p>利用<strong>关注、转发、评论</strong>这三种交互行为给推荐系统涨指标</p>
+</blockquote>
+<ul>
+<li>最根本的，可以使用用户的交互率作为标签训练预测模型。</li>
+<li>交互行为包括：关注、转发、评论等等，<strong>利用机器学习模型可以预测出用户对作品的关注率、转发率和评论率，在排序阶段需要着重考虑这几种概率的融分公式。</strong></li>
+</ul>
+<p>（1）<strong>关注的价值：</strong>用户对作者的关注有利于用户留存。所以可以<strong>使用模型预测用户的关注率，对关注率较高的内容予以奖励</strong>；另外，关注也有利于对作者进行激励，激发起创作积极性。</p>
+<p>（2）<strong>转发的价值：</strong>转发可以吸引应用的站外流量。外站的KOL（key opinion leader，即大V）的转发价值最大，所有需要着重关注（可以通过历史的转发流量收益来判断作者是否是外站的KOL）。</p>
+<p>（3）<strong>评论的价值：</strong>和关注类似。</p>
+<ul>
+<li><strong>对于不同的用户，可以设置不同的融分公式，来推送针对性的内容。</strong>例如，外站KOL需要被推送高转发率的内容，促使其转发；高质量评论用户需要被推送高评论率的内容，促使其留下高质量评论。</li>
+</ul>
+<p>——————————————————————🌹🌹🌹 ENDING 🌹🌹🌹—————————————————————————————</p>
 
   </div>
 </article>
@@ -458,7 +964,7 @@
     
     
       <div id="toc-footer" style="display: none">
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E3%80%90%E5%B7%A5%E4%B8%9A%E7%95%8C%E3%80%91%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E8%AF%BE%E7%A8%8B"><span class="toc-number">1.</span> <span class="toc-text">【工业界】推荐系统课程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#GuideLines%EF%BC%9A"><span class="toc-number">1.0.1.</span> <span class="toc-text">GuideLines：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%94%E8%AE%B0"><span class="toc-number">1.0.2.</span> <span class="toc-text">笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E7%AE%97%E6%B3%95%E7%9A%84%E8%BF%87%E7%A8%8B%EF%BC%9A"><span class="toc-number">1.0.2.1.</span> <span class="toc-text">推荐系统算法的过程：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%AC%E5%9B%9E"><span class="toc-number">1.1.</span> <span class="toc-text">召回</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%8D%E5%90%8C%E7%9A%84%E5%8F%AC%E5%9B%9E%E9%80%9A%E9%81%93%EF%BC%9F"><span class="toc-number">1.1.0.1.</span> <span class="toc-text">不同的召回通道？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%8C%E5%A1%94%E6%A8%A1%E5%9E%8B%EF%BC%88%E5%B7%A5%E4%B8%9A%E7%95%8C%E5%B8%B8%E7%94%A8%EF%BC%89%EF%BC%9A"><span class="toc-number">1.1.0.2.</span> <span class="toc-text">双塔模型（工业界常用）：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%8C%E5%A1%94%E6%A8%A1%E5%9E%8B-%E8%87%AA%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0"><span class="toc-number">1.1.0.3.</span> <span class="toc-text">双塔模型+自监督学习</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Deep-Retrieval%E3%80%90%E6%B7%B1%E5%BA%A6%E6%A3%80%E7%B4%A2%E3%80%91"><span class="toc-number">1.1.0.4.</span> <span class="toc-text">Deep Retrieval【深度检索】</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B6%E5%AE%83%E5%8F%AC%E5%9B%9E%E9%80%9A%E9%81%93"><span class="toc-number">1.1.0.5.</span> <span class="toc-text">其它召回通道</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9B%9D%E5%85%89%E8%BF%87%E6%BB%A4-Bloom-Filter"><span class="toc-number">1.1.0.6.</span> <span class="toc-text">曝光过滤 &amp; Bloom Filter</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%92%E5%BA%8F"><span class="toc-number">1.2.</span> <span class="toc-text">排序</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%B9%E5%BE%81%E4%BF%A1%E6%81%AF"><span class="toc-number">1.2.0.1.</span> <span class="toc-text">特征信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%9A%E7%9B%AE%E6%A0%87%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.2.0.2.</span> <span class="toc-text">多目标模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A2%84%E4%BC%B0%E5%80%BC%E6%A0%A1%E5%87%86"><span class="toc-number">1.2.0.3.</span> <span class="toc-text">预估值校准</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Multi-gate-Mixture-of-Experts%E3%80%90MMoE%E3%80%91"><span class="toc-number">1.2.0.4.</span> <span class="toc-text">Multi-gate Mixture-of-Experts【MMoE】</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B2%97%E6%8E%92"><span class="toc-number">1.2.0.5.</span> <span class="toc-text">粗排</span></a></li></ol></li></ol></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E3%80%90%E5%B7%A5%E4%B8%9A%E7%95%8C%E3%80%91%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E8%AF%BE%E7%A8%8B"><span class="toc-number">1.</span> <span class="toc-text">【工业界】推荐系统课程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%94%E8%AE%B0"><span class="toc-number">1.0.1.</span> <span class="toc-text">笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E7%AE%97%E6%B3%95%E7%9A%84%E8%BF%87%E7%A8%8B%EF%BC%9A"><span class="toc-number">1.0.1.1.</span> <span class="toc-text">推荐系统算法的过程：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%AC%E5%9B%9E"><span class="toc-number">1.1.</span> <span class="toc-text">召回</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%8D%E5%90%8C%E7%9A%84%E5%8F%AC%E5%9B%9E%E9%80%9A%E9%81%93%EF%BC%9F"><span class="toc-number">1.1.0.1.</span> <span class="toc-text">不同的召回通道？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%8C%E5%A1%94%E6%A8%A1%E5%9E%8B%EF%BC%88%E5%B7%A5%E4%B8%9A%E7%95%8C%E5%B8%B8%E7%94%A8%EF%BC%89%EF%BC%9A"><span class="toc-number">1.1.0.2.</span> <span class="toc-text">双塔模型（工业界常用）：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%8C%E5%A1%94%E6%A8%A1%E5%9E%8B-%E8%87%AA%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0"><span class="toc-number">1.1.0.3.</span> <span class="toc-text">双塔模型+自监督学习</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Deep-Retrieval%E3%80%90%E6%B7%B1%E5%BA%A6%E6%A3%80%E7%B4%A2%E3%80%91"><span class="toc-number">1.1.0.4.</span> <span class="toc-text">Deep Retrieval【深度检索】</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B6%E5%AE%83%E5%8F%AC%E5%9B%9E%E9%80%9A%E9%81%93"><span class="toc-number">1.1.0.5.</span> <span class="toc-text">其它召回通道</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9B%9D%E5%85%89%E8%BF%87%E6%BB%A4-Bloom-Filter"><span class="toc-number">1.1.0.6.</span> <span class="toc-text">曝光过滤 &amp; Bloom Filter</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%92%E5%BA%8F"><span class="toc-number">1.2.</span> <span class="toc-text">排序</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%B9%E5%BE%81%E4%BF%A1%E6%81%AF"><span class="toc-number">1.2.0.1.</span> <span class="toc-text">特征信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%9A%E7%9B%AE%E6%A0%87%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.2.0.2.</span> <span class="toc-text">多目标模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A2%84%E4%BC%B0%E5%80%BC%E6%A0%A1%E5%87%86"><span class="toc-number">1.2.0.3.</span> <span class="toc-text">预估值校准</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Multi-gate-Mixture-of-Experts%E3%80%90MMoE%E3%80%91"><span class="toc-number">1.2.0.4.</span> <span class="toc-text">Multi-gate Mixture-of-Experts【MMoE】</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B2%97%E6%8E%92"><span class="toc-number">1.2.0.5.</span> <span class="toc-text">粗排</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%89%B9%E5%BE%81%E4%BA%A4%E5%8F%89"><span class="toc-number">1.3.</span> <span class="toc-text">特征交叉</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8C%E9%98%B6%E4%BA%A4%E5%8F%89%E7%89%B9%E5%BE%81"><span class="toc-number">1.3.0.1.</span> <span class="toc-text">二阶交叉特征</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Factorized-Machine%EF%BC%88FM%EF%BC%89"><span class="toc-number">1.3.0.2.</span> <span class="toc-text">Factorized Machine（FM）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B7%B1%E5%BA%A6%E4%BA%A4%E5%8F%89%E7%BD%91%E7%BB%9C%EF%BC%88DCN%EF%BC%8CDeep-Cross-Network%EF%BC%89"><span class="toc-number">1.3.0.3.</span> <span class="toc-text">深度交叉网络（DCN，Deep &amp; Cross Network）</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E7%BB%93%E6%9E%84%EF%BC%9A%E4%BA%A4%E5%8F%89%E5%B1%82-%E4%BA%A4%E5%8F%89%E7%BD%91%E7%BB%9C"><span class="toc-number">1.3.0.3.1.</span> <span class="toc-text">核心结构：交叉层&#x2F;交叉网络</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#LHUC%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84"><span class="toc-number">1.3.0.4.</span> <span class="toc-text">LHUC网络结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#SENet"><span class="toc-number">1.3.0.5.</span> <span class="toc-text">SENet</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Bilinear-Cross"><span class="toc-number">1.3.0.6.</span> <span class="toc-text">Bilinear Cross</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#FiBiNET"><span class="toc-number">1.3.0.7.</span> <span class="toc-text">FiBiNET</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E8%A1%8C%E4%B8%BA%E5%BA%8F%E5%88%97%E5%BB%BA%E6%A8%A1"><span class="toc-number">1.4.</span> <span class="toc-text">用户行为序列建模</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#LastN%E7%89%B9%E5%BE%81"><span class="toc-number">1.4.0.1.</span> <span class="toc-text">LastN特征</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#DIN%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.4.0.2.</span> <span class="toc-text">DIN模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#SIM%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.4.0.3.</span> <span class="toc-text">SIM模型</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%87%8D%E6%8E%92%EF%BC%9A%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%A4%9A%E6%A0%B7%E6%80%A7"><span class="toc-number">1.5.</span> <span class="toc-text">重排：推荐系统的多样性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9B%B8%E4%BC%BC%E6%80%A7%E5%BA%A6%E9%87%8F"><span class="toc-number">1.5.0.1.</span> <span class="toc-text">相似性度量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E%E5%9B%BE%E6%96%87%E5%86%85%E5%AE%B9%E7%9A%84%E7%89%A9%E5%93%81%E5%90%91%E9%87%8F%E8%A1%A8%E5%BE%81"><span class="toc-number">1.5.0.2.</span> <span class="toc-text">基于图文内容的物品向量表征</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Maximal-Marginal-Relevance-MMR"><span class="toc-number">1.5.0.3.</span> <span class="toc-text">Maximal Marginal Relevance[MMR]</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#DPP%E5%A4%9A%E6%A0%B7%E6%80%A7%E7%AE%97%E6%B3%95"><span class="toc-number">1.5.0.4.</span> <span class="toc-text">DPP多样性算法</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80"><span class="toc-number">1.5.0.4.1.</span> <span class="toc-text">数学基础</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#DPP%E5%9C%A8%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%BA%94%E7%94%A8"><span class="toc-number">1.5.0.5.</span> <span class="toc-text">DPP在推荐系统的应用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#DPP%E5%BF%AB%E9%80%9F%E7%AE%97%E6%B3%95"><span class="toc-number">1.5.0.6.</span> <span class="toc-text">DPP快速算法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%89%A9%E5%93%81%E5%86%B7%E5%90%AF%E5%8A%A8"><span class="toc-number">1.6.</span> <span class="toc-text">物品冷启动</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%B7%E5%90%AF%E5%8A%A8%E7%9A%84%E8%AF%84%E4%BB%B7%E6%8C%87%E6%A0%87"><span class="toc-number">1.6.0.1.</span> <span class="toc-text">冷启动的评价指标</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%B7%E5%90%AF%E5%8A%A8%EF%BC%9A%E4%BC%98%E5%8C%96%E5%8F%AC%E5%9B%9E%E9%80%9A%E9%81%93"><span class="toc-number">1.6.0.2.</span> <span class="toc-text">冷启动：优化召回通道</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Sol1-%E6%94%B9%E8%BF%9B%E5%8F%8C%E5%A1%94%E6%A8%A1%E5%9E%8B%E4%BB%A5%E9%80%82%E7%94%A8%E5%86%B7%E5%90%AF%E5%8A%A8"><span class="toc-number">1.6.0.2.1.</span> <span class="toc-text">Sol1: 改进双塔模型以适用冷启动</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Sol2-%E4%BD%BF%E7%94%A8%E7%B1%BB%E7%9B%AE%E8%BF%9B%E8%A1%8C%E5%8F%AC%E5%9B%9E"><span class="toc-number">1.6.0.2.2.</span> <span class="toc-text">Sol2: 使用类目进行召回</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Sol3-%E8%81%9A%E7%B1%BB%E5%8F%AC%E5%9B%9E"><span class="toc-number">1.6.0.2.3.</span> <span class="toc-text">Sol3: 聚类召回</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Sol4-Look-Alike%E5%8F%AC%E5%9B%9E"><span class="toc-number">1.6.0.2.4.</span> <span class="toc-text">Sol4: Look-Alike召回</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Look-Alike-%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-number">1.6.0.2.5.</span> <span class="toc-text">Look-Alike 的工作原理</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%B7%E5%90%AF%E5%8A%A8%EF%BC%9A%E6%B5%81%E9%87%8F%E8%B0%83%E6%8E%A7"><span class="toc-number">1.6.0.3.</span> <span class="toc-text">冷启动：流量调控</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B6%A8%E6%8C%87%E6%A0%87%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-number">1.7.</span> <span class="toc-text">涨指标的方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%AC%E5%9B%9E%E9%98%B6%E6%AE%B5%EF%BC%9A%E6%94%B9%E8%BF%9B"><span class="toc-number">1.7.0.1.</span> <span class="toc-text">召回阶段：改进</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AF%B9%E5%8F%8C%E5%A1%94%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%94%B9%E8%BF%9B"><span class="toc-number">1.7.0.1.1.</span> <span class="toc-text">对双塔模型的改进</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AF%B9Item-to-Item%E7%9A%84%E6%94%B9%E8%BF%9B"><span class="toc-number">1.7.0.1.2.</span> <span class="toc-text">对Item-to-Item的改进</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8E%92%E5%BA%8F%E9%98%B6%E6%AE%B5%EF%BC%9A%E6%94%B9%E8%BF%9B"><span class="toc-number">1.7.0.2.</span> <span class="toc-text">排序阶段：改进</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%B2%97%E7%B2%BE%E6%8E%92%E4%B8%80%E8%87%B4%E6%80%A7%E5%BB%BA%E6%A8%A1"><span class="toc-number">1.7.0.2.1.</span> <span class="toc-text">粗精排一致性建模</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%80%81%E6%B1%A4%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.7.0.2.2.</span> <span class="toc-text">老汤模型</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%9A%E6%A0%B7%E6%80%A7%E6%8F%90%E5%8D%87"><span class="toc-number">1.7.0.3.</span> <span class="toc-text">多样性提升</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8F%8C%E5%A1%94%E6%A8%A1%E5%9E%8B-%E6%B7%BB%E5%8A%A0%E5%99%AA%E5%A3%B0"><span class="toc-number">1.7.0.3.1.</span> <span class="toc-text">双塔模型-添加噪声</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%8E%A2%E7%B4%A2%E6%B5%81%E9%87%8F"><span class="toc-number">1.7.0.3.2.</span> <span class="toc-text">探索流量</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%A4%9A%E6%A0%B7%E6%80%A7%E6%80%BB%E7%BB%93"><span class="toc-number">1.7.0.3.3.</span> <span class="toc-text">多样性总结</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%B9%E6%AE%8A%E7%94%A8%E6%88%B7%E5%92%8C%E4%BA%BA%E7%BE%A4"><span class="toc-number">1.7.0.4.</span> <span class="toc-text">特殊用户和人群</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%A4%E4%BA%92%E8%A1%8C%E4%B8%BA"><span class="toc-number">1.7.0.5.</span> <span class="toc-text">交互行为</span></a></li></ol></li></ol></li></ol></li></ol>
       </div>
     
 
