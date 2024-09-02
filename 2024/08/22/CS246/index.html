@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="CS246: Mining Massive Data Sets大数据挖掘 课程网站：CS246: Mining Massive Data Sets Winter 2024 概要：用于分析大数据[Massive Data]的数据挖掘和机器学习算法。 课程版本：24Winter  学习时间：24Fall 本博客记录自己的学习过程以及用于复习和回顾。     课程重点将放在MapReduce和Spark">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CS-246[大数据挖掘]">
+<meta property="og:url" content="https://02lb.github.io/2024/08/22/CS246/index.html">
+<meta property="og:site_name" content="Bo Li’s Blog">
+<meta property="og:description" content="CS246: Mining Massive Data Sets大数据挖掘 课程网站：CS246: Mining Massive Data Sets Winter 2024 概要：用于分析大数据[Massive Data]的数据挖掘和机器学习算法。 课程版本：24Winter  学习时间：24Fall 本博客记录自己的学习过程以及用于复习和回顾。     课程重点将放在MapReduce和Spark">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-22%2018.13.53.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-24%2009.38.14.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-24%2009.45.21.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-24%2010.05.36.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-24%2010.07.33.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-24%2010.10.45.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-24%2010.19.11.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-24%2010.20.54.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-24%2011.19.00.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-24%2023.56.11.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-24%2023.59.27.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-25%2000.00.50.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-25%2000.07.17.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-25%2000.23.58.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-25%2000.25.17.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-26%2013.24.27.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-26%2013.27.19.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-26%2015.44.37.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-26%2015.47.30.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-26%2015.56.02.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-26%2015.58.53.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-26%2016.29.27.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-09-02%2019.33.08.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-26%2021.41.05.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-26%2021.45.18.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-26%2022.41.22.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-26%2022.16.48.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-26%2023.08.26.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-31%2017.01.37.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-31%2017.03.17.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-31%2017.14.35.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-31%2017.18.55.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-31%2017.28.21.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-31%2017.32.42.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-31%2017.32.25.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-09-02%2020.40.54.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-09-02%2020.42.43.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-09-02%2019.56.50.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-09-02%2020.35.29.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-09-02%2020.36.46.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-09-02%2020.44.14.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-09-02%2021.05.35.png">
+<meta property="og:image" content="https://02lb.github.io/Users/lbyyds/Library/Application%20Support/typora-user-images/%E6%88%AA%E5%B1%8F2024-09-02%2021.09.03.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-09-02%2021.18.49.png">
+<meta property="article:published_time" content="2024-08-22T04:35:14.000Z">
+<meta property="article:modified_time" content="2024-09-02T13:19:08.335Z">
+<meta property="article:author" content="Lee">
+<meta property="article:tag" content="大数据">
+<meta property="article:tag" content="数据挖掘">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-22%2018.13.53.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.png">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>CS-246[大数据挖掘]</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/02lb">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2024/08/22/DS-100/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2024/07/22/RecSys/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://02lb.github.io/2024/08/22/CS246/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://02lb.github.io/2024/08/22/CS246/&text=CS-246[大数据挖掘]"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://02lb.github.io/2024/08/22/CS246/&title=CS-246[大数据挖掘]"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://02lb.github.io/2024/08/22/CS246/&is_video=false&description=CS-246[大数据挖掘]"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=CS-246[大数据挖掘]&body=Check out this article: https://02lb.github.io/2024/08/22/CS246/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://02lb.github.io/2024/08/22/CS246/&title=CS-246[大数据挖掘]"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://02lb.github.io/2024/08/22/CS246/&title=CS-246[大数据挖掘]"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://02lb.github.io/2024/08/22/CS246/&title=CS-246[大数据挖掘]"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://02lb.github.io/2024/08/22/CS246/&title=CS-246[大数据挖掘]"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://02lb.github.io/2024/08/22/CS246/&name=CS-246[大数据挖掘]&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://02lb.github.io/2024/08/22/CS246/&t=CS-246[大数据挖掘]"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#CS246-Mining-Massive-Data-Sets"><span class="toc-number">1.</span> <span class="toc-text">CS246: Mining Massive Data Sets</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98"><span class="toc-number">1.0.0.1.</span> <span class="toc-text">大数据挖掘</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Section0%EF%BC%9AIntruduction"><span class="toc-number">1.0.1.</span> <span class="toc-text">Section0：Intruduction</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Section1%EF%BC%9A-MapReduce-and-Spark"><span class="toc-number">1.0.2.</span> <span class="toc-text">Section1： MapReduce and Spark</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%A1%E7%AE%97"><span class="toc-number">1.0.2.1.</span> <span class="toc-text">分布式计算</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#MapReduce"><span class="toc-number">1.0.2.2.</span> <span class="toc-text">MapReduce</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Spark%EF%BC%9A%E5%AF%B9MapReduce%E7%9A%84%E6%89%A9%E5%B1%95"><span class="toc-number">1.0.2.3.</span> <span class="toc-text">Spark：对MapReduce的扩展</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#MapReduce%E5%BA%94%E7%94%A8"><span class="toc-number">1.0.2.4.</span> <span class="toc-text">MapReduce应用</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Section2%EF%BC%9AFrequent-Itemsets-Mining-Association-Rule"><span class="toc-number">1.0.3.</span> <span class="toc-text">Section2：Frequent Itemsets Mining &amp; Association Rule</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A2%91%E7%B9%81%E9%A1%B9%E9%9B%86%E6%8C%96%E6%8E%98-%E5%92%8C-%E5%85%B3%E8%81%94%E8%A7%84%E5%88%99"><span class="toc-number">1.0.3.1.</span> <span class="toc-text">频繁项集挖掘 和 关联规则</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-Items%EF%BC%88%E9%A1%B9%E7%9B%AE%EF%BC%89"><span class="toc-number">1.0.3.1.1.</span> <span class="toc-text">1. Items（项目）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-Baskets%EF%BC%88%E7%AF%AE%E5%AD%90%EF%BC%89"><span class="toc-number">1.0.3.1.2.</span> <span class="toc-text">2. Baskets（篮子）</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Frequent-Itemsets-Mining"><span class="toc-number">1.0.3.2.</span> <span class="toc-text">Frequent Itemsets Mining</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Association-Rule"><span class="toc-number">1.0.3.3.</span> <span class="toc-text">Association Rule</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%AF%84%E4%BB%B7%E6%8C%87%E6%A0%87"><span class="toc-number">1.0.3.3.1.</span> <span class="toc-text">评价指标</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E6%89%BE%E5%88%B0%E5%85%B3%E8%81%94%E8%A7%84%E5%88%99%EF%BC%9F"><span class="toc-number">1.0.3.4.</span> <span class="toc-text">如何找到关联规则？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#A-priori-%E7%AE%97%E6%B3%95"><span class="toc-number">1.0.3.5.</span> <span class="toc-text">A-priori 算法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9B%B4%E5%A4%9A%E7%AE%97%E6%B3%95"><span class="toc-number">1.0.3.6.</span> <span class="toc-text">更多算法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Section3-Locality-Sensitive-Hashing"><span class="toc-number">1.0.4.</span> <span class="toc-text">Section3: Locality-Sensitive Hashing</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%87%E6%A1%A3%E7%9B%B8%E4%BC%BC%E6%80%A7%E6%A3%80%E6%B5%8B"><span class="toc-number">1.0.4.1.</span> <span class="toc-text">文档相似性检测</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%AE%9A%E4%B9%89%E6%96%87%E6%A1%A3%E4%B9%8B%E9%97%B4%E7%9A%84%E7%9B%B8%E4%BC%BC%E6%80%A7%EF%BC%9F"><span class="toc-number">1.0.4.1.1.</span> <span class="toc-text">如何定义文档之间的相似性？</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Shingling%EF%BC%88n-gram%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96%EF%BC%89"><span class="toc-number">1.0.4.2.</span> <span class="toc-text">Shingling（n-gram特征提取）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Min-Hashing"><span class="toc-number">1.0.4.3.</span> <span class="toc-text">Min-Hashing</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Locality-Sensitive-Hashing-LSH"><span class="toc-number">1.0.4.4.</span> <span class="toc-text">Locality-Sensitive Hashing (LSH)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86min-hash%E7%9F%A9%E9%98%B5%EF%BC%9F"><span class="toc-number">1.0.4.5.</span> <span class="toc-text">如何处理min-hash矩阵？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#LSH%E7%AE%97%E6%B3%95%E8%AF%AF%E5%B7%AE"><span class="toc-number">1.0.4.6.</span> <span class="toc-text">LSH算法误差</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%BC%8F%E5%88%A4%EF%BC%88false-negatives%EF%BC%89"><span class="toc-number">1.0.4.6.1.</span> <span class="toc-text">漏判（false negatives）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%AF%AF%E5%88%A4%EF%BC%88false-positives%EF%BC%89"><span class="toc-number">1.0.4.6.2.</span> <span class="toc-text">误判（false positives）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%8A%89%E6%8B%A9%EF%BC%88Trade-off%EF%BC%89"><span class="toc-number">1.0.4.6.3.</span> <span class="toc-text">抉择（Trade off）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E9%80%89%E6%8B%A9%E6%98%AF%E4%B8%80%E4%B8%AA%E9%87%8D%E7%82%B9"><span class="toc-number">1.0.4.6.4.</span> <span class="toc-text">参数选择是一个重点</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Section3-5-Theory-of-LSH"><span class="toc-number">1.0.5.</span> <span class="toc-text">Section3.5: Theory of LSH</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3LSH%E7%9A%84-Locality-Sensitive%EF%BC%9F"><span class="toc-number">1.0.5.0.1.</span> <span class="toc-text">如何理解LSH的 Locality-Sensitive？</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#LSH-For-Cos-distance%EF%BC%9ARandom-Hyperplanes"><span class="toc-number">1.0.5.1.</span> <span class="toc-text">LSH For Cos-distance：Random Hyperplanes</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-number">1.0.5.1.1.</span> <span class="toc-text">工作原理</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BD%99%E5%BC%A6%E8%B7%9D%E7%A6%BB"><span class="toc-number">1.0.5.1.2.</span> <span class="toc-text">余弦距离</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#LSH-For-Euclidean-Distance%EF%BC%9ALine-Projection"><span class="toc-number">1.0.5.2.</span> <span class="toc-text">LSH For Euclidean Distance：Line Projection</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B8%BB%E8%A6%81%E7%9A%84%E6%AD%A5%E9%AA%A4%EF%BC%9A"><span class="toc-number">1.0.5.2.1.</span> <span class="toc-text">主要的步骤：</span></a></li></ol></li></ol></li></ol></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        CS-246[大数据挖掘]
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Lee</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2024-08-22T04:35:14.000Z" class="dt-published" itemprop="datePublished">2024-08-22</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag">大数据</a>, <a class="p-category" href="/tags/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98/" rel="tag">数据挖掘</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h1 id="CS246-Mining-Massive-Data-Sets"><a href="#CS246-Mining-Massive-Data-Sets" class="headerlink" title="CS246: Mining Massive Data Sets"></a>CS246: Mining Massive Data Sets</h1><h4 id="大数据挖掘"><a href="#大数据挖掘" class="headerlink" title="大数据挖掘"></a>大数据挖掘</h4><ul>
+<li>课程网站：<a target="_blank" rel="noopener" href="https://web.stanford.edu/class/cs246/">CS246: Mining Massive Data Sets </a>Winter 2024</li>
+<li>概要：<strong>用于分析大数据[Massive Data]的数据挖掘和机器学习算法。</strong></li>
+<li>课程版本：24Winter  学习时间：24Fall</li>
+<li>本博客记录自己的学习过程以及用于复习和回顾。</li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-22%2018.13.53.png" alt="截屏2024-08-22 18.13.53" style="zoom:33%;" />
+
+<ul>
+<li>课程重点将放在<strong>MapReduce和Spark作为创建可以处理大量数据的并行算法的工具。</strong></li>
+<li>主题包括：频繁项目集和关联规则、高维数据中的近邻搜索、局部敏感散列（LSH）、维度减少、推荐系统、聚类、链接分析、大规模监督机器学习、数据流、结构化数据挖掘网络、网络广告。</li>
+</ul>
+<h3 id="Section0：Intruduction"><a href="#Section0：Intruduction" class="headerlink" title="Section0：Intruduction"></a>Section0：Intruduction</h3><ul>
+<li>本课程主要涉及数据挖掘，即对数据的分析；绝大多数涉及机器学习技术</li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-24%2009.38.14.png" alt="截屏2024-08-24 09.38.14" style="zoom:25%;" />
+
+<ul>
+<li>主要课程内容可以划分为几个模块：</li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-24%2009.45.21.png" alt="截屏2024-08-24 09.45.21" style="zoom:33%;" />
+
+<h3 id="Section1：-MapReduce-and-Spark"><a href="#Section1：-MapReduce-and-Spark" class="headerlink" title="Section1： MapReduce and Spark"></a>Section1： MapReduce and Spark</h3><h4 id="分布式计算"><a href="#分布式计算" class="headerlink" title="分布式计算"></a>分布式计算</h4><ul>
+<li>解决大规模数据计算的问题</li>
+<li>在不同的节点进行数据的存储和计算</li>
+<li>数据存储：分布式文件系统（GFS【Google】、HDFS【Hadoop】）</li>
+<li>分布式计算模型：MapReduce、Spark</li>
+</ul>
+<h4 id="MapReduce"><a href="#MapReduce" class="headerlink" title="MapReduce"></a>MapReduce</h4><ul>
+<li>主要的三个步骤：<strong>Map、Group by key、Reduce</strong>、</li>
+<li>Map：对每一个Item&#x2F;entry 使用Mapper进行映射为一个 key-value pair，键值对的含义具体由应用制定；</li>
+<li>Group by key：使用key对所有键值对进行排序；</li>
+<li>Reduce：对同一个Group内的键值对进行规约操作。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th><img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-24%2010.05.36.png" alt="截屏2024-08-24 10.05.36" style="zoom:33%;" /></th>
+<th><img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-24%2010.07.33.png" alt="截屏2024-08-24 10.07.33" style="zoom:33%;" /></th>
+</tr>
+</thead>
+</table>
+<ul>
+<li>例子：<strong>词频统计</strong>（<strong>将词汇作为key，词频作为value</strong>；Group by key将相同词排序在一起；Reduce进行合并）</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th><img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-24%2010.10.45.png" alt="截屏2024-08-24 10.10.45" style="zoom: 33%;" /></th>
+<th><img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-24%2010.19.11.png" alt="截屏2024-08-24 10.19.11" style="zoom:33%;" /></th>
+</tr>
+</thead>
+</table>
+<ul>
+<li>MR过程如何进行<strong>分布式多机计算？</strong>并行进行Map后，<strong>在Group阶段每台机器收集各自的pair进行规约。</strong></li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-24%2010.20.54.png" alt="截屏2024-08-24 10.20.54" style="zoom:33%;" />
+
+<h4 id="Spark：对MapReduce的扩展"><a href="#Spark：对MapReduce的扩展" class="headerlink" title="Spark：对MapReduce的扩展"></a>Spark：对MapReduce的扩展</h4><ul>
+<li><p>MapReduce存在什么问题：</p>
+<ul>
+<li><strong>性能瓶颈：</strong>为了节约内存，使用硬盘[以及文件系统]进行存储和读写，<strong>由于数据复制、磁盘I&#x2F;O和序列化，MapReduce会产生大量开销</strong>（Mapper从disk读进行映射，写回disk；然后Reducer又要从disk读取进行规约，再写回）</li>
+<li><strong>运用困难：</strong>Map-Reduce的逻辑有时无法运用到一些大数据计算的任务中；<strong>（强编程范式，比较死板）</strong></li>
+</ul>
+  <img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-24%2011.19.00.png" alt="截屏2024-08-24 11.19.00" style="zoom: 50%;" />
+</li>
+<li><p>Spark内存计算，速度性能由于MR；Spark支持除了Map和Reduce更多高阶操作；Spark开发难度低（高阶API）</p>
+</li>
+<li><p>什么是Spark？四个主要接口</p>
+</li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-24%2023.56.11.png" alt="截屏2024-08-24 23.56.11" style="zoom: 25%;" />
+
+<ul>
+<li><strong>核心数据结构：</strong> Resilient Distributed Dataset (RDD) 弹性分布式数据集<ul>
+<li>什么是弹性？什么是分布式？</li>
+</ul>
+</li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-24%2023.59.27.png" alt="截屏2024-08-24 23.59.27" style="zoom: 25%;" />
+
+<ul>
+<li>Spark使用Scala语言开发，支持其他例如 Java&#x2F;Python 等语言。</li>
+<li><strong>例如：RDD in 词频统计</strong></li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-25%2000.00.50.png" alt="截屏2024-08-25 00.00.50" style="zoom: 33%;" />
+
+<ul>
+<li>如上所示，可以看到Spark的 <strong>RDD的数据流是一个DAG（有向无环图）</strong>。<ul>
+<li><strong>有利于数据恢复（当某一计算节点失效只需回复到上一阶段，而无需重新从头开始），这就是弹性。</strong></li>
+</ul>
+</li>
+<li>RDD支持两种操作：<strong>Transformations 以及 Actions</strong></li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-25%2000.07.17.png" alt="截屏2024-08-25 00.07.17" style="zoom: 25%;" />
+
+<h4 id="MapReduce应用"><a href="#MapReduce应用" class="headerlink" title="MapReduce应用"></a>MapReduce应用</h4><ul>
+<li>数据库表连接操作：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th><img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-25%2000.23.58.png" alt="截屏2024-08-25 00.23.58" style="zoom:33%;" /></th>
+<th><img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-25%2000.25.17.png" alt="截屏2024-08-25 00.25.17" style="zoom:33%;" /></th>
+</tr>
+</thead>
+</table>
+<h3 id="Section2：Frequent-Itemsets-Mining-Association-Rule"><a href="#Section2：Frequent-Itemsets-Mining-Association-Rule" class="headerlink" title="Section2：Frequent Itemsets Mining &amp; Association Rule"></a>Section2：Frequent Itemsets Mining &amp; Association Rule</h3><h4 id="频繁项集挖掘-和-关联规则"><a href="#频繁项集挖掘-和-关联规则" class="headerlink" title="频繁项集挖掘 和 关联规则"></a>频繁项集挖掘 和 关联规则</h4><blockquote>
+<p>概念解析：</p>
+<p><strong>Items and baskets</strong> 是数据挖掘中一个常见的概念，尤其是在市场篮分析（Market Basket Analysis）中。这些术语通常用于描述消费者购买行为或其他事务性数据。以下是这些概念的详细解释：</p>
+<h5 id="1-Items（项目）"><a href="#1-Items（项目）" class="headerlink" title="1. Items（项目）"></a>1. <strong>Items（项目）</strong></h5><ul>
+<li><strong>定义</strong>: 项目（Items）指的是单个的产品、商品或对象。在市场篮分析中，项目可以是任何可以被购买或交易的东西。例如，在超市里，一个项目可以是牛奶、面包、鸡蛋等商品。</li>
+<li>例子<ul>
+<li>在电子商务网站中，项目可以是用户可以购买的各种商品，如手机、书籍、衣服等。</li>
+<li>在音乐流媒体服务中，项目可以是不同的歌曲、专辑或艺术家。</li>
+</ul>
+</li>
+</ul>
+<h5 id="2-Baskets（篮子）"><a href="#2-Baskets（篮子）" class="headerlink" title="2. Baskets（篮子）"></a>2. <strong>Baskets（篮子）</strong></h5><ul>
+<li><strong>定义</strong>: 篮子（Baskets）是指一组项目的集合，通常表示一次交易或购买行为。在市场篮分析中，每个篮子代表一位顾客在一次购物中所购买的所有项目。</li>
+<li>例子<ul>
+<li>在超市购物中，篮子可以表示一个顾客在一次购物中购买的所有商品，如 {牛奶, 面包, 鸡蛋}。</li>
+<li>在在线购物中，篮子可能表示用户在一次交易中购买的所有物品，如 {手机, 充电器, 耳机}。</li>
+<li>在图书馆的借阅记录中，篮子可以表示一个读者一次借阅的所有书籍。</li>
+</ul>
+</li>
+</ul>
+<p><strong>市场篮分析（Market Basket Analysis）</strong>: 通过分析顾客的购物篮（baskets），发现哪些项目（items）经常一起购买。例如，超市可能会发现牛奶和面包经常一起被购买，于是可以在促销活动中捆绑销售这些商品。</p>
+</blockquote>
+<ul>
+<li>Items 和 Baskets 都是抽象的，在不同的应用场景中有不同的含义。</li>
+</ul>
+<h4 id="Frequent-Itemsets-Mining"><a href="#Frequent-Itemsets-Mining" class="headerlink" title="Frequent Itemsets Mining"></a>Frequent Itemsets Mining</h4><ul>
+<li><strong>频繁项集</strong>是指在交易数据库中频繁出现的一组项目。简单来说，频繁项集是那些在多个事务中共同出现的项目组合。</li>
+<li>一个项目集的<strong>频繁</strong>程度通常通过它的<strong>支持度（Support）</strong>来衡量。支持度指的是在所有交易中，包含某个项集的交易所占的比例（或者绝对数量）。</li>
+<li>频繁项集挖掘的目标是找到所有的项集，这些项集的支持度至少达到预先定义的<strong>最小支持度阈值（Minimum Support Threshold）</strong>。</li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-26%2013.24.27.png" alt="截屏2024-08-26 13.24.27" style="zoom:25%;" />
+
+
+
+<h4 id="Association-Rule"><a href="#Association-Rule" class="headerlink" title="Association Rule"></a>Association Rule</h4><img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-26%2013.27.19.png" alt="截屏2024-08-26 13.27.19" style="zoom: 25%;" />
+
+<ul>
+<li><strong>关联规则</strong>用于揭示频繁项集之间的强关联关系，通常表示为$A \Rightarrow B$，意思是“如果 A 发生，那么 B 也很可能发生”。</li>
+<li>关联规则由两部分组成：<strong>前件（Antecedent，A）和后件（Consequent，B），它们都是频繁项集。</strong></li>
+</ul>
+<h5 id="评价指标"><a href="#评价指标" class="headerlink" title="评价指标"></a>评价指标</h5><ul>
+<li><p><strong>支持度（Support）</strong>: 一个规则的支持度是前件和后件共同出现的概率。它表示了整个数据库中该规则适用的程度。<br>  $\text{Support}(A \Rightarrow B) &#x3D; P(A \cup B)$</p>
+</li>
+<li><p><strong>置信度（Confidence）</strong>: 置信度衡量了在前件发生的情况下，后件发生的概率。<br>  $ \text{Confidence}(A \Rightarrow B) &#x3D; P(B|A) &#x3D; \frac{\text{Support}(A \cup B)}{\text{Support}(A)} $</p>
+</li>
+<li><p>存在什么问题？当$P(B)$较大时，置信度虽然很高，但是没有实际意义。</p>
+</li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-26%2015.44.37.png" alt="截屏2024-08-26 15.44.37" style="zoom:33%;" />
+
+<ul>
+<li>解决：<strong>兴趣度</strong>（Interest）<br>  $Interest(I→j)&#x3D;conf(I→j)−P(j)&#x3D;∣P(j∣I)−P(j)∣$</li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-26%2015.47.30.png" alt="截屏2024-08-26 15.47.30" style="zoom: 33%;" />
+
+<ul>
+<li>兴趣度使用绝对值的意义在于 判断其<strong>正相关关系或者是负相关关系。</strong></li>
+</ul>
+<h4 id="如何找到关联规则？"><a href="#如何找到关联规则？" class="headerlink" title="如何找到关联规则？"></a>如何找到关联规则？</h4><ul>
+<li>如下是一个例子：</li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-26%2015.56.02.png" alt="截屏2024-08-26 15.56.02" style="zoom: 25%;" />
+
+<ol>
+<li>定义阈值信息。</li>
+<li>首先<strong>找到所有的频繁项</strong>集（这里可以筛选掉一些非最大化的频繁项，具体的方法之后详细给出）</li>
+<li>根据如下式子，<strong>进行关联规则的生成。</strong>（在每一个频繁项中，挑选其子集进行判断和生成）</li>
+</ol>
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-26%2015.58.53.png" alt="截屏2024-08-26 15.58.53" style="zoom:25%;" />
+
+<ul>
+<li>Step2 中需要找到所有的频繁项集，如何实现？<ul>
+<li>朴素的暴力算法实现的话，以寻找两个item大小的频繁子集问题为例，需要两次循环遍历计算每一个pair的出现次数。</li>
+<li>当 Baskets 的items的数量过大，内存无法容下。<strong>（内存问题）</strong></li>
+</ul>
+</li>
+</ul>
+<h4 id="A-priori-算法"><a href="#A-priori-算法" class="headerlink" title="A-priori 算法"></a>A-priori 算法</h4><ul>
+<li>基于一个思想：<strong>即如果一个item的出现次数都没有超过阈值，那么不可能有频繁项集包含该item。</strong></li>
+<li>所有的出现次数超过阈值的单个item称为<strong>frequent item</strong>，任何频繁项集只能由这些freq. item组成。</li>
+<li>算法流程：<strong>逐步的过滤和构造</strong></li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-26%2016.29.27.png" alt="截屏2024-08-26 16.29.27" style="zoom: 25%;" />
+
+<ul>
+<li>从freq. item（size&#x3D;1），逐渐构造更大size的item set；</li>
+</ul>
+<h4 id="更多算法"><a href="#更多算法" class="headerlink" title="更多算法"></a>更多算法</h4><ul>
+<li>更多的频繁项集挖掘的算法包括：<strong>随机采样</strong>Backets的子集进行寻找、<strong>分块载入内存</strong>进行查找</li>
+</ul>
+<h3 id="Section3-Locality-Sensitive-Hashing"><a href="#Section3-Locality-Sensitive-Hashing" class="headerlink" title="Section3: Locality-Sensitive Hashing"></a>Section3: Locality-Sensitive Hashing</h3><ul>
+<li><p>一种最近邻算法</p>
+</li>
+<li><p>局部敏感哈希，<strong>一种用于高维数据的近似最近邻搜索的技术。</strong></p>
+</li>
+<li><p>主要目标：<strong>将高维空间中的相似数据点映射到同一个桶（bucket）中</strong>，以便快速发现相似的项。</p>
+</li>
+</ul>
+<h4 id="文档相似性检测"><a href="#文档相似性检测" class="headerlink" title="文档相似性检测"></a>文档相似性检测</h4><ul>
+<li>如下图所示，文档相似性检测是一个经典的任务；在文档数量极大的前提下，如果两两比较开销巨大。</li>
+</ul>
+<h5 id="如何定义文档之间的相似性？"><a href="#如何定义文档之间的相似性？" class="headerlink" title="如何定义文档之间的相似性？"></a>如何定义文档之间的相似性？</h5><ul>
+<li>将文档视为一个集合，定义集合之间的相似度使用 <strong>Jaccard similarity</strong></li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-09-02%2019.33.08.png" alt="截屏2024-09-02 19.33.08" style="zoom: 33%;" />
+
+<ul>
+<li>进行文档相似性检测的三个典型的步骤和模型图如下图所示（其中第三步使用了LSH）。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th><img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-26%2021.41.05.png" alt="截屏2024-08-26 21.41.05" style="zoom:25%;" /></th>
+<th><img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-26%2021.45.18.png" alt="截屏2024-08-26 21.45.18" style="zoom:25%;" /></th>
+</tr>
+</thead>
+</table>
+<ul>
+<li><p><strong>三个步骤：</strong></p>
+<ol>
+<li><h4 id="Shingling（n-gram特征提取）"><a href="#Shingling（n-gram特征提取）" class="headerlink" title="Shingling（n-gram特征提取）"></a><strong>Shingling（n-gram特征提取）</strong></h4><p> <strong>定义</strong>: Shingling是将<strong>文档转换为一个集合表示的过程</strong>，这个集合由文档中的特征（通常是n-gram或k-shingle）构成。</p>
+<ul>
+<li><p><strong>n-gram</strong>: 指文档中连续的n个字符或n个单词序列。例如，对于文本 “chatgpt is cool”，若n&#x3D;3的字符shingle包括 “cha”, “hat”, “atg”, “tgp”, “gpt”, “pt “, “t i”, “ is”, “is “, “s c”, “ co”, “coo”, “ool”。</p>
+</li>
+<li><p><strong>集合表示</strong>: 每个文档都可以被表示为这些n-gram的集合。通过这种方式，<strong>不同文档中相同的n-gram可以反映它们之间的相似性。</strong>这种<strong>集合表示可以转换为布尔向量，其中向量的每一维表示一个n-gram是否存在于文档中。</strong></p>
+</li>
+</ul>
+<p> <strong>目标</strong>: 将文档表示为一个n-gram集合，以捕捉文档中局部的字符或词的相似性。通过这种表示，可以进一步进行相似性计算。</p>
+<p> <strong>优点包括：</strong>改变单个word只会影响其周围最多距离为1的特征；非常直观，具有相似内容的文档会有相同的n-gram特征。</p>
+</li>
+<li><h4 id="Min-Hashing"><a href="#Min-Hashing" class="headerlink" title="Min-Hashing"></a><strong>Min-Hashing</strong></h4><p> <strong>定义</strong>: Min-Hashing是一种哈希技术，它<strong>将大的集合（如shingles集合）转换为短的签名（signature）</strong>，同时保留集合之间的相似性特征。</p>
+<ul>
+<li><p><strong>过程</strong>: Min-Hashing使用多个哈希函数，对每个文档的shingle集合进行哈希。对于每个哈希函数，它选择哈希值最小的shingle作为文档的“最小哈希值”（min-hash）。通过使用多种不同的哈希函数，可以为每个文档生成一个签名，即一个哈希值的向量。</p>
+</li>
+<li><p><strong>保留相似性</strong>: 如果两个文档相似，它们的shingle集合有较大的重叠，那么它们在多个哈希函数下得到相同最小哈希值的概率也会较高。因此，通过比较签名，可以近似地衡量两个文档之间的相似性。</p>
+<p>  （<strong>低维度的签名能够保持相似性的原因</strong>如下图公式所示，假设其中的哈希函数$h_{\pi}$是一个序列变换，那么在进行序列变换后能够保持相同的概率即为其相似性）</p>
+  <img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-26%2022.41.22.png" alt="截屏2024-08-26 22.41.22" style="zoom:25%;" /></li>
+</ul>
+<p> <strong>目标</strong>: 将大的shingles集合转换为较短的签名，减少数据规模，同时保持文档之间的相似性特征。这使得在大规模数据集中进行相似性比较更加高效。</p>
+<ul>
+<li>如下图所示，<strong>Min-Hashing中的哈希函数使用的是Permutation序列变换；</strong>对于一个特定文档，例如matrix中的一列，运用一个序列变换后的最小的1值可以表征这个哈希函数对这个文档转换后的值。所<strong>以一个文档可以表征为#permutation维度的签名向量。</strong></li>
+<li>从而<strong>实现一个 shingles集合bool向量转换为一个低维的签名的降维。</strong></li>
+</ul>
+ <img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-26%2022.16.48.png" alt="截屏2024-08-26 22.16.48" style="zoom: 25%;" />
+
+ 
+</li>
+<li><h4 id="Locality-Sensitive-Hashing-LSH"><a href="#Locality-Sensitive-Hashing-LSH" class="headerlink" title="Locality-Sensitive Hashing (LSH)"></a><strong>Locality-Sensitive Hashing (LSH)</strong></h4> <img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-26%2023.08.26.png" alt="截屏2024-08-26 23.08.26" style="zoom:25%;" />
+
+<p> <strong>定义</strong>: LSH 是一种哈希技术，<strong>专注于将相似的签名（signature，签名在第二步min-hashing中已经实现）映射到同一个桶（bucket）中，使得相似的文档有更高的概率成为候选对（candidate pairs）。</strong></p>
+<ul>
+<li><p><strong>过程</strong>: LSH使用多组哈希函数，将Min-Hashing生成的签名映射到不同的桶中。每组哈希函数根据签名的不同部分进行哈希，以此确保相似的签名映射到相同桶中的概率较大。不同组哈希函数可以组合使用，进一步提高准确性。</p>
+</li>
+<li><p><strong>候选对</strong>: 通过LSH，将落在同一桶中的签名视为候选对。这些候选对可能来自相似的文档，因此只需对这些候选对进行进一步精确的相似性计算，而无需对所有文档进行两两比较。</p>
+</li>
+</ul>
+<p> <strong>目标</strong>: 使用LSH，快速找到可能相似的文档对，大幅减少需要进行精确相似性计算的对数，从而提高大规模相似性检测的效率。</p>
+<h4 id="如何处理min-hash矩阵？"><a href="#如何处理min-hash矩阵？" class="headerlink" title="如何处理min-hash矩阵？"></a>如何处理min-hash矩阵？</h4><ul>
+<li>需要将min-hash矩阵划分为一个个band，对这些band进行单独的哈希映射。</li>
+</ul>
+ <img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-31%2017.01.37.png" alt="截屏2024-08-31 17.01.37" style="zoom: 50%;" />
+
+<ul>
+<li>图解：</li>
+</ul>
+ <img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-31%2017.03.17.png" alt="截屏2024-08-31 17.03.17" style="zoom: 25%;" /></li>
+</ol>
+</li>
+</ul>
+<h4 id="LSH算法误差"><a href="#LSH算法误差" class="headerlink" title="LSH算法误差"></a>LSH算法误差</h4><ul>
+<li>LSH算法是一个近似算法，不可避免的存在误差和错误。可以从概率的角度进行解释。</li>
+<li>误差主要体现在两类错误上：<strong>误判</strong>（false positives）和<strong>漏判</strong>（false negatives）。</li>
+</ul>
+<h5 id="漏判（false-negatives）"><a href="#漏判（false-negatives）" class="headerlink" title="漏判（false negatives）"></a><strong>漏判</strong>（false negatives）</h5><ul>
+<li><ol>
+<li>目标是找到相似度大于0.8的doc pair，其中每一个bond有5行，一共有20个bonds。</li>
+<li>假设文档C1和C2在相似性为0.8的前提假设下，计算<strong>漏判false negatives</strong>的概率如下所示：（<strong>即计算两个文档在20个bonds中没有任何一个bond被划分入同一个bucket的概率</strong>）</li>
+<li>概率：即只有0.035%的概率存在漏判的可能。</li>
+</ol>
+  <img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-31%2017.14.35.png" alt="截屏2024-08-31 17.14.35" style="zoom:25%;" /></li>
+</ul>
+<h5 id="误判（false-positives）"><a href="#误判（false-positives）" class="headerlink" title="误判（false positives）"></a><strong>误判</strong>（false positives）</h5><ul>
+<li><ol>
+<li>假设文档C1和C2在相似性为0.3的前提假设下，计算<strong>误判（false positives）</strong>的概率如下所示：（<strong>即计算两个文档在20个bonds中存在任何一个bond被划分入同一个bucket的概率</strong>）</li>
+<li>概率：有4.74%的可能性存在误判。</li>
+</ol>
+</li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-31%2017.18.55.png" alt="截屏2024-08-31 17.18.55" style="zoom:25%;" />
+
+<h5 id="抉择（Trade-off）"><a href="#抉择（Trade-off）" class="headerlink" title="抉择（Trade off）"></a>抉择（Trade off）</h5><ul>
+<li>通过调整 #band 以及 rows per band 可以调整 false positives 以及 false negatives 的概率。</li>
+<li>但是这是一个trade off。</li>
+<li>当降低#band时，rows per band 会上升，那么两个文档完全相同的可能性就会减少。那么FN概率显然上升，FP概率显然下降。</li>
+</ul>
+<h5 id="参数选择是一个重点"><a href="#参数选择是一个重点" class="headerlink" title="参数选择是一个重点"></a>参数选择是一个重点</h5><ul>
+<li>调整$b、r$ 来得到一个在指定的相似性阈值下的高效模型。</li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-31%2017.28.21.png" alt="截屏2024-08-31 17.28.21" style="zoom:25%;" />
+
+<ul>
+<li><strong>理想curve 以及 实际 curve</strong> 如下图所示：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th><img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-31%2017.32.42.png" alt="截屏2024-08-31 17.32.42" style="zoom:25%;" /></th>
+<th><img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-08-31%2017.32.25.png" alt="截屏2024-08-31 17.32.25" style="zoom:25%;" /></th>
+</tr>
+</thead>
+</table>
+<h3 id="Section3-5-Theory-of-LSH"><a href="#Section3-5-Theory-of-LSH" class="headerlink" title="Section3.5: Theory of LSH"></a>Section3.5: Theory of LSH</h3><h5 id="如何理解LSH的-Locality-Sensitive？"><a href="#如何理解LSH的-Locality-Sensitive？" class="headerlink" title="如何理解LSH的 Locality-Sensitive？"></a>如何理解LSH的 Locality-Sensitive？</h5><ul>
+<li><p>位置敏感，核心是位置（也解释points之间的距离）。如果两个对象在原始空间中距离足够接近，那么它们在散列空间中也有很高的概率被映射到相同的散列桶中。</p>
+</li>
+<li><p>重点内容：这是一个LSH的常用定义。</p>
+</li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-09-02%2020.40.54.png" alt="截屏2024-09-02 20.40.54" style="zoom:25%;" />
+
+<ul>
+<li>例如：Min-Hash的位置敏感性如下：</li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-09-02%2020.42.43.png" alt="截屏2024-09-02 20.42.43" style="zoom:25%;" />
+
+<ul>
+<li><p>LSH在上述的内容用于文档的相似性检测，更加广泛地说：<strong>用于在一个巨大的稀疏矩阵中，找到Jaccard相似性高的columns</strong></p>
+</li>
+<li><p>事实上，是一种 <strong>距离检测</strong>（使用的是Jaccard距离，即：</p>
+</li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-09-02%2019.56.50.png" alt="截屏2024-09-02 19.56.50" style="zoom: 25%;" />
+
+<ul>
+<li>如何<strong>将LSH泛化到其他类型的距离？例如欧拉距离、cos距离等等。</strong></li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-09-02%2020.35.29.png" alt="截屏2024-09-02 20.35.29" style="zoom: 25%;" />
+
+
+
+<h4 id="LSH-For-Cos-distance：Random-Hyperplanes"><a href="#LSH-For-Cos-distance：Random-Hyperplanes" class="headerlink" title="LSH For Cos-distance：Random Hyperplanes"></a>LSH For Cos-distance：Random Hyperplanes</h4><ul>
+<li>随机超平面 vs Min-Hash</li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-09-02%2020.36.46.png" alt="截屏2024-09-02 20.36.46" style="zoom:25%;" />
+
+<ul>
+<li><strong>Random Hyperplanes</strong> 是一种用于 Locality-Sensitive Hashing (LSH) 的技术，主要应用于高维空间中的相似性搜索，<strong>特别是用于处理点之间的余弦相似度（Cosine Similarity）</strong>。其<strong>核心思想是利用随机生成的超平面将数据点划分到不同的区域，从而实现对数据点的分类和相似性判断。</strong></li>
+</ul>
+<h5 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h5><ol>
+<li><p><strong>定义超平面</strong>：在 ( d ) 维空间中，一个超平面可以由一个法向量（即垂直于超平面的向量）来表示。通过随机生成多个法向量，我们可以定义多个超平面。</p>
+</li>
+<li><p><strong>投影和分类</strong>：对于每个数据点，将其投影到由超平面定义的空间中。具体来说，计算数据点和超平面法向量的内积：</p>
+<ul>
+<li>如果内积为正，则认为该点在超平面的“正”侧。</li>
+<li>如果内积为负，则认为该点在超平面的“负”侧。</li>
+</ul>
+</li>
+<li><p><strong>生成哈希签名</strong>：通过多个随机超平面来定义一组哈希函数，每个超平面对数据点产生一个比特值（正侧记为1，负侧记为0）。将这些比特值组合起来就得到了一个签名或哈希码。相似的点在这些超平面下有更高的概率生成相同的哈希码。</p>
+</li>
+<li><p><strong>相似性判断</strong>：在查询时，将查询点通过相同的超平面集合进行哈希，得到哈希码。然后在哈希空间中查找具有相同或相似哈希码的点，从而实现高效的相似性搜索。</p>
+</li>
+</ol>
+<h5 id="余弦距离"><a href="#余弦距离" class="headerlink" title="余弦距离"></a>余弦距离</h5><ul>
+<li>两个高维数据点之间的<strong>余弦距离就是两个向量之间的夹角(0-180度)</strong></li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-09-02%2020.44.14.png" alt="截屏2024-09-02 20.44.14" style="zoom:25%;" />
+
+<ul>
+<li>重点：将x和y哈希到随机超平面的同一边的概率 就是 其余弦相似性。</li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-09-02%2021.05.35.png" alt="截屏2024-09-02 21.05.35" style="zoom: 25%;" />
+
+<ul>
+<li>证明：只有随机超平面在两个向量之间的时候hash为-1，否则是+1；概率为$d(x,y)&#x2F;\pi$</li>
+</ul>
+<img src="/Users/lbyyds/Library/Application Support/typora-user-images/截屏2024-09-02 21.09.03.png" alt="截屏2024-09-02 21.09.03" style="zoom:25%;" />
+
+<h4 id="LSH-For-Euclidean-Distance：Line-Projection"><a href="#LSH-For-Euclidean-Distance：Line-Projection" class="headerlink" title="LSH For Euclidean Distance：Line Projection"></a>LSH For Euclidean Distance：Line Projection</h4><ul>
+<li>主要的是思想是：哈希函数使用<strong>随机选择的一条直线， 将数据点投影到该直线。</strong>在直线上定义散列桶，越接近的数据点散列到同一个桶的概率更高。</li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-09-02%2021.18.49.png" alt="截屏2024-09-02 21.18.49" style="zoom:25%;" />
+
+<h5 id="主要的步骤："><a href="#主要的步骤：" class="headerlink" title="主要的步骤："></a>主要的步骤：</h5><ol>
+<li><strong>随机投影</strong>：选择一个随机方向（向量），即从一个高斯分布中随机抽取一个向量。这<strong>个随机向量用来定义一条投影线。</strong></li>
+<li><strong>计算投影值</strong>：对于每个数据点，将其投影到这个随机向量上。计算该点在随机向量上的投影值，即点与随机向量的内积。</li>
+<li><strong>分配散列桶</strong>：将这些投影值划分为若干区间，每个区间对应一个散列桶。数据点根据它们的投影值落入相应的桶中。</li>
+<li><strong>重复多次</strong>：由于单一的随机投影不足以可靠地区分点的距离关系，因此通常会重复多次，使用多个随机投影向量，并组合它们的结果来形成最终的散列签名。</li>
+</ol>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/02lb">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#CS246-Mining-Massive-Data-Sets"><span class="toc-number">1.</span> <span class="toc-text">CS246: Mining Massive Data Sets</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98"><span class="toc-number">1.0.0.1.</span> <span class="toc-text">大数据挖掘</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Section0%EF%BC%9AIntruduction"><span class="toc-number">1.0.1.</span> <span class="toc-text">Section0：Intruduction</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Section1%EF%BC%9A-MapReduce-and-Spark"><span class="toc-number">1.0.2.</span> <span class="toc-text">Section1： MapReduce and Spark</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%A1%E7%AE%97"><span class="toc-number">1.0.2.1.</span> <span class="toc-text">分布式计算</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#MapReduce"><span class="toc-number">1.0.2.2.</span> <span class="toc-text">MapReduce</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Spark%EF%BC%9A%E5%AF%B9MapReduce%E7%9A%84%E6%89%A9%E5%B1%95"><span class="toc-number">1.0.2.3.</span> <span class="toc-text">Spark：对MapReduce的扩展</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#MapReduce%E5%BA%94%E7%94%A8"><span class="toc-number">1.0.2.4.</span> <span class="toc-text">MapReduce应用</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Section2%EF%BC%9AFrequent-Itemsets-Mining-Association-Rule"><span class="toc-number">1.0.3.</span> <span class="toc-text">Section2：Frequent Itemsets Mining &amp; Association Rule</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A2%91%E7%B9%81%E9%A1%B9%E9%9B%86%E6%8C%96%E6%8E%98-%E5%92%8C-%E5%85%B3%E8%81%94%E8%A7%84%E5%88%99"><span class="toc-number">1.0.3.1.</span> <span class="toc-text">频繁项集挖掘 和 关联规则</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-Items%EF%BC%88%E9%A1%B9%E7%9B%AE%EF%BC%89"><span class="toc-number">1.0.3.1.1.</span> <span class="toc-text">1. Items（项目）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-Baskets%EF%BC%88%E7%AF%AE%E5%AD%90%EF%BC%89"><span class="toc-number">1.0.3.1.2.</span> <span class="toc-text">2. Baskets（篮子）</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Frequent-Itemsets-Mining"><span class="toc-number">1.0.3.2.</span> <span class="toc-text">Frequent Itemsets Mining</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Association-Rule"><span class="toc-number">1.0.3.3.</span> <span class="toc-text">Association Rule</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%AF%84%E4%BB%B7%E6%8C%87%E6%A0%87"><span class="toc-number">1.0.3.3.1.</span> <span class="toc-text">评价指标</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E6%89%BE%E5%88%B0%E5%85%B3%E8%81%94%E8%A7%84%E5%88%99%EF%BC%9F"><span class="toc-number">1.0.3.4.</span> <span class="toc-text">如何找到关联规则？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#A-priori-%E7%AE%97%E6%B3%95"><span class="toc-number">1.0.3.5.</span> <span class="toc-text">A-priori 算法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9B%B4%E5%A4%9A%E7%AE%97%E6%B3%95"><span class="toc-number">1.0.3.6.</span> <span class="toc-text">更多算法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Section3-Locality-Sensitive-Hashing"><span class="toc-number">1.0.4.</span> <span class="toc-text">Section3: Locality-Sensitive Hashing</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%87%E6%A1%A3%E7%9B%B8%E4%BC%BC%E6%80%A7%E6%A3%80%E6%B5%8B"><span class="toc-number">1.0.4.1.</span> <span class="toc-text">文档相似性检测</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%AE%9A%E4%B9%89%E6%96%87%E6%A1%A3%E4%B9%8B%E9%97%B4%E7%9A%84%E7%9B%B8%E4%BC%BC%E6%80%A7%EF%BC%9F"><span class="toc-number">1.0.4.1.1.</span> <span class="toc-text">如何定义文档之间的相似性？</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Shingling%EF%BC%88n-gram%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96%EF%BC%89"><span class="toc-number">1.0.4.2.</span> <span class="toc-text">Shingling（n-gram特征提取）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Min-Hashing"><span class="toc-number">1.0.4.3.</span> <span class="toc-text">Min-Hashing</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Locality-Sensitive-Hashing-LSH"><span class="toc-number">1.0.4.4.</span> <span class="toc-text">Locality-Sensitive Hashing (LSH)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86min-hash%E7%9F%A9%E9%98%B5%EF%BC%9F"><span class="toc-number">1.0.4.5.</span> <span class="toc-text">如何处理min-hash矩阵？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#LSH%E7%AE%97%E6%B3%95%E8%AF%AF%E5%B7%AE"><span class="toc-number">1.0.4.6.</span> <span class="toc-text">LSH算法误差</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%BC%8F%E5%88%A4%EF%BC%88false-negatives%EF%BC%89"><span class="toc-number">1.0.4.6.1.</span> <span class="toc-text">漏判（false negatives）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%AF%AF%E5%88%A4%EF%BC%88false-positives%EF%BC%89"><span class="toc-number">1.0.4.6.2.</span> <span class="toc-text">误判（false positives）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%8A%89%E6%8B%A9%EF%BC%88Trade-off%EF%BC%89"><span class="toc-number">1.0.4.6.3.</span> <span class="toc-text">抉择（Trade off）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E9%80%89%E6%8B%A9%E6%98%AF%E4%B8%80%E4%B8%AA%E9%87%8D%E7%82%B9"><span class="toc-number">1.0.4.6.4.</span> <span class="toc-text">参数选择是一个重点</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Section3-5-Theory-of-LSH"><span class="toc-number">1.0.5.</span> <span class="toc-text">Section3.5: Theory of LSH</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3LSH%E7%9A%84-Locality-Sensitive%EF%BC%9F"><span class="toc-number">1.0.5.0.1.</span> <span class="toc-text">如何理解LSH的 Locality-Sensitive？</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#LSH-For-Cos-distance%EF%BC%9ARandom-Hyperplanes"><span class="toc-number">1.0.5.1.</span> <span class="toc-text">LSH For Cos-distance：Random Hyperplanes</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-number">1.0.5.1.1.</span> <span class="toc-text">工作原理</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BD%99%E5%BC%A6%E8%B7%9D%E7%A6%BB"><span class="toc-number">1.0.5.1.2.</span> <span class="toc-text">余弦距离</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#LSH-For-Euclidean-Distance%EF%BC%9ALine-Projection"><span class="toc-number">1.0.5.2.</span> <span class="toc-text">LSH For Euclidean Distance：Line Projection</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B8%BB%E8%A6%81%E7%9A%84%E6%AD%A5%E9%AA%A4%EF%BC%9A"><span class="toc-number">1.0.5.2.1.</span> <span class="toc-text">主要的步骤：</span></a></li></ol></li></ol></li></ol></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://02lb.github.io/2024/08/22/CS246/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://02lb.github.io/2024/08/22/CS246/&text=CS-246[大数据挖掘]"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://02lb.github.io/2024/08/22/CS246/&title=CS-246[大数据挖掘]"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://02lb.github.io/2024/08/22/CS246/&is_video=false&description=CS-246[大数据挖掘]"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=CS-246[大数据挖掘]&body=Check out this article: https://02lb.github.io/2024/08/22/CS246/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://02lb.github.io/2024/08/22/CS246/&title=CS-246[大数据挖掘]"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://02lb.github.io/2024/08/22/CS246/&title=CS-246[大数据挖掘]"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://02lb.github.io/2024/08/22/CS246/&title=CS-246[大数据挖掘]"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://02lb.github.io/2024/08/22/CS246/&title=CS-246[大数据挖掘]"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://02lb.github.io/2024/08/22/CS246/&name=CS-246[大数据挖掘]&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://02lb.github.io/2024/08/22/CS246/&t=CS-246[大数据挖掘]"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2024
+    Lee
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/02lb">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
