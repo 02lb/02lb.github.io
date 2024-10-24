@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="推荐系统模型 本博客主要记录自己遇到的各种推荐系统中使用的经典&#x2F;前沿模型  （1）FunRec：🔗经典召回模型 基于协同过滤的召回UserCF | ItemCF | Swing | 矩阵分解 基于向量的召回FM召回 | item2vec召回系列(word2vec原理 | item2vec召回 | Airbnb召回) | YoutubeDNN召回 | 双塔召回(经典双塔 | Youtub">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RecSys-Models[推荐系统模型]">
+<meta property="og:url" content="https://02lb.github.io/2024/10/13/RecSys-Models/index.html">
+<meta property="og:site_name" content="Bo Li’s Blog">
+<meta property="og:description" content="推荐系统模型 本博客主要记录自己遇到的各种推荐系统中使用的经典&#x2F;前沿模型  （1）FunRec：🔗经典召回模型 基于协同过滤的召回UserCF | ItemCF | Swing | 矩阵分解 基于向量的召回FM召回 | item2vec召回系列(word2vec原理 | item2vec召回 | Airbnb召回) | YoutubeDNN召回 | 双塔召回(经典双塔 | Youtub">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-10-13%2022.39.43.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-10-13%2022.40.41.png">
+<meta property="article:published_time" content="2024-10-13T14:22:27.000Z">
+<meta property="article:modified_time" content="2024-10-13T14:42:00.786Z">
+<meta property="article:author" content="Lee">
+<meta property="article:tag" content="推荐系统">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-10-13%2022.39.43.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.png">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>RecSys-Models[推荐系统模型]</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/02lb">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2024/10/18/hadoop-spark-md/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2024/10/07/Python%E5%9F%BA%E7%A1%80/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://02lb.github.io/2024/10/13/RecSys-Models/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://02lb.github.io/2024/10/13/RecSys-Models/&text=RecSys-Models[推荐系统模型]"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://02lb.github.io/2024/10/13/RecSys-Models/&title=RecSys-Models[推荐系统模型]"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://02lb.github.io/2024/10/13/RecSys-Models/&is_video=false&description=RecSys-Models[推荐系统模型]"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=RecSys-Models[推荐系统模型]&body=Check out this article: https://02lb.github.io/2024/10/13/RecSys-Models/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://02lb.github.io/2024/10/13/RecSys-Models/&title=RecSys-Models[推荐系统模型]"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://02lb.github.io/2024/10/13/RecSys-Models/&title=RecSys-Models[推荐系统模型]"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://02lb.github.io/2024/10/13/RecSys-Models/&title=RecSys-Models[推荐系统模型]"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://02lb.github.io/2024/10/13/RecSys-Models/&title=RecSys-Models[推荐系统模型]"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://02lb.github.io/2024/10/13/RecSys-Models/&name=RecSys-Models[推荐系统模型]&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://02lb.github.io/2024/10/13/RecSys-Models/&t=RecSys-Models[推荐系统模型]"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.</span> <span class="toc-text">推荐系统模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%881%EF%BC%89FunRec%EF%BC%9A%F0%9F%94%97"><span class="toc-number">1.1.</span> <span class="toc-text">（1）FunRec：🔗</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%8F%E5%85%B8%E5%8F%AC%E5%9B%9E%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.1.1.</span> <span class="toc-text">经典召回模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%8F%E5%85%B8%E6%8E%92%E5%BA%8F%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.1.2.</span> <span class="toc-text">经典排序模型</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F-%E7%8E%8B%E5%96%86"><span class="toc-number">1.2.</span> <span class="toc-text">（2）深度学习推荐系统-王喆</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%A0%E7%BB%9F%E6%8E%A8%E8%8D%90%E6%A8%A1%E5%9E%8B%EF%BC%88%E5%89%8D%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%97%B6%E4%BB%A3%EF%BC%89"><span class="toc-number">1.2.1.</span> <span class="toc-text">传统推荐模型（前深度学习时代）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%8E%A8%E8%8D%90%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.2.2.</span> <span class="toc-text">深度学习推荐模型</span></a></li></ol></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        RecSys-Models[推荐系统模型]
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Lee</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2024-10-13T14:22:27.000Z" class="dt-published" itemprop="datePublished">2024-10-13</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/" rel="tag">推荐系统</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="推荐系统模型"><a href="#推荐系统模型" class="headerlink" title="推荐系统模型"></a>推荐系统模型</h2><blockquote>
+<p>本博客主要记录自己遇到的各种推荐系统中使用的经典&#x2F;前沿模型</p>
+</blockquote>
+<h3 id="（1）FunRec：🔗"><a href="#（1）FunRec：🔗" class="headerlink" title="（1）FunRec：🔗"></a>（1）FunRec：<a target="_blank" rel="noopener" href="https://datawhalechina.github.io/fun-rec/#/">🔗</a></h3><h4 id="经典召回模型"><a href="#经典召回模型" class="headerlink" title="经典召回模型"></a>经典召回模型</h4><ul>
+<li><strong>基于协同过滤的召回</strong><br><a target="_blank" rel="noopener" href="https://datawhalechina.github.io/fun-rec/#/ch02/ch2.1/ch2.1.1/usercf">UserCF</a> | <a target="_blank" rel="noopener" href="https://datawhalechina.github.io/fun-rec/#/ch02/ch2.1/ch2.1.1/itemcf">ItemCF</a> | <a target="_blank" rel="noopener" href="https://datawhalechina.github.io/fun-rec/#/ch02/ch2.1/ch2.1.1/Swing">Swing</a> | <a target="_blank" rel="noopener" href="https://datawhalechina.github.io/fun-rec/#/ch02/ch2.1/ch2.1.1/mf">矩阵分解</a></li>
+<li><strong>基于向量的召回</strong><br><a target="_blank" rel="noopener" href="https://datawhalechina.github.io/fun-rec/#/ch02/ch2.1/ch2.1.2/FM">FM召回</a> | item2vec召回系列(<a target="_blank" rel="noopener" href="https://datawhalechina.github.io/fun-rec/#/ch02/ch2.1/ch2.1.2/word2vec">word2vec原理</a> | <a target="_blank" rel="noopener" href="https://datawhalechina.github.io/fun-rec/#/ch02/ch2.1/ch2.1.2/item2vec">item2vec召回</a> | <a target="_blank" rel="noopener" href="https://datawhalechina.github.io/fun-rec/#/ch02/ch2.1/ch2.1.2/Airbnb">Airbnb召回</a>) | <a target="_blank" rel="noopener" href="https://datawhalechina.github.io/fun-rec/#/ch02/ch2.1/ch2.1.2/YoutubeDNN">YoutubeDNN召回</a> | 双塔召回(<a target="_blank" rel="noopener" href="https://datawhalechina.github.io/fun-rec/#/ch02/ch2.1/ch2.1.2/DSSM">经典双塔</a> | <a target="_blank" rel="noopener" href="https://datawhalechina.github.io/fun-rec/#/ch02/ch2.1/ch2.1.2/YoutubeTwoTower">Youtube双塔</a>)</li>
+<li><strong>基于图的召回</strong><br><a target="_blank" rel="noopener" href="https://datawhalechina.github.io/fun-rec/#/ch02/ch2.1/ch2.1.3/EGES">EGES</a> | <a target="_blank" rel="noopener" href="https://datawhalechina.github.io/fun-rec/#/ch02/ch2.1/ch2.1.3/PinSage">PinSAGE</a></li>
+<li><strong>基于序列的召回</strong><br><a target="_blank" rel="noopener" href="https://datawhalechina.github.io/fun-rec/#/ch02/ch2.1/ch2.1.4/MIND">MIND</a> | <a target="_blank" rel="noopener" href="https://datawhalechina.github.io/fun-rec/#/ch02/ch2.1/ch2.1.4/SDM">SDM</a></li>
+<li><strong>基于树模型的召回</strong><br><a target="_blank" rel="noopener" href="https://datawhalechina.github.io/fun-rec/#/ch02/ch2.1/ch2.1.5/TDM">TDM</a></li>
+</ul>
+<h4 id="经典排序模型"><a href="#经典排序模型" class="headerlink" title="经典排序模型"></a>经典排序模型</h4><ul>
+<li><p><strong>GBDT+LR</strong><br><a target="_blank" rel="noopener" href="https://datawhalechina.github.io/fun-rec/#/ch02/ch2.2/ch2.2.1">GBDT+LR</a></p>
+</li>
+<li><p><strong>特征交叉</strong><br><a target="_blank" rel="noopener" href="https://datawhalechina.github.io/fun-rec/#/ch02/ch2.2/ch2.2.2/FM">FM</a> | <a target="_blank" rel="noopener" href="https://datawhalechina.github.io/fun-rec/#/ch02/ch2.2/ch2.2.2/PNN">PNN</a> | <a target="_blank" rel="noopener" href="https://datawhalechina.github.io/fun-rec/#/ch02/ch2.2/ch2.2.2/DCN">DCN</a> | <a target="_blank" rel="noopener" href="https://datawhalechina.github.io/fun-rec/#/ch02/ch2.2/ch2.2.2/AutoInt">AutoInt</a> | <a target="_blank" rel="noopener" href="https://datawhalechina.github.io/fun-rec/#/ch02/ch2.2/ch2.2.2/FiBiNet">FiBiNet</a></p>
+</li>
+<li><p><strong>Wide&amp;Deep系列</strong><br><a target="_blank" rel="noopener" href="https://datawhalechina.github.io/fun-rec/#/ch02/ch2.2/ch2.2.3/WideNDeep">Wide&amp;Deep</a> | <a target="_blank" rel="noopener" href="https://datawhalechina.github.io/fun-rec/#/ch02/ch2.2/ch2.2.3/NFM">NFM</a> | <a target="_blank" rel="noopener" href="https://datawhalechina.github.io/fun-rec/#/ch02/ch2.2/ch2.2.3/AFM">AFM</a> | <a target="_blank" rel="noopener" href="https://datawhalechina.github.io/fun-rec/#/ch02/ch2.2/ch2.2.3/DeepFM">DeepFM</a> | <a target="_blank" rel="noopener" href="https://datawhalechina.github.io/fun-rec/#/ch02/ch2.2/ch2.2.3/xDeepFM">xDeepFM</a></p>
+</li>
+<li><p><strong>序列模型</strong><br><a target="_blank" rel="noopener" href="https://datawhalechina.github.io/fun-rec/#/ch02/ch2.2/ch2.2.4/DIN">DIN</a> | <a target="_blank" rel="noopener" href="https://datawhalechina.github.io/fun-rec/#/ch02/ch2.2/ch2.2.4/DIEN">DIEN</a> | <a target="_blank" rel="noopener" href="https://datawhalechina.github.io/fun-rec/#/ch02/ch2.2/ch2.2.4/DSIN">DSIN</a></p>
+</li>
+<li><p><strong>多任务学习</strong><br><a target="_blank" rel="noopener" href="https://datawhalechina.github.io/fun-rec/#/ch02/ch2.2/ch2.2.5/ESMM">ESMM</a> | <a target="_blank" rel="noopener" href="https://datawhalechina.github.io/fun-rec/#/ch02/ch2.2/ch2.2.5/MMOE">MMOE</a> | <a target="_blank" rel="noopener" href="https://datawhalechina.github.io/fun-rec/#/ch02/ch2.2/ch2.2.5/PLE">PLE</a></p>
+</li>
+</ul>
+<h3 id="（2）深度学习推荐系统-王喆"><a href="#（2）深度学习推荐系统-王喆" class="headerlink" title="（2）深度学习推荐系统-王喆"></a>（2）深度学习推荐系统-王喆</h3><h4 id="传统推荐模型（前深度学习时代）"><a href="#传统推荐模型（前深度学习时代）" class="headerlink" title="传统推荐模型（前深度学习时代）"></a>传统推荐模型（前深度学习时代）</h4><img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-10-13%2022.39.43.png" alt="截屏2024-10-13 22.39.43" style="zoom:50%;" />
+
+<h4 id="深度学习推荐模型"><a href="#深度学习推荐模型" class="headerlink" title="深度学习推荐模型"></a>深度学习推荐模型</h4><img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-10-13%2022.40.41.png" alt="截屏2024-10-13 22.40.41" style="zoom: 45%;" />
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/02lb">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.</span> <span class="toc-text">推荐系统模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%881%EF%BC%89FunRec%EF%BC%9A%F0%9F%94%97"><span class="toc-number">1.1.</span> <span class="toc-text">（1）FunRec：🔗</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%8F%E5%85%B8%E5%8F%AC%E5%9B%9E%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.1.1.</span> <span class="toc-text">经典召回模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%8F%E5%85%B8%E6%8E%92%E5%BA%8F%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.1.2.</span> <span class="toc-text">经典排序模型</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F-%E7%8E%8B%E5%96%86"><span class="toc-number">1.2.</span> <span class="toc-text">（2）深度学习推荐系统-王喆</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%A0%E7%BB%9F%E6%8E%A8%E8%8D%90%E6%A8%A1%E5%9E%8B%EF%BC%88%E5%89%8D%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%97%B6%E4%BB%A3%EF%BC%89"><span class="toc-number">1.2.1.</span> <span class="toc-text">传统推荐模型（前深度学习时代）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%8E%A8%E8%8D%90%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.2.2.</span> <span class="toc-text">深度学习推荐模型</span></a></li></ol></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://02lb.github.io/2024/10/13/RecSys-Models/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://02lb.github.io/2024/10/13/RecSys-Models/&text=RecSys-Models[推荐系统模型]"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://02lb.github.io/2024/10/13/RecSys-Models/&title=RecSys-Models[推荐系统模型]"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://02lb.github.io/2024/10/13/RecSys-Models/&is_video=false&description=RecSys-Models[推荐系统模型]"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=RecSys-Models[推荐系统模型]&body=Check out this article: https://02lb.github.io/2024/10/13/RecSys-Models/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://02lb.github.io/2024/10/13/RecSys-Models/&title=RecSys-Models[推荐系统模型]"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://02lb.github.io/2024/10/13/RecSys-Models/&title=RecSys-Models[推荐系统模型]"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://02lb.github.io/2024/10/13/RecSys-Models/&title=RecSys-Models[推荐系统模型]"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://02lb.github.io/2024/10/13/RecSys-Models/&title=RecSys-Models[推荐系统模型]"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://02lb.github.io/2024/10/13/RecSys-Models/&name=RecSys-Models[推荐系统模型]&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://02lb.github.io/2024/10/13/RecSys-Models/&t=RecSys-Models[推荐系统模型]"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2024
+    Lee
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/02lb">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Python基础 本科阶段系统学过C、C++，自学过Go，但是Java和Python都没有系统的学过或是自学过。 深度学习对Python编程的要求比较大，所以还是得系统的过一遍Python的基础语法和相关用法，并将一些容易遗忘的知识点或者是比较好的阅读内容Ping在这篇博客中，用于记录和温习。 遇到不懂的内容随时记录。  学习内容 基础的语法和数据结构-菜鸟教程链接：🔗 python进阶内容：�">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python基础">
+<meta property="og:url" content="https://02lb.github.io/2024/10/07/Python%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="Bo Li’s Blog">
+<meta property="og:description" content="Python基础 本科阶段系统学过C、C++，自学过Go，但是Java和Python都没有系统的学过或是自学过。 深度学习对Python编程的要求比较大，所以还是得系统的过一遍Python的基础语法和相关用法，并将一些容易遗忘的知识点或者是比较好的阅读内容Ping在这篇博客中，用于记录和温习。 遇到不懂的内容随时记录。  学习内容 基础的语法和数据结构-菜鸟教程链接：🔗 python进阶内容：�">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-10-07%2023.21.17.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-10-07%2023.46.37.png">
+<meta property="article:published_time" content="2024-10-07T14:55:45.000Z">
+<meta property="article:modified_time" content="2024-10-07T16:30:39.796Z">
+<meta property="article:author" content="Lee">
+<meta property="article:tag" content="Python Language">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-10-07%2023.21.17.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.png">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Python基础</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/02lb">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2024/10/13/RecSys-Models/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2024/09/12/RecSys-Pipeline/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://02lb.github.io/2024/10/07/Python%E5%9F%BA%E7%A1%80/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://02lb.github.io/2024/10/07/Python%E5%9F%BA%E7%A1%80/&text=Python基础"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://02lb.github.io/2024/10/07/Python%E5%9F%BA%E7%A1%80/&title=Python基础"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://02lb.github.io/2024/10/07/Python%E5%9F%BA%E7%A1%80/&is_video=false&description=Python基础"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Python基础&body=Check out this article: https://02lb.github.io/2024/10/07/Python%E5%9F%BA%E7%A1%80/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://02lb.github.io/2024/10/07/Python%E5%9F%BA%E7%A1%80/&title=Python基础"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://02lb.github.io/2024/10/07/Python%E5%9F%BA%E7%A1%80/&title=Python基础"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://02lb.github.io/2024/10/07/Python%E5%9F%BA%E7%A1%80/&title=Python基础"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://02lb.github.io/2024/10/07/Python%E5%9F%BA%E7%A1%80/&title=Python基础"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://02lb.github.io/2024/10/07/Python%E5%9F%BA%E7%A1%80/&name=Python基础&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://02lb.github.io/2024/10/07/Python%E5%9F%BA%E7%A1%80/&t=Python基础"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Python%E5%9F%BA%E7%A1%80"><span class="toc-number">1.</span> <span class="toc-text">Python基础</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%A6%E4%B9%A0%E5%86%85%E5%AE%B9"><span class="toc-number">1.1.</span> <span class="toc-text">学习内容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Python-%E6%98%AF%E4%B8%80%E7%A7%8D%E8%A7%A3%E9%87%8A%E5%9E%8B%E8%AF%AD%E8%A8%80"><span class="toc-number">1.2.</span> <span class="toc-text">Python 是一种解释型语言</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Python-%E4%B8%AD%E5%A6%82%E4%BD%95%E8%B0%83%E7%94%A8-C-%E4%BB%A3%E7%A0%81"><span class="toc-number">1.3.</span> <span class="toc-text">Python 中如何调用 C++ 代码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A4%EF%BC%9A"><span class="toc-number">1.4.</span> <span class="toc-text">步骤：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFCPython%E3%80%81JPython"><span class="toc-number">1.5.</span> <span class="toc-text">什么是CPython、JPython</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Python-%E6%98%AF%E4%B8%80%E7%A7%8D%E5%8A%A8%E6%80%81%E7%B1%BB%E5%9E%8B%E8%AF%AD%E8%A8%80-%E6%8C%87%E5%9C%A8%E8%BF%90%E8%A1%8C%E6%9C%9F%E9%97%B4%E6%89%8D%E5%8E%BB%E5%81%9A%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E6%A3%80%E6%9F%A5%E7%9A%84%E8%AF%AD%E8%A8%80-%EF%BC%8C%E8%BF%99%E6%84%8F%E5%91%B3%E7%9D%80%E5%8F%98%E9%87%8F%E7%9A%84%E7%B1%BB%E5%9E%8B%E6%98%AF%E5%9C%A8%E8%BF%90%E8%A1%8C%E6%97%B6%E7%A1%AE%E5%AE%9A%E7%9A%84"><span class="toc-number">1.6.</span> <span class="toc-text">Python 是一种动态类型语言(指在运行期间才去做数据类型检查的语言)，这意味着变量的类型是在运行时确定的</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Python%E7%9A%84%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6"><span class="toc-number">1.7.</span> <span class="toc-text">Python的垃圾回收机制</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%96%B9%E5%BC%8F%EF%BC%9A"><span class="toc-number">1.7.1.</span> <span class="toc-text">引用计数的工作方式：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0%E7%9A%84%E4%BC%98%E5%8A%BF%EF%BC%9A"><span class="toc-number">1.7.2.</span> <span class="toc-text">引用计数的优势：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0%E7%9A%84%E5%B1%80%E9%99%90%EF%BC%9A"><span class="toc-number">1.7.3.</span> <span class="toc-text">引用计数的局限：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Python-%E7%9A%84%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%EF%BC%9A"><span class="toc-number">1.8.</span> <span class="toc-text">Python 的垃圾回收器如何工作：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%EF%BC%9A"><span class="toc-number">1.9.</span> <span class="toc-text">垃圾回收器的工作流程：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Python%E7%9A%84%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="toc-number">1.10.</span> <span class="toc-text">Python的常用数据结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AF%B9%E6%AF%94%E5%88%97%E8%A1%A8%E5%92%8C%E5%85%83%E7%BB%84"><span class="toc-number">1.11.</span> <span class="toc-text">对比列表和元组</span></a></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        Python基础
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Lee</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2024-10-07T14:55:45.000Z" class="dt-published" itemprop="datePublished">2024-10-07</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/Python-Language/" rel="tag">Python Language</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h3 id="Python基础"><a href="#Python基础" class="headerlink" title="Python基础"></a>Python基础</h3><ul>
+<li>本科阶段系统学过C、C++，自学过Go，但是Java和Python都没有系统的学过或是自学过。</li>
+<li>深度学习对Python编程的要求比较大，所以还是得系统的过一遍Python的基础语法和相关用法，并将一些容易遗忘的知识点或者是比较好的阅读内容Ping在这篇博客中，用于记录和温习。</li>
+<li>遇到不懂的内容随时记录。</li>
+</ul>
+<h4 id="学习内容"><a href="#学习内容" class="headerlink" title="学习内容"></a>学习内容</h4><ul>
+<li>基础的语法和数据结构-菜鸟教程链接：<a target="_blank" rel="noopener" href="https://www.runoob.com/python/python-basic-syntax.html">🔗</a></li>
+<li>python进阶内容：<a target="_blank" rel="noopener" href="https://ebook-python-study.readthedocs.io/zh-cn/latest/python%E8%BF%9B%E9%98%B601%E5%81%8F%E5%87%BD%E6%95%B0.html">🔗</a></li>
+</ul>
+<h4 id="Python-是一种解释型语言"><a href="#Python-是一种解释型语言" class="headerlink" title="Python 是一种解释型语言"></a><strong>Python 是一种解释型语言</strong></h4><ul>
+<li>C++代码需要一个编译的过程，全部编译为机器码后执行；</li>
+<li>Python具有即时的解释运行的能力，解释一行运行一行</li>
+<li>跨平台兼容特性：只需要相应的Python解释器；</li>
+<li>性能较低，低于编译型语言；</li>
+</ul>
+<h4 id="Python-中如何调用-C-代码"><a href="#Python-中如何调用-C-代码" class="headerlink" title="Python 中如何调用 C++ 代码"></a>Python 中如何调用 C++ 代码</h4><ul>
+<li>将c++代码编译为共享库（so文件），然后通过ctypes加载并调用</li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-10-07%2023.21.17.png" alt="截屏2024-10-07 23.21.17" style="zoom:33%;" />
+
+<ul>
+<li><p>使用Cython：</p>
+<blockquote>
+<p>Cython是一种编程语言，是python的超集，同时融合了C++的静态类型特性；</p>
+<p>阅读：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/traditional/p/13196509.html">https://www.cnblogs.com/traditional/p/13196509.html</a></p>
+</blockquote>
+<p>  <code>Cython</code> 是一个用于将 Python 和 C&#x2F;C++ 代码无缝集成的工具。你可以通过 <code>Cython</code> 编写 Python 和 C++ 混合代码，或者直接调用现有的 C++ 函数库。</p>
+<h4 id="步骤："><a href="#步骤：" class="headerlink" title="步骤："></a>步骤：</h4><ol>
+<li>用 <code>Cython</code> 编写接口代码，使 Python 可以调用 C++ 函数。</li>
+<li>使用 <code>Cython</code> 编译并生成 Python 可调用的扩展模块。</li>
+</ol>
+</li>
+</ul>
+<h4 id="什么是CPython、JPython"><a href="#什么是CPython、JPython" class="headerlink" title="什么是CPython、JPython"></a>什么是CPython、JPython</h4><ul>
+<li>CPython是Python的解释器的一种实现，而Cython是一种编程语言（融合了Python以及C++的特性）；</li>
+<li><strong>标准解释器 CPython 是由 C 语言实现的，除了 CPython 之外还有 Jython（java实现的 Python 解释器）、PyPy（Python 语言实现的 Python 解释器）</strong></li>
+</ul>
+<h4 id="Python-是一种动态类型语言-指在运行期间才去做数据类型检查的语言-，这意味着变量的类型是在运行时确定的"><a href="#Python-是一种动态类型语言-指在运行期间才去做数据类型检查的语言-，这意味着变量的类型是在运行时确定的" class="headerlink" title="Python 是一种动态类型语言(指在运行期间才去做数据类型检查的语言)，这意味着变量的类型是在运行时确定的"></a>Python 是一种动态类型语言(指<strong>在运行期间才去做数据类型检查的语言</strong>)，这意味着变量的类型是在运行时确定的</h4><ul>
+<li>在 Python 中，<strong>变量并不是存储实际的值，而是存储对象的引用。</strong>可以理解为，Python 中的变量是指向对象的指针，指向的对象包含了实际的数据和值。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x = 42   # x 是指向整数对象 42 的引用</span><br><span class="line">x = &quot;hello&quot;  # 现在 x 指向的是字符串对象 &quot;hello&quot;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h4 id="Python的垃圾回收机制"><a href="#Python的垃圾回收机制" class="headerlink" title="Python的垃圾回收机制"></a>Python的垃圾回收机制</h4><ul>
+<li>主要依赖于 <strong>引用计数</strong> 和 <strong>垃圾回收器（GC）</strong></li>
+</ul>
+<p>引用计数是 Python 管理内存的基本机制。当一个对象被创建时，Python 会给这个对象分配内存，并为该对象的引用计数设置为 1。每当有一个新的引用指向该对象时，引用计数增加；当一个引用不再指向该对象时，引用计数减少。</p>
+<h5 id="引用计数的工作方式："><a href="#引用计数的工作方式：" class="headerlink" title="引用计数的工作方式："></a>引用计数的工作方式：</h5><ul>
+<li><p><strong>增加引用计数</strong>：当一个新变量引用该对象时。</p>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a = [1, 2, 3]  # 列表对象的引用计数为 1</span><br><span class="line">b = a          # 列表对象的引用计数增加到 2</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>减少引用计数</strong>：当一个引用不再指向该对象时（如使用 <code>del</code> 删除变量，或者变量指向了其他对象）。</p>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">del a          # 列表对象的引用计数减少到 1</span><br><span class="line">b = None       # 列表对象的引用计数减少到 0，触发垃圾回收</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>对象销毁</strong>：当对象的引用计数降为 0 时，Python 立即释放该对象占用的内存。</p>
+</li>
+<li><p>具体来说，有如下的引用计数的方法：</p>
+  <img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-10-07%2023.46.37.png" alt="截屏2024-10-07 23.46.37" style="zoom:50%;" /></li>
+</ul>
+<h5 id="引用计数的优势："><a href="#引用计数的优势：" class="headerlink" title="引用计数的优势："></a>引用计数的优势：</h5><ul>
+<li>简单高效，当引用计数为 0 时，Python 可以立即释放内存。</li>
+<li>实时性强，内存回收可以即时发生。</li>
+</ul>
+<h5 id="引用计数的局限："><a href="#引用计数的局限：" class="headerlink" title="引用计数的局限："></a>引用计数的局限：</h5><ul>
+<li><p><strong>循环引用问题</strong>：如果对象之间相互引用，则即使没有其他变量引用这些对象，它们的引用计数也永远不会归零，导致无法被销毁。这种情况下，单靠引用计数是无法解决的。</p>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">class Node:</span><br><span class="line">    def __init__(self):</span><br><span class="line">        self.other = None</span><br><span class="line"></span><br><span class="line">node1 = Node()</span><br><span class="line">node2 = Node()</span><br><span class="line">node1.other = node2</span><br><span class="line">node2.other = node1</span><br><span class="line"># node1 和 node2 之间形成了循环引用，它们的引用计数不会降为 0</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>为了解决引用计数无法处理循环引用的问题，Python 还引入了一个 <strong>垃圾回收器（GC）</strong>，它专门处理循环引用。</p>
+<h4 id="Python-的垃圾回收器如何工作："><a href="#Python-的垃圾回收器如何工作：" class="headerlink" title="Python 的垃圾回收器如何工作："></a>Python 的垃圾回收器如何工作：</h4><p>Python 的垃圾回收器采用的是 <strong>分代收集</strong> 算法，它将对象划分为三代：</p>
+<ul>
+<li><strong>第一代（Generation 0）</strong>：新创建的对象。</li>
+<li><strong>第二代（Generation 1）</strong>：经过一次垃圾回收未被销毁的对象。</li>
+<li><strong>第三代（Generation 2）</strong>：经过多次垃圾回收仍未被销毁的对象。</li>
+</ul>
+<p>垃圾回收器会定期对第一代对象进行检查。如果发现某些对象形成循环引用，且无法通过引用计数回收，它会标记这些对象并进行内存回收。通常，对象越老，越有可能继续存在，因此垃圾回收的频率对高代对象较低，对新生对象较高。</p>
+<h4 id="垃圾回收器的工作流程："><a href="#垃圾回收器的工作流程：" class="headerlink" title="垃圾回收器的工作流程："></a>垃圾回收器的工作流程：</h4><ul>
+<li><strong>标记-清除（Mark-and-Sweep）算法</strong>：垃圾回收器会遍历所有的对象，将可达的对象标记为 “活跃”。未被标记的对象则会被认为是垃圾，最终被销毁。</li>
+<li><strong>分代回收</strong>：新创建的对象通常有较高的可能性很快就会被销毁，因此垃圾回收器主要针对新对象（第一代）进行回收，而较老的对象（第二代和第三代）被认为是长期存在的对象，回收频率较低。</li>
+</ul>
+<h4 id="Python的常用数据结构"><a href="#Python的常用数据结构" class="headerlink" title="Python的常用数据结构"></a>Python的常用数据结构</h4><ul>
+<li>列表、元组、字典</li>
+<li>这些常见的操作直接看菜鸟教程，都写的比较详细了；</li>
+</ul>
+<h4 id="对比列表和元组"><a href="#对比列表和元组" class="headerlink" title="对比列表和元组"></a>对比列表和元组</h4><table>
+<thead>
+<tr>
+<th>特性</th>
+<th>元组（Tuple）</th>
+<th>列表（List）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>可变性</td>
+<td><strong>不可变</strong></td>
+<td><strong>可变</strong></td>
+</tr>
+<tr>
+<td>语法</td>
+<td>圆括号 <code>()</code></td>
+<td>方括号 <code>[]</code></td>
+</tr>
+<tr>
+<td>用途</td>
+<td>固定数据集合</td>
+<td>动态数据集合</td>
+</tr>
+<tr>
+<td>性能</td>
+<td>访问速度更快</td>
+<td>访问速度稍慢</td>
+</tr>
+<tr>
+<td>哈希性</td>
+<td><strong>可哈希（可作为字典键）</strong></td>
+<td>不可哈希</td>
+</tr>
+<tr>
+<td>存储空间</td>
+<td>占用空间更小</td>
+<td>占用空间较大</td>
+</tr>
+</tbody></table>
+<ul>
+<li><p>主要：</p>
+<ol>
+<li><p><strong>元组是不可变的</strong>：元组一旦创建，不能修改其中的元素。也就是说，不能对元组中的元素进行增、删、改操作。</p>
+<p> <strong>列表是可变的</strong>：列表中的元素可以随时修改，支持增、删、改操作。</p>
+</li>
+<li><p><strong>元组的不可变性使它更安全</strong>：如果一个对象不希望在程序的其他地方被修改，可以使用元组，提供了更多的安全性。</p>
+</li>
+<li><p><strong>元组是可哈希的</strong>，因此可以作为字典的键或集合中的元素（前提是元组中的所有元素也是可哈希的）。</p>
+<p> <strong>列表不可哈希</strong>，因此不能作为字典的键或集合中的元素。</p>
+</li>
+</ol>
+</li>
+</ul>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/02lb">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Python%E5%9F%BA%E7%A1%80"><span class="toc-number">1.</span> <span class="toc-text">Python基础</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%A6%E4%B9%A0%E5%86%85%E5%AE%B9"><span class="toc-number">1.1.</span> <span class="toc-text">学习内容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Python-%E6%98%AF%E4%B8%80%E7%A7%8D%E8%A7%A3%E9%87%8A%E5%9E%8B%E8%AF%AD%E8%A8%80"><span class="toc-number">1.2.</span> <span class="toc-text">Python 是一种解释型语言</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Python-%E4%B8%AD%E5%A6%82%E4%BD%95%E8%B0%83%E7%94%A8-C-%E4%BB%A3%E7%A0%81"><span class="toc-number">1.3.</span> <span class="toc-text">Python 中如何调用 C++ 代码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A4%EF%BC%9A"><span class="toc-number">1.4.</span> <span class="toc-text">步骤：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFCPython%E3%80%81JPython"><span class="toc-number">1.5.</span> <span class="toc-text">什么是CPython、JPython</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Python-%E6%98%AF%E4%B8%80%E7%A7%8D%E5%8A%A8%E6%80%81%E7%B1%BB%E5%9E%8B%E8%AF%AD%E8%A8%80-%E6%8C%87%E5%9C%A8%E8%BF%90%E8%A1%8C%E6%9C%9F%E9%97%B4%E6%89%8D%E5%8E%BB%E5%81%9A%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E6%A3%80%E6%9F%A5%E7%9A%84%E8%AF%AD%E8%A8%80-%EF%BC%8C%E8%BF%99%E6%84%8F%E5%91%B3%E7%9D%80%E5%8F%98%E9%87%8F%E7%9A%84%E7%B1%BB%E5%9E%8B%E6%98%AF%E5%9C%A8%E8%BF%90%E8%A1%8C%E6%97%B6%E7%A1%AE%E5%AE%9A%E7%9A%84"><span class="toc-number">1.6.</span> <span class="toc-text">Python 是一种动态类型语言(指在运行期间才去做数据类型检查的语言)，这意味着变量的类型是在运行时确定的</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Python%E7%9A%84%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6"><span class="toc-number">1.7.</span> <span class="toc-text">Python的垃圾回收机制</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%96%B9%E5%BC%8F%EF%BC%9A"><span class="toc-number">1.7.1.</span> <span class="toc-text">引用计数的工作方式：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0%E7%9A%84%E4%BC%98%E5%8A%BF%EF%BC%9A"><span class="toc-number">1.7.2.</span> <span class="toc-text">引用计数的优势：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0%E7%9A%84%E5%B1%80%E9%99%90%EF%BC%9A"><span class="toc-number">1.7.3.</span> <span class="toc-text">引用计数的局限：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Python-%E7%9A%84%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%EF%BC%9A"><span class="toc-number">1.8.</span> <span class="toc-text">Python 的垃圾回收器如何工作：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%EF%BC%9A"><span class="toc-number">1.9.</span> <span class="toc-text">垃圾回收器的工作流程：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Python%E7%9A%84%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="toc-number">1.10.</span> <span class="toc-text">Python的常用数据结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AF%B9%E6%AF%94%E5%88%97%E8%A1%A8%E5%92%8C%E5%85%83%E7%BB%84"><span class="toc-number">1.11.</span> <span class="toc-text">对比列表和元组</span></a></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://02lb.github.io/2024/10/07/Python%E5%9F%BA%E7%A1%80/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://02lb.github.io/2024/10/07/Python%E5%9F%BA%E7%A1%80/&text=Python基础"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://02lb.github.io/2024/10/07/Python%E5%9F%BA%E7%A1%80/&title=Python基础"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://02lb.github.io/2024/10/07/Python%E5%9F%BA%E7%A1%80/&is_video=false&description=Python基础"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Python基础&body=Check out this article: https://02lb.github.io/2024/10/07/Python%E5%9F%BA%E7%A1%80/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://02lb.github.io/2024/10/07/Python%E5%9F%BA%E7%A1%80/&title=Python基础"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://02lb.github.io/2024/10/07/Python%E5%9F%BA%E7%A1%80/&title=Python基础"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://02lb.github.io/2024/10/07/Python%E5%9F%BA%E7%A1%80/&title=Python基础"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://02lb.github.io/2024/10/07/Python%E5%9F%BA%E7%A1%80/&title=Python基础"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://02lb.github.io/2024/10/07/Python%E5%9F%BA%E7%A1%80/&name=Python基础&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://02lb.github.io/2024/10/07/Python%E5%9F%BA%E7%A1%80/&t=Python基础"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2024
+    Lee
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/02lb">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

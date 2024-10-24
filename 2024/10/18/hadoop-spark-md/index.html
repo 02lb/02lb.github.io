@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="大数据框架 主要是 Hadoop（Hive）以及 Spark 的学习，用于大数据、数据挖掘、推荐系统等岗位的工程技能； 大数据教程：大象教程  Spark什么是 Spark？ Apache Spark 是一个开源的分布式计算框架，专门用于大规模数据处理。 Spark 的设计目标是提供一种能够在分布式环境中高效处理大数据的计算引擎，并且具备比传统 MapReduce 更快的执行性能。  和Hadoo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hadoop-Spark[大数据框架]">
+<meta property="og:url" content="https://02lb.github.io/2024/10/18/hadoop-spark-md/index.html">
+<meta property="og:site_name" content="Bo Li’s Blog">
+<meta property="og:description" content="大数据框架 主要是 Hadoop（Hive）以及 Spark 的学习，用于大数据、数据挖掘、推荐系统等岗位的工程技能； 大数据教程：大象教程  Spark什么是 Spark？ Apache Spark 是一个开源的分布式计算框架，专门用于大规模数据处理。 Spark 的设计目标是提供一种能够在分布式环境中高效处理大数据的计算引擎，并且具备比传统 MapReduce 更快的执行性能。  和Hadoo">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-10-18%2017.11.24.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-10-18%2020.09.29.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-10-18%2020.21.07.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-10-18%2017.37.52.png">
+<meta property="article:published_time" content="2024-10-18T08:48:44.000Z">
+<meta property="article:modified_time" content="2024-10-21T08:30:02.929Z">
+<meta property="article:author" content="Lee">
+<meta property="article:tag" content="大数据">
+<meta property="article:tag" content="Hadoop">
+<meta property="article:tag" content="Spark">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-10-18%2017.11.24.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.png">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Hadoop-Spark[大数据框架]</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/02lb">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2024/10/21/BlackMyth-WuKong/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2024/10/13/RecSys-Models/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://02lb.github.io/2024/10/18/hadoop-spark-md/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://02lb.github.io/2024/10/18/hadoop-spark-md/&text=Hadoop-Spark[大数据框架]"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://02lb.github.io/2024/10/18/hadoop-spark-md/&title=Hadoop-Spark[大数据框架]"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://02lb.github.io/2024/10/18/hadoop-spark-md/&is_video=false&description=Hadoop-Spark[大数据框架]"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Hadoop-Spark[大数据框架]&body=Check out this article: https://02lb.github.io/2024/10/18/hadoop-spark-md/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://02lb.github.io/2024/10/18/hadoop-spark-md/&title=Hadoop-Spark[大数据框架]"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://02lb.github.io/2024/10/18/hadoop-spark-md/&title=Hadoop-Spark[大数据框架]"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://02lb.github.io/2024/10/18/hadoop-spark-md/&title=Hadoop-Spark[大数据框架]"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://02lb.github.io/2024/10/18/hadoop-spark-md/&title=Hadoop-Spark[大数据框架]"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://02lb.github.io/2024/10/18/hadoop-spark-md/&name=Hadoop-Spark[大数据框架]&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://02lb.github.io/2024/10/18/hadoop-spark-md/&t=Hadoop-Spark[大数据框架]"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A1%86%E6%9E%B6"><span class="toc-number">1.</span> <span class="toc-text">大数据框架</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Spark"><span class="toc-number"></span> <span class="toc-text">Spark</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-Spark%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">什么是 Spark？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%92%8CHadoop%E7%9A%84%E5%8C%BA%E5%88%AB%E5%92%8C%E8%81%94%E7%B3%BB%EF%BC%9F"><span class="toc-number">2.</span> <span class="toc-text">和Hadoop的区别和联系？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Spark%E7%BB%84%E4%BB%B6"><span class="toc-number">3.</span> <span class="toc-text">Spark组件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Spark-%E5%9F%BA%E6%9C%AC%E6%9E%B6%E6%9E%84"><span class="toc-number">4.</span> <span class="toc-text">Spark 基本架构</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Application"><span class="toc-number">4.1.</span> <span class="toc-text">Application</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#1-Driver%EF%BC%88%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F%EF%BC%89"><span class="toc-number">4.2.</span> <span class="toc-text">1. Driver（驱动程序）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-Cluster-Manager%EF%BC%88%E9%9B%86%E7%BE%A4%E7%AE%A1%E7%90%86%E5%99%A8%EF%BC%89"><span class="toc-number">4.3.</span> <span class="toc-text">2. Cluster Manager（集群管理器）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-Executor%EF%BC%88%E6%89%A7%E8%A1%8C%E5%99%A8%EF%BC%89"><span class="toc-number">4.4.</span> <span class="toc-text">3. Executor（执行器）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-Worker%EF%BC%88%E5%B7%A5%E4%BD%9C%E8%8A%82%E7%82%B9%EF%BC%89"><span class="toc-number">4.5.</span> <span class="toc-text">4. Worker（工作节点）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-Tasks%EF%BC%88%E4%BB%BB%E5%8A%A1%EF%BC%89"><span class="toc-number">4.6.</span> <span class="toc-text">5. Tasks（任务）</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Spark%E8%BF%90%E8%A1%8C%E5%9F%BA%E6%9C%AC%E6%B5%81%E7%A8%8B"><span class="toc-number">5.</span> <span class="toc-text">Spark运行基本流程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#SparkContext"><span class="toc-number">6.</span> <span class="toc-text">SparkContext</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Spark-RDD%EF%BC%88Resilient-Distributed-Dataset%EF%BC%89"><span class="toc-number">7.</span> <span class="toc-text">Spark RDD（Resilient Distributed Dataset）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Spark-%E7%9A%84%E6%9E%B6%E6%9E%84%E8%A7%92%E8%89%B2"><span class="toc-number">8.</span> <span class="toc-text">Spark 的架构角色</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Spark%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="toc-number">9.</span> <span class="toc-text">Spark环境搭建</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        Hadoop-Spark[大数据框架]
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Lee</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2024-10-18T08:48:44.000Z" class="dt-published" itemprop="datePublished">2024-10-18</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/Hadoop/" rel="tag">Hadoop</a>, <a class="p-category" href="/tags/Spark/" rel="tag">Spark</a>, <a class="p-category" href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag">大数据</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h4 id="大数据框架"><a href="#大数据框架" class="headerlink" title="大数据框架"></a>大数据框架</h4><ul>
+<li>主要是 Hadoop（Hive）以及 Spark 的学习，用于大数据、数据挖掘、推荐系统等岗位的工程技能；</li>
+<li>大数据教程：<a target="_blank" rel="noopener" href="https://www.hadoopdoc.com/">大象教程</a></li>
+</ul>
+<h1 id="Spark"><a href="#Spark" class="headerlink" title="Spark"></a>Spark</h1><h4 id="什么是-Spark？"><a href="#什么是-Spark？" class="headerlink" title="什么是 Spark？"></a>什么是 Spark？</h4><ul>
+<li>Apache Spark 是一个开源的<strong>分布式计算框架</strong>，专门用于大规模数据处理。</li>
+<li>Spark 的设计目标是提供一种能够在分布式环境中高效处理大数据的计算引擎，并且具备比传统 MapReduce 更快的执行性能。</li>
+</ul>
+<h4 id="和Hadoop的区别和联系？"><a href="#和Hadoop的区别和联系？" class="headerlink" title="和Hadoop的区别和联系？"></a>和Hadoop的区别和联系？</h4><img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-10-18%2017.11.24.png" alt="截屏2024-10-18 17.11.24" style="zoom: 25%;" />
+
+<h4 id="Spark组件"><a href="#Spark组件" class="headerlink" title="Spark组件"></a>Spark组件</h4><ul>
+<li>Spark Core：将<strong>分布式数据抽象为弹性分布式数据集（RDD）</strong>，实现了应用任务调度、RPC、序列化和压缩，<strong>并为运行在其上的上层组件提供API</strong>。所有Spark的上层组件（如：Spark SQL、Spark Streaming、MLlib、GraphX）都建立在Spark Core的基础之上，它提供了内存计算的能力，因此，Spark Core是分布式处理大数据集的基础。</li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-10-18%2020.09.29.png" alt="截屏2024-10-18 20.09.29" style="zoom:25%;" />
+
+<h4 id="Spark-基本架构"><a href="#Spark-基本架构" class="headerlink" title="Spark 基本架构"></a>Spark 基本架构</h4><ul>
+<li>Apache Spark 的基本架构是一个基于<strong>主从结构（Master-Slave）</strong>的分布式计算架构</li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-10-18%2020.21.07.png" alt="截屏2024-10-18 20.21.07" style="zoom:33%;" />
+
+<ul>
+<li><h5 id="Application"><a href="#Application" class="headerlink" title="Application"></a>Application</h5><ul>
+<li>用户编写的Spark应用程序，包含了driver程序以及在集群上运行的程序代码，物理机器上涉及了driver，master，worker三个节点。</li>
+</ul>
+</li>
+<li><h5 id="1-Driver（驱动程序）"><a href="#1-Driver（驱动程序）" class="headerlink" title="1. Driver（驱动程序）"></a>1. <strong>Driver（驱动程序）</strong></h5><ul>
+<li><strong>Driver</strong> 是 Spark 应用程序的主控程序，它负责与集群交互、任务的分配和调度。Driver 会创建一个 <strong>SparkContext</strong>（或在 Spark 2.x 中为 <strong>SparkSession</strong>），并通过 SparkContext 来与集群交互。</li>
+<li>Driver 程序负责将用户的作业拆分为多个任务，将这些任务分发到集群的 Executor 节点，并跟踪任务的执行状态和结果。</li>
+<li>Spark中的Driver即运行Application的main函数并创建SparkContext，创建SparkContext的目的是为了准备Spark应用程序的运行环境，在Spark中由SparkContext负责与Cluster Manager通信，进行资源申请、任务的分配和监控等，当Executor部分运行完毕后，Driver同时负责将SparkContext关闭。</li>
+</ul>
+<h5 id="2-Cluster-Manager（集群管理器）"><a href="#2-Cluster-Manager（集群管理器）" class="headerlink" title="2. Cluster Manager（集群管理器）"></a>2. <strong>Cluster Manager（集群管理器）</strong></h5><ul>
+<li><p>Cluster Manager</p>
+<p>   是 Spark 与底层集群之间的桥梁，负责管理集群中的资源。Spark 支持多种集群管理器：</p>
+<ul>
+<li><strong>Standalone</strong>：Spark 自带的资源管理器。</li>
+<li><strong>YARN</strong>：Hadoop 的资源管理框架。</li>
+<li><strong>Mesos</strong>：另一种分布式资源管理系统。</li>
+<li><strong>Kubernetes</strong>：用于容器化和云原生环境的资源管理。</li>
+</ul>
+</li>
+<li><p>Cluster Manager 负责在集群中为 Spark 应用程序分配 Executor 进程。</p>
+</li>
+</ul>
+<h5 id="3-Executor（执行器）"><a href="#3-Executor（执行器）" class="headerlink" title="3. Executor（执行器）"></a>3. <strong>Executor（执行器）</strong></h5><ul>
+<li><strong>Executor</strong> 是运行在每个工作节点上的进程。每个 Executor 负责执行由 Driver 分配的任务，并为每个任务提供运行的上下文环境。</li>
+<li>Executor 的主要职责：<ul>
+<li>执行 Driver 分配的任务。</li>
+<li>将计算结果和数据返回给 Driver。</li>
+<li>在内存中缓存数据以供后续使用（如果指定了持久化）。</li>
+</ul>
+</li>
+<li>每个 Spark 应用程序都会拥有自己独立的 Executor，且这些 Executor 在应用程序执行期间一直保持存活。</li>
+</ul>
+<h5 id="4-Worker（工作节点）"><a href="#4-Worker（工作节点）" class="headerlink" title="4. Worker（工作节点）"></a>4. <strong>Worker（工作节点）</strong></h5><ul>
+<li><strong>Worker</strong> 是集群中的物理或虚拟机器节点，负责运行 Executor 进程。集群中的每个 Worker 负责管理和监控 Executor 的运行状态。</li>
+</ul>
+<h5 id="5-Tasks（任务）"><a href="#5-Tasks（任务）" class="headerlink" title="5. Tasks（任务）"></a>5. <strong>Tasks（任务）</strong></h5><ul>
+<li><strong>Task</strong> 是 Spark 的最小计算单元，是针对分区的数据执行的具体计算操作。Driver 会将作业（Job）拆分为多个阶段（Stage），每个阶段再进一步拆分为多个 Task。Task 由 Executor 进程执行。</li>
+</ul>
+</li>
+</ul>
+<h4 id="Spark运行基本流程"><a href="#Spark运行基本流程" class="headerlink" title="Spark运行基本流程"></a>Spark运行基本流程</h4><p>+ </p>
+<h4 id="SparkContext"><a href="#SparkContext" class="headerlink" title="SparkContext"></a>SparkContext</h4><p>+ </p>
+<h4 id="Spark-RDD（Resilient-Distributed-Dataset）"><a href="#Spark-RDD（Resilient-Distributed-Dataset）" class="headerlink" title="Spark RDD（Resilient Distributed Dataset）"></a>Spark RDD（Resilient Distributed Dataset）</h4><ul>
+<li><p>核心数据结构-<strong>弹性分布式数据集</strong></p>
+</li>
+<li><p>特性：</p>
+<ol>
+<li><strong>Resilient（弹性）</strong>：RDD之间会形成有向无环图（DAG），如果RDD<strong>丢失了或者失效了，可以从父RDD重新计算得到</strong>。即<strong>容错性。</strong></li>
+<li><strong>Distributed（分布式）</strong>：RDD的数据是以<strong>逻辑分区</strong>的形式分布在集群的不同节点的。</li>
+<li><strong>Dataset（数据集）</strong>：即RDD存储的数据记录，可以从外部数据生成RDD，例如Json文件，CSV文件，文本文件，数据库等。</li>
+</ol>
+</li>
+<li></li>
+<li><p>什么是 PySpark？</p>
+</li>
+<li><p>Spark的DAG是什么？</p>
+</li>
+<li><p>数据抽象：RDD   </p>
+</li>
+<li><p>Spark的运行模式：本地单机&#x2F;集群&#x2F;云</p>
+</li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/02lb/img_picGo@main/img_data/%E6%88%AA%E5%B1%8F2024-10-18%2017.37.52.png" alt="截屏2024-10-18 17.37.52" style="zoom:25%;" />
+
+<h4 id="Spark-的架构角色"><a href="#Spark-的架构角色" class="headerlink" title="Spark 的架构角色"></a>Spark 的架构角色</h4><ul>
+<li><p>Master&#x2F;Worker （资源管理层面）</p>
+</li>
+<li><p>Diver&#x2F;Executor（单任务层面）</p>
+</li>
+</ul>
+<h4 id="Spark环境搭建"><a href="#Spark环境搭建" class="headerlink" title="Spark环境搭建"></a>Spark环境搭建</h4><ul>
+<li><p>Apache Spark 的进程实际上是运行在 Java 的 JVM (Java Virtual Machine) 上的。Spark 本身是用 <strong>Scala</strong> 编写的，而 Scala 运行在 JVM 上。因此，无论你用什么语言（Scala、Java、Python、R）编写 Spark 应用程序，Spark 都会在底层启动 JVM 进程来执行你的代码。</p>
+</li>
+<li><p>Python + Spark + JDK</p>
+</li>
+</ul>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/02lb">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A1%86%E6%9E%B6"><span class="toc-number">1.</span> <span class="toc-text">大数据框架</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Spark"><span class="toc-number"></span> <span class="toc-text">Spark</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-Spark%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">什么是 Spark？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%92%8CHadoop%E7%9A%84%E5%8C%BA%E5%88%AB%E5%92%8C%E8%81%94%E7%B3%BB%EF%BC%9F"><span class="toc-number">2.</span> <span class="toc-text">和Hadoop的区别和联系？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Spark%E7%BB%84%E4%BB%B6"><span class="toc-number">3.</span> <span class="toc-text">Spark组件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Spark-%E5%9F%BA%E6%9C%AC%E6%9E%B6%E6%9E%84"><span class="toc-number">4.</span> <span class="toc-text">Spark 基本架构</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Application"><span class="toc-number">4.1.</span> <span class="toc-text">Application</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#1-Driver%EF%BC%88%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F%EF%BC%89"><span class="toc-number">4.2.</span> <span class="toc-text">1. Driver（驱动程序）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-Cluster-Manager%EF%BC%88%E9%9B%86%E7%BE%A4%E7%AE%A1%E7%90%86%E5%99%A8%EF%BC%89"><span class="toc-number">4.3.</span> <span class="toc-text">2. Cluster Manager（集群管理器）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-Executor%EF%BC%88%E6%89%A7%E8%A1%8C%E5%99%A8%EF%BC%89"><span class="toc-number">4.4.</span> <span class="toc-text">3. Executor（执行器）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-Worker%EF%BC%88%E5%B7%A5%E4%BD%9C%E8%8A%82%E7%82%B9%EF%BC%89"><span class="toc-number">4.5.</span> <span class="toc-text">4. Worker（工作节点）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-Tasks%EF%BC%88%E4%BB%BB%E5%8A%A1%EF%BC%89"><span class="toc-number">4.6.</span> <span class="toc-text">5. Tasks（任务）</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Spark%E8%BF%90%E8%A1%8C%E5%9F%BA%E6%9C%AC%E6%B5%81%E7%A8%8B"><span class="toc-number">5.</span> <span class="toc-text">Spark运行基本流程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#SparkContext"><span class="toc-number">6.</span> <span class="toc-text">SparkContext</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Spark-RDD%EF%BC%88Resilient-Distributed-Dataset%EF%BC%89"><span class="toc-number">7.</span> <span class="toc-text">Spark RDD（Resilient Distributed Dataset）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Spark-%E7%9A%84%E6%9E%B6%E6%9E%84%E8%A7%92%E8%89%B2"><span class="toc-number">8.</span> <span class="toc-text">Spark 的架构角色</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Spark%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="toc-number">9.</span> <span class="toc-text">Spark环境搭建</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://02lb.github.io/2024/10/18/hadoop-spark-md/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://02lb.github.io/2024/10/18/hadoop-spark-md/&text=Hadoop-Spark[大数据框架]"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://02lb.github.io/2024/10/18/hadoop-spark-md/&title=Hadoop-Spark[大数据框架]"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://02lb.github.io/2024/10/18/hadoop-spark-md/&is_video=false&description=Hadoop-Spark[大数据框架]"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Hadoop-Spark[大数据框架]&body=Check out this article: https://02lb.github.io/2024/10/18/hadoop-spark-md/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://02lb.github.io/2024/10/18/hadoop-spark-md/&title=Hadoop-Spark[大数据框架]"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://02lb.github.io/2024/10/18/hadoop-spark-md/&title=Hadoop-Spark[大数据框架]"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://02lb.github.io/2024/10/18/hadoop-spark-md/&title=Hadoop-Spark[大数据框架]"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://02lb.github.io/2024/10/18/hadoop-spark-md/&title=Hadoop-Spark[大数据框架]"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://02lb.github.io/2024/10/18/hadoop-spark-md/&name=Hadoop-Spark[大数据框架]&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://02lb.github.io/2024/10/18/hadoop-spark-md/&t=Hadoop-Spark[大数据框架]"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2024
+    Lee
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/02lb">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
